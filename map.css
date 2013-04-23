@@ -1,0 +1,157 @@
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+
+.leaflet-popup-close-button {
+    display: none;
+}
+.leaflet-popup-content-wrapper {
+    pointer-events: none;
+}
+body {
+  margin:0px;
+  padding:0px;
+  font:normal 15px/20px Arial,sans-serif;
+  background:#fff;
+  position: relative;
+  }
+
+article {
+  width:33.3333%;
+  min-width:320px;
+  position:absolute;
+  padding-top:40px;
+  padding-bottom:33.3333%;
+  opacity: 0;
+  transition: opacity 0.4s linear;
+  -moz-transition: opacity 0.4s linear;
+  -webkit-transition: opacity 0.4s linear;
+  }
+article.active {
+  opacity: 1;}
+section {
+  padding: 20px 40px 30px;
+  margin: 0 0 45px 40px;
+  position:relative;
+  transition:background 500ms, color 500ms;
+  -moz-transition:background 500ms, color 500ms;
+  -webkit-transition:background 500ms, color 500ms;
+  }
+section,
+section a {
+  color:#888;
+  color:rgba(128,128,128,0);
+  text-decoration:none;
+  text-shadow:rgba(128,128,128,1) 0px 0px 4px;
+  }
+section.active {
+  background:#222;
+  color:#eee;
+  }
+section.active a { color:#eee; text-decoration: underline; }
+section.active small { color:#aaa; }
+h1 { font-size:2em; line-height:1em; }
+section h2 { font-size:1.3333em; 
+  position: absolute;
+  bottom: 100%;}
+h1,h2 { margin:0px 0px 10px; }
+p { margin:0 0 10px; }
+
+section img {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 100%;
+  opacity: 0;
+  z-index: -1;
+  transition:opacity 500ms;
+  -moz-transition:opacity 500ms;
+  -webkit-transition:opacity 500ms;
+}
+section.active img {
+  z-index: 0;
+  opacity: 1;}
+  section.active h2 {
+    z-index: 2;}
+.scroll {
+  position:absolute;
+  right:0px; bottom:0px;
+  font-size:10px;
+  text-transform:uppercase;
+  padding:5px 10px;
+  }
+.colophon {
+  display:block;
+  margin-top:10px;
+  }
+
+.cover:before {
+  content:'';
+  display:block;
+  width:264px; height:45px;
+  margin:20px auto 60px;
+  }
+.cover.active:before { background:url(clearwater.png) no-repeat; }
+
+#pane {
+  position:fixed;
+  top:0px;
+  bottom:0px;
+  right:0px;
+  width:66.6666%;
+  }
+#map  {
+  position:absolute;
+  top:0px;
+  bottom:0px;
+  width:200%;
+  left:-50%;
+  transition:opacity 250ms;
+  -moz-transition:opacity 250ms;
+  -webkit-transition:opacity 250ms;
+  }
+#map .leaflet-objects-pane {
+  transition:opacity 250ms;
+  -moz-transition:opacity 250ms;
+  -webkit-transition:opacity 250ms;
+}
+/* Distinguish the "cover page" visually other sections. */
+body.overview-section-0 #map { opacity:0.5; }
+
+/* Don't show area overlay on "cover page" */
+body.overview-section-0 #map .leaflet-objects-pane { opacity:0; }
+
+@media (max-width:640px) {
+  body {
+    font-size:12px;
+    line-height:16px;
+    }
+  article {
+    width:100%;
+    min-width:100%;
+    padding-top:0px;
+    padding-bottom:200%;
+    }
+  section {
+    text-shadow:none;
+    margin-left:0px;
+    padding:30px;
+    }
+  section.active {
+    position:fixed;
+    top:0px; left:0px; right:0px;
+    }
+  #pane { width:100%; }
+  #map  {
+    bottom:0%;
+    left:0%;
+    width:100%;
+    height:150%;
+    }
+  }
+
+@media (min-width:1280px) {
+  body {
+    font-size:18px;
+    line-height:24px;
+    }
+  }
