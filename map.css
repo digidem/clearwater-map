@@ -10,59 +10,90 @@ body { margin:0; padding:0; }
 body {
   margin:0px;
   padding:0px;
-  font:normal 15px/20px Arial,sans-serif;
+  font:normal 15px/20px "PT Sans",Arial,sans-serif;
   background:#fff;
-  position: relative;
-  }
-
-article {
-  width:33.3333%;
+  position: absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+}
+#stories {
+  width:400px;
   min-width:320px;
   position:absolute;
-  padding-top:40px;
-  padding-bottom:33.3333%;
-  opacity: 0;
+  margin: 0 0 0 40px;
+  top: 100%;
+  color:#eee;
   transition: opacity 0.4s linear;
   -moz-transition: opacity 0.4s linear;
   -webkit-transition: opacity 0.4s linear;
-  }
-article.active {
-  opacity: 1;}
+}
+#ecuador {
+  position: absolute;
+  bottom: 100%;
+}
+article {
+  position: relative;
+}
+
+.background {
+  background-color: #222;
+  position: relative;
+}
+
+.affixed {
+position: fixed !important;
+}
+
 section {
-  padding: 20px 40px 30px;
-  margin: 0 0 45px 40px;
-  position:relative;
+  background-color: #222;
   transition:background 500ms, color 500ms;
   -moz-transition:background 500ms, color 500ms;
   -webkit-transition:background 500ms, color 500ms;
   }
 section,
 section a {
-  color:#888;
-  color:rgba(128,128,128,0);
-  text-decoration:none;
-  text-shadow:rgba(128,128,128,1) 0px 0px 4px;
   }
 section.active {
-  background:#222;
-  color:#eee;
   }
 section.active a { color:#eee; text-decoration: underline; }
 section.active small { color:#aaa; }
-h1 { font-size:2em; line-height:1em; }
-section h2 { font-size:1.3333em; 
-  position: absolute;
-  bottom: 100%;}
-h1,h2 { margin:0px 0px 10px; }
-p { margin:0 0 10px; }
+section h1 {
+font-weight: bold;
+font-size: 2.2em;
+}
+h1,h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
+section h2:before { 
+content: "Featured Story";
+display: block;
+background: rgba(0,0,0,0.5);
+color: #f2c21c;
+position: absolute;
+bottom: 100%;
+right: 0;
+left: 0;
+padding: 1px 40px;
+font-size: 0.7em;
+}
+p, ul { padding:0 40px 2em; 
+margin:0;}
 
-section img {
-  position: absolute;
-  width: 100%;
+section ul {
+list-style-type: none;
+font-size: 1.2em;
+}
+section ul li {
+margin-bottom: 0.5em;
+}
+
+
+#stories img {
+display: block;
+width: 400px;
+height: 267px;
   left: 0;
-  bottom: 100%;
-  opacity: 0;
-  z-index: -1;
+  position: relative;
   transition:opacity 500ms;
   -moz-transition:opacity 500ms;
   -webkit-transition:opacity 500ms;
@@ -83,14 +114,6 @@ section.active img {
   display:block;
   margin-top:10px;
   }
-
-.cover:before {
-  content:'';
-  display:block;
-  width:264px; height:45px;
-  margin:20px auto 60px;
-  }
-.cover.active:before { background:url(clearwater.png) no-repeat; }
 
 #pane {
   position:fixed;
@@ -119,6 +142,21 @@ body.overview-section-0 #map { opacity:0.5; }
 
 /* Don't show area overlay on "cover page" */
 body.overview-section-0 #map .leaflet-objects-pane { opacity:0; }
+
+.d3-vec { position:absolute; }
+path {
+  fill: #000;
+  fill-opacity: .2;
+  stroke: #fff;
+  stroke-width: 1.5px;
+  cursor: pointer;
+}
+
+path:hover {
+  fill: brown;
+  fill-opacity: .7;
+}
+
 
 @media (max-width:640px) {
   body {
@@ -150,6 +188,10 @@ body.overview-section-0 #map .leaflet-objects-pane { opacity:0; }
   }
 
 @media (min-width:1280px) {
+#stories {width:540px;}
+#stories img {
+width: 540px;
+height: 360px;}
   body {
     font-size:18px;
     line-height:24px;

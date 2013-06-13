@@ -6,11 +6,16 @@
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-  <script src='http://underscorejs.org/underscore-min.js'></script>
-  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
-  <script src='binglayer.js'></script>
-  <script src='oms.min.js'></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic|Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+  <script src='jquery-1.8.3.min.js'></script>
+  <script src='jquery-throttle.js'></script>
+  <script src='collapse.js'></script>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+  <script src='http://d3js.org/d3.v2.min.js'></script>
+  <script src='binglayer.MM.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
   <script src='googlejson2geojson.js'></script>
+  <script src='mapstory.js'></script>
   <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' />
   <link href='map.css' rel='stylesheet' />
   <!--[if lte IE 8]>
@@ -21,87 +26,71 @@
 
 <div id='pane'><div id='map'></div></div>
 
-<article class='overview active'>
-  <section class='cover active' id="ecuador">
-    <h1>ClearWater in Ecuador</h1>
-    <p>Subtitle here maybe?</p>
-    <small class='scroll'>Scroll ▼</small>
-  </section>
-  <section id="norOriente">
-    <h2>Nor-Oriente</h2>
-    <img src="images/nor-oriente.jpg">
-    <p>Couple of paragraphs about the region and oil drilling here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    <small class='scroll'><a href="#">More about the history of oil in the region</a></small>
-  </section>
-  <section id="cofan">
-    <h2>Cofan</h2>
-    <img src="images/cofan.jpg">
-    <p>About the Cofan. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-    <small class='scroll'><a href="#">More about the Cofan</a></small>
-  </section>
-  <section id="siona">
-    <h2>Siona</h2>
-    <img src="images/siona.jpg">
-    <p>About the Siona. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-    <small class='scroll'><a href="#">More about the Siona</a></small>
-  </section>
-  <section id="secoya">
-    <h2>Secoya</h2>
-    <img src="images/secoya.jpg">
-    <p>About the Secoya. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
-    <small class='scroll'><a href="#">More about the Secoya</a></small>
-  </section>
-  <section id="kichwa">
-    <h2>Kichwa</h2>
-    <img src="images/kichwa.jpg">
-    <p>About the Kichwa. Ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-    <small class='scroll'><a href="#">More about the Kichwa</a></small>
-  </section>
-</article>
+<div id='stories'>
+  <article class='active' id='overview'>
+    <section class='cover active' id="ecuador">
+      <img src="images/siona.jpg" class="nocollapse">
+      <h1>ClearWater in Ecuador</h1>
+      <p>ClearWater is bringing clean drinking water to indigenous communities in the Ecuadorian Amazon. This should be a 40-60 word elevator pitch. Ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+      <small class='scroll'>Scroll ▼</small>
+    </section>
+    <section>
+      <img src="images/nor-oriente.jpg">
+      <h1>The Nor-Oriente Amazon</h1>
+      <p>Over three decades of oil drilling in the Ecuadorian Amazon, Chevron dumped more than 18 billion gallons of toxic wastewater into the rainforest, leaving local people suffering a wave of cancers, miscarriages and birth defects. ClearWater is partnering with five indigenous tribes — Cofan, Siona, Secoya, Quichua and Huaorani — to address the immediate environmental and health crisis. This should be 40-60 words explaining the problem in more depth.</p>
+    </section>
+  </article>
 
-<article class="cofan-dureno">
-  <section class="cover active">
-    <h1>Cofan Dureno</h1>
-    <p>This pane can include details about number of installations...</p>
-    <small class='scroll'>Scroll ▼</small>
-  </section>
-  <section id="a-2012-08-10-permalink">
-    <img src="images/story-1.jpg">
-    <h2>Featured Story 1</h2>
-    <p>Ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-    <small class='scroll'><a href="#">Read More&hellip;</a></small>
-  </section>
-  <section id="a-2013-01-02-permalink">
-    <img src="images/story-2.jpg">
-    <h2>Featured Story 2</h2>
-    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
-    <small class='scroll'><a href="#">Read More&hellip;</a></small>
-  </section>
-  <section id="a-2013-02-03-permalink">
-    <img src="images/story-3.jpg">
-    <h2>Featured Story 3</h2>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-    <small class='scroll'><a href="#">Read More&hellip;</a></small>
-  </section>
-</article>
+  <article id="cofan-dureno">
+    <section id="cofan-cover" class="cover active">
+      <img src="images/cofan.jpg" id="myimg">
+      <h1>Cofan Dureno</h1>
+      <ul>
+      <li>+  Community: Cofan Dureno</li>
+      <li>+  52 Rainwater Catchment Systems</li>
+      <li>+  350 people benefitted</li>
+      <li>+  4 community technicians trained</li>
+      </ul>
+      <small class='scroll'>Scroll ▼</small>
+    </section>
+    <section id="a-2012-08-10-permalink">
+      <img src="images/story-1.jpg">
+      <h2>Meet Hurlem Piaguaje</h2>
+      <p>Ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+      <small class='scroll'><a href="#">Read More&hellip;</a></small>
+    </section>
+    <section id="a-2013-01-02-permalink">
+      <img src="images/story-2.jpg">
+      <h2>Featured Story 2</h2>
+      <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+      <small class='scroll'><a href="#">Read More&hellip;</a></small>
+    </section>
+    <section id="a-2013-02-03-permalink">
+      <img src="images/story-3.jpg">
+      <h2>Featured Story 3</h2>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+      <small class='scroll'><a href="#">Read More&hellip;</a></small>
+    </section>
+  </article>
+  <article id="secoya">
+    <section id="secoya-cover" class="cover active">
+      <h1>Secoya</h1>
+      <p>This pane can include details about number of installations...</p>
+      <small class='scroll'>Scroll ▼</small>
+    </section>
+    <section id="secoya-2012-08-01-permalink">
+      <img src="images/story-1.jpg">
+      <h2>Featured Story 1</h2>
+      <p>Ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+      <small class='scroll'><a href="#">Read More&hellip;</a></small>
+    </section>
+</div>
 
-<!--
-  This will load geoJSON data from http://clearwater.cartodb.com/ with SQL query
-  SELECT ST_Simplify(the_geom, 0.001) AS the_geom, nombre, nacion FROM nationalities
-  ST_Simplify simplifies the geometry of the community areas to reduce bandwidth
-  It is JSONP so function "onOverlayLoad" will run when the data is loaded.
--->
-<script src='http://clearwater.cartodb.com/api/v2/sql?q=SELECT%20ST_Simplify(the_geom,%200.001)%20AS%20the_geom,%20nombre,%20nacion%20FROM%20nationalities&format=geoJSON&callback=onOverlayLoad'></script>
-
-<!--
-  This will load spreadsheet data from sheet 0AtH_pDdto56YdGwzVU5Mb0F0QjY1WklqYzhtRjJ2d3c
-  It needs to be published (via File ... Publish to Web...) in order to work
-  See https://developers.google.com/gdata/docs/json and 
-  https://developers.google.com/gdata/samples/spreadsheet_sample
-  It is JSONP so funtion "onDataLoad" will run when the data is loaded.
--->
-<script src='https://spreadsheets.google.com/feeds/list/0AtH_pDdto56YdGwzVU5Mb0F0QjY1WklqYzhtRjJ2d3c/od6/public/values?alt=json-in-script&callback=onDataLoad'></script>
-
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  MapStory.init()
+  $('#stories').css('height',$('#stories').height());
+});
+</script>
 </body>
 </html>
