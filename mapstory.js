@@ -35,13 +35,7 @@
       labelLayer,
       communityLayer,
       markerLayer,
-      markerGeoJson,
-      closeTooltip,
-      map,
-      stories,
-      activeMarker,
-      activeSection,
-      activeStory;
+      map;
 
   //--- Start of public functions of MapStory ---//
 
