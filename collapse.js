@@ -39,7 +39,7 @@
     this.$nextAll = this.$element.next()
                      .add($parent.nextAll())
                      .add($parent.parent().nextAll()).reverse()
-                     console.log(this.$nextAll)
+                     
     this.checkPosition()
   }
 
@@ -65,7 +65,7 @@
 
     // If this is the first time this is called and we have not yet
     // scrolled passed the element, then move everything up
-    console.log('this.affixed', (typeof this.affixed === 'undefined'), this.affixed)
+    
     if (typeof this.affixed === 'undefined' && !scrolledPast) {
       this.$element.css('position', 'absolute')
       this.affixed = affix
@@ -78,12 +78,12 @@
         var $this = $(this)
         var top = $this.offset().top
         var width = $this.width()
-        console.log($this.attr('id'), top, scrollTop)
+        
         $this.css({ 
           top: top - scrollTop, 
           width: width
         }).addClass('affixed')
-        console.log($this.css('top'))
+        
       })
     } else {
       this.$element.css('position', scrolledPast ? 'relative' : 'absolute')
