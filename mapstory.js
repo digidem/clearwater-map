@@ -30,12 +30,10 @@
           format: 'geoJSON'
         }};
   var markerSrc = {
-        url: 'https://spreadsheets.google.com/feeds/list/' + 
-                '0AtH_pDdto56YdGwzVU5Mb0F0QjY1WklqYzhtRjJ2d3c' + // Workbook key
-                '/od6/' +                                        // Sheet key in spreadsheet
-                'public/values',
+        url: 'http://clearwater.cartodb.com/api/v2/sql',
         params: {
-          alt: 'json-in-script'
+          q: 'SELECT * FROM clearwater_well_installations',
+          format: 'geoJSON'
         }};
 
   //-- ***************************** --//
@@ -45,6 +43,7 @@
   var communityLayer,
       labelLayer,
       satLayer,
+      markerLayer,
       markerGeoJson,
       closeTooltip,
       map,
@@ -59,6 +58,7 @@
     
     //--- Set up map layer objects ---//
     labelLayer = mapbox.layer().id('gmaclennan.map-y7pgvo15');
+    markerLayer = mapbox.markers.layer();
     MapStory.map = map = mapbox.map('map',null,null,[]).setExtent(startBounds);
     
     if (retina) {
@@ -67,13 +67,14 @@
     }
     
     map.addLayer(labelLayer);
+    _loadData(overlaySrc, _onOverlayLoad);
+    _loadData(markerSrc, _onMarkerLoad);
     
     var bingProvider = new MM.BingProvider(BING_API_KEY, 'Aerial', function() {
       
       // Initialize map, base layer (from Mapbox), and satellite layer (from Bing)
       satLayer = new MM.Layer(bingProvider);
       map.insertLayerAt(0,satLayer);
-      _loadData(overlaySrc, _onOverlayLoad);
       var from = map.locationCoordinate({lat: -0.9348, lon: -78.1392}).zoomTo(7);
       MapStory.ease = map.ease.location({ lat: -1.1, lon: -77.7 }).zoom(10);
       MapStory.ease.from(from);
@@ -165,9 +166,9 @@
 
   // _onMarkerLoad processes the Google JSON returned from the spreadsheet
   // and adds it to the marker layer.
-  var _onMarkerLoad = function(googlejson) {
-    markerGeoJson = googledocs2geojson(googlejson);
-    markerLayer.addData(markerGeoJson);
+  var _onMarkerLoad = function(geojson) {
+    markerLayer.features(geojson.features);
+    map.addLayer(markerLayer);
   }
 
   var _ease = function () {
