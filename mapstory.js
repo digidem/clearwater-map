@@ -6,30 +6,31 @@
 	// be attached to this.
 	var MapStory = window.MapStory = {};
   
-  var retina = false; //window.devicePixelRatio >= 2;
+    var retina = false; //window.devicePixelRatio >= 2;
   
-  //-- *************** --//
-  //-- Customize below --//
-  //-- *************** --//
+    //-- *************** --//
+    //-- Customize below --//
+    //-- *************** --//
     
-  // Bing Maps API key for satellite layer
-  // Register for key at http://...
-  // NEEDS CHANGED: is currently only a trial key for 90 days
-  var BING_API_KEY = "AnadQ9NziZo9MYVo8394fMtJjPrkZMasNfSqpt5wz4vUMSaATniZnKxvDgxrsrGB";
-  
-  // Bounds for the initial view of the map (Ecuador)
-  var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }]; 
-  var PROJECT_BOUNDS = [ [-1.1, -77.7], [0.5, -75.2]];
-  
-  // Data sources for overlay and markers (loaded with JSONP)
-  var overlaySrc = {
+    // Bing Maps API key for satellite layer
+    // Register for key at http://...
+    // NEEDS CHANGED: is currently only a trial key for 90 days
+    var BING_API_KEY = "AnadQ9NziZo9MYVo8394fMtJjPrkZMasNfSqpt5wz4vUMSaATniZnKxvDgxrsrGB";
+    
+    // Bounds for the initial view of the map (Ecuador)
+    var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }]; 
+    var PROJECT_BOUNDS = [ [-1.1, -77.7], [0.5, -75.2]];
+    
+    // Data sources for overlay and markers (loaded with JSONP)
+    var overlaySrc = {
         url: 'http://clearwater.cartodb.com/api/v2/sql',
         params: {
           q: 'SELECT ST_Simplify(the_geom, 0.001) AS the_geom, nombre, nacion ' + 
               'FROM nationalities',
           format: 'geoJSON'
         }};
-  var markerSrc = {
+
+    var markerSrc = {
         url: 'https://spreadsheets.google.com/feeds/list/' + 
                 '0AtH_pDdto56YdGwzVU5Mb0F0QjY1WklqYzhtRjJ2d3c' + // Workbook key
                 '/od6/' +                                        // Sheet key in spreadsheet
@@ -38,6 +39,26 @@
           alt: 'json-in-script'
         }};
 
+    var StorySteps = {
+        '#ecuador' : {
+            latitude : -1.703,
+            longitude : -78.050,
+            zoom : 7
+        },
+        '#nor-oriente' : {
+            latitude : -0.109,
+            longitude : -76.833,
+            zoom : 10
+        },
+        '#cofan-cover' : {
+            latitude : 0.009,
+            longitude : -76.717,
+            zoom : 13
+        }
+    },
+    scrollMarkers = {},
+    currentHeader = '';
+    
   //-- ***************************** --//
   //-- End of customizable variables --//
   //-- ***************************** --//
@@ -69,15 +90,33 @@
     map.addLayer(labelLayer);
     
     var bingProvider = new MM.BingProvider(BING_API_KEY, 'Aerial', function() {
-      
-      // Initialize map, base layer (from Mapbox), and satellite layer (from Bing)
-      satLayer = new MM.Layer(bingProvider);
-      map.insertLayerAt(0,satLayer);
-      _loadData(overlaySrc, _onOverlayLoad);
-      var from = map.locationCoordinate({lat: -0.9348, lon: -78.1392}).zoomTo(7);
-      MapStory.ease = map.ease.location({ lat: -1.1, lon: -77.7 }).zoom(10);
-      MapStory.ease.from(from);
+        
+        // Initialize map, base layer (from Mapbox), and satellite layer (from Bing)
+        satLayer = new MM.Layer(bingProvider);
+        map.insertLayerAt(0,satLayer);
+        _loadData(overlaySrc, _onOverlayLoad);
+        
+        // Make a initial location
+        var to, from, stepCount = 0;
+        for (var header in StorySteps) {
+            if (StorySteps.hasOwnProperty(header)) {
+                stepCount += 1;
+                StorySteps[header].location = map.locationCoordinate({lat: StorySteps[header].latitude, lon: StorySteps[header].longitude}).zoomTo(StorySteps[header].zoom);
+                if (stepCount === 1) {
+                    currentHeader = header;
+                    from = StorySteps[header].location;
+                } else if (stepCount === 2) {
+                    to = StorySteps[header].location;
+                }
+                scrollMarkers[parseInt($(header).offset().top)] = header;
+                console.log(scrollMarkers);
+            }
+        }
+        console.log(scrollMarkers);
+        MapStory.ease = map.ease.to(to);
+        MapStory.ease.from(from);
     });
+      
     
 //    map.fitBounds(startBounds);
     
@@ -170,49 +209,43 @@
     markerLayer.addData(markerGeoJson);
   }
 
-  var _ease = function () {
-    // IE 8
-    if (window.pageYOffset === undefined) {
-      var y = document.documentElement.scrollTop;
-      var h = document.documentElement.clientHeight;
-    } else {
-      var y = window.pageYOffset;
-      var h = window.innerHeight;
+    var _ease = function () {
+        var location, 
+            belowme = 100000, // something ridiculously high
+            aboveme = 0,
+            y = $(window).scrollTop();
+        console.log("My current location is " + y);
+        // find the closest locations above and below me
+        for (location in scrollMarkers) {
+            if (scrollMarkers.hasOwnProperty(location)) {
+                // is it further down the page than me?
+                if (location > y) {
+                    // is it closer to me than the last one?
+                    if (location - y < belowme - y) {
+                        belowme = location;
+                    }
+                }
+                // is it higher up the page than me?
+                if (location < y) {
+                    // is it closer to me than the last one?
+                    if (location - y > aboveme - y) {
+                        aboveme = location;
+                    }
+                }
+            }
+        }
+        
+        if (scrollMarkers[aboveme] !== currentHeader) {
+            console.log('Setting A New Header - ' + scrollMarkers[aboveme]);
+            currentHeader = scrollMarkers[aboveme];
+            MapStory.ease = map.ease.to(StorySteps[scrollMarkers[belowme]].location);
+            MapStory.ease.from(StorySteps[scrollMarkers[aboveme]].location);
+        }
+        console.log(y + " is between " + aboveme + " and " + belowme);
+        console.log("I am at " + scrollMarkers[aboveme]);
+        t = (y-aboveme)/(belowme - aboveme);
+        MapStory.ease.t(t);
     }
-    t = y%1000/1000;
-    MapStory.ease.t(t);
-  }
-
-  // Check window position and set active section.
-  // *TODO* check if jQuery can replace IE8 specific code.
-  var _checkActiveSection = function () {
-    // IE 8
-    if (window.pageYOffset === undefined) {
-      var y = document.documentElement.scrollTop;
-      var h = document.documentElement.clientHeight;
-    } else {
-      var y = window.pageYOffset;
-      var h = window.innerHeight;
-    }
-
-    // If scrolled to the very top of the page set the first section active.
-    if (y === 0) return setActiveSection(0, true);
-
-    // Otherwise, conditionally determine the extent to which page must be
-    // scrolled for each section. The first section that matches the current
-    // scroll position wins and exits the loop early.
-    var memo = 0;
-    var buffer = (h * 0.3333);
-    var active = _(sections).any(function(el, index) {
-      memo += el.offsetHeight;
-      return y < (memo-buffer) ? setActiveSection(index, true) : false;
-    });
-
-    // If no section was set active the user has scrolled past the last section.
-    // Set the last section active.
-    if (!active) setActiveSection(sections.length - 1, true);
-  }
-
 
 //  var map = L.mapbox.map('map', 'gmaclennan.map-y7pgvo15', mapOptions).fitBounds(ECUADOR_BOUNDS.padXY(0.33, 0));
 
