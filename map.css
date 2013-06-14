@@ -76,14 +76,14 @@ left: 0;
 padding: 1px 40px;
 font-size: 0.7em;
 }
-p, ul { padding:0 40px 2em; 
+#stories p, ul { padding:0 40px 2em; 
 margin:0;}
 
-section ul {
+#stories section ul {
 list-style-type: none;
 font-size: 1.2em;
 }
-section ul li {
+#stories section ul li {
 margin-bottom: 0.5em;
 }
 
