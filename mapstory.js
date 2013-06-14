@@ -21,6 +21,16 @@
   var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }]; 
   var PROJECT_BOUNDS = [ [-1.1, -77.7], [0.5, -75.2]];
   
+  // Array of locations for each story on the map
+  // The first location is for the initial map view
+  // it should be attached to the body element which has offset().top = 0
+  // TODO change this - not very obvious.
+  var storyLocations = [
+    { id: 'body', lat: -1.703, lon : -78.050, zoom : 7 },
+    { id: '#nor-oriente', lat : -0.109, lon : -76.833, zoom : 10 },
+    { id: '#cofan-cover', lat : 0.009, lon : -76.717, zoom : 13 }
+  ];
+  
   // Data sources for overlay and markers (loaded with JSONP)
   var overlaySQL = 'SELECT ST_Simplify(the_geom, 0.001)' +
                    'AS the_geom, nombre, nacion ' + 
@@ -35,7 +45,9 @@
       labelLayer,
       communityLayer,
       markerLayer,
-      map;
+      map,
+      storyScrollPoints = [],
+      easings = [];
 
   //--- Start of public functions of MapStory ---//
 
@@ -50,6 +62,7 @@
     
     // Set up the map, with no layers and no handlers.
     map = mapbox.map('map',null,null,[]).setExtent(startBounds);
+    MapStory.map = map;
     
     // Add all the map layers to the map, in order (they are empty at this point)
     map.addLayer(satLayer);
@@ -75,21 +88,40 @@
       satLayer.setProvider(bingProvider);
     });
     
-    var from = map.locationCoordinate({lat: -0.9348, lon: -78.1392}).zoomTo(7);
-    MapStory.ease = map.ease.location({ lat: 0.009, lon: -76.717 }).zoom(13);
-    MapStory.ease.from(from);
+    _initEasing(map);
 
     window.onscroll = $.throttle(_ease,40);
     
   };
-  
-  // TODO: remove. Temporary public reference to map object.
-  MapStory.map = map;
 
   //--- End of public functions of MapStory ---//
   
   
   //--- Private helper functions ---//
+
+  // Sets up easings between each story location on the map
+  var _initEasing = function (map) {
+    
+    for (var i = 0; i < storyLocations.length; i++) {
+
+      // Populate scroll points of each story in the #stories column
+      storyScrollPoints[i] = $(storyLocations[i].id).offset().top;
+      
+      var loc = map.locationCoordinate({
+                    lat: storyLocations[i].lat,
+                    lon: storyLocations[i].lon
+                  })
+                  .zoomTo(storyLocations[i].zoom);
+      
+      // Setup easings between each story location
+      easings[i] = mapbox.ease().map(map).from(loc).to(loc);
+      if (typeof easings[i-1] === 'object') {
+        easings[i-1].to(loc);
+      }
+      console.log(i, easings[i].from(), easings[i].to())
+    }
+    
+  }
 
   // Loads data from external dataSrc via JSONP
   var _loadData = function (sql, callback) {
@@ -121,10 +153,26 @@
   }
 
   var _ease = function () {
-    y = $(window).scrollTop();
-    t = y%1000/1000;
-    MapStory.ease.t(t);
+    var scrollTop = $(window).scrollTop();
+    scrollTop = scrollTop >= 0 ? scrollTop : 0;
+    
+    // Iterate over storyScrollPoints to find which easing we want
+    i = _find(scrollTop, storyScrollPoints);  
+    
+    // 0 < t < 1 represents where we are between two storyScrollPoints    
+    t = (scrollTop - storyScrollPoints[i-1]) / (storyScrollPoints[i] - storyScrollPoints[i-1]);
+
+    // Move the map to the position on the easing path according to t
+    easings[i-1].t(t);
   }
+  
+  var _find = function (val, array) {
+    for (var i = 0; i < array.length; i++) {
+      if (val < array[i]) return i;
+    }
+    return array.length - 1;
+  }
+  
 
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
   function _sanitize(string) {
