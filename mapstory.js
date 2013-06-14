@@ -101,25 +101,25 @@
 
   // Sets up easings between each story location on the map
   var _initEasing = function (map) {
-    
     for (var i = 0; i < storyLocations.length; i++) {
 
       // Populate scroll points of each story in the #stories column
       storyScrollPoints[i] = $(storyLocations[i].id).offset().top;
       
-      var loc = map.locationCoordinate({
-                    lat: storyLocations[i].lat,
-                    lon: storyLocations[i].lon
-                  })
-                  .zoomTo(storyLocations[i].zoom);
+      var lat = storyLocations[i].lat;
+      var lon = storyLocations[i].lon;
+      var zoom = storyLocations[i].zoom
+      var loc = map.locationCoordinate({ lat: lat, lon: lon }).zoomTo(zoom);
       
       // Setup easings between each story location
+      // By default an easing just goes to itself
       easings[i] = mapbox.ease().map(map).from(loc).to(loc);
+      
+      // One easing's start position is the previous easing's end position
       if (typeof easings[i-1] === 'object') {
         easings[i-1].to(loc);
       }
     }
-    
   }
 
   // Loads data from external dataSrc via JSONP
@@ -153,23 +153,32 @@
 
   var _ease = function () {
     var scrollTop = $(window).scrollTop();
+    
+    // On a Mac "bouncy scrolling" you can get -ve scrollTop, not good
     scrollTop = scrollTop >= 0 ? scrollTop : 0;
     
-    // Iterate over storyScrollPoints to find which easing we want
-    var i = _find(scrollTop, storyScrollPoints);  
+    // Iterate over storyScrollPoints to find the index of the easing we want
+    var i = _find(scrollTop, storyScrollPoints);
+    
+    // Don't do anything if we are beyond the last storyScrollPoint
+    if (!i) return;
     
     // 0 < t < 1 represents where we are between two storyScrollPoints    
-    var t = (scrollTop - storyScrollPoints[i-1]) / (storyScrollPoints[i] - storyScrollPoints[i-1]);
+    var t = (scrollTop - storyScrollPoints[i-1]) / 
+            (storyScrollPoints[i] - storyScrollPoints[i-1]);
 
     // Move the map to the position on the easing path according to t
     easings[i-1].t(t);
   }
   
+  // Simple function to iterate over an ascending ordered array and
+  // return the index of the first value greater than the search value
+  // Returns null if value is outside range in the array.
   var _find = function (val, array) {
     for (var i = 0; i < array.length; i++) {
       if (val < array[i]) return i;
     }
-    return array.length - 1;
+    return null;
   }
   
 
