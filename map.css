@@ -192,8 +192,19 @@ path:hover {
 #stories img {
 width: 540px;
 height: 360px;}
-  body {
-    font-size:18px;
-    line-height:24px;
-    }
+body {
+  font-size:18px;
+  line-height:24px;
   }
+}
+  
+  
+/* Map elements */
+
+.marker {
+width: 16px;
+height: 16px;
+display: block;
+position: absolute;
+cursor: pointer;
+}

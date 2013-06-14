@@ -22,19 +22,10 @@
   var PROJECT_BOUNDS = [ [-1.1, -77.7], [0.5, -75.2]];
   
   // Data sources for overlay and markers (loaded with JSONP)
-  var overlaySrc = {
-        url: 'http://clearwater.cartodb.com/api/v2/sql',
-        params: {
-          q: 'SELECT ST_Simplify(the_geom, 0.001) AS the_geom, nombre, nacion ' + 
-              'FROM nationalities',
-          format: 'geoJSON'
-        }};
-  var markerSrc = {
-        url: 'http://clearwater.cartodb.com/api/v2/sql',
-        params: {
-          q: 'SELECT * FROM clearwater_well_installations',
-          format: 'geoJSON'
-        }};
+  var overlaySQL = 'SELECT ST_Simplify(the_geom, 0.001)' +
+                   'AS the_geom, nombre, nacion ' + 
+                   'FROM nationalities';
+  var markerSQL = 'SELECT * FROM clearwater_well_installations';
 
   //-- ***************************** --//
   //-- End of customizable variables --//
@@ -55,103 +46,62 @@
   //--- Start of public functions of MapStory ---//
 
   MapStory.init = function (storyContainerId, mapContainerId, baseLayerId) {
-    
+
     //--- Set up map layer objects ---//
-    labelLayer = mapbox.layer().id('gmaclennan.map-y7pgvo15');
+    // composite false is necessary to stop mapbox trying to composite server-side
+    satLayer = mapbox.layer().composite(false);
+    labelLayer = mapbox.layer();
+    communityLayer = d3layer();
     markerLayer = mapbox.markers.layer();
-    MapStory.map = map = mapbox.map('map',null,null,[]).setExtent(startBounds);
     
+    // Set up the map, with no layers and no handlers.
+    map = mapbox.map('map',null,null,[]).setExtent(startBounds);
+    
+    // Add all the map layers to the map, in order (they are empty at this point)
+    map.addLayer(satLayer);
+    map.addLayer(labelLayer);
+    map.addLayer(communityLayer);
+    map.addLayer(markerLayer);
+
+    // Set small tilesize if retina display. Set tilesource according to retina.
     if (retina) {
       map.tileSize = { x: 128, y: 128 };
-      labelLayer = mapbox.layer().id('gmaclennan.map-lb73ione');
+      labelLayer.id('gmaclennan.map-lb73ione');
+    } else {
+      labelLayer.id('gmaclennan.map-y7pgvo15');
     }
     
-    map.addLayer(labelLayer);
-    _loadData(overlaySrc, _onOverlayLoad);
-    _loadData(markerSrc, _onMarkerLoad);
+    // Load GeoJSON for polygons and markers from CartoDB
+    _loadData(overlaySQL, _onOverlayLoad);
+    _loadData(markerSQL, _onMarkerLoad);
     
+    // Load sat tiles from Bing
+    // *TODO* Remove need for async function in MM.BingProvider
     var bingProvider = new MM.BingProvider(BING_API_KEY, 'Aerial', function() {
-      
-      // Initialize map, base layer (from Mapbox), and satellite layer (from Bing)
-      satLayer = new MM.Layer(bingProvider);
-      map.insertLayerAt(0,satLayer);
-      var from = map.locationCoordinate({lat: -0.9348, lon: -78.1392}).zoomTo(7);
-      MapStory.ease = map.ease.location({ lat: -1.1, lon: -77.7 }).zoom(10);
-      MapStory.ease.from(from);
+      satLayer.setProvider(bingProvider);
     });
     
-//    map.fitBounds(startBounds);
-    
-    // add all the layers to the map...
-    
-    // Array of story article elements (overview, and one for each community).
-    stories = $('article');
-//    MapStory.setActiveStory('overview');
-    
-    // Load data into community and installations layer...
-    
-//    _loadData(markerSrc, _onMarkerLoad);
-        
-    // Check active section whenever the window scrolls
+    var from = map.locationCoordinate({lat: -0.9348, lon: -78.1392}).zoomTo(7);
+    MapStory.ease = map.ease.location({ lat: 0.009, lon: -76.717 }).zoom(13);
+    MapStory.ease.from(from);
+
     window.onscroll = $.throttle(_ease,40);
     
   };
   
-  MapStory.setActiveStory = function (storyId) {
-    stories.removeClass('active');
-    activeStory = stories.find('#' + storyId).addClass('active');
-  }
-  
-  MapStory.setActiveSection = function (sectionId) {
-    // set the class of the active section to 'active'
-    activeStory.children().removeClass('active');
-    activeSection = activeStory.find('#' + sectionId)
-    activeSection.id = sectionId;
-    activeSection.addClass('active');
+  // TODO: remove. Temporary public reference to map object.
+  MapStory.map = map;
 
-    // Set a body class for the active section.
-    document.body.className = activeArticle + '-section-' + sectionId;
-    
-    // Different behaviours depending on whether we are in 'overview' view
-    // or zoomed into a particular community looking at featured stories.
-    if (activeStory.id == 'overview') {
-      // Reset the style on each layer according to the active section
-      communityLayer.eachLayer( function (layer) {
-        communityLayer.resetStyle(layer);
-      })
-      // Zoom map to the bounds of all communities in current section.
-      map.options.maxZoom = 11;
-      map.fitBounds(getBounds(sectionId));
-      map.options.maxZoom = undefined;
-    } else {
-      // Reset the style of the previous active marker
-      activeMarker.setZIndexOffset(0);
-      activeMarker.setIcon(defaultIcon);
-      markerLayer.eachLayer( function (layer) {
-        var storyId = _sanitize(layer.feature.properties.storylink);
-        // Search for the marker which has an id matching the active section
-        if (storyId == activeSection.id && activeSection.id != "") {
-          activeMarker = layer;
-          // Zoom to active marker and change the icon to indicate it is active
-          map.setView(activeMarker.getLatLng(), 15);
-          activeMarker.setZIndexOffset(250);
-          activeMarker.setIcon(activeIcon);
-        }
-      });
-    }
-  };
-  
   //--- End of public functions of MapStory ---//
-  
   
   
   //--- Private helper functions ---//
 
   // Loads data from external dataSrc via JSONP
-  var _loadData = function (dataSrc, callback) {
+  var _loadData = function (sql, callback) {
     $.ajax({
-      url: dataSrc.url,
-      data: dataSrc.params,
+      url: 'http://clearwater.cartodb.com/api/v2/sql',
+      data: { q: sql, format: 'geojson' },
       dataType: 'jsonp',
       success: callback
     });
