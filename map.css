@@ -52,18 +52,12 @@ section {
   -moz-transition:background 500ms, color 500ms;
   -webkit-transition:background 500ms, color 500ms;
   }
-section,
-section a {
-  }
-section.active {
-  }
-section.active a { color:#eee; text-decoration: underline; }
-section.active small { color:#aaa; }
+
 #stories section h1 {
 font-weight: bold;
 font-size: 2.2em;
 }
-#stories h1,h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
+#stories h1, #stories h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
 #stories section h2:before { 
 content: "Featured Story";
 display: block;
@@ -76,7 +70,7 @@ left: 0;
 padding: 1px 40px;
 font-size: 0.7em;
 }
-#stories p, ul { padding:0 40px 2em; 
+#stories p, #stories ul { padding:0 40px 2em; 
 margin:0;}
 
 #stories section ul {
@@ -98,11 +92,7 @@ height: 267px;
   -moz-transition:opacity 500ms;
   -webkit-transition:opacity 500ms;
 }
-section.active img {
-  z-index: 0;
-  opacity: 1;}
-  section.active h2 {
-    z-index: 2;}
+
 .scroll {
   position:absolute;
   right:0px; bottom:0px;
@@ -173,10 +163,6 @@ path:hover {
     text-shadow:none;
     margin-left:0px;
     padding:30px;
-    }
-  section.active {
-    position:fixed;
-    top:0px; left:0px; right:0px;
     }
   #pane { width:100%; }
   #map  {
