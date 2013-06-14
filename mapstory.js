@@ -118,7 +118,6 @@
       if (typeof easings[i-1] === 'object') {
         easings[i-1].to(loc);
       }
-      console.log(i, easings[i].from(), easings[i].to())
     }
     
   }
@@ -157,10 +156,10 @@
     scrollTop = scrollTop >= 0 ? scrollTop : 0;
     
     // Iterate over storyScrollPoints to find which easing we want
-    i = _find(scrollTop, storyScrollPoints);  
+    var i = _find(scrollTop, storyScrollPoints);  
     
     // 0 < t < 1 represents where we are between two storyScrollPoints    
-    t = (scrollTop - storyScrollPoints[i-1]) / (storyScrollPoints[i] - storyScrollPoints[i-1]);
+    var t = (scrollTop - storyScrollPoints[i-1]) / (storyScrollPoints[i] - storyScrollPoints[i-1]);
 
     // Move the map to the position on the easing path according to t
     easings[i-1].t(t);
