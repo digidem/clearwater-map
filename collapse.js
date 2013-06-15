@@ -35,9 +35,7 @@
     var $parent = this.$element.parent()
     $parent.css('height', $parent.height())
     this.$prev = $parent.prev()
-    console.log(this.$prev, this.$prev.length)
     if (this.$prev.length == 0) this.$prev = $parent.parent().prev()
-//    console.log(this.$prev)
     this.$element.nextAll().wrapAll('<div class="background" />')
     this.height = this.$element.height()
     this.width = this.$element.width()
@@ -47,7 +45,6 @@
   }
 
   Collapse.prototype.checkPosition = function () {
-    var start = Date.now()
 
     var scrollTop = this.$window.scrollTop()
       , offset = this.$element.offset()
@@ -66,7 +63,6 @@
     else if (offsetFromScreenBottom > this.nextHeight + height) opacity = 0
     else {
       opacity = (height + this.nextHeight - offsetFromScreenBottom) / height
-    console.log($prev)
   }
     $prev.css('opacity', opacity * opacity)
 
@@ -95,7 +91,6 @@
         width: width
       }).addClass('affixed')
       
-      console.log(Date.now()-start)
     } else {
       this.$element.css('position', scrolledPast ? 'relative' : 'absolute')
       $next.css({ top: '', width: '' }).removeClass('affixed')
