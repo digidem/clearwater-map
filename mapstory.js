@@ -48,6 +48,7 @@
       map,
       storyScrollPoints = [],
       easings = [],
+      lastPosition = -1,
       easingOffset;
 
   //--- Start of public functions of MapStory ---//
@@ -90,8 +91,7 @@
     });
     
     _initEasing(map);
-
-    window.onscroll = $.throttle(_ease,40);
+    _loop()
     _initScrollTos();
     
   };
@@ -170,9 +170,36 @@
         return img;
     })
   }
+  
+  // Detect css transform
+  var cssTransform = (function(){
+    var prefixes = 'transform webkitTransform mozTransform oTransform msTransform'.split(' ')
+      , el = document.createElement('div')
+      , cssTransform
+      , i = 0
+    while( cssTransform === undefined ){ 
+        cssTransform = document.createElement('div').style[prefixes[i]] != undefined ? prefixes[i] : undefined
+        i++
+     }
+     return cssTransform
+   })()
 
-  var _ease = function () {
-    var scrollTop = $(window).scrollTop();
+  // Detect request animation frame
+  var _scroll = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function(callback){ window.setTimeout(callback, 1000/60) }
+  
+  function _loop(){
+    // Avoid calculations if not needed
+    if (lastPosition == window.pageYOffset) {
+        _scroll(_loop);
+        return false;
+    } else lastPosition = window.pageYOffset
+
+    _ease(lastPosition);
+    _scroll(_loop);
+  }
+
+  var lasttime = [];
+  var _ease = function (scrollTop) {
     
     // On a Mac "bouncy scrolling" you can get -ve scrollTop, not good
     scrollTop = scrollTop >= 0 ? scrollTop : 0;
@@ -186,10 +213,16 @@
     // 0 < t < 1 represents where we are between two storyScrollPoints    
     var t = (scrollTop - storyScrollPoints[i-1]) / 
             (storyScrollPoints[i] - storyScrollPoints[i-1]);
+    
+    // Easing function for cubic in and out
     t = t > 1 ? 1 : t<.5 ? 2*t*t : -1+(4-2*t)*t;
-
+    
     // Move the map to the position on the easing path according to t
     easings[i-1].t(t);
+    var fps;
+    if (lasttime.length > 9) fps = 1000* 10 / (Date.now() - lasttime[lasttime.length - 10])
+    console.log(fps, "ms");
+    lasttime.push(Date.now());
   }
   
   // Simple function to iterate over an ascending ordered array and
