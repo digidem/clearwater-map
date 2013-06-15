@@ -29,36 +29,52 @@
   var Collapse = function (element, options) {
     this.options = $.extend({}, $.fn.collapse.defaults, options)
     this.$window = $(window)
-      .on('scroll.collapse.data-api', $.throttle($.proxy(this.checkPosition, this),40))
+      .on('scroll.collapse.data-api', $.proxy(this.checkPosition, this))
       .on('click.collapse.data-api',  $.proxy(function () { setTimeout($.proxy(this.checkPosition, this), 1) }, this))
     this.$element = $(element)
     var $parent = this.$element.parent()
+    $parent.css('height', $parent.height())
+    this.$prev = $parent.prev()
+    console.log(this.$prev, this.$prev.length)
+    if (this.$prev.length == 0) this.$prev = $parent.parent().prev()
+//    console.log(this.$prev)
     this.$element.nextAll().wrapAll('<div class="background" />')
     this.height = this.$element.height()
     this.width = this.$element.width()
-    this.$nextAll = this.$element.next()
-                     .add($parent.nextAll())
-                     .add($parent.parent().nextAll()).reverse()
-                     
+    this.$next = this.$element.next()
+    this.nextHeight = this.$next.height()
     this.checkPosition()
   }
 
   Collapse.prototype.checkPosition = function () {
-    if (!this.$element.is(':visible')) return
+    var start = Date.now()
 
-    var scrollHeight = $(document).height()
-      , scrollTop = this.$window.scrollTop()
+    var scrollTop = this.$window.scrollTop()
       , offset = this.$element.offset()
       , height = this.height
       , width = this.width
       , affix
       , scrolledPast
-         
+      , offsetFromScreenBottom
+      , $next = this.$next
+      , $prev = this.$prev
+      , opacity
+    
+    offsetFromScreenBottom = $(window).height() - offset.top + scrollTop
+
+    if (offsetFromScreenBottom <= this.nextHeight) opacity = 1
+    else if (offsetFromScreenBottom > this.nextHeight + height) opacity = 0
+    else {
+      opacity = (height + this.nextHeight - offsetFromScreenBottom) / height
+    console.log($prev)
+  }
+    $prev.css('opacity', opacity * opacity)
+
     // Check whether content should be 'affixed' as element scrolls into our out of view
-    affix = offset.top - scrollTop <= height && scrollTop < offset.top
+    affix = offsetFromScreenBottom >= this.nextHeight && offsetFromScreenBottom < height + this.nextHeight
     
     // Check if scroll is already past the element
-    scrolledPast = scrollTop >= offset.top
+    scrolledPast = offsetFromScreenBottom >= height + this.nextHeight
     
     // Exit if nothing has changed since last time
     if (this.affixed === affix) return
@@ -74,25 +90,18 @@
 
     if (affix) {
       if (offset.top - scrollTop > height) this.$element.css('position','absolute')
-      this.$nextAll.each(function () {
-        var $this = $(this)
-        var top = $this.offset().top
-        var width = $this.width()
-        
-        $this.css({ 
-          top: top - scrollTop, 
-          width: width
-        }).addClass('affixed')
-        
-      })
+      $next.css({ 
+        top: $(window).height() - this.nextHeight, 
+        width: width
+      }).addClass('affixed')
+      
+      console.log(Date.now()-start)
     } else {
       this.$element.css('position', scrolledPast ? 'relative' : 'absolute')
-      this.$nextAll.each(function () {
-        var $this = $(this)
-        $this.css({ top: '', width: '' }).removeClass('affixed')
-      })
+      $next.css({ top: '', width: '' }).removeClass('affixed')
     }
     this.affixed = affix
+    
   }
 
   $.fn.reverse = [].reverse;
