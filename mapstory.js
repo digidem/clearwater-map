@@ -120,13 +120,14 @@
     
     var lastResize = 0;
     $(window).resize(function () {
+      $('html,body').stop(true);
       if (Date.now() - lastResize > 1000/60) {
         var y = $(window).scrollTop()
         _initReveals("#stories img:not(.nocollapse)");
         _initEasing(map);
-        _initScrollTos();
-        _reveal($(window).scrollTop());
-        _ease($(window).scrollTop());      
+        _initScrollTos("#stories");
+        _reveal(y);
+        _ease(y);      
       }
     })
     $(window).resize();
@@ -142,6 +143,7 @@
 
   // Sets up easings between each story location on the map
   var _initEasing = function (map) {
+    wHeight = $(window).height();
     
     // We actually want easing to pause whilst the images are
     // scrolling into view. The images are 3:2, so height will be
@@ -150,9 +152,9 @@
     
     // Loop through each of the locations in our array
     for (var i = 0; i < storyLocations.length; i++) {
-
+      var $el = $(storyLocations[i].id);
       // Populate scroll points of each story in the #stories column
-      storyScrollPoints[i] = $(storyLocations[i].id).offset().top;
+      storyScrollPoints[i] = $el.offset().top - wHeight + $el.height();
       
       var lat = storyLocations[i].lat;
       var lon = storyLocations[i].lon;
@@ -171,19 +173,26 @@
   }
 
   // Set up onClick events to scroll the document between anchors
-  var _initScrollTos = function (section) {
-    $("a[href*=#]").click(function(event){    
-      event.preventDefault();
-      var scrollSrc = $(window).scrollTop();
-      var scrollDest;
-      var $nextSection = $(this).parents("section").next();
-      
-      if ($nextSection.length == 0) $nextSection = $(this).parents("article").next();
-      
-      if (this.hash !== "") scrollDest = $(this.hash).offset().top;
-      else scrollDest = $nextSection.offset().top;
-
-      $('html,body').animate({scrollTop:scrollDest}, Math.round(Math.abs(scrollDest - scrollSrc))* 5);
+  var _initScrollTos = function (selector) {
+    wHeight = $(window).height();
+    $(selector + " a[href*=#]").each(function () {
+      var targetScroll
+        , hash = this.href.split("#")[1]
+        , $target = $("#" + hash);
+      if ($target.length == 0) {
+        $target = $(this).parents("section").next();
+        if ($target.length == 0) $target = $(this).parents("article").next().children().first();
+      }
+      if ($target.length > 0) {
+        targetScroll = $target.offset().top - wHeight + $target.height();
+      }
+      $(this).data("target-scroll", targetScroll).click(function (event) {    
+        event.preventDefault();
+        $('html,body').stop(true);
+        var scrollSrc = $(window).scrollTop();
+        var targetScroll = $(this).data("target-scroll");
+        $('htmll,body').animate({scrollTop:targetScroll}, Math.round(Math.abs(targetScroll - scrollSrc))* 5);
+      });
     });
   }
   
@@ -213,13 +222,15 @@
 
       $this.parent().css('min-height', height + nextHeight);
 
-      reveals[i] = { $el: $this };
-      reveals[i].$next = $next;
-      reveals[i].$prev = $prev;
-      reveals[i].$parent = $this.parent();
-      reveals[i].offscreen = offsetTop - wHeight;
-      reveals[i].start = offsetTop - wHeight + nextHeight;
-      reveals[i].stop = reveals[i].start + height;
+      reveals[i] = { 
+        $el: $this,
+        $next: $next,
+        $prev: $prev,
+        $parent: $this.parent(),
+        offscreen: offsetTop - wHeight,
+        start: offsetTop - wHeight + nextHeight,
+        stop: offsetTop - wHeight + nextHeight + height
+      }
     })
   }
   
