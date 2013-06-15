@@ -58,13 +58,14 @@ font-weight: bold;
 font-size: 2.2em;
 }
 #stories h1, #stories h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
-#stories section h2:before { 
+
+#stories .featured img:before { 
 content: "Featured Story";
 display: block;
 background: rgba(0,0,0,0.5);
 color: #f2c21c;
 position: absolute;
-bottom: 100%;
+bottom: 0;
 right: 0;
 left: 0;
 padding: 1px 40px;
@@ -93,13 +94,17 @@ height: 267px;
   -webkit-transition:opacity 500ms;
 }
 
-.scroll {
+a.scroll {
+color: #fff;
   position:absolute;
   right:0px; bottom:0px;
-  font-size:10px;
+  font-size:0.7em;
   text-transform:uppercase;
   padding:5px 10px;
-  }
+}
+a.scroll:after {
+content: " ▼";
+}
 .colophon {
   display:block;
   margin-top:10px;

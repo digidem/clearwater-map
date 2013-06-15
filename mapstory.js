@@ -92,6 +92,7 @@
     _initEasing(map);
 
     window.onscroll = $.throttle(_ease,40);
+    _initScrollTos();
     
   };
 
@@ -201,7 +202,21 @@
     return null;
   }
   
+  function _initScrollTos(section) {
+    $("a[href*=#]").click(function(event){    
+      event.preventDefault();
+      var scrollSrc = $(window).scrollTop();
+      var scrollDest;
+      var $nextSection = $(this).parents("section").next();
+      
+      if ($nextSection.length == 0) $nextSection = $(this).parents("article").next();
+      
+      if (this.hash !== "") scrollDest = $(this.hash).offset().top;
+      else scrollDest = $nextSection.offset().top;
 
+      $('html,body').animate({scrollTop:scrollDest}, Math.round(Math.abs(scrollDest - scrollSrc))* 5);
+    });
+  }
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
   function _sanitize(string) {
     if (typeof(string) != "undefined")
