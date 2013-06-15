@@ -47,7 +47,8 @@
       markerLayer,
       map,
       storyScrollPoints = [],
-      easings = [];
+      easings = [],
+      easingOffset;
 
   //--- Start of public functions of MapStory ---//
 
@@ -101,6 +102,13 @@
 
   // Sets up easings between each story location on the map
   var _initEasing = function (map) {
+    
+    // We actually want easing to pause whilst the images are
+    // scrolling into view. The images are 3:2, so height will be
+    // the width / 1.5. We need this to be dynamic for responsive design.
+    easingOffset = $("#stories").width() / 1.5;
+    
+    // Loop through each of the locations in our array
     for (var i = 0; i < storyLocations.length; i++) {
 
       // Populate scroll points of each story in the #stories column
@@ -113,13 +121,14 @@
       
       // Setup easings between each story location
       // By default an easing just goes to itself
-      easings[i] = mapbox.ease().map(map).from(loc).to(loc);
+      easings[i] = mapbox.ease().map(map).from(loc).to(loc).easing('linear');
       
       // One easing's start position is the previous easing's end position
       if (typeof easings[i-1] === 'object') {
         easings[i-1].to(loc);
       }
     }
+    easings[0].easing('linear');
   }
 
   // Loads data from external dataSrc via JSONP
@@ -166,6 +175,7 @@
     // 0 < t < 1 represents where we are between two storyScrollPoints    
     var t = (scrollTop - storyScrollPoints[i-1]) / 
             (storyScrollPoints[i] - storyScrollPoints[i-1]);
+    t = t > 1 ? 1 : t<.5 ? 2*t*t : -1+(4-2*t)*t;
 
     // Move the map to the position on the easing path according to t
     easings[i-1].t(t);
@@ -199,7 +209,7 @@
           g = svg.append("g");
           
       var click = function (d) {
-          window.location = "#" + d.properties.name;
+          window.location = "#" + d.properties.nacion;
       }
 
       f.parent = div.node();
