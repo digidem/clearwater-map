@@ -155,9 +155,19 @@
     // Set a custom formatter for tooltips
     // Provide a function that returns html to be used in tooltip
     interaction.formatter(function(feature) {
-        var o = feature.properties.name;
+        var o = '<img src="' + feature.properties.photo + '">' +
+                '<p>' + feature.properties.name + '</p>';
         return o;
     });
+    markerLayer.factory(function(f) {
+    // Define a new factory function. This takes a GeoJSON object
+    // as its input and returns an element - in this case an image -
+    // that represents the point.
+        var img = document.createElement('img');
+        img.className = 'marker';
+        img.setAttribute('src', 'images/cw-system.png');
+        return img;
+    })
   }
 
   var _ease = function () {
