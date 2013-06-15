@@ -9,18 +9,11 @@
   <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic|Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
   <script src='jquery-1.8.3.min.js'></script>
   <script src='jquery.requestAnimationFrame.min.js'></script>
-  <script src='jquery-throttle.js'></script>
-  <script src='collapse.js'></script>
   <script src='mapbox.uncompressed.js'></script>
   <script src='http://d3js.org/d3.v2.min.js'></script>
   <script src='binglayer.MM.js'></script>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapboxxx.css' rel='stylesheet' />
-  <script src='googlejson2geojson.js'></script>
   <script src='mapstory.js'></script>
   <link href='map.css' rel='stylesheet' />
-  <!--[if lte IE 8]>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.ie.css' rel='stylesheet' >
-  <![endif]-->
 </head>
 <body class="overview-section-0">
 
@@ -90,8 +83,6 @@
 <script type="text/javascript" charset="utf-8">
 $(function() {
   MapStory.init()
-  $('#stories').css('height',$('#stories').height());
-  $("#stories img:not(.nocollapse)").collapse();
 });
 </script>
 </body>

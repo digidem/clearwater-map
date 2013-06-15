@@ -6,7 +6,31 @@
 	// be attached to this.
 	var MapStory = window.MapStory = {};
   
+  //--- Some feature detection ---//
+  
   var retina = false; //window.devicePixelRatio >= 2;
+  
+  // Detect css transform
+  var cssTransform = (function(){
+    var prefixes = 'transform webkitTransform mozTransform oTransform msTransform'.split(' ')
+      , el = document.createElement('div')
+      , cssTransform
+      , i = 0;
+    while ( cssTransform === undefined ) { 
+        cssTransform = document.createElement('div')
+                        .style[prefixes[i]] != undefined ? prefixes[i] : undefined;
+        i++;
+     }
+     return cssTransform;
+   })();
+
+  // Detect request animation frame
+  var _requestAnimation = window.requestAnimationFrame 
+                          || window.webkitRequestAnimationFrame
+                          || window.mozRequestAnimationFrame
+                          || window.msRequestAnimationFrame 
+                          || window.oRequestAnimationFrame 
+                          || function (callback) { window.setTimeout(callback, 1000/60) };
   
   //-- *************** --//
   //-- Customize below --//
@@ -48,7 +72,9 @@
       map,
       storyScrollPoints = [],
       easings = [],
+      reveals = [],
       lastPosition = -1,
+      wHeight = $(window).height(),
       easingOffset;
 
   //--- Start of public functions of MapStory ---//
@@ -90,9 +116,22 @@
       satLayer.setProvider(bingProvider);
     });
     
-    _initEasing(map);
+    $('#stories').css('height',$('#stories').height());
+    
+    var lastResize = 0;
+    $(window).resize(function () {
+      if (Date.now() - lastResize > 1000/60) {
+        var y = $(window).scrollTop()
+        _initReveals("#stories img:not(.nocollapse)");
+        _initEasing(map);
+        _initScrollTos();
+        _reveal($(window).scrollTop());
+        _ease($(window).scrollTop());      
+      }
+    })
+    $(window).resize();
+
     _loop()
-    _initScrollTos();
     
   };
 
@@ -129,10 +168,62 @@
         easings[i-1].to(loc);
       }
     }
-    easings[0].easing('linear');
   }
 
-  // Loads data from external dataSrc via JSONP
+  // Set up onClick events to scroll the document between anchors
+  var _initScrollTos = function (section) {
+    $("a[href*=#]").click(function(event){    
+      event.preventDefault();
+      var scrollSrc = $(window).scrollTop();
+      var scrollDest;
+      var $nextSection = $(this).parents("section").next();
+      
+      if ($nextSection.length == 0) $nextSection = $(this).parents("article").next();
+      
+      if (this.hash !== "") scrollDest = $(this.hash).offset().top;
+      else scrollDest = $nextSection.offset().top;
+
+      $('html,body').animate({scrollTop:scrollDest}, Math.round(Math.abs(scrollDest - scrollSrc))* 5);
+    });
+  }
+  
+  var _initReveals = function (selector) {
+    wHeight = $(window).height();
+    reveals = [];
+    
+    $(selector).each(function (i) {
+      var $this = $(this)
+      var $next = $this.next();
+      var $parent = $this.parent();
+      if (!$next.hasClass('background')) {
+        $next = $this.nextAll().wrapAll('<div class="background" />').parent();
+      }
+      var $prev = $parent.prev();
+      if ($prev.length == 0) $prev = $this.parent().parent().prev()
+      var width = $this.width();
+
+      $parent.removeClass('offscreen');
+      $this.removeClass('collapsed');
+      $next.removeClass('affixed').css('width', width);
+      $this.parent().css('min-height', '');
+
+      var offsetTop = $this.offset().top;
+      var height = $this.height();
+      var nextHeight = $next.height();
+
+      $this.parent().css('min-height', height + nextHeight);
+
+      reveals[i] = { $el: $this };
+      reveals[i].$next = $next;
+      reveals[i].$prev = $prev;
+      reveals[i].$parent = $this.parent();
+      reveals[i].offscreen = offsetTop - wHeight;
+      reveals[i].start = offsetTop - wHeight + nextHeight;
+      reveals[i].stop = reveals[i].start + height;
+    })
+  }
+  
+  // Load data from external dataSrc via JSONP
   var _loadData = function (sql, callback) {
     $.ajax({
       url: 'http://clearwater.cartodb.com/api/v2/sql',
@@ -171,34 +262,23 @@
     })
   }
   
-  // Detect css transform
-  var cssTransform = (function(){
-    var prefixes = 'transform webkitTransform mozTransform oTransform msTransform'.split(' ')
-      , el = document.createElement('div')
-      , cssTransform
-      , i = 0
-    while( cssTransform === undefined ){ 
-        cssTransform = document.createElement('div').style[prefixes[i]] != undefined ? prefixes[i] : undefined
-        i++
-     }
-     return cssTransform
-   })()
-
-  // Detect request animation frame
-  var _scroll = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function(callback){ window.setTimeout(callback, 1000/60) }
-  
+  // Continually loop and check for page scroll, calling animations that
+  // need to fire when the page scrolls.
   function _loop(){
-    // Avoid calculations if not needed
-    if (lastPosition == window.pageYOffset) {
-        _scroll(_loop);
+    var y = $(window).scrollTop();
+    
+    // Avoid calculations if not needed and just loop again
+    if (lastPosition == y) {
+        _requestAnimation(_loop);
         return false;
-    } else lastPosition = window.pageYOffset
+    } else lastPosition = y
 
-    _ease(lastPosition);
-    _scroll(_loop);
+    _ease(y);
+    _reveal(y);
+    _requestAnimation(_loop);
   }
 
-  var lasttime = [];
+  // Moves the map from one location to the next based on scroll position.
   var _ease = function (scrollTop) {
     
     // On a Mac "bouncy scrolling" you can get -ve scrollTop, not good
@@ -219,10 +299,45 @@
     
     // Move the map to the position on the easing path according to t
     easings[i-1].t(t);
-    var fps;
-    if (lasttime.length > 9) fps = 1000* 10 / (Date.now() - lasttime[lasttime.length - 10])
-    console.log(fps, "ms");
-    lasttime.push(Date.now());
+
+  }
+  
+  // Checks scroll position and reveals images as you scroll
+  var _reveal = function (scrollTop) {
+    var i;
+    for (i=0; i<reveals.length; i++) {
+      pos = (scrollTop <= reveals[i].offscreen) ? 'offscreen' :
+            (scrollTop < reveals[i].start) ? 'before' :
+            (scrollTop >= reveals[i].start && scrollTop < reveals[i].stop) ? 'affix' :
+            'after';
+      var opacity = 1;
+      if (pos == 'affix') {
+        opacity = 1 - (scrollTop - reveals[i].start) / (reveals[i].stop - reveals[i].start);
+        reveals[i].$prev.css('opacity', opacity * opacity);
+      }
+            
+      if (reveals[i].lastpos !== pos) {
+        if (pos == 'offscreen') {
+          reveals[i].$parent.addClass('offscreen');
+          reveals[i].$prev.css('opacity', 1);
+        } else {
+          reveals[i].$parent.removeClass('offscreen');
+          if (pos == 'affix') {
+            reveals[i].$el.addClass('collapsed');
+            reveals[i].$next.addClass('affixed');
+          } else if (pos == 'before') {
+            reveals[i].$el.addClass('collapsed');
+            reveals[i].$next.removeClass('affixed');
+          } else if (pos == 'after') {
+            reveals[i].$el.removeClass('collapsed');
+            reveals[i].$next.removeClass('affixed');
+            reveals[i].$prev.css('opacity', 0);
+          }
+        }
+        reveals[i].lastpos = pos;
+      }
+    }
+    
   }
   
   // Simple function to iterate over an ascending ordered array and
@@ -235,21 +350,6 @@
     return null;
   }
   
-  function _initScrollTos(section) {
-    $("a[href*=#]").click(function(event){    
-      event.preventDefault();
-      var scrollSrc = $(window).scrollTop();
-      var scrollDest;
-      var $nextSection = $(this).parents("section").next();
-      
-      if ($nextSection.length == 0) $nextSection = $(this).parents("article").next();
-      
-      if (this.hash !== "") scrollDest = $(this.hash).offset().top;
-      else scrollDest = $nextSection.offset().top;
-
-      $('html,body').animate({scrollTop:scrollDest}, Math.round(Math.abs(scrollDest - scrollSrc))* 5);
-    });
-  }
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
   function _sanitize(string) {
     if (typeof(string) != "undefined")
