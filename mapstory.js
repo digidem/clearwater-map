@@ -159,7 +159,6 @@
 
   //--- End of public functions of MapStory ---//
   
-  
   //--- Private helper functions ---//
 
   // Sets up easings between each story location on the map
@@ -265,7 +264,7 @@
     };
     layerScrollPoints[2] = {
       start: storyScrollPoints[2] - (storyScrollPoints[2] - storyScrollPoints[1]) / 2,
-      show: storyScrollPoints[3],
+      show: storyScrollPoints[2],
       stop: undefined
     }
   }
@@ -297,7 +296,7 @@
   // _onMarkerLoad processes the Google JSON returned from the spreadsheet
   // and adds it to the marker layer.
   var _onMarkerLoad = function(geojson) {
- //   markerLayer.features(geojson.features);
+    markerLayer.features(geojson.features);
     var interaction = mapbox.markers.interaction(markerLayer);
     // Set a custom formatter for tooltips
     // Provide a function that returns html to be used in tooltip
@@ -409,7 +408,6 @@
   // Hide or show layers according to scroll position / zoom
   var _layerDisplay = function (scrollTop) {
     var i;
-    console.log()
     for (i=0; i<layerScrollPoints.length; i++) {
       var start = layerScrollPoints[i].start
       var show = layerScrollPoints[i].show
@@ -417,10 +415,14 @@
       opacity = (scrollTop < start || scrollTop > stop) && scrollTop >= 0 ? 0
                 : (scrollTop <= show ) ? (scrollTop - start) / (show - start)
                 : (scrollTop > show) ? 1 - (scrollTop - show) / (stop - show) : 0
-      if (layerScrollPoints[i].lastOpacity != opacity && i<2) {
+      if (layerScrollPoints[i].lastOpacity != opacity && i<3) {
+        console.log(layerScrollPoints[i]);
         var layer = map.getLayerAt(i+2);
         if (opacity == 0) layer.disable();
-        else layer.enable().opacity(opacity);
+        else {
+          layer.enable();
+          $(layer.parent).css("opacity", opacity);
+        }
         layerScrollPoints[i].lastOpacity = opacity;
       }
     }
@@ -491,7 +493,6 @@
         blurHover.append("feMerge")
             .append("feMergeNode")
             .attr("in", "coloredBlur");
-            console.log(blur);
         return f;
       }
 
@@ -534,12 +535,6 @@
           }
           return f;
       };
-      
-      f.opacity = function(opacity) {
-        div.style("opacity", opacity);
-        if (opacity == 0) f.disable();
-        return f;
-      }
       
       f.enable = function() {
         enabled = true;
