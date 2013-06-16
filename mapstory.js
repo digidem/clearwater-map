@@ -17,12 +17,23 @@
       , cssTransform
       , i = 0;
     while ( cssTransform === undefined ) { 
-        cssTransform = document.createElement('div')
-                        .style[prefixes[i]] != undefined ? prefixes[i] : undefined;
-        i++;
-     }
-     return cssTransform;
-   })();
+      cssTransform = document.createElement('div')
+                      .style[prefixes[i]] != undefined ? prefixes[i] : undefined;
+      i++;
+   }
+   return cssTransform;
+  })();
+
+  // Detect css filter for svg
+  // https://github.com/Modernizr/Modernizr/issues/615
+  var cssFilter = (function(){
+    var prefixes = '-webkit- -moz- -o- -ms-'.split(' ')
+      , el = document.createElement('div');
+    el.style.cssText = prefixes.join('filter:blur(2px); ');
+    return !!el.style.length 
+           && ((document.documentMode === undefined || document.documentMode > 9))
+           ? el.style.cssText.split(":")[0] : undefined;
+  })();
 
   // Detect request animation frame
   var _requestAnimation = window.requestAnimationFrame 
@@ -50,16 +61,19 @@
   // it should be attached to the body element which has offset().top = 0
   // TODO change this - not very obvious.
   var storyLocations = [
-    { id: 'body', lat: -1.703, lon : -78.050, zoom : 7 },
-    { id: '#nor-oriente', lat : -0.109, lon : -76.833, zoom : 10 },
-    { id: '#cofan-cover', lat : 0.009, lon : -76.717, zoom : 13 }
+    { id: 'body', lat: -1.369, lon : -79.717, zoom : 7.8 },
+    { id: '#nor-oriente', lat : -0.141, lon : -77.416, zoom : 10 },
+    { id: '#cofan-cover', lat : 0.012, lon : -76.763, zoom : 13 }
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
-  var overlaySQL = 'SELECT ST_Simplify(the_geom, 0.001)' +
-                   'AS the_geom, nombre, nacion ' + 
+  var communitiesSql = 'SELECT ST_Simplify(the_geom, 0.0001)' +
+                   'AS the_geom, name, nationality ' + 
                    'FROM nationalities';
-  var markerSQL = 'SELECT * FROM clearwater_well_installations';
+  var projectAreaSql = 'SELECT ST_Simplify(the_geom, 0.001)' +
+                  'AS the_geom, name ' + 
+                  'FROM project_area';
+  var markerSql = 'SELECT * FROM clearwater_well_installations';
 
   //-- ***************************** --//
   //-- End of customizable variables --//
@@ -67,10 +81,12 @@
   
   var satLayer,
       labelLayer,
+      projectLayer,
       communityLayer,
       markerLayer,
       map,
       storyScrollPoints = [],
+      layerScrollPoints = [],
       easings = [],
       reveals = [],
       lastPosition = -1,
@@ -85,7 +101,8 @@
     // composite false is necessary to stop mapbox trying to composite server-side
     satLayer = mapbox.layer().composite(false);
     labelLayer = mapbox.layer();
-    communityLayer = d3layer();
+    communityLayer = d3layer("communities");
+    projectLayer = d3layer("project-area");
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
@@ -95,6 +112,7 @@
     // Add all the map layers to the map, in order (they are empty at this point)
     map.addLayer(satLayer);
     map.addLayer(labelLayer);
+    map.addLayer(projectLayer);
     map.addLayer(communityLayer);
     map.addLayer(markerLayer);
 
@@ -107,8 +125,9 @@
     }
     
     // Load GeoJSON for polygons and markers from CartoDB
-    _loadData(overlaySQL, _onOverlayLoad);
-    _loadData(markerSQL, _onMarkerLoad);
+    _loadData(communitiesSql, _onCommunitiesLoad);
+    _loadData(markerSql, _onMarkerLoad);
+    _loadData(projectAreaSql, _onProjectAreaLoad);
     
     // Load sat tiles from Bing
     // *TODO* Remove need for async function in MM.BingProvider
@@ -117,7 +136,7 @@
     });
     
     $('#stories').css('height',$('#stories').height());
-    
+
     var lastResize = 0;
     $(window).resize(function () {
       $('html,body').stop(true);
@@ -125,9 +144,11 @@
         var y = $(window).scrollTop()
         _initReveals("#stories img:not(.nocollapse)");
         _initEasing(map);
-        _initScrollTos("#stories");
+        _initLayerDisplay(map);
+        _initScrollTos("");
         _reveal(y);
-        _ease(y);      
+        _ease(y);
+        _layerDisplay(y);
       }
     })
     $(window).resize();
@@ -173,29 +194,25 @@
   }
 
   // Set up onClick events to scroll the document between anchors
-  var _initScrollTos = function (selector) {
+  var _initScrollTos = function () {
     wHeight = $(window).height();
-    $(selector + " a[href*=#]").each(function () {
+    $("a[href*=#]").each(function () {
       var targetScroll
-        , hash = this.href.split("#")[1]
+        , hash = $(this).attr("href").split("#")[1]
         , $target = $("#" + hash);
       if ($target.length == 0) {
         $target = $(this).parents("section").next();
         if ($target.length == 0) $target = $(this).parents("article").next().children().first();
       }
+      
       if ($target.length > 0) {
         targetScroll = $target.offset().top - wHeight + $target.height();
       }
-      $(this).data("target-scroll", targetScroll).click(function (event) {    
-        event.preventDefault();
-        $('html,body').stop(true);
-        var scrollSrc = $(window).scrollTop();
-        var targetScroll = $(this).data("target-scroll");
-        $('htmll,body').animate({scrollTop:targetScroll}, Math.round(Math.abs(targetScroll - scrollSrc))* 5);
-      });
+      $(this).data("target-scroll", targetScroll).click(_scrollTo);
     });
   }
   
+  // Set up collapsing and revealing images as you scroll
   var _initReveals = function (selector) {
     wHeight = $(window).height();
     reveals = [];
@@ -234,6 +251,25 @@
     })
   }
   
+  // Set up display and hiding of map layers on scroll
+  var _initLayerDisplay = function (map) {
+    layerScrollPoints[0] = { 
+      start: 0,
+      show: 0,
+      stop: storyScrollPoints[1] / 2 
+    };
+    layerScrollPoints[1] = {
+      start: storyScrollPoints[1] / 2,
+      show: storyScrollPoints[1],
+      stop: storyScrollPoints[2] - (storyScrollPoints[2] - storyScrollPoints[1]) / 2
+    };
+    layerScrollPoints[2] = {
+      start: storyScrollPoints[2] - (storyScrollPoints[2] - storyScrollPoints[1]) / 2,
+      show: storyScrollPoints[3],
+      stop: undefined
+    }
+  }
+  
   // Load data from external dataSrc via JSONP
   var _loadData = function (sql, callback) {
     $.ajax({
@@ -244,16 +280,24 @@
     });
   }
   
-  // _onOverlayLoad adds geojson returned from the JSONP call to the map
+  // _onCommunitiesLoad adds geojson returned from the JSONP call to the map
   // and caches the bounds of each nationality in bounds[]
-  var _onOverlayLoad = function(geojson) {
+  var _onCommunitiesLoad = function(geojson) {
     communityLayer.data(geojson);
+    communityLayer.draw();
+    $(window).resize();
+  }
+  
+  // _onProjectAreaLoad adds geojson returned from the JSONP call to the map
+  var _onProjectAreaLoad = function(geojson) {
+    projectLayer.data(geojson).draw().addFilters();
+    $(window).resize();
   }
 
   // _onMarkerLoad processes the Google JSON returned from the spreadsheet
   // and adds it to the marker layer.
   var _onMarkerLoad = function(geojson) {
-    markerLayer.features(geojson.features);
+ //   markerLayer.features(geojson.features);
     var interaction = mapbox.markers.interaction(markerLayer);
     // Set a custom formatter for tooltips
     // Provide a function that returns html to be used in tooltip
@@ -286,6 +330,7 @@
 
     _ease(y);
     _reveal(y);
+    _layerDisplay(y);
     _requestAnimation(_loop);
   }
 
@@ -351,6 +396,36 @@
     
   }
   
+  // Smooth scroll to an element on the page when clicking a link
+  var _scrollTo = function () {
+    event.preventDefault();
+    $('html,body').stop(true);
+    var scrollSrc = $(window).scrollTop();
+    var targetScroll = $(this).data("target-scroll");
+    $('htmll,body').animate({scrollTop:targetScroll}
+      , Math.round(Math.abs(targetScroll - scrollSrc))* 5);
+  }
+  
+  // Hide or show layers according to scroll position / zoom
+  var _layerDisplay = function (scrollTop) {
+    var i;
+    console.log()
+    for (i=0; i<layerScrollPoints.length; i++) {
+      var start = layerScrollPoints[i].start
+      var show = layerScrollPoints[i].show
+      var stop = layerScrollPoints[i].stop
+      opacity = (scrollTop < start || scrollTop > stop) && scrollTop >= 0 ? 0
+                : (scrollTop <= show ) ? (scrollTop - start) / (show - start)
+                : (scrollTop > show) ? 1 - (scrollTop - show) / (stop - show) : 0
+      if (layerScrollPoints[i].lastOpacity != opacity && i<2) {
+        var layer = map.getLayerAt(i+2);
+        if (opacity == 0) layer.disable();
+        else layer.enable().opacity(opacity);
+        layerScrollPoints[i].lastOpacity = opacity;
+      }
+    }
+  }
+  
   // Simple function to iterate over an ascending ordered array and
   // return the index of the first value greater than the search value
   // Returns null if value is outside range in the array.
@@ -369,16 +444,55 @@
           .split(" ").join("-").split("/").join("-");
   }
   
-  function d3layer() {
-      var f = {}, bounds, feature, collection;
+  function d3layer(c) {
+      var f = {}, bounds, feature, collection, enabled = true;
       var div = d3.select(document.body)
           .append("div")
-          .attr('class', 'd3-vec'),
+          .attr('class', c + " d3-vec"),
           svg = div.append('svg'),
           g = svg.append("g");
-          
-      var click = function (d) {
-          window.location = "#" + d.properties.nacion;
+      var defs = svg.append("defs");
+
+      // This adds filters to blur the polygons on the layer
+      // Can only be added to one layer, otherwise things get strange
+      f.addFilters = function () {
+        // Blur effect for project area
+        var blur = defs.append("filter")
+            .attr("id", "blur")
+        blur.append("feColorMatrix")
+            .attr("in", "SourceAlpha")
+            .attr("color-interpolation-filters", "sRGB")
+            .attr("type", "matrix")
+            .attr("values", "0 0 0 0.9450980392 0  "
+                          + "0 0 0 0.7607843137 0  "
+                          + "0 0 0 0.1098039216 0  "
+                          + "0 0 0 1 0");
+        blur.append("feGaussianBlur")
+            .attr("stdDeviation", 10)
+            .attr("result", "coloredBlur");
+        blur.append("feMerge")
+            .append("feMergeNode")
+            .attr("in", "coloredBlur")
+
+        // Hover effect for project area
+        var blurHover = defs.append("filter")
+            .attr("id", "blur-hover")
+        blurHover.append("feColorMatrix")
+            .attr("in", "SourceAlpha")
+            .attr("color-interpolation-filters", "sRGB")
+            .attr("type", "matrix")
+            .attr("values", "0 0 0 0.6705882353 0  "
+                          + "0 0 0 0.5450980392 0  "
+                          + "0 0 0 0.1176470588 0  "
+                          + "0 0 0 1 0");
+        blurHover.append("feGaussianBlur")
+            .attr("stdDeviation", 10)
+            .attr("result", "coloredBlur");
+        blurHover.append("feMerge")
+            .append("feMergeNode")
+            .attr("in", "coloredBlur");
+            console.log(blur);
+        return f;
       }
 
       f.parent = div.node();
@@ -390,24 +504,54 @@
 
       var first = true;
       f.draw = function() {
+        if (!enabled) return;
         first && svg.attr("width", f.map.dimensions.x)
             .attr("height", f.map.dimensions.y)
             .style("margin-left", "0px")
             .style("margin-top", "0px") && (first = false);
 
         path = d3.geo.path().projection(f.project);
-        if (typeof feature !== 'undefined') feature.attr("d", path);
+        if (!!feature) feature.attr("d", path);
+        return f;
       };
 
       f.data = function(x) {
           collection = x;
           bounds = d3.geo.bounds(collection);
-          feature = g.selectAll("path")
+          feature = g.selectAll("polygon")
               .data(collection.features)
-              .enter().append("path")
-              .on("click", click);
+              .enter().append("a")
+              .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.name); })
+              .append("path");
+              
+          // If we can't control filter and hover events from css, then add javascript event
+          // and attach the filter directly to the svg element
+          // Currently only WebKit (Safari & Chrome) support SVG filters from CSS
+          if (!cssFilter) {
+            feature.style("filter", "url(#blur)")
+              .on("mouseover", function () {this.style.cssText = "filter: url(#blur-hover);"})
+              .on("mouseout", function () {this.style.cssText = "filter: url(#blur);"});
+          }
           return f;
       };
+      
+      f.opacity = function(opacity) {
+        div.style("opacity", opacity);
+        if (opacity == 0) f.disable();
+        return f;
+      }
+      
+      f.enable = function() {
+        enabled = true;
+        div.style("display", "");
+        return f;
+      }
+      
+      f.disable = function() {
+        enabled = false;
+        div.style("display", "none");
+        return f;
+      }
 
       f.extent = function() {
           return new MM.Extent(
@@ -416,6 +560,5 @@
       };
       return f;
   };
-
 
 }).call(this);
