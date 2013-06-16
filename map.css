@@ -148,12 +148,12 @@ path:hover {
 
 .project-area path {
 fill-opacity: .9;
-filter: url(#blur-project-area);
+filter: url(#blur);
 }
 
 .project-area path:hover {
   fill-opacity: 0.9;
-  filter: url(#blur-hover-project-area);
+  filter: url(#blur-hover);
 }
 
 @media (max-width:640px) {
