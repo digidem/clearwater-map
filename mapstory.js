@@ -91,8 +91,18 @@
       reveals = [],
       lastPosition = -1,
       wHeight = $(window).height(),
-      easingOffset;
+      easingOffset,
+      meter;
 
+  // Overwrite ModestMaps getMousePoint function - it does not like
+  // the map in position: fixed and gets confused.
+  // *WARNING* this will need modified if the map div has padding/margins
+  // This only works when filling the browser window.
+  MM.getMousePoint = function(e, map) {
+      var point = new MM.Point(e.clientX, e.clientY);
+      return point;
+  };
+  
   //--- Start of public functions of MapStory ---//
 
   MapStory.init = function (storyContainerId, mapContainerId, baseLayerId) {
@@ -314,6 +324,24 @@
         img.setAttribute('src', 'images/cw-system.png');
         return img;
     })
+    $(markerLayer.parent).on("click","img",false,_clickMarkers);
+    $(map.parent).on("click",true,_clickMarkers);
+  }
+  
+  var _clickMarkers = function (e) {
+    //if (map.getZoom() <= 13 && e.data) return;
+    // Ensure that this handler is attached once.
+    // Get the point on the map that was double-clicked
+    var point = MM.getMousePoint(e, map);
+    e.stopPropagation();
+    z = (map.getZoom() <= 13) ? 16 : 13;
+    if (e.data && z != 13) return;
+    mapbox.ease().map(map)
+      .to(map.pointCoordinate(MM.getMousePoint(e, map)).zoomTo(z))
+      .path("about").run(300, function() {
+      map.dispatchCallback('zoomed');
+    });
+    return MM.cancelEvent(e);
   }
   
   // Continually loop and check for page scroll, calling animations that
@@ -418,7 +446,6 @@
                 : (scrollTop <= show ) ? (scrollTop - start) / (show - start)
                 : (scrollTop > show) ? 1 - (scrollTop - show) / (stop - show) : 0
       if (layerScrollPoints[i].lastOpacity != opacity && i<3) {
-        console.log(layerScrollPoints[i]);
         var layer = map.getLayerAt(i+2);
         if (opacity == 0) layer.disable();
         else {

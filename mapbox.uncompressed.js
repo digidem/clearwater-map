@@ -8522,9 +8522,9 @@ mapbox.markers.interaction = function(mmg) {
     mi.bindMarker = function(marker) {
         var delayed_close = function() {
             if (showOnHover === false) return;
-            if (!marker.clicked) close_timer = window.setTimeout(function() {
+            close_timer = window.setTimeout(function() {
                 mi.hideTooltips();
-            }, 200);
+            }, 100);
         };
 
         var show = function(e) {
@@ -8560,7 +8560,17 @@ mapbox.markers.interaction = function(mmg) {
             }
 
             // Align the bottom of the tooltip with the top of its marker
-            wrapper.style.bottom = marker.element.offsetHeight / 2 + 20 + 'px';
+            // wrapper.style.bottom = marker.element.offsetHeight / 2 + 20 + 'px';
+            
+            // Show the popup on a different corner if it would not show
+            // on the screen at the normal position.
+            // *NOTE* popup width and height is hard-coded for now.
+            if (e.clientY < 135) {
+              popup.style.cssText = "top: 0; bottom: auto;";
+            }
+            if (mmg.map.dimensions.x - e.clientX < 155) {
+              popup.style.cssText += "left: auto; right: 0;";
+            }
 
             // Block mouse and touch events
             function stopPropagation(e) {
@@ -8572,9 +8582,9 @@ mapbox.markers.interaction = function(mmg) {
             MM.addEvent(popup, 'touchstart', stopPropagation);
 
             if (showOnHover) {
-                tooltip.onmouseover = function() {
-                    if (close_timer) window.clearTimeout(close_timer);
-                };
+//                tooltip.onmouseover = function() {
+//                    if (close_timer) window.clearTimeout(close_timer);
+//                };
                 tooltip.onmouseout = delayed_close;
             }
 
