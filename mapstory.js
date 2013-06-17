@@ -89,7 +89,8 @@
       layerScrollPoints = [],
       easings = [],
       reveals = [],
-      lastPosition = -1,
+      lastPositionE = -1,
+      lastPositionR = -1,
       wHeight = $(window).height(),
       easingOffset,
       meter;
@@ -161,7 +162,8 @@
     })
     $(window).resize();
     meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 1});
-    _loop()
+    _loopEase()
+    _loopReveal()
     
   };
 
@@ -172,12 +174,12 @@
   // Sets up easings between each story location on the map
   var _initEasing = function (map) {
     wHeight = $(window).height();
-    
+
     // We actually want easing to pause whilst the images are
     // scrolling into view. The images are 3:2, so height will be
     // the width / 1.5. We need this to be dynamic for responsive design.
     easingOffset = $("#stories").width() / 1.5;
-    
+
     // Loop through each of the locations in our array
     for (var i = 0; i < storyLocations.length; i++) {
       var $el = $(storyLocations[i].id);
@@ -192,10 +194,9 @@
       // Setup easings between each story location
       // By default an easing just goes to itself
       easings[i] = mapbox.ease().map(map).from(loc).to(loc).easing('linear');
-      
       // One easing's start position is the previous easing's end position
       if (typeof easings[i-1] === 'object') {
-        easings[i-1].to(loc);
+        easings[i-1].to(loc); //.setOptimalPath();
       }
     }
   }
@@ -333,19 +334,32 @@
   
   // Continually loop and check for page scroll, calling animations that
   // need to fire when the page scrolls.
-  function _loop(){
+  function _loopEase(){
     var y = $(window).scrollTop();
     
     // Avoid calculations if not needed and just loop again
-    if (lastPosition == y) {
-      meter.pause();
-        _requestAnimation(_loop);
+    if (lastPositionE == y) {
+        _requestAnimation(_loopEase);
         return false;
-    } else lastPosition = y
-    meter.resume();
+    } else lastPositionE = y
     _ease(y);
+    _requestAnimation(_loopEase);
+  }
+
+  // Continually loop and check for page scroll, calling animations that
+  // need to fire when the page scrolls.
+  function _loopReveal(){
+    var y = $(window).scrollTop();
+    
+    // Avoid calculations if not needed and just loop again
+    if (lastPositionR == y) {
+      meter.pause();
+        _requestAnimation(_loopReveal);
+        return false;
+    } else lastPositionR = y
+    meter.resume();
     _reveal(y);
-    _requestAnimation(_loop);
+    _requestAnimation(_loopReveal);
     meter.tick()
   }
 
@@ -367,7 +381,7 @@
     
     // Easing function for cubic in and out
     t = t > 1 ? 1 : t<.5 ? 2*t*t : -1+(4-2*t)*t;
-    
+
     // Move the map to the position on the easing path according to t
     easings[i-1].t(t);
 
