@@ -154,11 +154,9 @@
         var y = $(window).scrollTop()
         _initReveals("#stories img:not(.nocollapse)");
         _initEasing(map);
-        _initLayerDisplay(map);
         _initScrollTos("");
         _reveal(y);
         _ease(y);
-        _layerDisplay(y);
       }
     })
     $(window).resize();
@@ -260,25 +258,6 @@
     })
   }
   
-  // Set up display and hiding of map layers on scroll
-  var _initLayerDisplay = function (map) {
-    layerScrollPoints[0] = { 
-      start: 0,
-      show: 0,
-      stop: storyScrollPoints[1] / 2 
-    };
-    layerScrollPoints[1] = {
-      start: storyScrollPoints[1] / 2,
-      show: storyScrollPoints[1],
-      stop: storyScrollPoints[2] - (storyScrollPoints[2] - storyScrollPoints[1]) / 2
-    };
-    layerScrollPoints[2] = {
-      start: storyScrollPoints[2] - (storyScrollPoints[2] - storyScrollPoints[1]) / 2,
-      show: storyScrollPoints[2],
-      stop: undefined
-    }
-  }
-  
   // Load data from external dataSrc via JSONP
   var _loadData = function (sql, callback) {
     $.ajax({
@@ -324,23 +303,31 @@
         img.setAttribute('src', 'images/cw-system.png');
         return img;
     })
-    $(markerLayer.parent).on("click","img",false,_clickMarkers);
-    $(map.parent).on("click",true,_clickMarkers);
+    
+    //Set up click events on the layer and parent
+    $(markerLayer.parent).on("click","img",_clickMarkers);
+    $(map.parent).on("click",_clickMarkers);
   }
   
+  var easeBack;
   var _clickMarkers = function (e) {
-    //if (map.getZoom() <= 13 && e.data) return;
-    // Ensure that this handler is attached once.
-    // Get the point on the map that was double-clicked
-    var point = MM.getMousePoint(e, map);
-    e.stopPropagation();
-    z = (map.getZoom() <= 13) ? 16 : 13;
-    if (e.data && z != 13) return;
-    mapbox.ease().map(map)
-      .to(map.pointCoordinate(MM.getMousePoint(e, map)).zoomTo(z))
-      .path("about").run(300, function() {
-      map.dispatchCallback('zoomed');
-    });
+    var maxZoom = 16;
+    var z = map.getZoom()
+    e.stopPropagation();    
+    // If the click is not on a marker, then we only want to continue
+    // if we are already zoomed in to max, and we want to return.
+    if (z < maxZoom && this.nodeName != 'IMG') return MM.cancelEvent(e);
+
+    var to = map.pointCoordinate(MM.getMousePoint(e, map)).zoomTo(maxZoom);
+
+    if (z < maxZoom) {
+      if (!easeBack) easeBack = mapbox.ease().map(map).to(map.coordinate.copy()).from(to);
+      mapbox.ease().map(map)
+        .to(to)
+        .optimal(0.9);
+    } else {
+      easeBack.optimal(0.9, 1.42, function() { easeBack = undefined; });
+    }
     return MM.cancelEvent(e);
   }
   
@@ -358,7 +345,6 @@
     meter.resume();
     _ease(y);
     _reveal(y);
-    _layerDisplay(y);
     _requestAnimation(_loop);
     meter.tick()
   }
@@ -428,33 +414,12 @@
   // Smooth scroll to an element on the page when clicking a link
   var _scrollTo = function () {
     event.preventDefault();
+    if (map.getZoom() > 12 && this.parentNode.nodeName == 'g') return;
     $('html,body').stop(true);
     var scrollSrc = $(window).scrollTop();
     var targetScroll = $(this).data("target-scroll");
     $('htmll,body').animate({scrollTop:targetScroll}
       , Math.round(Math.abs(targetScroll - scrollSrc))* 5);
-  }
-  
-  // Hide or show layers according to scroll position / zoom
-  var _layerDisplay = function (scrollTop) {
-    var i;
-    for (i=0; i<layerScrollPoints.length; i++) {
-      var start = layerScrollPoints[i].start
-      var show = layerScrollPoints[i].show
-      var stop = layerScrollPoints[i].stop
-      opacity = (scrollTop < start || scrollTop > stop) && scrollTop >= 0 ? 0
-                : (scrollTop <= show ) ? (scrollTop - start) / (show - start)
-                : (scrollTop > show) ? 1 - (scrollTop - show) / (stop - show) : 0
-      if (layerScrollPoints[i].lastOpacity != opacity && i<3) {
-        var layer = map.getLayerAt(i+2);
-        if (opacity == 0) layer.disable();
-        else {
-          layer.enable();
-          $(layer.parent).css("opacity", opacity);
-        }
-        layerScrollPoints[i].lastOpacity = opacity;
-      }
-    }
   }
   
   // Simple function to iterate over an ascending ordered array and
@@ -539,7 +504,10 @@
             .attr("height", f.map.dimensions.y)
             .style("margin-left", "0px")
             .style("margin-top", "0px") && (first = false);
-
+        div.classed('zoom8', (f.map.getZoom() > 8));
+        div.classed('zoom9', (f.map.getZoom() > 9));
+        div.classed('zoom12', (f.map.getZoom() > 12));
+        div.classed('zoom14', (f.map.getZoom() > 14));
         path = d3.geo.path().projection(f.project);
         if (!!feature) feature.attr("d", path);
         return f;

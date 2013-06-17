@@ -8253,6 +8253,12 @@ mapbox.markers.layer = function() {
     // the markers library to be attached to a map, and will noop otherwise.
     m.draw = function() {
         if (!m.map) return;
+        var i = 1, c = "markers";
+        while (i < m.map.getZoom()) {
+          c += " zoom" + i;
+          i++
+        }
+        m.parent.className = c;
         left = m.map.pointLocation(new MM.Point(0, 0));
         right = m.map.pointLocation(new MM.Point(m.map.dimensions.x, 0));
         for (var i = 0; i < markers.length; i++) {
@@ -8624,8 +8630,8 @@ mapbox.markers.interaction = function(mmg) {
 
         marker.showTooltip = show;
 
-        marker.element.onclick = marker.element.ontouchstart = function() {
-            show();
+        marker.element.onclick = marker.element.ontouchstart = function(e) {
+            show(e);
             marker.clicked = true;
         };
 

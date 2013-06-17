@@ -132,29 +132,7 @@ content: " ▼";
   -webkit-transition:opacity 250ms;
 }
 
-.d3-vec { position:absolute; }
-path {
-  fill: #f1c21c;
-  fill-opacity: .6;
-  stroke: #fff;
-  stroke-width: 0;
-  cursor: pointer;
-}
 
-path:hover {
-  fill: #ab8b1e;
-  fill-opacity: 0.8;
-}
-
-.project-area path {
-fill-opacity: .9;
-filter: url(#blur);
-}
-
-.project-area path:hover {
-  fill-opacity: 0.9;
-  filter: url(#blur-hover);
-}
 
 @media (max-width:640px) {
   body {
@@ -194,6 +172,77 @@ body {
   
   
 /* Map elements */
+
+.d3-vec { position:absolute; }
+path {
+  fill: #f1c21c;
+  fill-opacity: .6;
+  stroke: #f1c21c;
+  stroke-width: 0;
+  cursor: pointer;
+  transition:fill-opacity 500ms,opacity 500ms;
+  -moz-transition:fill-opacity 500ms,opacity 500ms;
+  -webkit-transition:fill-opacity 500ms,opacity 500ms;
+}
+
+path:hover {
+  fill: #ab8b1e;
+}
+
+.communities { display: none;}
+
+.communities.zoom8 { display: block;}
+
+.communities path { opacity: 0;}
+
+.communities.zoom9 path {opacity:1;}
+
+.communities.zoom12 path {
+fill-opacity: 0;
+stroke-width: 2px;
+cursor: default;
+}
+
+.communities.zoom12 path:hover {
+fill-opacity: 0;
+}
+
+.communities.zoom14 {display: none;}
+
+.project-area path {
+fill-opacity: .9;
+filter: url(#blur);
+transition:fill-opacity 250ms, opacity 250ms;
+-moz-transition:fill-opacity 250ms, opacity 250ms;
+-webkit-transition:fill-opacity 250ms, opacity 250ms;
+}
+
+.project-area path:hover {
+  fill-opacity: 0.9;
+  filter: url(#blur-hover);
+}
+
+.project-area.zoom8 path {
+opacity: 0;
+}
+
+.project-area.zoom9 { display: none; }
+
+.markers {
+display: none;
+opacity: 0;
+transition:opacity 500ms;
+-moz-transition:opacity 500ms;
+-webkit-transition:opacity 500ms;
+}
+
+.markers.zoom11 {
+display: block;
+}
+
+.markers.zoom12 {
+opacity: 1;
+}
 
 .marker {
 margin-left: -8px;
