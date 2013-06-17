@@ -6832,7 +6832,7 @@ wax.mm.interaction = function() {
             _grid = (function(t) {
                 var o = [];
                 for (var key in t) {
-                    if (t[key].parentNode === zoomLayer) {
+                    if (t.hasOwnProperty(key) && t[key].parentNode === zoomLayer) {
                         var offset = wax.u.offset(t[key]);
                         o.push([
                             offset.top,
@@ -7687,6 +7687,8 @@ wax.mm.connector = function(options) {
             maxTapDistance = 30,
             maxDoubleTapDelay = 350,
             locations = {},
+            scale = 1,
+            startDistance = 1,
             taps = [],
             wasPinching = false,
             lastPinchCenter = null,
@@ -7698,6 +7700,9 @@ wax.mm.connector = function(options) {
         }
 
         function clearLocations() {
+            scale = 1;
+            startDistance = 1;
+
             for (var loc in locations) {
                 if (locations.hasOwnProperty(loc)) {
                     delete locations[loc];
@@ -7706,17 +7711,19 @@ wax.mm.connector = function(options) {
         }
 
         function updateTouches (e) {
+            var eventScale = (e.scale === undefined) ? scale : e.scale;
+
             for (var i = 0; i < e.touches.length; i += 1) {
                 var t = e.touches[i];
                 if (t.identifier in locations) {
                     var l = locations[t.identifier];
                     l.x = t.clientX;
                     l.y = t.clientY;
-                    l.scale = e.scale;
+                    l.scale = eventScale;
                 } else {
                     locations[t.identifier] = {
-                        scale: e.scale,
-                        startPos: { x: t.clientX, y: t.screenY },
+                        scale: eventScale,
+                        startPos: { x: t.clientX, y: t.clientY },
                         startZoom: map.zoom(),
                         x: t.clientX,
                         y: t.clientY,
@@ -7737,6 +7744,19 @@ wax.mm.connector = function(options) {
                     touchMoveMachine);
                 MM.addEvent(e.touches[1].target, 'touchend',
                     touchEndMachine);
+
+                if (e.scale === undefined) {
+                    var _t0 = e.touches[0],
+                        _t1 = e.touches[1],
+                        _p0 = new MM.Point(0, 0),
+                        _p1 = new MM.Point(0, 0);
+
+                        _p0.x = _t0.clientX;
+                        _p0.y = _t0.clientY;
+                        _p1.x = _t1.clientX;
+                        _p1.y = _t1.clientY;
+                        startDistance = MM.Point.distance(_p0, _p1);
+                }
             }
             updateTouches(e);
             panner.down(e.touches[0]);
@@ -7787,7 +7807,7 @@ wax.mm.connector = function(options) {
             p0.y = t0.clientY;
             p1.x = t1.clientX;
             p1.y = t1.clientY;
-            l0 = locations[t0.identifier],
+            l0 = locations[t0.identifier];
             l1 = locations[t1.identifier];
 
             // mark these touches so they aren't used as taps/holds
@@ -7797,8 +7817,11 @@ wax.mm.connector = function(options) {
             // scale about the center of these touches
             var center = MM.Point.interpolate(p0, p1, 0.5);
 
+            // e.scale isn't available to Android or Windows 7 browsers
+            var eventScale = (e.scale === undefined) ? scale = MM.Point.distance(p0, p1) / startDistance : e.scale;
+
             map.zoomByAbout(
-                Math.log(e.scale) / Math.LN2 - Math.log(l0.scale) / Math.LN2,
+                Math.log(eventScale) / Math.LN2 - Math.log(l0.scale) / Math.LN2,
                 center);
 
             // pan from the previous center of these touches
@@ -7814,6 +7837,7 @@ wax.mm.connector = function(options) {
         function onPinched(touch) {
             var z = map.getZoom(), // current zoom
                 tz = locations[touch.identifier].startZoom > z ? Math.floor(z) : Math.ceil(z);
+
             easey().map(map).point(lastPinchCenter).zoom(tz)
                 .path('about').run(300);
             clearLocations();
@@ -7828,7 +7852,7 @@ wax.mm.connector = function(options) {
             var now = new Date().getTime();
 
             // round zoom if we're done pinching
-            if (e.touches.length === 0 && wasPinching) {
+            if (e.touches.length <= 1 && wasPinching) {
                 onPinched(e.changedTouches[0]);
             }
 
@@ -8231,10 +8255,10 @@ mapbox.markers.layer = function() {
         if (!m.map) return;
         left = m.map.pointLocation(new MM.Point(0, 0));
         right = m.map.pointLocation(new MM.Point(m.map.dimensions.x, 0));
-        callbackManager.dispatchCallback('drawn', m);
         for (var i = 0; i < markers.length; i++) {
             reposition(markers[i]);
         }
+        callbackManager.dispatchCallback('drawn', m);
     };
 
     // Add a fully-formed marker to the layer. This fires a `markeradded` event.
@@ -8304,6 +8328,7 @@ mapbox.markers.layer = function() {
                 } else {
                     // marker needs to be added to the map
                     index[id] = m.add({
+                        id: id,
                         element: factory(features[i]),
                         location: new MM.Location(
                             features[i].geometry.coordinates[1],
@@ -8317,6 +8342,8 @@ mapbox.markers.layer = function() {
 
         for (var k = markers.length - 1; k >= 0; k--) {
             if (markers[k].touch === false) {
+                if (typeof markers[k].id !== 'undefined')
+                    delete index[markers[k].id];
                 m.remove(markers[k]);
             }
         }
@@ -8507,6 +8534,7 @@ mapbox.markers.interaction = function(mmg) {
         for (var i = 0; i < markers.length; i++) {
             delete markers[i].clicked;
         }
+        return mi;
     };
 
     mi.add = function() {
@@ -8559,9 +8587,6 @@ mapbox.markers.interaction = function(mmg) {
                 popup.appendChild(content);
             }
 
-            // Align the bottom of the tooltip with the top of its marker
-            // wrapper.style.bottom = marker.element.offsetHeight / 2 + 20 + 'px';
-            
             // Show the popup on a different corner if it would not show
             // on the screen at the normal position.
             // *NOTE* popup width and height is hard-coded for now.
@@ -8582,9 +8607,6 @@ mapbox.markers.interaction = function(mmg) {
             MM.addEvent(popup, 'touchstart', stopPropagation);
 
             if (showOnHover) {
-//                tooltip.onmouseover = function() {
-//                    if (close_timer) window.clearTimeout(close_timer);
-//                };
                 tooltip.onmouseout = delayed_close;
             }
 
