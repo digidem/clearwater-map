@@ -152,7 +152,7 @@
       }
     })
     $(window).resize();
-
+    meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 1});
     _loop()
     
   };
@@ -323,14 +323,16 @@
     
     // Avoid calculations if not needed and just loop again
     if (lastPosition == y) {
+      meter.pause();
         _requestAnimation(_loop);
         return false;
     } else lastPosition = y
-
+    meter.resume();
     _ease(y);
     _reveal(y);
     _layerDisplay(y);
     _requestAnimation(_loop);
+    meter.tick()
   }
 
   // Moves the map from one location to the next based on scroll position.
