@@ -58,12 +58,10 @@
   
   // Array of locations for each story on the map
   // The first location is for the initial map view
-  // it should be attached to the body element which has offset().top = 0
+  // it should be attached to the #map element which has offset().top = 0
   // TODO change this - not very obvious.
   var storyLocations = [
-    { id: 'body', lat: -1.369, lon : -79.717, zoom : 7.8 },
-    { id: '#nor-oriente', lat : -0.141, lon : -77.416, zoom : 10 },
-    { id: '#cofan-cover', lat : 0.012, lon : -76.763, zoom : 13 }
+    { id: '#map', bounds: [ [-81.2, -5.2], [-74.9, 1.8] ] }
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
@@ -92,7 +90,8 @@
       lastPositionE = -1,
       lastPositionR = -1,
       wHeight = $(window).height(),
-      easingOffset,
+      mapPadding = {},
+      markerBounds = [],
       meter;
 
   // Overwrite ModestMaps getMousePoint function - it does not like
@@ -117,9 +116,9 @@
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
-    map = mapbox.map('map',null,null,[]).setExtent(startBounds);
+    map = mapbox.map('map',null,null, []).setExtent(startBounds);
     MapStory.map = map;
-    
+    map.extentCoordinate = _paddedExtentCoordinate;
     // Add all the map layers to the map, in order (they are empty at this point)
     map.addLayer(satLayer);
     map.addLayer(labelLayer);
@@ -153,6 +152,7 @@
       $('html,body').stop(true);
       if (Date.now() - lastResize > 1000/60) {
         var y = $(window).scrollTop()
+        mapPadding.left = $("#stories").outerWidth(true)
         _initReveals("#stories img:not(.nocollapse)");
         _initEasing(map);
         _initScrollTos("");
@@ -174,31 +174,101 @@
   // Sets up easings between each story location on the map
   var _initEasing = function (map) {
     wHeight = $(window).height();
-
+    storyScrollPoints = [];
     // We actually want easing to pause whilst the images are
     // scrolling into view. The images are 3:2, so height will be
     // the width / 1.5. We need this to be dynamic for responsive design.
     easingOffset = $("#stories").width() / 1.5;
 
-    // Loop through each of the locations in our array
+    // Loop through each of the locations in our array and search for
+    // a matching element id on the page, and set the scroll point
     for (var i = 0; i < storyLocations.length; i++) {
       var $el = $(storyLocations[i].id);
-      // Populate scroll points of each story in the #stories column
-      storyScrollPoints[i] = $el.offset().top - wHeight + $el.height();
-      
-      var lat = storyLocations[i].lat;
-      var lon = storyLocations[i].lon;
-      var zoom = storyLocations[i].zoom
-      var loc = map.locationCoordinate({ lat: lat, lon: lon }).zoomTo(zoom);
-      
+      if ($el.length > 0) {
+        // Populate scroll points of each story in the #stories column
+        storyScrollPoints.push({
+          id: i,
+          scrollPoint: $el.offset().top - wHeight + $el.height()
+        });
+      }
+    }
+    storyScrollPoints = storyScrollPoints.sort(function(a,b) { return a.id > b.id; });
+    // Loop through the scroll points and set easing functions to 
+    // move the map as you move between scroll points.
+    for (var i = 0; i < storyScrollPoints.length; i++) {
+      var loc = _centerFromBounds(storyLocations[storyScrollPoints[i].id].bounds);
+    
       // Setup easings between each story location
       // By default an easing just goes to itself
       easings[i] = mapbox.ease().map(map).from(loc).to(loc).easing('linear');
       // One easing's start position is the previous easing's end position
       if (typeof easings[i-1] === 'object') {
-        easings[i-1].to(loc); //.setOptimalPath();
+        easings[i-1].to(loc).setOptimalPath();
       }
     }
+  }
+
+  var _centerFromBounds = function (bounds) {
+    var extent = new MM.Extent(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0]);
+    return map.extentCoordinate(extent, true);
+  }
+
+  var _paddedExtentCoordinate = function (locations, precise) {
+    // coerce locations to an array if it's a Extent instance
+    if (locations instanceof MM.Extent) {
+        locations = locations.toArray();
+    }
+
+    var TL, BR;
+    for (var i = 0; i < locations.length; i++) {
+        var coordinate = this.projection.locationCoordinate(locations[i]);
+        if (TL) {
+            TL.row = Math.min(TL.row, coordinate.row);
+            TL.column = Math.min(TL.column, coordinate.column);
+            TL.zoom = Math.min(TL.zoom, coordinate.zoom);
+            BR.row = Math.max(BR.row, coordinate.row);
+            BR.column = Math.max(BR.column, coordinate.column);
+            BR.zoom = Math.max(BR.zoom, coordinate.zoom);
+        }
+        else {
+            TL = coordinate.copy();
+            BR = coordinate.copy();
+        }
+    }
+
+    var width = this.dimensions.x + 1 - mapPadding.left;
+    var height = this.dimensions.y + 1;
+
+    // multiplication factor between horizontal span and map width
+    var hFactor = (BR.column - TL.column) / (width / this.tileSize.x);
+
+    // multiplication factor expressed as base-2 logarithm, for zoom difference
+    var hZoomDiff = Math.log(hFactor) / Math.log(2);
+
+    // possible horizontal zoom to fit geographical extent in map width
+    var hPossibleZoom = TL.zoom - (precise ? hZoomDiff : Math.ceil(hZoomDiff));
+
+    // multiplication factor between vertical span and map height
+    var vFactor = (BR.row - TL.row) / (height / this.tileSize.y);
+
+    // multiplication factor expressed as base-2 logarithm, for zoom difference
+    var vZoomDiff = Math.log(vFactor) / Math.log(2);
+
+    // possible vertical zoom to fit geographical extent in map height
+    var vPossibleZoom = TL.zoom - (precise ? vZoomDiff : Math.ceil(vZoomDiff));
+
+    // initial zoom to fit extent vertically and horizontally
+    var initZoom = Math.min(hPossibleZoom, vPossibleZoom);
+
+    // additionally, make sure it's not outside the boundaries set by map limits
+    initZoom = Math.min(initZoom, this.coordLimits[1].zoom);
+    initZoom = Math.max(initZoom, this.coordLimits[0].zoom);
+
+    // coordinate of extent center
+    var centerRow = (TL.row + BR.row) / 2;
+    var centerColumn = (TL.column + BR.column) / 2;
+    var centerZoom = TL.zoom;
+    return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom).left(mapPadding.left / this.tileSize.x / 2);
   }
 
   // Set up onClick events to scroll the document between anchors
@@ -302,27 +372,51 @@
         var img = document.createElement('img');
         img.className = 'marker';
         img.setAttribute('src', 'images/cw-system.png');
+        $.data(img,'id',_sanitize(f.properties.location));
         return img;
     })
-    
+    markerBounds = _calculateMarkerBounds(geojson);
     //Set up click events on the layer and parent
     $(markerLayer.parent).on("click","img",_clickMarkers);
     $(map.parent).on("click",_clickMarkers);
   }
   
+  var _calculateMarkerBounds = function (geojson) {
+    var b = {};
+    for (var i=0; i < geojson.features.length; i++) {
+      var f = geojson.features[i];
+      var id = _sanitize(f.properties.location);
+      var x = f.geometry.coordinates[0];
+      var y = f.geometry.coordinates[1];
+      b[id] = b[id] || {};
+      b[id].bounds = b[id].bounds || [[],[]];
+      b[id].bounds[0][0] = (b[id].bounds[0][0] < x) ? b[id].bounds[0][0] : x;
+      b[id].bounds[0][1] = (b[id].bounds[0][1] < y) ? b[id].bounds[0][1] : y;
+      b[id].bounds[1][0] = (b[id].bounds[1][0] > x) ? b[id].bounds[1][0] : x;
+      b[id].bounds[1][1] = (b[id].bounds[1][1] > y) ? b[id].bounds[1][1] : y;
+      b[id].loc = _centerFromBounds(b[id].bounds);
+    }
+    console.log(b);
+    return b;
+  }
+  
   var easeBack;
   var _clickMarkers = function (e) {
-    var maxZoom = 16;
+    var id = $.data(this,'id');
+    var maxZoom = 17;
     var z = map.getZoom()
-    e.stopPropagation();    
+    var position = $(this).position();
+    e.stopPropagation();
+    var point = new MM.Point(position.left, position.top);
     // If the click is not on a marker, then we only want to continue
     // if we are already zoomed in to max, and we want to return.
     if (z < maxZoom && this.nodeName != 'IMG') return MM.cancelEvent(e);
 
-    var to = map.pointCoordinate(MM.getMousePoint(e, map)).zoomTo(maxZoom);
-
+    var to = map.pointCoordinate(point).zoomTo(maxZoom)
+             .left(mapPadding.left / map.tileSize.x / 2);
+    var backTo = (!!markerBounds[id]) ? markerBounds[id].loc : map.coordinate.copy()
     if (z < maxZoom) {
-      if (!easeBack) easeBack = mapbox.ease().map(map).to(map.coordinate.copy()).from(to);
+      if (!easeBack) easeBack = mapbox.ease().map(map).to(backTo).from(to);
       mapbox.ease().map(map)
         .to(to)
         .optimal(0.9);
@@ -376,14 +470,14 @@
     if (!i) return;
     
     // 0 < t < 1 represents where we are between two storyScrollPoints    
-    var t = (scrollTop - storyScrollPoints[i-1]) / 
-            (storyScrollPoints[i] - storyScrollPoints[i-1]);
+    var t = (scrollTop - storyScrollPoints[i-1].scrollPoint) / 
+            (storyScrollPoints[i].scrollPoint - storyScrollPoints[i-1].scrollPoint);
     
     // Easing function for cubic in and out
     t = t > 1 ? 1 : t<.5 ? 2*t*t : -1+(4-2*t)*t;
 
     // Move the map to the position on the easing path according to t
-    easings[i-1].t(t);
+    easings[i-1].t(t+0.000001);
 
   }
   
@@ -441,7 +535,7 @@
   // Returns null if value is outside range in the array.
   var _find = function (val, array) {
     for (var i = 0; i < array.length; i++) {
-      if (val < array[i]) return i;
+      if (val < array[i].scrollPoint) return i;
     }
     return null;
   }
@@ -455,10 +549,10 @@
   }
   
   function d3layer(c) {
-      var f = {}, bounds, feature, collection, enabled = true;
+      var f = {}, bounds, feature, collection, enabled = true, c = c + " d3-vec";
       var div = d3.select(document.body)
           .append("div")
-          .attr('class', c + " d3-vec"),
+          .attr('class', c),
           svg = div.append('svg'),
           g = svg.append("g");
       var defs = svg.append("defs");
@@ -518,10 +612,12 @@
             .attr("height", f.map.dimensions.y)
             .style("margin-left", "0px")
             .style("margin-top", "0px") && (first = false);
-        div.classed('zoom8', (f.map.getZoom() > 8));
-        div.classed('zoom9', (f.map.getZoom() > 9));
-        div.classed('zoom12', (f.map.getZoom() > 12));
-        div.classed('zoom14', (f.map.getZoom() > 14));
+        var i = 0, classString = c;
+        while (i < f.map.getZoom()) {
+          classString += " zoom" + i;
+          i++;
+        }
+        div.attr('class', classString);
         path = d3.geo.path().projection(f.project);
         if (!!feature) feature.attr("d", path);
         return f;
@@ -529,13 +625,22 @@
 
       f.data = function(x) {
           collection = x;
+          var fs = collection.features;
           bounds = d3.geo.bounds(collection);
           feature = g.selectAll("polygon")
-              .data(collection.features)
+              .data(fs)
               .enter().append("a")
               .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.name); })
               .append("path");
-              
+          
+          // Add the bounds of each feature to the storyLocations array
+          for (i=0; i < fs.length; i++) {
+            storyLocations.push({ 
+              id: "#" + _sanitize(fs[i].properties.name),
+              bounds: d3.geo.bounds(fs[i])
+            });
+          }
+
           // If we can't control filter and hover events from css, then add javascript event
           // and attach the filter directly to the svg element
           // Currently only WebKit (Safari & Chrome) support SVG filters from CSS
