@@ -203,7 +203,7 @@
       easings[i] = mapbox.ease().map(map).from(loc).to(loc).easing('linear');
       // One easing's start position is the previous easing's end position
       if (typeof easings[i-1] === 'object') {
-        easings[i-1].to(loc).setOptimalPath();
+        easings[i-1].to(loc); //.setOptimalPath();
       }
     }
   }
