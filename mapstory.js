@@ -86,6 +86,7 @@
       storyScrollPoints = [],
       layerScrollPoints = [],
       easings = [],
+      easeOverride,
       reveals = [],
       lastPositionE = -1,
       lastPositionR = -1,
@@ -420,6 +421,7 @@
       mapbox.ease().map(map)
         .to(to)
         .optimal(0.9);
+      _setEaseOverride(to);
     } else {
       easeBack.optimal(0.9, 1.42, function() { easeBack = undefined; });
     }
@@ -467,18 +469,81 @@
     var i = _find(scrollTop, storyScrollPoints);
     
     // Don't do anything if we are beyond the last storyScrollPoint
-    if (!i) return;
+    if (!storyScrollPoints[i]) return;
     
-    // 0 < t < 1 represents where we are between two storyScrollPoints    
-    var t = (scrollTop - storyScrollPoints[i-1].scrollPoint) / 
+    // If there is an easeOverride, check if we are within it,
+    // and ease accordingly. Cancel the override once we leave it.
+    if (!!easeOverride) {
+      console.log(scrollTop);
+      if (scrollTop > easeOverride.top && scrollTop < easeOverride.bottom) {
+        if (scrollTop < easeOverride.start) {
+          t = (scrollTop - easeOverride.top) / (easeOverride.start - easeOverride.top);
+          easeOverride.easings[0].t(t+0.000001);
+        } else if (scrollTop > easeOverride.start) {
+          t = (scrollTop - easeOverride.start) / (easeOverride.bottom - easeOverride.start);
+          console.log("t", t)
+          easeOverride.easings[1].t(t+0.000001);
+        }
+      } else {
+        easeOverride = undefined;
+      }
+    } else {
+      // 0 < t < 1 represents where we are between two storyScrollPoints    
+      var t = (scrollTop - storyScrollPoints[i-1].scrollPoint) / 
+              (storyScrollPoints[i].scrollPoint - storyScrollPoints[i-1].scrollPoint);
+  
+      // Move the map to the position on the easing path according to t
+      easings[i-1].t(t+0.000001);
+    }
+  }
+  
+  // Sets an override easing function if the user has moved the map from the
+  // pre-defined easing path, or if we need to move quickly between two 
+  // points far apart on the page without moving through the intermediary steps 
+  var _setEaseOverride = function (from,start,top,bottom) {
+    easeOverride = { easings: [] };
+    var from = from || map.coordinate.copy(),
+        start = start || $(window).scrollTop(),
+        defaultTop = (!top),
+        defaultBottom = (!bottom),
+        top = top || start - 200,
+        bottom = bottom || start + 200,
+        buffer = 100,
+        scrollPoint,
+        topLoc,
+        bottomLoc,
+        i;
+    easeOverride.start = start;
+    
+    // If there is a story scroll point within buffer, use that as the destination
+    i = _find(top - buffer, storyScrollPoints);
+    if (typeof storyScrollPoints[i-1] !== 'undefined') {
+      scrollPoint = storyScrollPoints[i].scrollPoint;
+      top = (Math.abs(scrollPoint - top) > buffer) ? top : false;
+      t = (top === false) ? 0
+          : (top - storyScrollPoints[i-1].scrollPoint) / 
             (storyScrollPoints[i].scrollPoint - storyScrollPoints[i-1].scrollPoint);
+      topLoc = easings[i-1].t(t+0.000001,false);
+    } else {
+      topLoc = from;
+    }
+    easeOverride.top = (top === false) ? scrollPoint : top;
+    easeOverride.easings[0] = mapbox.ease().map(map).from(topLoc).to(from).setOptimalPath();
     
-    // Easing function for cubic in and out
-    t = t > 1 ? 1 : t<.5 ? 2*t*t : -1+(4-2*t)*t;
-
-    // Move the map to the position on the easing path according to t
-    easings[i-1].t(t+0.000001);
-
+    i = _find(bottom - buffer, storyScrollPoints);
+    if (typeof storyScrollPoints[i] !== 'undefined') {
+      scrollPoint = storyScrollPoints[i].scrollPoint;
+      bottom = (Math.abs(scrollPoint - bottom) > buffer) ? bottom : false;
+      t = (bottom === false) ? 0
+          : (bottom - storyScrollPoints[i-1].scrollPoint) / 
+            (storyScrollPoints[i].scrollPoint - storyScrollPoints[i-1].scrollPoint);
+      bottomLoc = easings[i-1].t(t+0.000001,false);
+    } else {
+      bottomLoc = from;
+    }   
+    easeOverride.bottom = (bottom === false) ? scrollPoint : bottom;
+    easeOverride.easings[1] = mapbox.ease().map(map).from(from).to(bottomLoc).setOptimalPath();
+    console.log(easeOverride);
   }
   
   // Checks scroll position and reveals images as you scroll
@@ -537,12 +602,12 @@
     for (var i = 0; i < array.length; i++) {
       if (val < array[i].scrollPoint) return i;
     }
-    return null;
+    return undefined;
   }
   
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
   function _sanitize(string) {
-    if (typeof(string) != "undefined")
+    if (typeof string != "undefined")
     return string.toLowerCase()
           .replace('http://www.giveclearwater.org/','a-')
           .split(" ").join("-").split("/").join("-");
