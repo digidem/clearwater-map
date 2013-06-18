@@ -7364,7 +7364,8 @@ wax.mm.connector = function(options) {
             easeIn: function(t) { return t * t; },
             easeOut: function(t) { return Math.sin(t * Math.PI / 2); },
             easeInOut: function(t) { return (1 - Math.cos(Math.PI * t)) / 2; },
-            linear: function(t) { return t; }
+            linear: function(t) { return t; },
+            easeCubicInOut: function(t) { return (t > 1) ? 1 : t<.5 ? 2*t*t : -1+(4-2*t)*t; }
         };
         var easing = easings.easeOut;
 
@@ -7502,8 +7503,10 @@ wax.mm.connector = function(options) {
 
         var path = paths.screen;
 
-        easey.t = function(t) {
+        // If draw is false, just returns the coordinate for where it would draw.
+        easey.t = function(t, draw) {
             path(from, to, easing(t), static_coord);
+            if (draw === false) return static_coord;
             map.coordinate = static_coord;
             map.draw();
             return easey;
