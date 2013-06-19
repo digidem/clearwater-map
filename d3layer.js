@@ -145,7 +145,7 @@ d3layer.prototype.disable = function() {
 
 // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
 function _sanitize(string) {
-  if (typeof string != "undefined")
+  if (typeof string != "undefined" && string !== null)
   return string.toLowerCase()
         .replace('http://www.giveclearwater.org/','a-')
         .split(" ").join("-").split("/").join("-");
