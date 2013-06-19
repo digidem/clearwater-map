@@ -7503,14 +7503,17 @@ wax.mm.connector = function(options) {
 
         var path = paths.screen;
 
-        // If draw is false, just returns the coordinate for where it would draw.
-        easey.t = function(t, draw) {
+        easey.t = function(t) {
             path(from, to, easing(t), static_coord);
-            if (draw === false) return static_coord;
             map.coordinate = static_coord;
             map.draw();
             return easey;
         };
+        
+        easey.getCoordinate = function(t) {
+          path(from, to, easing(t), static_coord);
+          return static_coord;
+        }
 
         easey.future = function(parts) {
             var futures = [];

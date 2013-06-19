@@ -1,10 +1,9 @@
-(function () {
-
-	var window = this;
+;(function () {
+  var window = this;
 
 	// The top-level namespace. All public classes and modules will
 	// be attached to this.
-	var MapStory = window.MapStory = {};
+	var MapStory = this.MapStory = {};
   
   //--- Some feature detection ---//
   
@@ -37,11 +36,11 @@
 
   // Detect request animation frame
   var _requestAnimation = window.requestAnimationFrame 
-                          || window.webkitRequestAnimationFrame
-                          || window.mozRequestAnimationFrame
-                          || window.msRequestAnimationFrame 
-                          || window.oRequestAnimationFrame 
-                          || function (callback) { window.setTimeout(callback, 1000/60) };
+                        || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame
+                        || window.msRequestAnimationFrame 
+                        || window.oRequestAnimationFrame 
+                        || function (callback) { window.setTimeout(callback, 1000/60) };
   
   //-- *************** --//
   //-- Customize below --//
@@ -59,9 +58,10 @@
   // Array of locations for each story on the map
   // The first location is for the initial map view
   // it should be attached to the #map element which has offset().top = 0
+  // bounds as [[ lonSouth, latWest], [lonNorth, latEast]] - blame d3 for this order.
   // TODO change this - not very obvious.
   var storyLocations = [
-    { id: '#map', bounds: [ [-81.2, -5.2], [-74.9, 1.8] ] }
+    { id: 'map', bounds: [ [-81.2, -5.2], [-74.9, 1.8] ] }
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
@@ -86,14 +86,12 @@
       storyScrollPoints = [],
       layerScrollPoints = [],
       easings = [],
-      easeOverride,
+      easeHandler,
       reveals = [],
-      lastPositionE = -1,
       lastPositionR = -1,
       wHeight = $(window).height(),
       mapPadding = {},
-      markerBounds = [],
-      meter;
+      markerBounds = [];
 
   // Overwrite ModestMaps getMousePoint function - it does not like
   // the map in position: fixed and gets confused.
@@ -118,8 +116,12 @@
     
     // Set up the map, with no layers and no handlers.
     map = mapbox.map('map',null,null, []).setExtent(startBounds);
-    MapStory.map = map;
+    window.map = map; // export the map variable for debugging
+    
+    // Override the default MM.extentCoordinate function to add padding
+    // so that zooms and eases are centered slightly to the right.
     map.extentCoordinate = _paddedExtentCoordinate;
+    
     // Add all the map layers to the map, in order (they are empty at this point)
     map.addLayer(satLayer);
     map.addLayer(labelLayer);
@@ -147,7 +149,8 @@
     });
     
     $('#stories').css('height',$('#stories').height());
-
+    window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
+    easeHandler = MapStory.easeHandler()
     var lastResize = 0;
     $(window).resize(function () {
       $('html,body').stop(true);
@@ -155,64 +158,23 @@
         var y = $(window).scrollTop()
         mapPadding.left = $("#stories").outerWidth(true)
         _initReveals("#stories img:not(.nocollapse)");
-        _initEasing(map);
+        easeHandler.locations(storyLocations).map(map).enable();
+        window.eh = easeHandler;
         _initScrollTos("");
         _reveal(y);
-        _ease(y);
       }
     })
     $(window).resize();
-    meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 1});
-    _loopEase()
+
     _loopReveal()
     
   };
 
   //--- End of public functions of MapStory ---//
   
+
+  
   //--- Private helper functions ---//
-
-  // Sets up easings between each story location on the map
-  var _initEasing = function (map) {
-    wHeight = $(window).height();
-    storyScrollPoints = [];
-    // We actually want easing to pause whilst the images are
-    // scrolling into view. The images are 3:2, so height will be
-    // the width / 1.5. We need this to be dynamic for responsive design.
-    easingOffset = $("#stories").width() / 1.5;
-
-    // Loop through each of the locations in our array and search for
-    // a matching element id on the page, and set the scroll point
-    for (var i = 0; i < storyLocations.length; i++) {
-      var $el = $(storyLocations[i].id);
-      if ($el.length > 0) {
-        // Populate scroll points of each story in the #stories column
-        storyScrollPoints.push({
-          id: i,
-          scrollPoint: $el.offset().top - wHeight + $el.height()
-        });
-      }
-    }
-    storyScrollPoints = storyScrollPoints.sort(function(a,b) { return a.id > b.id; });
-    // Loop through the scroll points and set easing functions to 
-    // move the map as you move between scroll points.
-    for (var i = 0; i < storyScrollPoints.length; i++) {
-      var loc = _centerFromBounds(storyLocations[storyScrollPoints[i].id].bounds);
-    
-      // Setup easings between each story location
-      // By default an easing just goes to itself
-      easings[i] = mapbox.ease().map(map).from(loc).to(loc).easing('linear');
-      // One easing's start position is the previous easing's end position
-      if (typeof easings[i-1] === 'object') {
-        easings[i-1].to(loc); //.setOptimalPath();
-      }
-    }
-  }
-
-  var _centerFromBounds = function (bounds) {
-    var extent = new MM.Extent(bounds[0][1], bounds[0][0], bounds[1][1], bounds[1][0]);
-    return map.extentCoordinate(extent, true);
-  }
 
   var _paddedExtentCoordinate = function (locations, precise) {
     // coerce locations to an array if it's a Extent instance
@@ -344,13 +306,15 @@
   // and caches the bounds of each nationality in bounds[]
   var _onCommunitiesLoad = function(geojson) {
     communityLayer.data(geojson);
+    storyLocations = storyLocations.concat(communityLayer.getLocations());
     communityLayer.draw();
     $(window).resize();
   }
   
   // _onProjectAreaLoad adds geojson returned from the JSONP call to the map
   var _onProjectAreaLoad = function(geojson) {
-    projectLayer.data(geojson).draw().addFilters();
+    projectLayer.data(geojson).draw();//.addFilters();
+    storyLocations = storyLocations.concat(projectLayer.getLocations());
     $(window).resize();
   }
 
@@ -418,30 +382,20 @@
     var backTo = (!!markerBounds[id]) ? markerBounds[id].loc : map.coordinate.copy()
     if (z < maxZoom) {
       if (!easeBack) easeBack = mapbox.ease().map(map).to(backTo).from(to);
-      mapbox.ease().map(map)
-        .to(to)
-        .optimal(0.9);
-      _setEaseOverride(to);
+      map.ease.to(to).optimal(0.9);
+      easeHandler.setOverride(to);
     } else {
       easeBack.optimal(0.9, 1.42, function() { easeBack = undefined; });
     }
     return MM.cancelEvent(e);
   }
   
-  // Continually loop and check for page scroll, calling animations that
-  // need to fire when the page scrolls.
-  function _loopEase(){
-    var y = $(window).scrollTop();
-    
-    // Avoid calculations if not needed and just loop again
-    if (lastPositionE == y) {
-        _requestAnimation(_loopEase);
-        return false;
-    } else lastPositionE = y
-    _ease(y);
-    _requestAnimation(_loopEase);
+  // Get the map center point for a given bounds
+  function _centerFromBounds (b) {
+    var extent = new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]);
+    return map.extentCoordinate(extent, true);
   }
-
+  
   // Continually loop and check for page scroll, calling animations that
   // need to fire when the page scrolls.
   function _loopReveal(){
@@ -449,103 +403,13 @@
     
     // Avoid calculations if not needed and just loop again
     if (lastPositionR == y) {
-      meter.pause();
         _requestAnimation(_loopReveal);
         return false;
     } else lastPositionR = y
-    meter.resume();
     _reveal(y);
     _requestAnimation(_loopReveal);
-    meter.tick()
   }
 
-  // Moves the map from one location to the next based on scroll position.
-  var _ease = function (scrollTop) {
-    
-    // On a Mac "bouncy scrolling" you can get -ve scrollTop, not good
-    scrollTop = scrollTop >= 0 ? scrollTop : 0;
-    
-    // Iterate over storyScrollPoints to find the index of the easing we want
-    var i = _find(scrollTop, storyScrollPoints);
-    
-    // Don't do anything if we are beyond the last storyScrollPoint
-    if (!storyScrollPoints[i]) return;
-    
-    // If there is an easeOverride, check if we are within it,
-    // and ease accordingly. Cancel the override once we leave it.
-    if (!!easeOverride) {
-      console.log(scrollTop);
-      if (scrollTop > easeOverride.top && scrollTop < easeOverride.bottom) {
-        if (scrollTop < easeOverride.start) {
-          t = (scrollTop - easeOverride.top) / (easeOverride.start - easeOverride.top);
-          easeOverride.easings[0].t(t+0.000001);
-        } else if (scrollTop > easeOverride.start) {
-          t = (scrollTop - easeOverride.start) / (easeOverride.bottom - easeOverride.start);
-          console.log("t", t)
-          easeOverride.easings[1].t(t+0.000001);
-        }
-      } else {
-        easeOverride = undefined;
-      }
-    } else {
-      // 0 < t < 1 represents where we are between two storyScrollPoints    
-      var t = (scrollTop - storyScrollPoints[i-1].scrollPoint) / 
-              (storyScrollPoints[i].scrollPoint - storyScrollPoints[i-1].scrollPoint);
-  
-      // Move the map to the position on the easing path according to t
-      easings[i-1].t(t+0.000001);
-    }
-  }
-  
-  // Sets an override easing function if the user has moved the map from the
-  // pre-defined easing path, or if we need to move quickly between two 
-  // points far apart on the page without moving through the intermediary steps 
-  var _setEaseOverride = function (from,start,top,bottom) {
-    easeOverride = { easings: [] };
-    var from = from || map.coordinate.copy(),
-        start = start || $(window).scrollTop(),
-        defaultTop = (!top),
-        defaultBottom = (!bottom),
-        top = top || start - 200,
-        bottom = bottom || start + 200,
-        buffer = 100,
-        scrollPoint,
-        topLoc,
-        bottomLoc,
-        i;
-    easeOverride.start = start;
-    
-    // If there is a story scroll point within buffer, use that as the destination
-    i = _find(top - buffer, storyScrollPoints);
-    if (typeof storyScrollPoints[i-1] !== 'undefined') {
-      scrollPoint = storyScrollPoints[i].scrollPoint;
-      top = (Math.abs(scrollPoint - top) > buffer) ? top : false;
-      t = (top === false) ? 0
-          : (top - storyScrollPoints[i-1].scrollPoint) / 
-            (storyScrollPoints[i].scrollPoint - storyScrollPoints[i-1].scrollPoint);
-      topLoc = easings[i-1].t(t+0.000001,false);
-    } else {
-      topLoc = from;
-    }
-    easeOverride.top = (top === false) ? scrollPoint : top;
-    easeOverride.easings[0] = mapbox.ease().map(map).from(topLoc).to(from).setOptimalPath();
-    
-    i = _find(bottom - buffer, storyScrollPoints);
-    if (typeof storyScrollPoints[i] !== 'undefined') {
-      scrollPoint = storyScrollPoints[i].scrollPoint;
-      bottom = (Math.abs(scrollPoint - bottom) > buffer) ? bottom : false;
-      t = (bottom === false) ? 0
-          : (bottom - storyScrollPoints[i-1].scrollPoint) / 
-            (storyScrollPoints[i].scrollPoint - storyScrollPoints[i-1].scrollPoint);
-      bottomLoc = easings[i-1].t(t+0.000001,false);
-    } else {
-      bottomLoc = from;
-    }   
-    easeOverride.bottom = (bottom === false) ? scrollPoint : bottom;
-    easeOverride.easings[1] = mapbox.ease().map(map).from(from).to(bottomLoc).setOptimalPath();
-    console.log(easeOverride);
-  }
-  
   // Checks scroll position and reveals images as you scroll
   var _reveal = function (scrollTop) {
     var i;
@@ -595,16 +459,6 @@
       , Math.round(Math.abs(targetScroll - scrollSrc))* 5);
   }
   
-  // Simple function to iterate over an ascending ordered array and
-  // return the index of the first value greater than the search value
-  // Returns null if value is outside range in the array.
-  var _find = function (val, array) {
-    for (var i = 0; i < array.length; i++) {
-      if (val < array[i].scrollPoint) return i;
-    }
-    return undefined;
-  }
-  
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
   function _sanitize(string) {
     if (typeof string != "undefined")
@@ -613,7 +467,7 @@
           .split(" ").join("-").split("/").join("-");
   }
   
-  function d3layer(c) {
+  function d3layerold(c) {
       var f = {}, bounds, feature, collection, enabled = true, c = c + " d3-vec";
       var div = d3.select(document.body)
           .append("div")
@@ -701,7 +555,7 @@
           // Add the bounds of each feature to the storyLocations array
           for (i=0; i < fs.length; i++) {
             storyLocations.push({ 
-              id: "#" + _sanitize(fs[i].properties.name),
+              id: _sanitize(fs[i].properties.name),
               bounds: d3.geo.bounds(fs[i])
             });
           }
