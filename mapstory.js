@@ -23,16 +23,6 @@
    return cssTransform;
   })();
 
-  // Detect css filter for svg
-  // https://github.com/Modernizr/Modernizr/issues/615
-  var cssFilter = (function(){
-    var prefixes = '-webkit- -moz- -o- -ms-'.split(' ')
-      , el = document.createElement('div');
-    el.style.cssText = prefixes.join('filter:blur(2px); ');
-    return !!el.style.length 
-           && ((document.documentMode === undefined || document.documentMode > 9))
-           ? el.style.cssText.split(":")[0] : undefined;
-  })();
 
   // Detect request animation frame
   var _requestAnimation = window.requestAnimationFrame 
@@ -66,10 +56,10 @@
   
   // Data sources for overlay and markers (loaded with JSONP)
   var communitiesSql = 'SELECT ST_Simplify(the_geom, 0.0001)' +
-                   'AS the_geom, name, nationality ' + 
-                   'FROM nationalities';
+                   'AS the_geom, community, nationality ' + 
+                   'FROM communities WHERE active';
   var projectAreaSql = 'SELECT ST_Simplify(the_geom, 0.001)' +
-                  'AS the_geom, name ' + 
+                  'AS the_geom, name AS community ' + 
                   'FROM project_area';
   var markerSql = 'SELECT * FROM clearwater_well_installations';
 
@@ -91,7 +81,9 @@
       lastPositionR = -1,
       wHeight = $(window).height(),
       mapPadding = {},
-      markerBounds = [];
+      markerBounds = [],
+      projectLayerIsLoaded = false,
+      communitiesLayerIsLoaded = false;;
 
   // Overwrite ModestMaps getMousePoint function - it does not like
   // the map in position: fixed and gets confused.
@@ -115,7 +107,7 @@
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
-    map = mapbox.map('map',null,null, []).setExtent(startBounds);
+    map = mapbox.map('map',null,null, []).setExtent(startBounds).setZoomRange(5,17);
     window.map = map; // export the map variable for debugging
     
     // Override the default MM.extentCoordinate function to add padding
@@ -134,7 +126,7 @@
       map.tileSize = { x: 128, y: 128 };
       labelLayer.id('gmaclennan.map-lb73ione');
     } else {
-      labelLayer.id('gmaclennan.map-y7pgvo15');
+      labelLayer.id('gmaclennan.clearwater,gmaclennan.map-y7pgvo15');
     }
     
     // Load GeoJSON for polygons and markers from CartoDB
@@ -150,7 +142,7 @@
     
     $('#stories').css('height',$('#stories').height());
     window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
-    easeHandler = MapStory.easeHandler()
+    easeHandler = easeHandler();
     var lastResize = 0;
     $(window).resize(function () {
       $('html,body').stop(true);
@@ -158,7 +150,7 @@
         var y = $(window).scrollTop()
         mapPadding.left = $("#stories").outerWidth(true)
         _initReveals("#stories img:not(.nocollapse)");
-        easeHandler.locations(storyLocations).map(map).enable();
+        easeHandler.locations(storyLocations).map(map);
         window.eh = easeHandler;
         _initScrollTos("");
         _reveal(y);
@@ -309,13 +301,17 @@
     storyLocations = storyLocations.concat(communityLayer.getLocations());
     communityLayer.draw();
     $(window).resize();
+    if (projectLayerIsLoaded) easeHandler.enable();
+    communitiesLayerIsLoaded = true
   }
   
   // _onProjectAreaLoad adds geojson returned from the JSONP call to the map
   var _onProjectAreaLoad = function(geojson) {
-    projectLayer.data(geojson).draw();//.addFilters();
+    projectLayer.data(geojson).draw().addFilters();
     storyLocations = storyLocations.concat(projectLayer.getLocations());
     $(window).resize();
+    if (communitiesLayerIsLoaded) easeHandler.enable();
+    projectLayerIsLoaded = true
   }
 
   // _onMarkerLoad processes the Google JSON returned from the spreadsheet
@@ -335,22 +331,40 @@
     // as its input and returns an element - in this case an image -
     // that represents the point.
         var img = document.createElement('img');
-        img.className = 'marker';
-        img.setAttribute('src', 'images/cw-system.png');
-        $.data(img,'id',_sanitize(f.properties.location));
+        img.className = (f.properties.featured) ? 'featured marker' : 'marker';
+        var src = (f.properties.featured) ? "images/cw-story.png" : "images/cw-system.png"
+        img.setAttribute('src', src);
+        $.data(img,'id',_sanitize(f.properties.community));
         return img;
     })
+    preloadImages(geojson);
+    storyLocations = storyLocations.concat(getMarkerLocations(geojson));
     markerBounds = _calculateMarkerBounds(geojson);
+    $(window).resize();
     //Set up click events on the layer and parent
     $(markerLayer.parent).on("click","img",_clickMarkers);
     $(map.parent).on("click",_clickMarkers);
+  }
+  
+  function getMarkerLocations (geojson) {
+    locations = []
+    _.forEach(geojson.features, function (v) {
+      if (v.properties.featured) {
+        var bounds = [[],[]];
+        var id = _sanitize(v.properties.featured_url);
+        bounds[0][0] = bounds[1][0] = v.geometry.coordinates[0];
+        bounds[0][1] = bounds[1][1] = v.geometry.coordinates[1];
+        locations.push({id: id, bounds: bounds});
+      }
+    })
+    return locations;
   }
   
   var _calculateMarkerBounds = function (geojson) {
     var b = {};
     for (var i=0; i < geojson.features.length; i++) {
       var f = geojson.features[i];
-      var id = _sanitize(f.properties.location);
+      var id = _sanitize(f.properties.community);
       var x = f.geometry.coordinates[0];
       var y = f.geometry.coordinates[1];
       b[id] = b[id] || {};
@@ -361,7 +375,6 @@
       b[id].bounds[1][1] = (b[id].bounds[1][1] > y) ? b[id].bounds[1][1] : y;
       b[id].loc = _centerFromBounds(b[id].bounds);
     }
-    console.log(b);
     return b;
   }
   
@@ -371,11 +384,13 @@
     var maxZoom = 17;
     var z = map.getZoom()
     var position = $(this).position();
+    var markerClicked = this.nodeName == 'IMG';
+    
     e.stopPropagation();
     var point = new MM.Point(position.left, position.top);
     // If the click is not on a marker, then we only want to continue
     // if we are already zoomed in to max, and we want to return.
-    if (z < maxZoom && this.nodeName != 'IMG') return MM.cancelEvent(e);
+    if (z < maxZoom && !markerClicked) return MM.cancelEvent(e);
 
     var to = map.pointCoordinate(point).zoomTo(maxZoom)
              .left(mapPadding.left / map.tileSize.x / 2);
@@ -384,8 +399,13 @@
       if (!easeBack) easeBack = mapbox.ease().map(map).to(backTo).from(to);
       map.ease.to(to).optimal(0.9);
       easeHandler.setOverride(to);
+    } else if (markerClicked) {
+      easeBack.from(to);
+      map.ease.to(to).optimal(0.9);
+      easeHandler.setOverride(to);
     } else {
       easeBack.optimal(0.9, 1.42, function() { easeBack = undefined; });
+      easeHandler.setOverride(easeBack.to());
     }
     return MM.cancelEvent(e);
   }
@@ -465,6 +485,13 @@
     return string.toLowerCase()
           .replace('http://www.giveclearwater.org/','a-')
           .split(" ").join("-").split("/").join("-");
+  }
+  
+  function preloadImages(geojson) {
+    _.forEach(geojson.features, function (v) {
+      var img = new Image();
+      img.src = v.properties.photo;
+    });
   }
   
   function d3layerold(c) {
@@ -590,5 +617,134 @@
       };
       return f;
   };
+
+  function easeHandler() {
+    var eh = {},
+        override,
+        map,
+        easings = [],
+        locations,
+        lastScroll,
+        enabled = false;
+
+    if (!mapbox.ease) throw 'Mapbox easey library not found';
+
+    // Expects a mapbox v.0.6.x map object (ModestMaps)
+    eh.map = function (m) {
+      map = m;
+      return eh;
+    }
+
+    // Locations is an array of objects with an id referring to an element id
+    // and bounds, an array of two LatLon arrays, south-west, north-east
+    // e.g. { id: 'elementid', bounds: [ [0, 0], [100, 100] ] }
+    eh.locations = function (l) {
+      if (!arguments.length) return locations;      
+      locations = l;
+      setScrollPoints();
+      if (!!map) setEasings()
+      return eh;
+    }
+  
+    eh.enable = function () {
+      if (enabled) return eh;
+      if (!locations || !map) throw "Map and locations need to be set";
+      if (!easings) setEasings();
+      enabled = true;
+      loop(this);
+      return eh;
+    }
+  
+    // Moves the map to the location corresponding to the current scroll position.
+    // Returns false if there is no easing for this location.
+    eh.easeTo = function (scrollTop) {
+      scrollTop = Math.max(scrollTop, 0);
+      if (!!override) {
+        if (scrollTop > override.top && scrollTop < override.bottom) {
+          map.coordinate = override.easings[scrollTop - override.top];
+        } else {
+          override = undefined;
+        }
+      } else {
+        map.coordinate = easings[scrollTop] || _.last(easings);
+      }
+      map.draw();
+      return eh;
+    }
+  
+    // Sets an override easing function if the user has moved the map from the
+    // pre-defined easing path, or if we need to move quickly between two 
+    // points far apart on the page without moving through the intermediary steps 
+    eh.setOverride = function (from,start,top,bottom) {
+      var t, ease1, ease2,
+          from = from || map.coordinate.copy(),
+          start = start || $(window).scrollTop(),
+          top = Math.max(top || start - 200, 0);
+          bottom = bottom || start + 200;
+
+      override = {top: top, bottom: bottom};
+      topCoord = easings[top] || _.last(easings);
+      bottomCoord = easings[bottom] || _.last(easings);
+      ease1 = mapbox.ease().map(map).from(topCoord).to(from).setOptimalPath();
+      ease2 = mapbox.ease().map(map).from(from).to(bottomCoord).setOptimalPath();
+      override.easings = ease1.future(start - top).concat(ease2.future(bottom-start));
+
+      return eh;
+    }
+
+    function setScrollPoints () {
+      var wHeight = $(window).height();
+    
+      // Add the scroll point of each element with an id in location
+      // remove items that are not found on the page
+      // and sort locations by the scroll point on the page.
+      locations = _.chain(locations)
+                  .map(function (v) {
+                    var $el = $("#" + v.id);
+                    v.scrollPoint = ($el.length > 0) 
+                      ? $el.offset().top - wHeight + $el.height() : -1;
+                      return v;
+                    })
+                  .reject(function (v) { return v.scrollPoint < 0; })
+                  .sortBy('scrollPoint').value();
+    }
+  
+    function setEasings () {
+      var easing, coord, prevCoord, prevScrollPoint;
+      easings = [];
+    
+      _.forEach(locations, function (v, i) {
+        coord = centerFromBounds(v.bounds);
+        if (!!prevCoord) {
+          easing = mapbox.ease().map(map).from(prevCoord).to(coord).easing('linear');
+          easings = easings.concat(easing.future(v.scrollPoint - prevScrollPoint));
+        }
+        prevCoord = coord;
+        prevScrollPoint = v.scrollPoint;
+      });
+    }
+
+    // This loop uses requestAnimationFrame to check the scroll position and update the map.
+    function loop() {
+      var y = $(window).scrollTop();
+      meter.tick()
+      if (!enabled) return false;
+      // Avoid calculations if not needed and just loop again
+      if (lastScroll == y) {
+          _requestAnimation(loop);
+          return false;
+      } else lastScroll = y
+      eh.easeTo(y);
+      _requestAnimation(loop);
+    }
+  
+    // Get the map center point for a given bounds
+    function centerFromBounds (b) {
+      var extent = new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]);
+      return map.extentCoordinate(extent, true);
+    }
+    
+    return eh;
+  }
 
 }).call(this);

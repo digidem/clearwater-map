@@ -1,3 +1,15 @@
+// Detect css filter for svg
+// https://github.com/Modernizr/Modernizr/issues/615
+var cssFilter = (function(){
+  var prefixes = '-webkit- -moz- -o- -ms-'.split(' ')
+    , el = document.createElement('div');
+  el.style.cssText = prefixes.join('filter:blur(2px); ');
+  return !!el.style.length 
+         && ((document.documentMode === undefined || document.documentMode > 9))
+         ? el.style.cssText.split(":")[0] : undefined;
+})();
+
+
 var d3layer = function(id) {
   if (!(this instanceof d3layer)) {
     console.log('newing');
@@ -24,7 +36,9 @@ var d3layer = function(id) {
 
 d3layer.prototype.project = function (d) {
   var point = this.map.locationPoint({ lat: d[1], lon: d[0] });
-  return [point.x, point.y];
+  // Rounding hack from http://jsperf.com/math-round-vs-hack/3
+  // Performance increase: http://www.mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
+  return [~~(0.5 + point.x), ~~(0.5 + point.y)];
 }
 
 d3layer.prototype.draw = function () {
@@ -52,7 +66,7 @@ d3layer.prototype.data = function (geojson) {
   this.feature = this.g.selectAll("polygon")
       .data(fs)
       .enter().append("a")
-      .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.name); })
+      .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.community); })
       .append("path");
   return this;
 }
@@ -62,11 +76,59 @@ d3layer.prototype.getLocations = function () {
   var locations = []
   for (i=0; i < this.geojson.features.length; i++) {
     locations.push({ 
-      id: _sanitize(this.geojson.features[i].properties.name),
+      id: _sanitize(this.geojson.features[i].properties.community),
       bounds: d3.geo.bounds(this.geojson.features[i])
     });
   }
   return locations;
+}
+
+d3layer.prototype.addFilters = function() {
+  
+  if (cssFilter) {
+    this.g.classed("filtered", true);
+  } else {
+    this.feature.style("filter", "url(#blur)")
+      .on("mouseover", function () {this.style.cssText = "filter: url(#blur-hover);"})
+      .on("mouseout", function () {this.style.cssText = "filter: url(#blur);"});
+  }
+  
+  // Blur effect for project area
+  var blur = this.svg.select("defs").append("filter")
+      .attr("id", "blur")
+  blur.append("feColorMatrix")
+      .attr("in", "SourceAlpha")
+      .attr("color-interpolation-filters", "sRGB")
+      .attr("type", "matrix")
+      .attr("values", "0 0 0 0.9450980392 0  "
+                    + "0 0 0 0.7607843137 0  "
+                    + "0 0 0 0.1098039216 0  "
+                    + "0 0 0 1 0");
+  blur.append("feGaussianBlur")
+      .attr("stdDeviation", 10)
+      .attr("result", "coloredBlur");
+  blur.append("feMerge")
+      .append("feMergeNode")
+      .attr("in", "coloredBlur")
+
+  // Hover effect for project area
+  var blurHover = this.svg.select("defs").append("filter")
+      .attr("id", "blur-hover")
+  blurHover.append("feColorMatrix")
+      .attr("in", "SourceAlpha")
+      .attr("color-interpolation-filters", "sRGB")
+      .attr("type", "matrix")
+      .attr("values", "0 0 0 0.6705882353 0  "
+                    + "0 0 0 0.5450980392 0  "
+                    + "0 0 0 0.1176470588 0  "
+                    + "0 0 0 1 0");
+  blurHover.append("feGaussianBlur")
+      .attr("stdDeviation", 10)
+      .attr("result", "coloredBlur");
+  blurHover.append("feMerge")
+      .append("feMergeNode")
+      .attr("in", "coloredBlur");
+  return this;
 }
 
 d3layer.prototype.enable = function() {
