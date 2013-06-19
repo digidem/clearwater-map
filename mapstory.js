@@ -493,130 +493,6 @@
       img.src = v.properties.photo;
     });
   }
-  
-  function d3layerold(c) {
-      var f = {}, bounds, feature, collection, enabled = true, c = c + " d3-vec";
-      var div = d3.select(document.body)
-          .append("div")
-          .attr('class', c),
-          svg = div.append('svg'),
-          g = svg.append("g");
-      var defs = svg.append("defs");
-
-      // This adds filters to blur the polygons on the layer
-      // Can only be added to one layer, otherwise things get strange
-      f.addFilters = function () {
-        // Blur effect for project area
-        var blur = defs.append("filter")
-            .attr("id", "blur")
-        blur.append("feColorMatrix")
-            .attr("in", "SourceAlpha")
-            .attr("color-interpolation-filters", "sRGB")
-            .attr("type", "matrix")
-            .attr("values", "0 0 0 0.9450980392 0  "
-                          + "0 0 0 0.7607843137 0  "
-                          + "0 0 0 0.1098039216 0  "
-                          + "0 0 0 1 0");
-        blur.append("feGaussianBlur")
-            .attr("stdDeviation", 10)
-            .attr("result", "coloredBlur");
-        blur.append("feMerge")
-            .append("feMergeNode")
-            .attr("in", "coloredBlur")
-
-        // Hover effect for project area
-        var blurHover = defs.append("filter")
-            .attr("id", "blur-hover")
-        blurHover.append("feColorMatrix")
-            .attr("in", "SourceAlpha")
-            .attr("color-interpolation-filters", "sRGB")
-            .attr("type", "matrix")
-            .attr("values", "0 0 0 0.6705882353 0  "
-                          + "0 0 0 0.5450980392 0  "
-                          + "0 0 0 0.1176470588 0  "
-                          + "0 0 0 1 0");
-        blurHover.append("feGaussianBlur")
-            .attr("stdDeviation", 10)
-            .attr("result", "coloredBlur");
-        blurHover.append("feMerge")
-            .append("feMergeNode")
-            .attr("in", "coloredBlur");
-        return f;
-      }
-
-      f.parent = div.node();
-
-      f.project = function(x) {
-        var point = f.map.locationPoint({ lat: x[1], lon: x[0] });
-        return [point.x, point.y];
-      };
-
-      var first = true;
-      f.draw = function() {
-        if (!enabled) return;
-        first && svg.attr("width", f.map.dimensions.x)
-            .attr("height", f.map.dimensions.y)
-            .style("margin-left", "0px")
-            .style("margin-top", "0px") && (first = false);
-        var i = 0, classString = c;
-        while (i < f.map.getZoom()) {
-          classString += " zoom" + i;
-          i++;
-        }
-        div.attr('class', classString);
-        path = d3.geo.path().projection(f.project);
-        if (!!feature) feature.attr("d", path);
-        return f;
-      };
-
-      f.data = function(x) {
-          collection = x;
-          var fs = collection.features;
-          bounds = d3.geo.bounds(collection);
-          feature = g.selectAll("polygon")
-              .data(fs)
-              .enter().append("a")
-              .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.name); })
-              .append("path");
-          
-          // Add the bounds of each feature to the storyLocations array
-          for (i=0; i < fs.length; i++) {
-            storyLocations.push({ 
-              id: _sanitize(fs[i].properties.name),
-              bounds: d3.geo.bounds(fs[i])
-            });
-          }
-
-          // If we can't control filter and hover events from css, then add javascript event
-          // and attach the filter directly to the svg element
-          // Currently only WebKit (Safari & Chrome) support SVG filters from CSS
-          if (!cssFilter) {
-            feature.style("filter", "url(#blur)")
-              .on("mouseover", function () {this.style.cssText = "filter: url(#blur-hover);"})
-              .on("mouseout", function () {this.style.cssText = "filter: url(#blur);"});
-          }
-          return f;
-      };
-      
-      f.enable = function() {
-        enabled = true;
-        div.style("display", "");
-        return f;
-      }
-      
-      f.disable = function() {
-        enabled = false;
-        div.style("display", "none");
-        return f;
-      }
-
-      f.extent = function() {
-          return new MM.Extent(
-              new MM.Location(bounds[0][1], bounds[0][0]),
-              new MM.Location(bounds[1][1], bounds[1][0]));
-      };
-      return f;
-  };
 
   function easeHandler() {
     var eh = {},
@@ -716,7 +592,8 @@
       _.forEach(locations, function (v, i) {
         coord = centerFromBounds(v.bounds);
         if (!!prevCoord) {
-          easing = mapbox.ease().map(map).from(prevCoord).to(coord).easing('linear');
+          easing = mapbox.ease().map(map).from(prevCoord).to(coord)
+                    .easing('linear').setOptimalPath();
           easings = easings.concat(easing.future(v.scrollPoint - prevScrollPoint));
         }
         prevCoord = coord;
