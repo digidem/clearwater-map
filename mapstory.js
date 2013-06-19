@@ -223,7 +223,7 @@
     var centerRow = (TL.row + BR.row) / 2;
     var centerColumn = (TL.column + BR.column) / 2;
     var centerZoom = TL.zoom;
-    return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom).left(mapPadding.left / this.tileSize.x / 2);
+    return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom - 0.2).left(mapPadding.left / this.tileSize.x / 2);
   }
 
   // Set up onClick events to scroll the document between anchors
@@ -337,7 +337,7 @@
         $.data(img,'id',_sanitize(f.properties.community));
         return img;
     })
-    preloadImages(geojson);
+    //preloadImages(geojson);
     storyLocations = storyLocations.concat(getMarkerLocations(geojson));
     markerBounds = _calculateMarkerBounds(geojson);
     $(window).resize();
