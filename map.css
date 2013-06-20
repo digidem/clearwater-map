@@ -18,6 +18,22 @@ body {
   right:0;
   left:0;
 }
+#overview-return {
+position: fixed;
+left: 5px;
+top: 5px;
+background-color: #222;
+opacity: 0.7;
+z-index: 3;
+}
+
+#overview-return a {
+display: block;
+padding: 5px 10px;
+color: white;
+text-decoration: none;
+}
+
 #stories {
   width:400px;
   min-width:320px;
