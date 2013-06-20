@@ -7591,6 +7591,11 @@ wax.mm.connector = function(options) {
                 if (callback) callback(m);
             });
         }
+        
+        easey.getOptimalTime = function(V) {
+          V = V || 0.9;
+          return (!V || !S) ? null : S / V * 1000;
+        }
 
         easey.setOptimalPath = function(V, rho) {
           V = V || 0.9;

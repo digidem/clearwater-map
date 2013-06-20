@@ -51,7 +51,7 @@
   // bounds as [[ lonSouth, latWest], [lonNorth, latEast]] - blame d3 for this order.
   // TODO change this - not very obvious.
   var storyLocations = [
-    { id: 'map', bounds: [ [-81.2, -5.2], [-74.9, 1.8] ] }
+    { id: 'body', bounds: [ [-81.2, -5.2], [-74.9, 1.8] ] }
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
@@ -469,14 +469,21 @@
   }
   
   // Smooth scroll to an element on the page when clicking a link
-  var _scrollTo = function () {
+  function _scrollTo (e) {
+    var t;
     event.preventDefault();
     if (map.getZoom() > 12 && this.parentNode.nodeName == 'g') return;
     $('html,body').stop(true);
     var scrollSrc = $(window).scrollTop();
     var targetScroll = $(this).data("target-scroll");
-    $('htmll,body').animate({scrollTop:targetScroll}
-      , Math.round(Math.abs(targetScroll - scrollSrc))* 5);
+    
+    if (Math.abs(targetScroll - scrollSrc) > 1500) {
+      easeHandler.setOverride(null, null, Math.min(targetScroll, scrollSrc), Math.max(targetScroll, scrollSrc));
+      t = easeHandler.getOverrideTime();
+    } else {
+      t = Math.round(Math.abs(targetScroll - scrollSrc))* 4;
+    }
+    $('html,body').animate({scrollTop:targetScroll}, t);
   }
   
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
@@ -535,6 +542,7 @@
     // Returns false if there is no easing for this location.
     eh.easeTo = function (scrollTop) {
       scrollTop = Math.max(scrollTop, 0);
+
       if (!!override) {
         if (scrollTop > override.top && scrollTop < override.bottom) {
           map.coordinate = override.easings[scrollTop - override.top];
@@ -547,7 +555,12 @@
       map.draw();
       return eh;
     }
-  
+
+    eh.getCoord = function (scrollTop) {
+      scrollTop = Math.max(scrollTop, 0);
+      return easings[scrollTop] || _.last(easings);
+    }
+
     // Sets an override easing function if the user has moved the map from the
     // pre-defined easing path, or if we need to move quickly between two 
     // points far apart on the page without moving through the intermediary steps 
@@ -559,13 +572,17 @@
           bottom = bottom || start + 200;
 
       override = {top: top, bottom: bottom};
-      topCoord = easings[top] || _.last(easings);
-      bottomCoord = easings[bottom] || _.last(easings);
+      topCoord = easings[Math.floor(top)] || _.last(easings);
+      bottomCoord = easings[Math.floor(bottom)] || _.last(easings);
       ease1 = mapbox.ease().map(map).from(topCoord).to(from).setOptimalPath();
       ease2 = mapbox.ease().map(map).from(from).to(bottomCoord).setOptimalPath();
       override.easings = ease1.future(start - top).concat(ease2.future(bottom-start));
-
+      override.time = ease1.getOptimalTime() + ease2.getOptimalTime();
       return eh;
+    }
+    
+    eh.getOverrideTime = function () {
+      return Math.floor(override.time);
     }
 
     function setScrollPoints () {
@@ -578,7 +595,7 @@
                   .map(function (v) {
                     var $el = $("#" + v.id);
                     v.scrollPoint = ($el.length > 0) 
-                      ? $el.offset().top - wHeight + $el.height() : -1;
+                      ? Math.floor($el.offset().top - wHeight + $el.height()) : -1;
                       return v;
                     })
                   .reject(function (v) { return v.scrollPoint < 0; })
@@ -586,7 +603,10 @@
     }
   
     function setEasings () {
-      var easing, coord, prevCoord, prevScrollPoint;
+      var easing, coord, coords, prevCoord, prevScrollPoint;
+      // Padding is the space (in pixels) above and below a location
+      // when scrolling will pause.
+      var padding = 75;
       easings = [];
     
       _.forEach(locations, function (v, i) {
@@ -594,7 +614,11 @@
         if (!!prevCoord) {
           easing = mapbox.ease().map(map).from(prevCoord).to(coord)
                     .easing('linear').setOptimalPath();
-          easings = easings.concat(easing.future(v.scrollPoint - prevScrollPoint));
+          // for some reason the first easing is funky, so we drop it...
+          coords = _.tail(easing.future(v.scrollPoint - prevScrollPoint + 1 - padding * 2))
+          coords = fillArray(_.first(coords),padding).concat(coords);
+          coords = coords.concat(fillArray(_.last(coords), padding));
+          easings = easings.concat(coords);
         }
         prevCoord = coord;
         prevScrollPoint = v.scrollPoint;
@@ -614,7 +638,16 @@
       eh.easeTo(y);
       _requestAnimation(loop);
     }
-  
+
+    // Fill an array of n length
+    function fillArray(val, len) {
+      a = [];
+      for (var i=0; i<len; i++) {
+        a.push(val)
+      }
+      return a;
+    }
+    
     // Get the map center point for a given bounds
     function centerFromBounds (b) {
       var extent = new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]);
