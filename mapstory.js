@@ -107,7 +107,7 @@
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
-    map = mapbox.map('map',null,null, []).setExtent(startBounds).setZoomRange(5,17);
+    map = mapbox.map('map',null,null, []).setExtent(startBounds).setZoomRange(5,18);
     window.map = map; // export the map variable for debugging
     
     // Override the default MM.extentCoordinate function to add padding
@@ -381,7 +381,7 @@
   var easeBack;
   var _clickMarkers = function (e) {
     var id = $.data(this,'id');
-    var maxZoom = 17;
+    var maxZoom = 18;
     var z = map.getZoom()
     var position = $(this).position();
     var markerClicked = this.nodeName == 'IMG';
