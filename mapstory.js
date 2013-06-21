@@ -55,9 +55,7 @@
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
-  var communitiesSql = 'SELECT ST_Simplify(the_geom, 0.0001)' +
-                   'AS the_geom, community, nationality ' + 
-                   'FROM communities WHERE active';
+  var communitiesSql = 'SELECT ST_Simplify(the_geom, 0.0001) AS the_geom, c.community, c.nationality, systems, users FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active';
   var projectAreaSql = 'SELECT ST_Simplify(the_geom, 0.001)' +
                   'AS the_geom, name AS community ' + 
                   'FROM project_area';
@@ -300,6 +298,13 @@
     communityLayer.data(geojson);
     storyLocations = storyLocations.concat(communityLayer.getLocations());
     communityLayer.draw();
+    _.forEach(geojson.features, function (v) {
+      var systemsSel = "#" + _sanitize(v.properties.community) + " .systems";
+      var usersSel = "#" + _sanitize(v.properties.community) + " .users";
+      console.log(systemsSel, usersSel);
+      $(systemsSel).text(v.properties.systems);
+      $(usersSel).text(v.properties.users);
+    });
     $(window).resize();
     if (projectLayerIsLoaded) easeHandler.enable();
     communitiesLayerIsLoaded = true
