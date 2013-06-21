@@ -444,15 +444,16 @@
             (scrollTop >= reveals[i].start && scrollTop < reveals[i].stop) ? 'affix' :
             'after';
       var opacity = 1;
-      if (pos == 'affix') {
-        opacity = 1 - (scrollTop - reveals[i].start) / (reveals[i].stop - reveals[i].start);
-        reveals[i].$prev.css('opacity', opacity * opacity);
-      }
-            
+
+        if (scrollTop <=  reveals[i].start) {
+          reveals[i].$prev.removeClass('faded');
+        } else {
+          reveals[i].$prev.addClass('faded');
+        }
+
       if (reveals[i].lastpos !== pos) {
         if (pos == 'offscreen') {
           reveals[i].$parent.addClass('offscreen');
-          reveals[i].$prev.css('opacity', 1);
         } else {
           reveals[i].$parent.removeClass('offscreen');
           if (pos == 'affix') {
@@ -464,7 +465,6 @@
           } else if (pos == 'after') {
             reveals[i].$el.removeClass('collapsed');
             reveals[i].$next.removeClass('affixed');
-            reveals[i].$prev.css('opacity', 0);
           }
         }
         reveals[i].lastpos = pos;
