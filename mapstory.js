@@ -39,7 +39,7 @@
   // Bing Maps API key for satellite layer
   // Register for key at http://...
   // NEEDS CHANGED: is currently only a trial key for 90 days
-  var BING_API_KEY = "AnadQ9NziZo9MYVo8394fMtJjPrkZMasNfSqpt5wz4vUMSaATniZnKxvDgxrsrGB";
+  var BING_API_KEY = "AqVWiJ79W7khoQS3cEZn9Uuh3czvwSUr3bD2GTCCciGCasSEIaTVba37EAGBjwR6";
   
   // Bounds for the initial view of the map (Ecuador)
   var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }]; 
