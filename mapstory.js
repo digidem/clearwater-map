@@ -315,11 +315,13 @@
     _.forEach(geojson.features, function (v) {
       var systemsSel = "#" + _sanitize(v.properties.community) + " .systems";
       var usersSel = "#" + _sanitize(v.properties.community) + " .users";
-      console.log(systemsSel, usersSel);
+      // console.log(systemsSel, usersSel);
       $(systemsSel).text(v.properties.systems);
       $(usersSel).text(v.properties.users);
     });
     $(window).resize();
+    $('#communities a').hover(_enterCommunity,_leaveCommunity);
+
     if (projectLayerIsLoaded) easeHandler.enable();
     communitiesLayerIsLoaded = true
   }
@@ -428,6 +430,15 @@
       easeHandler.setOverride(easeBack.to());
     }
     return MM.cancelEvent(e);
+  }
+
+  var _enterCommunity = function (e) {
+    var label = $(this).data('label');
+    var pos = $(this).position();
+    $('#label').text(label).css('top',pos.top - 40).css('left',pos.left).fadeIn(100);
+  }
+  var _leaveCommunity = function (e) {
+    $('#label').fadeOut(100);
   }
   
   // Get the map center point for a given bounds

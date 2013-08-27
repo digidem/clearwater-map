@@ -55,7 +55,8 @@ d3layer.prototype.draw = function () {
   }
   this.parent.className = classString;
   path = d3.geo.path().projection(_.bind(this.project,this));
-  this.feature.attr("d", path);
+  this.feature.select("path").attr("d", path);
+
   return this;
 }
 
@@ -67,7 +68,10 @@ d3layer.prototype.data = function (geojson) {
       .data(fs)
       .enter().append("a")
       .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.community); })
-      .append("path");
+      .attr("data-label",function(d){ return (d.properties.nationality) ? "Meet the " + d.properties.nationality : ""; });
+
+    this.feature.append("path");
+
   return this;
 }
 

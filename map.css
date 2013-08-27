@@ -155,7 +155,17 @@ content: " ▼";
   width:100%;
   height:100%;
   }
-
+#label {
+  position: absolute;
+  padding: 5px 10px;
+  color: black;
+  background: #f1c21c;
+  font-family: "Yanone Kaffeesatz";
+  font-size: 1.5em;
+  z-index: 999;
+  display: none;
+  box-shadow: 0 10px 0 rgba(0,0,0,0.5);
+}
 
 @media (max-width:640px) {
   body {
