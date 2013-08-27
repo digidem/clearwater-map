@@ -102,6 +102,10 @@ font-weight: bold;
 font-size: 2.2em;
 }
 #stories h1, #stories h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
+#stories h2 {
+  color: #f2c21c;
+  background: black;
+}
 
 #stories p, #stories ul { padding:0 40px 2em; 
 margin:0;}
