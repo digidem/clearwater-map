@@ -12,7 +12,7 @@ var cssFilter = (function(){
 
 var d3layer = function(id) {
   if (!(this instanceof d3layer)) {
-    console.log('newing');
+    // console.log('newing');
       return new d3layer(id);
   }
   this.bounds = null;

@@ -241,6 +241,20 @@
       }
       $(this).data("target-scroll", targetScroll).click(_scrollTo);
     });
+    $('img.featured').each(function () { // Modified from above for now, should be combined
+      var targetScroll
+        , hash = $(this).attr("data-link")
+        , $target = $("#" + hash);
+      if ($target.length == 0) {
+        $target = $(this).parents("section").next();
+        if ($target.length == 0) $target = $(this).parents("article").next().children().first();
+      }
+      
+      if ($target.length > 0) {
+        targetScroll = $target.offset().top - wHeight + $target.height();
+      }
+      $(this).data("target-scroll", targetScroll).click(_scrollTo);
+    });
   }
   
   // Set up collapsing and revealing images as you scroll
@@ -340,6 +354,7 @@
         var src = (f.properties.featured) ? "images/cw-story.png" : "images/cw-system.png"
         img.setAttribute('src', src);
         $.data(img,'id',_sanitize(f.properties.community));
+        if (f.properties.featured) { img.setAttribute('data-link',_sanitize(f.properties.featured_url)); }
         return img;
     })
     //preloadImages(geojson);
