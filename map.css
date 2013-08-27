@@ -126,12 +126,14 @@ transform: translate3d(0,0,0);
 }
 
 a.scroll {
-color: #fff;
-  position:absolute;
-  right:0px; bottom:0px;
-  font-size:0.7em;
-  text-transform:uppercase;
-  padding:5px 10px;
+	color: #fff;
+	position: absolute;
+	right: 0px;
+	bottom: -40px;
+	font-size: 0.7em;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	height: 56px;
 }
 a.scroll:after {
 content: " ▼";
@@ -155,7 +157,28 @@ content: " ▼";
   width:100%;
   height:100%;
   }
-
+.label  {
+	font-family: "Yanone Kaffeesatz"; /* main font/type */
+	font-size: 1.5em;
+	display: block;
+	color: #f2c21c;
+	text-decoration: none;
+	background: url(images/cw-system.png) no-repeat, no-repeat, 	url(images/cw-story.png) repeat-y;	/* CSS3, placing images 											vertically  */
+	position: fixed;	/* fixed, element stays in place when 								you scroll */
+	bottom: 0;			
+	right: 0;			/* float left */
+	width: 300px;		
+	background-attachment: fixed;
+	background-color: #222;
+	opacity: 0.7;
+	filter: alpha(opacity = 40); /* For IE */
+	padding-left: 40px;
+	margin: 10px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+  
 
 @media (max-width:640px) {
   body {
