@@ -126,12 +126,14 @@ transform: translate3d(0,0,0);
 }
 
 a.scroll {
-color: #fff;
-  position:absolute;
-  right:0px; bottom:0px;
-  font-size:0.7em;
-  text-transform:uppercase;
-  padding:5px 10px;
+	color: #fff;
+	position: absolute;
+	right: 0px;
+	bottom: -40px;
+	font-size: 0.7em;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	height: 56px;
 }
 a.scroll:after {
 content: " ▼";
@@ -166,6 +168,34 @@ content: " ▼";
   display: none;
   box-shadow: 0 10px 0 rgba(0,0,0,0.5);
 }
+#legend  {
+  margin: 10px;
+  padding: 10px;
+	font-family: "Yanone Kaffeesatz"; /* main font/type */
+	font-size: 1.5em;
+	display: block;
+	color: #f2c21c;
+	text-decoration: none;
+	background: #222;	/* CSS3, placing images 											vertically  */
+	position: fixed;	/* fixed, element stays in place when 								you scroll */
+	bottom: 0;			
+	right: 0;			/* float left */
+	width: 340px;		
+	opacity: 0.7;
+	filter: alpha(opacity = 40); /* For IE */
+}
+#legend dt.system {
+  display: block;
+  margin: 0; padding: 0 0 0 1.25em;
+  background: #222 url(images/cw-system.png) no-repeat;
+  background-size: 1em 1em;
+  line-height: 1em;
+  /*background: red;*/
+
+}
+#legend dt.story {
+  background-image: url(images/cw-story.png);
+}
 
 @media (max-width:640px) {
   body {
@@ -190,6 +220,9 @@ content: " ▼";
     width:100%;
     height:150%;
     }
+  #legend {
+    display: none;
+  }
   }
 
 @media (min-width:1280px) {

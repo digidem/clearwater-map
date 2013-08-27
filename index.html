@@ -17,6 +17,8 @@
   <script src='fpsmeter.min.js'></script>
   <script src='mapstory.js'></script>
   <link href='map.css' rel='stylesheet' />
+  <style type="text/css">
+  </style>
 </head>
 <body id="body">
 
@@ -24,6 +26,10 @@
   <div id='map'></div>
   <div id="label"></div>
 </div>
+
+
+
+
 
 <div id='stories'>
   <div id='overview-return'><a href="#overview">Return to  Overview</a></div>
@@ -199,10 +205,18 @@
   </article>
 </div>
 
+<dl id="legend">
+  <dt class="system">Built Clearwater system</dt>
+  <dt class="system story">Built Clearwater system with story</dt>
+</dl>
+
 <script type="text/javascript" charset="utf-8">
 $(function() {
   MapStory.init()
 });
 </script>
+
+
+
 </body>
 </html>
