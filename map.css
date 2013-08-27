@@ -28,10 +28,22 @@ z-index: 3;
 }
 
 #overview-return a {
-display: block;
-padding: 5px 10px;
-color: white;
-text-decoration: none;
+	font-family: "Yanone Kaffeesatz";
+	font-size: 1.5em;
+	display: block;
+	color: #f2c21c;
+	text-decoration: none;
+	padding-left: 40px;
+	background-repeat: no-repeat;
+	background-image: url(images/arrow.png);
+	padding-top: 7px;
+	padding-right: 10px;
+	padding-bottom: 7px;
+	margin: 4px;
+}
+
+#overview-return a:hover {
+color: #ecf21c;
 }
 
 #stories {
