@@ -267,6 +267,9 @@ fill-opacity: 0;
 stroke-width: 2px;
 cursor: default;
 }
+#communities.zoom12 #label {
+  display: none !important;
+}
 
 #communities.zoom12 path:hover {
 fill-opacity: 0;

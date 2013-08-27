@@ -320,6 +320,7 @@
       $(usersSel).text(v.properties.users);
     });
     $(window).resize();
+    $('#communities').append('<div id="label"></div>');
     $('#communities a').hover(_enterCommunity,_leaveCommunity);
 
     if (projectLayerIsLoaded) easeHandler.enable();
