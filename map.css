@@ -59,6 +59,7 @@ width: 228px;
 background: url(images/initialclick.png) no-repeat scroll left bottom;
 text-indent: -2000px;
 z-index: 2;
+display: none;
 }
 
 
