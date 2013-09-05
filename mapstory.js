@@ -139,7 +139,7 @@
     });
     
     $('#stories').css('height',$('#stories').height());
-    window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
+    // window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
     easeHandler = easeHandler();
     var lastResize = 0;
     $(window).resize(function () {
@@ -660,7 +660,7 @@
     // This loop uses requestAnimationFrame to check the scroll position and update the map.
     function loop() {
       var y = $(window).scrollTop();
-      meter.tick()
+      // meter.tick()
       if (!enabled) return false;
       // Avoid calculations if not needed and just loop again
       if (lastScroll == y) {
