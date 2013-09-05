@@ -48,6 +48,21 @@ z-index: 3;
 	background-image: url(images/arrow_grey1.png);
 }
 
+
+.instruction {
+margin: 0 0 -122px;
+position: relative;
+top: -500px;
+left: 750px;
+height: 250px;
+width: 228px;
+background: url(images/initialclick.png) no-repeat scroll left bottom;
+text-indent: -2000px;
+z-index: 2;
+}
+
+
+
 #stories {
   width:400px;
   min-width:320px;
