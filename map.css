@@ -125,6 +125,48 @@ font-size: 2.2em;
   background: black;
 }
 
+#stories h3 {
+	font-size: 1.4em;
+	line-height: 1em;
+	background-color: #000;
+	color: black;
+	font-weight: normal;
+	font-family: "Yanone Kaffeesatz";
+	position: relative;
+	color: #f2c21c;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0em;
+	margin-left: 0;
+	padding-top: 5px;
+	padding-right: 40px;
+	padding-bottom: 5px;
+	padding-left: 40px;
+}
+
+.button {
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 15px;
+	padding: 5px;
+	text-decoration: none;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	text-shadow: 1px 1px 3px #666666;
+	border: solid #8d85ff 0px;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#7656b3), to(#7656b3));
+	background: -moz-linear-gradient(top, #7656b3, #7656b3);
+	margin-top: 10px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+.button:hover {
+  background: #6d52a8;
+}
+
+
 #stories p, #stories ul { padding:0 40px 1em; 
 margin:0;}
 
@@ -145,6 +187,12 @@ position: relative;
 transform: translate3d(0,0,0);
 -moz-transform: translate3d(0,0,0);
 -webkit-transform: translate3d(0,0,0);
+}
+
+a 
+{
+	color: #f2c21c;
+	text-decoration: none;	
 }
 
 a.scroll {
