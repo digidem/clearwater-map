@@ -59,7 +59,7 @@
   var projectAreaSql = 'SELECT ST_Simplify(the_geom, 0.001)' +
                   'AS the_geom, name AS community ' + 
                   'FROM project_area';
-  var markerSql = 'SELECT * FROM clearwater_well_installations';
+  var markerSql = 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL';
 
   //-- ***************************** --//
   //-- End of customizable variables --//
