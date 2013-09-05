@@ -23,7 +23,6 @@
    return cssTransform;
   })();
 
-
   // Detect request animation frame
   var _requestAnimation = window.requestAnimationFrame
                         || window.webkitRequestAnimationFrame
@@ -144,7 +143,6 @@
     var lastResize = 0;
     $(window).resize(function () {
       $('html,body').stop(true);
-      // location.reload();
       if (Date.now() - lastResize > 1000/60) {
         var y = $(window).scrollTop();
         mapPadding.left = $("#stories").outerWidth(true);
@@ -153,7 +151,9 @@
         window.eh = easeHandler;
         _initScrollTos("");
         _reveal(y);
+        $(window).scrollTop(y+1);
       }
+      lastResize = Date.now();
     });
 
     $(window).resize();
