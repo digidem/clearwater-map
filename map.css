@@ -267,6 +267,37 @@ content: " ▼";
   background-image: url(images/cw-story.png);
 }
 
+@media (max-width:480px) {
+  body {
+    background: #333;
+  }
+  #map {
+    display: none;
+  }
+  #stories {
+    margin: 0;
+    width: 100%;
+  }
+  #stories img {
+    display: block;
+    clear: both;
+    width: 100%;
+    height: auto;
+  }
+  #stories .background {
+    width: 100% !important;
+  }
+  .affixed, .collapsed {
+    position: relative !important;
+  }
+  .offscreen {
+    display: inherit;
+  }
+  .faded {
+    opacity: inherit;
+  }
+}
+
 @media (max-width:640px) {
   body {
     font-size:12px;
@@ -276,12 +307,12 @@ content: " ▼";
     width:100%;
     min-width:100%;
     padding-top:0px;
-    padding-bottom:200%;
+    /*padding-bottom:200%;*/
     }
   section {
     text-shadow:none;
     margin-left:0px;
-    padding:30px;
+    /*padding:30px;*/
     }
   #pane { width:100%; }
   #map  {
@@ -293,7 +324,7 @@ content: " ▼";
   #legend {
     display: none;
   }
-  }
+}
 
 @media (min-width:1280px) {
 #stories {width:540px;}
