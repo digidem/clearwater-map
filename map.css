@@ -332,6 +332,14 @@ path:hover {
 
 #communities.zoom9 path {opacity:1;}
 
+#communities #overview-return {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+#communities.zoom10 #overview-return {
+  opacity: 1;
+}
+
 #communities.zoom12 path {
 fill-opacity: 0;
 stroke-width: 2px;

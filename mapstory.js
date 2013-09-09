@@ -321,6 +321,9 @@
       $(usersSel).text(v.properties.users);
     });
     $(window).resize();
+
+    $('#communities').prepend('<div id="overview-return"><a href="#overview">Return to Overview</a></div>');
+
     $('#communities').append('<div id="label"></div>');
     $('#communities a').hover(_enterCommunity,_leaveCommunity);
 
@@ -335,6 +338,7 @@
     $(window).resize();
     if (communitiesLayerIsLoaded) easeHandler.enable();
     projectLayerIsLoaded = true;
+
   };
 
   // _onMarkerLoad processes the Google JSON returned from the spreadsheet
@@ -368,6 +372,8 @@
     //Set up click events on the layer and parent
     $(markerLayer.parent).on("click","img",_clickMarkers);
     $(map.parent).on("click",_clickMarkers);
+
+    $('.markers').prepend('<dl id="legend"><dt class="system">Built Clearwater system</dt><dt class="system story">Built Clearwater system with story</dt></dl>');
   };
   
   function getMarkerLocations (geojson) {
