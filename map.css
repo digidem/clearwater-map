@@ -347,8 +347,18 @@ fill-opacity: 0;
 stroke-width: 2px;
 cursor: default;
 }
-#communities.zoom12 #label {
-  display: none !important;
+
+#communities #label {
+  opacity: 0;
+  transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+}
+#communities.zoom9 #label {
+  opacity: 1;
+}
+#communities.zoom10 #label {
+  opacity: 0 !important;
 }
 
 #communities.zoom12 path:hover {
