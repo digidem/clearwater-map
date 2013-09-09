@@ -510,7 +510,7 @@
   // Smooth scroll to an element on the page when clicking a link
   function _scrollTo (e) {
     var t;
-    event.preventDefault();
+    e.preventDefault();
     if (map.getZoom() > 12 && this.parentNode.nodeName == 'g') return;
     $('html,body').stop(true);
     var scrollSrc = $(window).scrollTop();
