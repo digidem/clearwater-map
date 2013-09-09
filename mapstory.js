@@ -15,7 +15,7 @@
       , el = document.createElement('div')
       , cssTransform
       , i = 0;
-    while ( cssTransform === undefined ) { 
+    while ( cssTransform === undefined ) {
       cssTransform = document.createElement('div')
                       .style[prefixes[i]] != undefined ? prefixes[i] : undefined;
       i++;
@@ -23,13 +23,12 @@
    return cssTransform;
   })();
 
-
   // Detect request animation frame
-  var _requestAnimation = window.requestAnimationFrame 
+  var _requestAnimation = window.requestAnimationFrame
                         || window.webkitRequestAnimationFrame
                         || window.mozRequestAnimationFrame
-                        || window.msRequestAnimationFrame 
-                        || window.oRequestAnimationFrame 
+                        || window.msRequestAnimationFrame
+                        || window.oRequestAnimationFrame
                         || function (callback) { window.setTimeout(callback, 1000/60) };
   
   //-- *************** --//
@@ -42,7 +41,7 @@
   var BING_API_KEY = "AqVWiJ79W7khoQS3cEZn9Uuh3czvwSUr3bD2GTCCciGCasSEIaTVba37EAGBjwR6";
   
   // Bounds for the initial view of the map (Ecuador)
-  var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }]; 
+  var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }];
   var PROJECT_BOUNDS = [ [-1.1, -77.7], [0.5, -75.2]];
   
   // Array of locations for each story on the map
@@ -57,7 +56,7 @@
   // Data sources for overlay and markers (loaded with JSONP)
   var communitiesSql = 'SELECT ST_Simplify(the_geom, 0.0001) AS the_geom, c.community, c.nationality, systems, users FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active';
   var projectAreaSql = 'SELECT ST_Simplify(the_geom, 0.001)' +
-                  'AS the_geom, name AS community ' + 
+                  'AS the_geom, name AS community ' +
                   'FROM project_area';
   var markerSql = 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL';
 
@@ -81,7 +80,7 @@
       mapPadding = {},
       markerBounds = [],
       projectLayerIsLoaded = false,
-      communitiesLayerIsLoaded = false;;
+      communitiesLayerIsLoaded = false;
 
   // Overwrite ModestMaps getMousePoint function - it does not like
   // the map in position: fixed and gets confused.
@@ -139,25 +138,27 @@
     });
     
     $('#stories').css('height',$('#stories').height());
-    window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
+    // window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
     easeHandler = easeHandler();
     var lastResize = 0;
     $(window).resize(function () {
       $('html,body').stop(true);
       if (Date.now() - lastResize > 1000/60) {
-        var y = $(window).scrollTop()
-        mapPadding.left = $("#stories").outerWidth(true)
+        var y = $(window).scrollTop();
+        mapPadding.left = $("#stories").outerWidth(true);
         _initReveals("#stories img:not(.nocollapse)");
         easeHandler.locations(storyLocations).map(map);
         window.eh = easeHandler;
         _initScrollTos("");
         _reveal(y);
+        $(window).scrollTop(y+1);
       }
-    })
-    $(window).resize();
+      lastResize = Date.now();
+    });
 
-    _loopReveal()
-    
+    $(window).resize();
+    _loopReveal();
+
   };
 
   //--- End of public functions of MapStory ---//
@@ -222,7 +223,7 @@
     var centerColumn = (TL.column + BR.column) / 2;
     var centerZoom = TL.zoom;
     return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom - 0.2).left(mapPadding.left / this.tileSize.x / 2);
-  }
+  };
 
   // Set up onClick events to scroll the document between anchors
   var _initScrollTos = function () {
@@ -255,7 +256,7 @@
       }
       $(this).data("target-scroll", targetScroll).click(_scrollTo);
     });
-  }
+  };
   
   // Set up collapsing and revealing images as you scroll
   var _initReveals = function (selector) {
@@ -263,14 +264,14 @@
     reveals = [];
     
     $(selector).each(function (i) {
-      var $this = $(this)
+      var $this = $(this);
       var $next = $this.next();
       var $parent = $this.parent();
       if (!$next.hasClass('background')) {
         $next = $this.nextAll().wrapAll('<div class="background" />').parent();
       }
       var $prev = $parent.prev();
-      if ($prev.length == 0) $prev = $this.parent().parent().prev()
+      if ($prev.length == 0) $prev = $this.parent().parent().prev();
       var width = $this.width();
 
       $parent.removeClass('offscreen');
@@ -284,7 +285,7 @@
 
       $this.parent().css('min-height', height + nextHeight);
 
-      reveals[i] = { 
+      reveals[i] = {
         $el: $this,
         $next: $next,
         $prev: $prev,
@@ -292,9 +293,9 @@
         offscreen: offsetTop - wHeight,
         start: offsetTop - wHeight + nextHeight,
         stop: offsetTop - wHeight + nextHeight + height
-      }
-    })
-  }
+      };
+    });
+  };
   
   // Load data from external dataSrc via JSONP
   var _loadData = function (sql, callback) {
@@ -304,7 +305,7 @@
       dataType: 'jsonp',
       success: callback
     });
-  }
+  };
   
   // _onCommunitiesLoad adds geojson returned from the JSONP call to the map
   // and caches the bounds of each nationality in bounds[]
@@ -324,8 +325,8 @@
     $('#communities a').hover(_enterCommunity,_leaveCommunity);
 
     if (projectLayerIsLoaded) easeHandler.enable();
-    communitiesLayerIsLoaded = true
-  }
+    communitiesLayerIsLoaded = true;
+  };
   
   // _onProjectAreaLoad adds geojson returned from the JSONP call to the map
   var _onProjectAreaLoad = function(geojson) {
@@ -333,8 +334,8 @@
     storyLocations = storyLocations.concat(projectLayer.getLocations());
     $(window).resize();
     if (communitiesLayerIsLoaded) easeHandler.enable();
-    projectLayerIsLoaded = true
-  }
+    projectLayerIsLoaded = true;
+  };
 
   // _onMarkerLoad processes the Google JSON returned from the spreadsheet
   // and adds it to the marker layer.
@@ -359,7 +360,7 @@
         $.data(img,'id',_sanitize(f.properties.community));
         if (f.properties.featured) { img.setAttribute('data-link',_sanitize(f.properties.featured_url)); }
         return img;
-    })
+    });
     //preloadImages(geojson);
     storyLocations = storyLocations.concat(getMarkerLocations(geojson));
     markerBounds = _calculateMarkerBounds(geojson);
@@ -367,10 +368,10 @@
     //Set up click events on the layer and parent
     $(markerLayer.parent).on("click","img",_clickMarkers);
     $(map.parent).on("click",_clickMarkers);
-  }
+  };
   
   function getMarkerLocations (geojson) {
-    locations = []
+    locations = [];
     _.forEach(geojson.features, function (v) {
       if (v.properties.featured) {
         var bounds = [[],[]];
@@ -379,7 +380,7 @@
         bounds[0][1] = bounds[1][1] = v.geometry.coordinates[1];
         locations.push({id: id, bounds: bounds});
       }
-    })
+    });
     return locations;
   }
   
@@ -399,13 +400,13 @@
       b[id].loc = _centerFromBounds(b[id].bounds);
     }
     return b;
-  }
+  };
   
   var easeBack;
   var _clickMarkers = function (e) {
     var id = $.data(this,'id');
     var maxZoom = 18;
-    var z = map.getZoom()
+    var z = map.getZoom();
     var position = $(this).position();
     var markerClicked = this.nodeName == 'IMG';
     
@@ -417,7 +418,7 @@
 
     var to = map.pointCoordinate(point).zoomTo(maxZoom)
              .left(mapPadding.left / map.tileSize.x / 2);
-    var backTo = (!!markerBounds[id]) ? markerBounds[id].loc : map.coordinate.copy()
+    var backTo = (!!markerBounds[id]) ? markerBounds[id].loc : map.coordinate.copy();
     if (z < maxZoom) {
       if (!easeBack) easeBack = mapbox.ease().map(map).to(backTo).from(to);
       map.ease.to(to).optimal(0.9);
@@ -431,16 +432,16 @@
       easeHandler.setOverride(easeBack.to());
     }
     return MM.cancelEvent(e);
-  }
+  };
 
   var _enterCommunity = function (e) {
     var label = $(this).data('label');
     var pos = $(this).position();
     $('#label').text(label).css('top',pos.top - 40).css('left',pos.left).fadeIn(100);
-  }
+  };
   var _leaveCommunity = function (e) {
     $('#label').fadeOut(100);
-  }
+  };
   
   // Get the map center point for a given bounds
   function _centerFromBounds (b) {
@@ -457,7 +458,7 @@
     if (lastPositionR == y) {
         _requestAnimation(_loopReveal);
         return false;
-    } else lastPositionR = y
+    } else lastPositionR = y;
     _reveal(y);
     _requestAnimation(_loopReveal);
   }
@@ -498,7 +499,7 @@
       }
     }
     
-  }
+  };
   
   // Smooth scroll to an element on the page when clicking a link
   function _scrollTo (e) {
@@ -523,6 +524,7 @@
     if (typeof string != "undefined" && string !== null)
     return string.toLowerCase()
           .replace('http://www.giveclearwater.org/','a-')
+          .replace('http://beta.giveclearwater.org/','b-')
           .split(" ").join("-").split("/").join("-");
   }
   
@@ -548,18 +550,18 @@
     eh.map = function (m) {
       map = m;
       return eh;
-    }
+    };
 
     // Locations is an array of objects with an id referring to an element id
     // and bounds, an array of two LatLon arrays, south-west, north-east
     // e.g. { id: 'elementid', bounds: [ [0, 0], [100, 100] ] }
     eh.locations = function (l) {
-      if (!arguments.length) return locations;      
+      if (!arguments.length) return locations; 
       locations = l;
       setScrollPoints();
-      if (!!map) setEasings()
+      if (!!map) setEasings();
       return eh;
-    }
+    };
   
     eh.enable = function () {
       if (enabled) return eh;
@@ -568,7 +570,7 @@
       enabled = true;
       loop(this);
       return eh;
-    }
+    };
   
     // Moves the map to the location corresponding to the current scroll position.
     // Returns false if there is no easing for this location.
@@ -586,12 +588,12 @@
       }
       map.draw();
       return eh;
-    }
+    };
 
     eh.getCoord = function (scrollTop) {
       scrollTop = Math.max(scrollTop, 0);
       return easings[scrollTop] || _.last(easings);
-    }
+    };
 
     // Sets an override easing function if the user has moved the map from the
     // pre-defined easing path, or if we need to move quickly between two 
@@ -611,11 +613,11 @@
       override.easings = ease1.future(start - top).concat(ease2.future(bottom-start));
       override.time = ease1.getOptimalTime() + ease2.getOptimalTime();
       return eh;
-    }
+    };
     
     eh.getOverrideTime = function () {
       return Math.floor(override.time);
-    }
+    };
 
     function setScrollPoints () {
       var wHeight = $(window).height();
@@ -626,7 +628,7 @@
       locations = _.chain(locations)
                   .map(function (v) {
                     var $el = $("#" + v.id);
-                    v.scrollPoint = ($el.length > 0) 
+                    v.scrollPoint = ($el.length > 0)
                       ? Math.floor($el.offset().top - wHeight + $el.height()) : -1;
                       return v;
                     })
@@ -647,7 +649,7 @@
           easing = mapbox.ease().map(map).from(prevCoord).to(coord)
                     .easing('linear').setOptimalPath();
           // for some reason the first easing is funky, so we drop it...
-          coords = _.tail(easing.future(v.scrollPoint - prevScrollPoint + 1 - padding * 2))
+          coords = _.tail(easing.future(v.scrollPoint - prevScrollPoint + 1 - padding * 2));
           coords = fillArray(_.first(coords),padding).concat(coords);
           coords = coords.concat(fillArray(_.last(coords), padding));
           easings = easings.concat(coords);
@@ -660,13 +662,13 @@
     // This loop uses requestAnimationFrame to check the scroll position and update the map.
     function loop() {
       var y = $(window).scrollTop();
-      meter.tick()
+      // meter.tick()
       if (!enabled) return false;
       // Avoid calculations if not needed and just loop again
       if (lastScroll == y) {
           _requestAnimation(loop);
           return false;
-      } else lastScroll = y
+      } else lastScroll = y;
       eh.easeTo(y);
       _requestAnimation(loop);
     }
@@ -675,7 +677,7 @@
     function fillArray(val, len) {
       a = [];
       for (var i=0; i<len; i++) {
-        a.push(val)
+        a.push(val);
       }
       return a;
     }
