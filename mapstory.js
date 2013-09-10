@@ -47,16 +47,16 @@
   // Array of locations for each story on the map
   // The first location is for the initial map view
   // it should be attached to the #map element which has offset().top = 0
-  // bounds as [[ lonSouth, latWest], [lonNorth, latEast]] - blame d3 for this order.
+  // bounds as [[ latWest, lonSouth], [latEast, lonNorth]] - blame d3 for this order.
   // TODO change this - not very obvious.
   var storyLocations = [
-    { id: 'body', bounds: [ [-81.2, -5.2], [-74.9, 1.8] ] }
+    { id: 'body', bounds: [ [-90, -55], [-33, 14] ] }
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
   var communitiesSql = 'SELECT ST_Simplify(the_geom, 0.0001) AS the_geom, c.community, c.nationality, systems, users FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active';
   var projectAreaSql = 'SELECT ST_Simplify(the_geom, 0.001)' +
-                  'AS the_geom, name AS community ' +
+                  'AS the_geom, description, name AS community ' +
                   'FROM project_area';
   var markerSql = 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL';
 
@@ -104,7 +104,7 @@
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
-    map = mapbox.map('map',null,null, []).setExtent(startBounds).setZoomRange(5,18);
+    map = mapbox.map('map',null,null, []).setExtent(startBounds).setZoomRange(3,18);
     window.map = map; // export the map variable for debugging
     
     // Override the default MM.extentCoordinate function to add padding

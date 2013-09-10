@@ -345,6 +345,7 @@ path {
   fill-opacity: .6;
   stroke: #f1c21c;
   stroke-width: 0;
+  stroke-linejoin: round;
   cursor: pointer;
   transition:fill-opacity 500ms,opacity 500ms;
   -moz-transition:fill-opacity 500ms,opacity 500ms;
@@ -357,11 +358,11 @@ path:hover {
 
 #communities { display: none;}
 
-#communities.zoom8 { display: block;}
+#communities.zoom7 { display: block;}
 
 #communities path { opacity: 0;}
 
-#communities.zoom9 path {opacity:1;}
+#communities.zoom8 path {opacity:1;}
 
 #communities #overview-return {
   opacity: 0;
@@ -385,7 +386,7 @@ cursor: default;
   -moz-transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
 }
-#communities.zoom9 #label {
+#communities.zoom8 #label {
   opacity: 1;
 }
 #communities.zoom10 #label {
@@ -399,24 +400,36 @@ fill-opacity: 0;
 #communities.zoom14 g {display: none;}
 
 #project-area path {
-fill-opacity: .9;
 /*filter: url(#blur);*/
 transition:fill-opacity 250ms, opacity 250ms;
 -moz-transition:fill-opacity 250ms, opacity 250ms;
 -webkit-transition:fill-opacity 250ms, opacity 250ms;
 }
 
+#project-area path.ecuador-border {
+stroke-width: 2px;
+fill-opacity: 0;
+}
+
+#project-area path.project-area {
+fill-opacity: 0.9;
+}
+
 #project-area path:hover {
-  fill-opacity: 0.9;
+  fill-opacity: 0.5;
 /*  filter: url(#blur-hover);*/
 }
 
-.filtered path {
+.filtered path.project-area {
 filter: url(#blur);
 }
 
-.filtered path:hover {
+.filtered path.project-area:hover {
 filter: url(#blur-hover);
+}
+
+#project-area.zoom6 path.ecuador-border {
+opacity: 0;
 }
 
 #project-area.zoom8 path {

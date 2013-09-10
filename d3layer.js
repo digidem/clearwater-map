@@ -70,7 +70,7 @@ d3layer.prototype.data = function (geojson) {
       .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.community); })
       .attr("data-label",function(d){ return (d.properties.nationality) ? "Meet the " + d.properties.nationality : ""; });
 
-    this.feature.append("path");
+    this.feature.append("path").attr("class", function(d){ return _sanitize(d.properties.description); });
 
   return this;
 }
@@ -79,10 +79,13 @@ d3layer.prototype.getLocations = function () {
   // Add the bounds of each feature to the storyLocations array
   var locations = []
   for (i=0; i < this.geojson.features.length; i++) {
-    locations.push({ 
-      id: _sanitize(this.geojson.features[i].properties.community),
-      bounds: d3.geo.bounds(this.geojson.features[i])
-    });
+    if (this.geojson.features[i].properties.description !== "Ecuador Border") {
+      console.log(this.geojson.features[i].properties.description);
+      locations.push({ 
+        id: _sanitize(this.geojson.features[i].properties.community),
+        bounds: d3.geo.bounds(this.geojson.features[i])
+      });
+    }
   }
   return locations;
 }
