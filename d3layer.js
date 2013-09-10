@@ -26,6 +26,8 @@ var d3layer = function(id) {
   var div = d3.select(document.body)
       .append("div")
       .style('position', 'absolute')
+      .style("width", '100%')
+      .style("height", '100%')
       .attr('id', id);
 
   this.parent = div.node();
@@ -45,15 +47,12 @@ d3layer.prototype.draw = function () {
   if (!this.enabled || !this.map || !this.feature) return;
   var i = 0, classString = "", path;
   // *TODO* at the moment the SVG container does not resize on window.resize
-  this.first && this.svg.attr("width", this.map.dimensions.x)
-      .attr("height", this.map.dimensions.y)
-      .style("margin-left", "0px")
-      .style("margin-top", "0px") && (this.first = false);
+  this.first && this.svg && (this.first = false);
   while (i < this.map.getZoom()) {
     classString += " zoom" + i;
     i++;
   }
-  this.parent.className = classString;
+  d3.select(document.body).node().className = classString;
   path = d3.geo.path().projection(_.bind(this.project,this));
   this.feature.select("path").attr("d", path);
 
