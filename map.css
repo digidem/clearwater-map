@@ -1,13 +1,6 @@
-body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:100%; }
+#mapstory #map { position:absolute; top:0; bottom:0; width:100%; }
 
-.leaflet-popup-close-button {
-    display: none;
-}
-.leaflet-popup-content-wrapper {
-    pointer-events: none;
-}
-body {
+body#mapstory {
   margin:0px;
   padding:0px;
   font:normal 15px/20px "PT Sans",Arial,sans-serif;
@@ -18,7 +11,7 @@ body {
   right:0;
   left:0;
 }
-#overview-return {
+#mapstory #nav {
 position: fixed;
 left: 0px;
 top: 5px;
@@ -27,7 +20,7 @@ opacity: 0.7;
 z-index: 3;
 }
 
-#overview-return a {
+#mapstory #nav a {
 	font-family: "Yanone Kaffeesatz";
 	font-size: 1.5em;
 	display: block;
@@ -43,13 +36,12 @@ z-index: 3;
 	margin: 4px;
 }
 
-#overview-return a:hover {
+#mapstory #nav a:hover {
 	color: #DADADA;
 	background-image: url(images/arrow_grey1.png);
 }
 
-
-.instruction {
+#mapstory .instruction {
 margin: 0 0 -122px;
 position: relative;
 top: -500px;
@@ -62,9 +54,7 @@ z-index: 2;
 display: none;
 }
 
-
-
-#stories {
+#mapstory #stories {
   width:400px;
   min-width:320px;
   position:absolute;
@@ -75,15 +65,17 @@ display: none;
   -moz-transition: opacity 0.4s linear;
   -webkit-transition: opacity 0.4s linear;
 }
-#ecuador {
+
+#mapstory #stories article:first-child section:first-child {
   position: absolute;
   bottom: 100%;
 }
-article {
+
+#mapstory article {
   position: relative;
 }
 
-.background {
+#mapstory .background {
   background-color: #222;
   position: relative;
   bottom: 0;
@@ -92,40 +84,40 @@ article {
   -webkit-transform: translate3d(0,0,0);
 }
 
-.affixed {
+#mapstory .affixed {
 position: fixed !important;
 }
 
-.collapsed {
+#mapstory .collapsed {
 position: absolute !important;
 }
 
-.offscreen {
+#mapstory .offscreen {
 display: none;
 }
 
-.faded {
+#mapstory .faded {
 opacity: 0;
 }
 
-section {
+#mapstory section {
   background-color: #222;
   transition:opacity 1s;
   -moz-transition:opacity 1s;
   -webkit-transition:opacity 1s;
   }
 
-#stories section h1 {
+#mapstory #stories section h1 {
 font-weight: bold;
 font-size: 2.2em;
 }
-#stories h1, #stories h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
-#stories h2 {
+#mapstory #stories h1, #stories h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
+#mapstory #stories h2 {
   color: #f2c21c;
   background: black;
 }
 
-#stories h3 {
+#mapstory #stories h3 {
 	font-size: 1.4em;
 	line-height: 1em;
 	background-color: #000;
@@ -144,7 +136,7 @@ font-size: 2.2em;
 	padding-left: 40px;
 }
 
-.button {
+#mapstory .button {
 	font-family: Arial;
 	color: #ffffff;
 	font-size: 15px;
@@ -162,23 +154,23 @@ font-size: 2.2em;
 	margin-bottom: 10px;
 	margin-left: 10px;
 }
-.button:hover {
+#mapstory .button:hover {
   background: #6d52a8;
 }
 
 
-#stories p, #stories ul { padding:0 40px 1em; 
+#mapstory #stories p, #mapstory #stories ul { padding:0 40px 1em; 
 margin:0;}
 
-#stories section ul {
+#mapstory #stories section ul {
 list-style-type: none;
 font-size: 1.2em;
 }
-#stories section ul li {
+#mapstory #stories section ul li {
 margin-bottom: 0.5em;
 }
 
-#stories img {
+#mapstory #stories img {
 display: block;
 width: 400px;
 height: 267px;
@@ -195,7 +187,7 @@ a
 	text-decoration: none;	
 }
 
-a.scroll {
+#mapstory a.scroll {
 	color: #fff;
 	position: absolute;
 	right: 0px;
@@ -205,29 +197,29 @@ a.scroll {
 	padding: 5px 10px;
 	height: 56px;
 }
-a.scroll:after {
+#mapstory a.scroll:after {
 content: " ▼";
 }
-.colophon {
+#mapstory .colophon {
   display:block;
   margin-top:10px;
   }
 
-#pane {
+#mapstory #pane {
   position:fixed;
   top:0;
   bottom:0;
   right:0;
   left:0;
   }
-#map  {
+#mapstory #map  {
   position:absolute;
   top:0px;
   bottom:0px;
   width:100%;
   height:100%;
   }
-#label {
+#mapstory #label {
   position: absolute;
   padding: 5px 10px;
   color: black;
@@ -238,7 +230,7 @@ content: " ▼";
   display: none;
   box-shadow: 0 10px 0 rgba(0,0,0,0.5);
 }
-#legend dl {
+#mapstory #legend dl {
 	margin: 10px;
 	padding: 10px;
 	font-family: "Yanone Kaffeesatz"; /* main font/type */
@@ -254,7 +246,7 @@ content: " ▼";
 	opacity: 0.7;
 	filter: alpha(opacity = 40); /* For IE */
 }
-#legend dt {
+#mapstory #legend dt {
   display: block;
   margin: 0; padding: 0 0 0 1.65em;
   background: #222 no-repeat;
@@ -262,78 +254,78 @@ content: " ▼";
   line-height: 1.2em;
   background-position: 5px;
 }
-#legend dt.system {
+#mapstory #legend dt.system {
   background-image: url(images/cw-system.png);
 }
-#legend dt.story {
+#mapstory #legend dt.story {
   background-image: url(images/cw-story.png);
 }
 
 @media (max-width:480px) {
-  body {
+  body#mapstory {
     background: #333;
   }
-  #map {
+  #mapstory #map {
     display: none;
   }
-  #stories {
+  #mapstory #stories {
     margin: 0;
     width: 100%;
   }
-  #stories img {
+  #mapstory #stories img {
     display: block;
     clear: both;
     width: 100%;
     height: auto;
   }
-  #stories .background {
+  #mapstory #stories .background {
     width: 100% !important;
   }
-  .affixed, .collapsed {
+  #mapstory .affixed, #mapstory .collapsed {
     position: relative !important;
   }
-  .offscreen {
+  #mapstory .offscreen {
     display: inherit;
   }
-  .faded {
+  #mapstory .faded {
     opacity: inherit;
   }
 }
 
 @media (max-width:640px) {
-  body {
+  body#mapstory {
     font-size:12px;
     line-height:16px;
     }
-  article {
+  #mapstory article {
     width:100%;
     min-width:100%;
     padding-top:0px;
     /*padding-bottom:200%;*/
     }
-  section {
+  #mapstory section {
     text-shadow:none;
     margin-left:0px;
     /*padding:30px;*/
     }
-  #pane { width:100%; }
-  #map  {
+  #mapstory #pane { width:100%; }
+  #mapstory #map  {
     bottom:0%;
     left:0%;
     width:100%;
     height:150%;
     }
-  #legend {
+  #mapstory #legend {
     display: none;
   }
 }
 
 @media (min-width:1280px) {
-#stories {width:540px;}
-#stories img {
+#mapstory #stories {width:540px;}
+#mapstory #stories img {
 width: 540px;
 height: 360px;}
-body {
+body#mapstory {
   font-size:18px;
   line-height:24px;
   }
@@ -342,7 +334,7 @@ body {
   
 /* Map elements */
 
-path {
+#mapstory path {
   fill: #f1c21c;
   fill-opacity: .6;
   stroke: #f1c21c;
@@ -354,93 +346,93 @@ path {
   -webkit-transition:fill-opacity 500ms,opacity 500ms;
 }
 
-path:hover {
+#mapstory path:hover {
   fill: #ab8b1e;
 }
 
-#communities { display: none;}
+#mapstory #communities { display: none;}
 
-#communities.zoom7 { display: block;}
+#mapstory #communities.zoom7 { display: block;}
 
-#communities path { opacity: 0;}
+#mapstory #communities path { opacity: 0;}
 
-#communities.zoom8 path {opacity:1;}
+#mapstory #communities.zoom8 path {opacity:1;}
 
-#communities #overview-return {
+#mapstory #communities #overview-return {
   opacity: 0;
   transition: opacity 0.5s;
   -moz-transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
 }
-#communities.zoom10 #overview-return {
+#mapstory #communities.zoom10 #overview-return {
   opacity: 0.7;
 }
 
-#communities.zoom12 path {
+#mapstory #communities.zoom12 path {
 fill-opacity: 0;
 stroke-width: 2px;
 cursor: default;
 }
 
-#communities #label {
+#mapstory #communities #label {
   opacity: 0;
   transition: opacity 0.5s;
   -moz-transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
 }
-#communities.zoom8 #label {
+#mapstory #communities.zoom8 #label {
   opacity: 1;
 }
-#communities.zoom10 #label {
+#mapstory #communities.zoom10 #label {
   opacity: 0 !important;
 }
 
-#communities.zoom12 path:hover {
+#mapstory #communities.zoom12 path:hover {
 fill-opacity: 0;
 }
 
-#communities.zoom14 g {display: none;}
+#mapstory #communities.zoom14 g {display: none;}
 
-#project-area path {
+#mapstory #project-area path {
 /*filter: url(#blur);*/
 transition:fill-opacity 250ms, opacity 250ms;
 -moz-transition:fill-opacity 250ms, opacity 250ms;
 -webkit-transition:fill-opacity 250ms, opacity 250ms;
 }
 
-#project-area path.ecuador-border {
+#mapstory #project-area path.ecuador-border {
 stroke-width: 2px;
 fill-opacity: 0;
 }
 
-#project-area path.project-area {
+#mapstory #project-area path.project-area {
 fill-opacity: 0.9;
 }
 
-#project-area path:hover {
+#mapstory #project-area path:hover {
   fill-opacity: 0.5;
 /*  filter: url(#blur-hover);*/
 }
 
-.filtered path.project-area {
+#mapstory .filtered path.project-area {
 filter: url(#blur);
 }
 
-.filtered path.project-area:hover {
+#mapstory .filtered path.project-area:hover {
 filter: url(#blur-hover);
 }
 
-#project-area.zoom6 path.ecuador-border {
+#mapstory #project-area.zoom6 path.ecuador-border {
 opacity: 0;
 }
 
-#project-area.zoom8 path {
+#mapstory #project-area.zoom8 path {
 opacity: 0;
 }
 
-#project-area.zoom9 { display: none; }
+#mapstory #project-area.zoom9 { display: none; }
 
-.markers {
+#mapstory .markers {
 display: none;
 opacity: 0;
 transition:opacity 500ms;
@@ -448,15 +440,15 @@ transition:opacity 500ms;
 -webkit-transition:opacity 500ms;
 }
 
-.markers.zoom11 {
+#mapstory .markers.zoom11 {
 display: block;
 }
 
-.markers.zoom12 {
+#mapstory .markers.zoom12 {
 opacity: 1;
 }
 
-.marker {
+#mapstory .marker {
 margin-left: -8px;
 margin-top: -8px;
 width: 16px;
@@ -484,7 +476,7 @@ pointer-events: all;
         z-index: -1;
 }
 
-.marker.featured {
+#mapstory .marker.featured {
 margin-left: -12px;
 margin-top: -12px;
 width: 24px;
@@ -492,7 +484,7 @@ height: 24px;
 z-index: 0;
 }
 
-.marker:hover {
+#mapstory .marker:hover {
 margin-left: -17px;
 margin-top: -17px;
 width: 33px;
@@ -502,7 +494,7 @@ pointer-events: all;
 
 }
 
-.marker-popup {
+#mapstory .marker-popup {
   position:absolute;
   left:0;
   bottom:0;
@@ -519,13 +511,13 @@ pointer-events: all;
           box-shadow: 0px 0px 5px 0px #ccc;
 }
 
-.marker-popup img {
+#mapstory .marker-popup img {
 display: block;
 width: 150px;
 height: 100px;
 }
 
-.marker-popup p {
+#mapstory .marker-popup p {
 margin-top: 3px;
 margin-left: 10px;
 }
