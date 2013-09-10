@@ -123,7 +123,7 @@
       map.tileSize = { x: 128, y: 128 };
       labelLayer.id('gmaclennan.map-lb73ione');
     } else {
-      labelLayer.id('gmaclennan.clearwater,gmaclennan.map-y7pgvo15');
+      labelLayer.id('mapbox.world-borders-light');
     }
     
     // Load GeoJSON for polygons and markers from CartoDB
@@ -373,7 +373,6 @@
     $(markerLayer.parent).on("click","img",_clickMarkers);
     $(map.parent).on("click",_clickMarkers);
 
-    $('.markers').prepend('<dl id="legend"><dt class="system">Built Clearwater system</dt><dt class="system story">Built Clearwater system with story</dt></dl>');
   };
   
   function getMarkerLocations (geojson) {
