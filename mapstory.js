@@ -50,7 +50,7 @@
   // bounds as [[ latWest, lonSouth], [latEast, lonNorth]] - blame d3 for this order.
   // TODO change this - not very obvious.
   var storyLocations = [
-    { id: 'body', bounds: [ [-90, -55], [-33, 14] ] }
+    { id: 'mapstory', bounds: [ [-90, -55], [-33, 14] ] }
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
