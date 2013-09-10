@@ -230,6 +230,17 @@ content: " ▼";
   display: none;
   box-shadow: 0 10px 0 rgba(0,0,0,0.5);
 }
+#mapstory #legend {
+opacity: 0;
+transition:opacity 500ms;
+-moz-transition:opacity 500ms;
+-webkit-transition:opacity 500ms;
+}
+
+#mapstory.zoom12 #legend {
+opacity: 1;
+}
+
 #mapstory #legend dl {
 	margin: 10px;
 	padding: 10px;
