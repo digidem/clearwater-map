@@ -352,11 +352,11 @@ body#mapstory {
 
 #mapstory #communities { display: none;}
 
-#mapstory #communities.zoom7 { display: block;}
+#mapstory.zoom7 #communities { display: block;}
 
 #mapstory #communities path { opacity: 0;}
 
-#mapstory #communities.zoom8 path {opacity:1;}
+#mapstory.zoom8 #communities path {opacity:1;}
 
 #mapstory #communities #overview-return {
   opacity: 0;
@@ -364,11 +364,11 @@ body#mapstory {
   -moz-transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
 }
-#mapstory #communities.zoom10 #overview-return {
+#mapstory.zoom10 #communities #overview-return {
   opacity: 0.7;
 }
 
-#mapstory #communities.zoom12 path {
+#mapstory.zoom12 #communities path {
 fill-opacity: 0;
 stroke-width: 2px;
 cursor: default;
@@ -380,18 +380,18 @@ cursor: default;
   -moz-transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
 }
-#mapstory #communities.zoom8 #label {
+#mapstory.zoom8 #communities #label {
   opacity: 1;
 }
-#mapstory #communities.zoom10 #label {
+#mapstory.zoom10 #communities #label {
   opacity: 0 !important;
 }
 
-#mapstory #communities.zoom12 path:hover {
+#mapstory.zoom12 #communities path:hover {
 fill-opacity: 0;
 }
 
-#mapstory #communities.zoom14 g {display: none;}
+#mapstory.zoom14 #communities g {display: none;}
 
 #mapstory #project-area path {
 /*filter: url(#blur);*/
@@ -422,15 +422,15 @@ filter: url(#blur);
 filter: url(#blur-hover);
 }
 
-#mapstory #project-area.zoom6 path.ecuador-border {
+#mapstory.zoom6 #project-area path.ecuador-border {
 opacity: 0;
 }
 
-#mapstory #project-area.zoom8 path {
+#mapstory.zoom8 #project-area path {
 opacity: 0;
 }
 
-#mapstory #project-area.zoom9 { display: none; }
+#mapstory.zoom9 #project-area { display: none; }
 
 #mapstory .markers {
 display: none;
