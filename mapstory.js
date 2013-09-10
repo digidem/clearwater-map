@@ -322,8 +322,6 @@
     });
     $(window).resize();
 
-    $('#communities').prepend('<div id="overview-return"><a href="#overview">Return to Overview</a></div>');
-
     $('#communities').append('<div id="label"></div>');
     $('#communities a').hover(_enterCommunity,_leaveCommunity);
 
