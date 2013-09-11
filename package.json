@@ -1,0 +1,21 @@
+{
+  "name": "clearwater-map",
+  "version": "0.0.0",
+  "description": "ClearWater project map for website",
+  "main": "mapstory.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/digidem/clearwater-map.git"
+  },
+  "devDependencies": {
+    "uglify-js": "~2.2.5"
+  },
+  "author": "Gregor MacLennan (Digital Democracy)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/digidem/clearwater-map/issues"
+  }
+}

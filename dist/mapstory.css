@@ -1,0 +1,540 @@
+#mapstory #map { position:absolute; top:0; bottom:0; width:100%; }
+
+body#mapstory {
+  margin:0px;
+  padding:0px;
+  font:normal 15px/20px "PT Sans",Arial,sans-serif;
+  background:#fff;
+  position: absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+}
+#mapstory #nav {
+position: fixed;
+left: 0px;
+top: 5px;
+background-color: #222;
+opacity: 0;
+z-index: 3;
+transition:opacity 500ms;
+-moz-transition:opacity 500ms;
+-webkit-transition:opacity 500ms;
+}
+#mapstory.zoom10 #nav {
+opacity: 1;
+}
+
+#mapstory #nav a {
+	font-family: "Yanone Kaffeesatz";
+	font-size: 1.5em;
+	display: block;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-left: 45px;
+	background-repeat: no-repeat;
+	background-image: url(images/arrow_white1.png);
+	padding-top: 7px;
+	padding-right: 10px;
+	padding-bottom: 7px;
+	background-position: 5px;
+	margin: 4px;
+}
+
+#mapstory #nav a:hover {
+	color: #DADADA;
+	background-image: url(images/arrow_grey1.png);
+}
+
+#mapstory .instruction {
+margin: 0 0 -122px;
+position: relative;
+top: -500px;
+left: 750px;
+height: 250px;
+width: 228px;
+background: url(images/initialclick.png) no-repeat scroll left bottom;
+text-indent: -2000px;
+z-index: 2;
+display: none;
+}
+
+#mapstory #stories {
+  width:400px;
+  min-width:320px;
+  position:absolute;
+  margin: 0 0 0 40px;
+  top: 100%;
+  color:#eee;
+  transition: opacity 0.4s linear;
+  -moz-transition: opacity 0.4s linear;
+  -webkit-transition: opacity 0.4s linear;
+}
+
+#mapstory #stories article:first-child section:first-child {
+  position: absolute;
+  bottom: 100%;
+}
+
+#mapstory article {
+  position: relative;
+}
+
+#mapstory .background {
+  background-color: #222;
+  position: relative;
+  bottom: 0;
+  transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+}
+
+#mapstory .affixed {
+position: fixed !important;
+}
+
+#mapstory .collapsed {
+position: absolute !important;
+}
+
+#mapstory .offscreen {
+display: none;
+}
+
+#mapstory .faded {
+opacity: 0;
+}
+
+#mapstory section {
+  background-color: #222;
+  transition:opacity 1s;
+  -moz-transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+  }
+
+#mapstory #stories section h1 {
+font-weight: bold;
+font-size: 2.2em;
+}
+#mapstory #stories h1, #stories h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
+#mapstory #stories h2 {
+  color: #f2c21c;
+  background: black;
+}
+
+#mapstory #stories h3 {
+	font-size: 1.4em;
+	line-height: 1em;
+	background-color: #000;
+	color: black;
+	font-weight: normal;
+	font-family: "Yanone Kaffeesatz";
+	position: relative;
+	color: #f2c21c;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0em;
+	margin-left: 0;
+	padding-top: 5px;
+	padding-right: 40px;
+	padding-bottom: 5px;
+	padding-left: 40px;
+}
+
+#mapstory .button {
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 15px;
+	padding: 5px;
+	text-decoration: none;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	text-shadow: 1px 1px 3px #666666;
+	border: solid #8d85ff 0px;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#7656b3), to(#7656b3));
+	background: -moz-linear-gradient(top, #7656b3, #7656b3);
+	margin-top: 10px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+#mapstory .button:hover {
+  background: #6d52a8;
+}
+
+
+#mapstory #stories p, #mapstory #stories ul { padding:0 40px 1em; 
+margin:0;}
+
+#mapstory #stories section ul {
+list-style-type: none;
+font-size: 1.2em;
+}
+#mapstory #stories section ul li {
+margin-bottom: 0.5em;
+}
+
+#mapstory #stories img {
+display: block;
+width: 400px;
+height: 267px;
+left: 0;
+position: relative;
+transform: translate3d(0,0,0);
+-moz-transform: translate3d(0,0,0);
+-webkit-transform: translate3d(0,0,0);
+}
+
+a 
+{
+	color: #f2c21c;
+	text-decoration: none;	
+}
+
+#mapstory a.scroll {
+	color: #fff;
+	position: absolute;
+	right: 0px;
+	bottom: -40px;
+	font-size: 0.7em;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	height: 56px;
+}
+#mapstory a.scroll:after {
+content: " ▼";
+}
+#mapstory .colophon {
+  display:block;
+  margin-top:10px;
+  }
+
+#mapstory #pane {
+  position:fixed;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+  }
+#mapstory #map  {
+  position:absolute;
+  top:0px;
+  bottom:0px;
+  width:100%;
+  height:100%;
+  }
+#mapstory #label {
+  position: absolute;
+  padding: 5px 10px;
+  color: black;
+  background: #f1c21c;
+  font-family: "Yanone Kaffeesatz";
+  font-size: 1.5em;
+  z-index: 999;
+  display: none;
+  box-shadow: 0 10px 0 rgba(0,0,0,0.5);
+}
+#mapstory #legend {
+opacity: 0;
+transition:opacity 500ms;
+-moz-transition:opacity 500ms;
+-webkit-transition:opacity 500ms;
+}
+
+#mapstory.zoom12 #legend {
+opacity: 1;
+}
+
+#mapstory #legend dl {
+	margin: 10px;
+	padding: 10px;
+	font-family: "Yanone Kaffeesatz"; /* main font/type */
+	font-size: 1.5em;
+	display: block;
+	color: #FFFFFF;
+	text-decoration: none;
+	background: #222;	/* CSS3, placing images 											vertically  */
+	position: fixed;	/* fixed, element stays in place when 								you scroll */
+	bottom: 0;
+	right: 0;			/* float left */
+	width: 340px;
+	opacity: 0.7;
+	filter: alpha(opacity = 40); /* For IE */
+}
+#mapstory #legend dt {
+  display: block;
+  margin: 0; padding: 0 0 0 1.65em;
+  background: #222 no-repeat;
+  background-size: 0.95em 0.95em;
+  line-height: 1.2em;
+  background-position: 5px;
+}
+#mapstory #legend dt.system {
+  background-image: url(images/cw-system.png);
+}
+#mapstory #legend dt.story {
+  background-image: url(images/cw-story.png);
+}
+
+@media (max-width:480px) {
+  body#mapstory {
+    background: #333;
+  }
+  #mapstory #map {
+    display: none;
+  }
+  #mapstory #stories {
+    margin: 0;
+    width: 100%;
+  }
+  #mapstory #stories img {
+    display: block;
+    clear: both;
+    width: 100%;
+    height: auto;
+  }
+  #mapstory #stories .background {
+    width: 100% !important;
+  }
+  #mapstory .affixed, #mapstory .collapsed {
+    position: relative !important;
+  }
+  #mapstory .offscreen {
+    display: inherit;
+  }
+  #mapstory .faded {
+    opacity: inherit;
+  }
+}
+
+@media (max-width:640px) {
+  body#mapstory {
+    font-size:12px;
+    line-height:16px;
+    }
+  #mapstory article {
+    width:100%;
+    min-width:100%;
+    padding-top:0px;
+    /*padding-bottom:200%;*/
+    }
+  #mapstory section {
+    text-shadow:none;
+    margin-left:0px;
+    /*padding:30px;*/
+    }
+  #mapstory #pane { width:100%; }
+  #mapstory #map  {
+    bottom:0%;
+    left:0%;
+    width:100%;
+    height:150%;
+    }
+  #mapstory #legend {
+    display: none;
+  }
+}
+
+@media (min-width:1280px) {
+#mapstory #stories {width:540px;}
+#mapstory #stories img {
+width: 540px;
+height: 360px;}
+body#mapstory {
+  font-size:18px;
+  line-height:24px;
+  }
+}
+  
+  
+/* Map elements */
+
+#mapstory path {
+  fill: #f1c21c;
+  fill-opacity: .6;
+  stroke: #f1c21c;
+  stroke-width: 0;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition:fill-opacity 500ms,opacity 500ms;
+  -moz-transition:fill-opacity 500ms,opacity 500ms;
+  -webkit-transition:fill-opacity 500ms,opacity 500ms;
+}
+
+#mapstory path:hover {
+  fill: #ab8b1e;
+}
+
+#mapstory #communities { display: none;}
+
+#mapstory.zoom7 #communities { display: block;}
+
+#mapstory #communities path { opacity: 0;}
+
+#mapstory.zoom8 #communities path {opacity:1;}
+
+#mapstory #communities #overview-return {
+  opacity: 0;
+  transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+}
+#mapstory.zoom10 #communities #overview-return {
+  opacity: 0.7;
+}
+
+#mapstory.zoom12 #communities path {
+fill-opacity: 0;
+stroke-width: 2px;
+cursor: default;
+}
+
+#mapstory #communities #label {
+  opacity: 0;
+  transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+}
+#mapstory.zoom8 #communities #label {
+  opacity: 1;
+}
+#mapstory.zoom10 #communities #label {
+  opacity: 0 !important;
+}
+
+#mapstory.zoom12 #communities path:hover {
+fill-opacity: 0;
+}
+
+#mapstory.zoom14 #communities g {display: none;}
+
+#mapstory #project-area path {
+/*filter: url(#blur);*/
+transition:fill-opacity 250ms, opacity 250ms;
+-moz-transition:fill-opacity 250ms, opacity 250ms;
+-webkit-transition:fill-opacity 250ms, opacity 250ms;
+}
+
+#mapstory #project-area path.ecuador-border {
+stroke-width: 2px;
+fill-opacity: 0;
+}
+
+#mapstory #project-area path.project-area {
+fill-opacity: 0.9;
+}
+
+#mapstory #project-area path:hover {
+  fill-opacity: 0.5;
+/*  filter: url(#blur-hover);*/
+}
+
+#mapstory .filtered path.project-area {
+filter: url(#blur);
+}
+
+#mapstory .filtered path.project-area:hover {
+filter: url(#blur-hover);
+}
+
+#mapstory.zoom6 #project-area path.ecuador-border {
+opacity: 0;
+}
+
+#mapstory.zoom8 #project-area path {
+opacity: 0;
+}
+
+#mapstory.zoom9 #project-area { display: none; }
+
+#mapstory .markers {
+display: none;
+opacity: 0;
+transition:opacity 500ms;
+-moz-transition:opacity 500ms;
+-webkit-transition:opacity 500ms;
+}
+
+#mapstory .markers.zoom11 {
+display: block;
+}
+
+#mapstory .markers.zoom12 {
+opacity: 1;
+}
+
+#mapstory .marker {
+margin-left: -8px;
+margin-top: -8px;
+width: 16px;
+height: 16px;
+display: block;
+position: absolute;
+cursor: pointer;
+pointer-events: all;
+-webkit-transition-timing-function: cubic-bezier(0.680, 0, 0.265, 1); /* older webkit */
+-webkit-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+   -moz-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+    -ms-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+     -o-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+-webkit-transition-property: width,height,margin;
+  	-moz-transition-property: width,height,margin;
+	    -o-transition-property: width,height,margin;
+	   -ms-transition-property: width,height,margin;
+	       transition-property: width,height,margin;
+-webkit-transition-duration: 0.1s;
+	 -moz-transition-duration: 0.1s;
+	   -o-transition-duration: 0.1s;
+	  -ms-transition-duration: 0.1s;
+	      transition-duration: 0.1s;
+        z-index: -1;
+}
+
+#mapstory .marker.featured {
+margin-left: -12px;
+margin-top: -12px;
+width: 24px;
+height: 24px;
+z-index: 0;
+}
+
+#mapstory .marker:hover {
+margin-left: -17px;
+margin-top: -17px;
+width: 33px;
+height: 33px;
+z-index:1;
+pointer-events: all;
+
+}
+
+#mapstory .marker-popup {
+  position:absolute;
+  left:0;
+  bottom:0;
+  height: 130px;
+  width:150px;
+  background:#fff;
+  color:#000;
+  padding:0;
+  margin:0;
+  z-index: 9999;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-box-shadow: 0px 0px 5px 0px #ccc;
+          box-shadow: 0px 0px 5px 0px #ccc;
+}
+
+#mapstory .marker-popup img {
+display: block;
+width: 150px;
+height: 100px;
+}
+
+#mapstory .marker-popup p {
+margin-top: 3px;
+margin-left: 10px;
+}
