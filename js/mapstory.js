@@ -637,6 +637,7 @@
                     })
                   .reject(function (v) { return v.scrollPoint < 0; })
                   .sortBy('scrollPoint').value();
+      console.log(locations);
     }
   
     function setEasings () {
