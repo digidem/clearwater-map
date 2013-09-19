@@ -147,6 +147,7 @@
         var y = $(window).scrollTop();
         mapPadding.left = $("#stories").outerWidth(true);
         _initReveals("#stories img:not(.nocollapse)");
+        console.log("calling eh", storyLocations)
         easeHandler.locations(storyLocations).map(map);
         window.eh = easeHandler;
         _initScrollTos("");
@@ -636,6 +637,7 @@
                     var $el = $("#" + v.id);
                     v.scrollPoint = ($el.length > 0)
                       ? Math.floor($el.offset().top - wHeight + $el.height()) : -1;
+                      console.log($el, $el.offset().top, wHeight, $el.height()); 
                       return v;
                     })
                   .reject(function (v) { return v.scrollPoint < 0; })
