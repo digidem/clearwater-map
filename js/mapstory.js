@@ -123,7 +123,7 @@
       map.tileSize = { x: 128, y: 128 };
       labelLayer.id('gmaclennan.map-lb73ione');
     } else {
-      labelLayer.id('mapbox.world-borders-light');
+      labelLayer.id('gmaclennan.map-y7pgvo15');
     }
     
     // Load GeoJSON for polygons and markers from CartoDB
