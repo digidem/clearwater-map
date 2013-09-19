@@ -638,7 +638,8 @@
                     v.scrollPoint = ($el.length > 0)
                       ? Math.floor($el.offset().top - wHeight + $el.height()) : -1; 
                     // This is terrible but it will do for now.
-                    if (v.id == "mapstory") v.scrollPoint = 0;
+                    if (v.id === "mapstory") v.scrollPoint = 0;
+                    console.log(v);
                     return v;
                   })
                   .reject(function (v) { return v.scrollPoint < 0; })
