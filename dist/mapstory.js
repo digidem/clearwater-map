@@ -13878,7 +13878,6 @@ var cssFilter = (function(){
 
 var d3layer = function(id) {
   if (!(this instanceof d3layer)) {
-    // console.log('newing');
       return new d3layer(id);
   }
   this.bounds = null;
@@ -13945,7 +13944,6 @@ d3layer.prototype.getLocations = function () {
   var locations = []
   for (i=0; i < this.geojson.features.length; i++) {
     if (this.geojson.features[i].properties.description !== "Ecuador Border") {
-      console.log(this.geojson.features[i].properties.description);
       locations.push({ 
         id: _sanitize(this.geojson.features[i].properties.community),
         bounds: d3.geo.bounds(this.geojson.features[i])
@@ -14661,6 +14659,7 @@ function _sanitize(string) {
                     })
                   .reject(function (v) { return v.scrollPoint < 0; })
                   .sortBy('scrollPoint').value();
+      console.log(locations);
     }
   
     function setEasings () {
