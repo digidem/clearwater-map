@@ -34,7 +34,7 @@ opacity: 1;
 	text-decoration: none;
 	padding-left: 45px;
 	background-repeat: no-repeat;
-	background-image: url(images/arrow_white1.png);
+	background-image: url(http://digidem.github.io/clearwater-map/images/arrow_white1.png);
 	padding-top: 7px;
 	padding-right: 10px;
 	padding-bottom: 7px;
@@ -44,7 +44,7 @@ opacity: 1;
 
 #mapstory #nav a:hover {
 	color: #DADADA;
-	background-image: url(images/arrow_grey1.png);
+	background-image: url(http://digidem.github.io/clearwater-map/images/arrow_grey1.png);
 }
 
 #mapstory .instruction {
@@ -54,7 +54,7 @@ top: -500px;
 left: 750px;
 height: 250px;
 width: 228px;
-background: url(images/initialclick.png) no-repeat scroll left bottom;
+background: url(http://digidem.github.io/clearwater-map/images/initialclick.png) no-repeat scroll left bottom;
 text-indent: -2000px;
 z-index: 2;
 display: none;
@@ -255,7 +255,7 @@ opacity: 1;
 	display: block;
 	color: #FFFFFF;
 	text-decoration: none;
-	background: #222;	/* CSS3, placing images 											vertically  */
+	background: #222;	/* CSS3, placing http://digidem.github.io/clearwater-map/images 											vertically  */
 	position: fixed;	/* fixed, element stays in place when 								you scroll */
 	bottom: 0;
 	right: 0;			/* float left */
@@ -272,10 +272,10 @@ opacity: 1;
   background-position: 5px;
 }
 #mapstory #legend dt.system {
-  background-image: url(images/cw-system.png);
+  background-image: url(http://digidem.github.io/clearwater-map/images/cw-system.png);
 }
 #mapstory #legend dt.story {
-  background-image: url(images/cw-story.png);
+  background-image: url(http://digidem.github.io/clearwater-map/images/cw-story.png);
 }
 
 @media (max-width:480px) {
