@@ -357,7 +357,7 @@
     // that represents the point.
         var img = document.createElement('img');
         img.className = (f.properties.featured) ? 'featured marker' : 'marker';
-        var src = (f.properties.featured) ? "images/cw-story.png" : "images/cw-system.png"
+        var src = (f.properties.featured) ? "http://digidem.github.io/clearwater-map/images/cw-story.png" : "http://digidem.github.io/clearwater-map/images/cw-system.png"
         img.setAttribute('src', src);
         $.data(img,'id',_sanitize(f.properties.community));
         if (f.properties.featured) { img.setAttribute('data-link',_sanitize(f.properties.featured_url)); }
