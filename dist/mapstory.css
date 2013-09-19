@@ -381,7 +381,7 @@ body#mapstory {
   -moz-transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
 }
-#mapstory.zoom10 #communities #overview-return {
+#mapstory.zoom11 #communities #overview-return {
   opacity: 0.7;
 }
 
