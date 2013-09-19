@@ -636,13 +636,13 @@
                   .map(function (v) {
                     var $el = $("#" + v.id);
                     v.scrollPoint = ($el.length > 0)
-                      ? Math.floor($el.offset().top - wHeight + $el.height()) : -1;
-                      console.log($el, $el.offset().top, wHeight, $el.height()); 
-                      return v;
-                    })
+                      ? Math.floor($el.offset().top - wHeight + $el.height()) : -1; 
+                    // This is terrible but it will do for now.
+                    if (v.id == "mapstory") v.scrollPoint = 0;
+                    return v;
+                  })
                   .reject(function (v) { return v.scrollPoint < 0; })
                   .sortBy('scrollPoint').value();
-      console.log(locations);
     }
   
     function setEasings () {
