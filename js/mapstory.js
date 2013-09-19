@@ -125,7 +125,7 @@
     } else {
       labelLayer.id('gmaclennan.map-y7pgvo15');
     }
-    
+    console.log(storyLocations);
     // Load GeoJSON for polygons and markers from CartoDB
     _loadData(communitiesSql, _onCommunitiesLoad);
     _loadData(markerSql, _onMarkerLoad);
@@ -324,6 +324,7 @@
 
     $('#communities').append('<div id="label"></div>');
     $('#communities a').hover(_enterCommunity,_leaveCommunity);
+    console.log(storyLocations);
 
     if (projectLayerIsLoaded) easeHandler.enable();
     communitiesLayerIsLoaded = true;
@@ -336,6 +337,7 @@
     $(window).resize();
     if (communitiesLayerIsLoaded) easeHandler.enable();
     projectLayerIsLoaded = true;
+    console.log(storyLocations);
 
   };
 
@@ -370,6 +372,7 @@
     //Set up click events on the layer and parent
     $(markerLayer.parent).on("click","img",_clickMarkers);
     $(map.parent).on("click",_clickMarkers);
+    console.log(storyLocations);
 
   };
   
