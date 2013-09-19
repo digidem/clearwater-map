@@ -125,7 +125,6 @@
     } else {
       labelLayer.id('gmaclennan.map-y7pgvo15');
     }
-    console.log(storyLocations);
     // Load GeoJSON for polygons and markers from CartoDB
     _loadData(communitiesSql, _onCommunitiesLoad);
     _loadData(markerSql, _onMarkerLoad);
@@ -147,7 +146,6 @@
         var y = $(window).scrollTop();
         mapPadding.left = $("#stories").outerWidth(true);
         _initReveals("#stories img:not(.nocollapse)");
-        console.log("calling eh", storyLocations)
         easeHandler.locations(storyLocations).map(map);
         window.eh = easeHandler;
         _initScrollTos("");
@@ -325,7 +323,6 @@
 
     $('#communities').append('<div id="label"></div>');
     $('#communities a').hover(_enterCommunity,_leaveCommunity);
-    console.log(storyLocations);
 
     if (projectLayerIsLoaded) easeHandler.enable();
     communitiesLayerIsLoaded = true;
@@ -338,7 +335,6 @@
     $(window).resize();
     if (communitiesLayerIsLoaded) easeHandler.enable();
     projectLayerIsLoaded = true;
-    console.log(storyLocations);
 
   };
 
@@ -373,8 +369,6 @@
     //Set up click events on the layer and parent
     $(markerLayer.parent).on("click","img",_clickMarkers);
     $(map.parent).on("click",_clickMarkers);
-    console.log(storyLocations);
-
   };
   
   function getMarkerLocations (geojson) {
@@ -639,7 +633,6 @@
                       ? Math.floor($el.offset().top - wHeight + $el.height()) : -1; 
                     // This is terrible but it will do for now.
                     if (v.id === "mapstory") v.scrollPoint = 0;
-                    console.log(v);
                     return v;
                   })
                   .reject(function (v) { return v.scrollPoint < 0; })
