@@ -14,7 +14,7 @@ body#mapstory {
 #mapstory #nav {
 position: fixed;
 left: 0px;
-top: 5px;
+top: 71px;
 background-color: #222;
 opacity: 0;
 z-index: 3;
@@ -22,7 +22,7 @@ transition:opacity 500ms;
 -moz-transition:opacity 500ms;
 -webkit-transition:opacity 500ms;
 }
-#mapstory.zoom10 #nav {
+#mapstory.zoom11 #nav {
 opacity: 1;
 }
 
@@ -374,16 +374,6 @@ body#mapstory {
 #mapstory #communities path { opacity: 0;}
 
 #mapstory.zoom8 #communities path {opacity:1;}
-
-#mapstory #communities #overview-return {
-  opacity: 0;
-  transition: opacity 0.5s;
-  -moz-transition: opacity 0.5s;
-  -webkit-transition: opacity 0.5s;
-}
-#mapstory.zoom11 #communities #overview-return {
-  opacity: 0.7;
-}
 
 #mapstory.zoom12 #communities path {
 fill-opacity: 0;
