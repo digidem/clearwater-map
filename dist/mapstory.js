@@ -14496,7 +14496,7 @@ function _sanitize(string) {
             'after';
       var opacity = 1;
 
-        if (scrollTop <=  reveals[i].start) {
+        if (scrollTop <=  reveals[i].offscreen) {
           reveals[i].$prev.removeClass('faded');
         } else {
           reveals[i].$prev.addClass('faded');
@@ -14665,7 +14665,7 @@ function _sanitize(string) {
       var easing, coord, coords, prevCoord, prevScrollPoint;
       // Padding is the space (in pixels) above and below a location
       // when scrolling will pause.
-      var padding = 75;
+      var padding = 0;
       easings = [];
     
       _.forEach(locations, function (v, i) {

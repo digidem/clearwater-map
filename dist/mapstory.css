@@ -78,7 +78,7 @@ display: none;
 }
 
 #mapstory article {
-  position: relative;
+  margin-bottom: 1000px;
 }
 
 #mapstory .background {
@@ -111,6 +111,7 @@ opacity: 0;
   transition:opacity 1s;
   -moz-transition:opacity 1s;
   -webkit-transition:opacity 1s;
+  margin-top: 267px;
   }
 
 #mapstory #stories section h1 {
@@ -342,6 +343,9 @@ opacity: 1;
 #mapstory #stories img {
 width: 540px;
 height: 360px;}
+#mapstory section {
+  margin-top: 360px;
+}
 body#mapstory {
   font-size:18px;
   line-height:24px;
