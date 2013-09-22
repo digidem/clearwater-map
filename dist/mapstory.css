@@ -293,6 +293,10 @@ opacity: 1;
     margin: 0;
     width: 100%;
   }
+  #mapstory article, #mapstory section {
+    margin-bottom: 0;
+  }
+  
   #mapstory #stories img {
     display: block;
     clear: both;
@@ -329,7 +333,10 @@ opacity: 1;
     min-width:100%;
     padding-top:0px;
     /*padding-bottom:200%;*/
-    }
+    }  
+  #mapstory article, #mapstory section {
+    margin-bottom: 0;
+  }
   #mapstory section {
     text-shadow:none;
     margin-left:0px;
