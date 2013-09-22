@@ -286,6 +286,9 @@ opacity: 1;
   #mapstory #map {
     display: none;
   }
+  #mapstory #nav {
+    display: none;
+  }
   #mapstory #stories {
     margin: 0;
     width: 100%;
@@ -295,6 +298,9 @@ opacity: 1;
     clear: both;
     width: 100%;
     height: auto;
+  }
+  #mapstory #stories section h3 {
+    display: none;
   }
   #mapstory #stories .background {
     width: 100% !important;
@@ -315,6 +321,9 @@ opacity: 1;
     font-size:12px;
     line-height:16px;
     }
+  #mapstory #nav {
+    display: none;
+  }
   #mapstory article {
     width:100%;
     min-width:100%;
