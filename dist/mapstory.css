@@ -279,7 +279,7 @@ opacity: 1;
   background-image: url(http://digidem.github.io/clearwater-map/images/cw-story.png);
 }
 
-@media (max-width:480px) {
+@media (max-width:640px) {
   body#mapstory {
     background: #333;
   }
@@ -321,7 +321,7 @@ opacity: 1;
   }
 }
 
-@media (max-width:640px) {
+@media (max-width:768px) {
   body#mapstory {
     font-size:12px;
     line-height:16px;
