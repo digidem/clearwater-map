@@ -295,6 +295,7 @@ opacity: 1;
   }
   #mapstory article, #mapstory section {
     margin-bottom: 0;
+    margin-top: 0;
   }
   
   #mapstory #stories img {
@@ -336,6 +337,7 @@ opacity: 1;
     }  
   #mapstory article, #mapstory section {
     margin-bottom: 0;
+    margin-top: 0;
   }
   #mapstory section {
     text-shadow:none;
