@@ -14058,9 +14058,9 @@ function _sanitize(string) {
   //-- *************** --//
     
   // Bing Maps API key for satellite layer
-  // Register for key at http://...
-  // NEEDS CHANGED: is currently only a trial key for 90 days
-  var BING_API_KEY = "AqVWiJ79W7khoQS3cEZn9Uuh3czvwSUr3bD2GTCCciGCasSEIaTVba37EAGBjwR6";
+  // Register for key at http://www.bingmapsportal.com
+  // Currently a basic non-profit key. Need to check limits.
+  var BING_API_KEY = "Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l";
   
   // Bounds for the initial view of the map (Ecuador)
   var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }];
