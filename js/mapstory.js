@@ -104,7 +104,7 @@
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
-    map = mapbox.map('map',null,null, []).setExtent(startBounds).setZoomRange(3,18);
+    map = mapbox.map('map',null,null, [ easey_handlers.DragHandler() ]).setExtent(startBounds).setZoomRange(3,18);
     window.map = map; // export the map variable for debugging
     
     // Override the default MM.extentCoordinate function to add padding
@@ -139,6 +139,13 @@
     $('#stories').css('height',$('#stories').height());
     // window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
     easeHandler = easeHandler();
+    
+    // When the user pans the map, add an override so that scrolling
+    // returns the user to the predefined path through the map
+    map.addCallback("panned", function(map, panOffset) {
+      easeHandler.setOverride();
+    });
+      
     var lastResize = 0;
     $(window).resize(function () {
       $('html,body').stop(true);
@@ -429,8 +436,9 @@
       map.ease.to(to).optimal(0.9);
       easeHandler.setOverride(to);
     } else {
-      easeBack.optimal(0.9, 1.42, function() { easeBack = undefined; });
-      easeHandler.setOverride(easeBack.to());
+      // **TODO** We should only do this if this is not a drag event
+      // easeBack.optimal(0.9, 1.42, function() { easeBack = undefined; });
+      // easeHandler.setOverride(easeBack.to());
     }
     return MM.cancelEvent(e);
   };
