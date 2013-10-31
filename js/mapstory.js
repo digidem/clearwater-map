@@ -41,8 +41,9 @@
   var BING_API_KEY = "Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l";
   
   // Bounds for the initial view of the map (Ecuador)
-  var startBounds = [{ lat: -5.2, lon: -81.2 }, { lat: 1.8, lon: -74.9 }];
-  var PROJECT_BOUNDS = [ [-1.1, -77.7], [0.5, -75.2]];
+  var START_BOUNDS = [ [-90, -55], [-33, 14] ];
+  var START_BOUNDS_MM = [{ lat: START_BOUNDS[0][1], lon: START_BOUNDS[0][0] }, 
+                         { lat: START_BOUNDS[1][1], lon: START_BOUNDS[1][0] }];
   
   // Array of locations for each story on the map
   // The first location is for the initial map view
@@ -50,7 +51,7 @@
   // bounds as [[ latWest, lonSouth], [latEast, lonNorth]] - blame d3 for this order.
   // TODO change this - not very obvious.
   var storyLocations = [
-    { id: 'mapstory', bounds: [ [-90, -55], [-33, 14] ] }
+    { id: 'mapstory', bounds: START_BOUNDS }
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
@@ -104,7 +105,7 @@
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
-    map = mapbox.map('map',null,null, [ easey_handlers.DragHandler() ]).setExtent(startBounds).setZoomRange(3,18);
+    map = mapbox.map('map',null,null, [ easey_handlers.DragHandler() ]).setExtent(START_BOUNDS_MM).setZoomRange(3,18);
     window.map = map; // export the map variable for debugging
     
     // Override the default MM.extentCoordinate function to add padding
