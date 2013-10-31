@@ -370,7 +370,6 @@
         if (f.properties.featured) { img.setAttribute('data-link',_sanitize(f.properties.featured_url)); }
         return img;
     });
-    //preloadImages(geojson);
     storyLocations = storyLocations.concat(getMarkerLocations(geojson));
     markerBounds = _calculateMarkerBounds(geojson);
     $(window).resize();
@@ -538,10 +537,12 @@
           .split(" ").join("-").split("/").join("-");
   }
   
-  function preloadImages(geojson) {
+  function preloadImages(geojson, community) {
     _.forEach(geojson.features, function (v) {
-      var img = new Image();
-      img.src = v.properties.photo;
+      if (community === v.properties.community) {
+        var img = new Image();
+        img.src = v.properties.photo;
+      }
     });
   }
 
