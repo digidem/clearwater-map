@@ -527,7 +527,6 @@ pointer-events: all;
   position:absolute;
   left:0;
   bottom:0;
-  height: 130px;
   width:150px;
   background:#fff;
   color:#000;
@@ -547,6 +546,5 @@ height: 100px;
 }
 
 #mapstory .marker-popup p {
-margin-top: 3px;
-margin-left: 10px;
+margin: 3px 10px;
 }
