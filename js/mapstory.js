@@ -98,7 +98,7 @@
 
     //--- Set up map layer objects ---//
     // composite false is necessary to stop mapbox trying to composite server-side
-    satLayer = mapbox.layer().composite(false);
+    satLayer = mapStory.bingLayer(BING_API_KEY, 'Aerial');
     labelLayer = mapbox.layer();
     communityLayer = d3layer("communities");
     projectLayer = d3layer("project-area");
@@ -130,13 +130,7 @@
     _loadData(communitiesSql, _onCommunitiesLoad);
     _loadData(markerSql, _onMarkerLoad);
     _loadData(projectAreaSql, _onProjectAreaLoad);
-    
-    // Load sat tiles from Bing
-    // *TODO* Remove need for async function in MM.BingProvider
-    var bingProvider = new MM.BingProvider(BING_API_KEY, 'Aerial', function() {
-      satLayer.setProvider(bingProvider);
-    });
-    
+        
     $('#stories').css('height',$('#stories').height());
     // window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
     easeHandler = easeHandler();
