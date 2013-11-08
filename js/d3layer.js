@@ -21,7 +21,14 @@ mapStory.d3Layer = function(id) {
   this.feature = null;
   this.enabled = true;
   this.map = null;
+  this.parent = null;
+  this.g = null;
+  this.defs = null;
+  
+  this.init(id);
+};
 
+mapStory.d3Layer.prototype.init = function (id) {
   var div = d3.select(document.body)
       .append("div")
       .style('position', 'absolute')
@@ -33,7 +40,7 @@ mapStory.d3Layer = function(id) {
   var svg = div.append('svg');
   this.g = svg.append('g');
   this.defs = svg.append('defs');
-};
+}
 
 mapStory.d3Layer.prototype.project = function (d) {
   var point = this.map.locationPoint({ lat: d[1], lon: d[0] });
