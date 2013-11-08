@@ -58,6 +58,7 @@ mapStory.d3Layer.prototype.draw = function () {
 }
 
 mapStory.d3Layer.prototype.addData = function (geojson, callback) {
+  console.log(geojson, callback);
   this.geojson = geojson;
   var fs = this.geojson.features;
   this.bounds = d3.geo.bounds(this.geojson);
@@ -145,13 +146,13 @@ mapStory.d3Layer.prototype.addFilters = function() {
   return this;
 }
 
-d3layer.prototype.enable = function() {
+mapStory.d3Layer.prototype.enable = function() {
   this.enabled = true;
   this.parent.cssText = "position: absolute;";
   return this;
 }
 
-d3layer.prototype.disable = function() {
+mapStory.d3Layer.prototype.disable = function() {
   enabled = false;
   this.parent.cssText = "display: none;"
   return this;

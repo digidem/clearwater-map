@@ -55,6 +55,7 @@
   ];
   
   // Data sources for overlay and markers (loaded with JSONP)
+  var baseDataUrl = 'http://clearwater.cartodb.com/api/v2/sql?format=geojson';
   var communitiesSql = 'SELECT ST_Simplify(the_geom, 0.0001) AS the_geom, c.community, c.nationality, systems, users FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active';
   var projectAreaSql = 'SELECT ST_Simplify(the_geom, 0.001)' +
                   'AS the_geom, description, name AS community ' +
@@ -127,9 +128,10 @@
       labelLayer.id('gmaclennan.map-y7pgvo15');
     }
     // Load GeoJSON for polygons and markers from CartoDB
-    _loadData(communitiesSql, _onCommunitiesLoad);
+    communityLayer.loadData(baseDataUrl + '&q=' + communitiesSql, _onCommunitiesLoad)
+    projectLayer.loadData(baseDataUrl + '&q=' + projectAreaSql, _onProjectAreaLoad)
+
     _loadData(markerSql, _onMarkerLoad);
-    _loadData(projectAreaSql, _onProjectAreaLoad);
         
     $('#stories').css('height',$('#stories').height());
     // window.meter = new FPSMeter($("#pane")[0], {left: 'auto', right: '5px', graph: true, smoothing: 30});
@@ -310,11 +312,10 @@
   
   // _onCommunitiesLoad adds geojson returned from the JSONP call to the map
   // and caches the bounds of each nationality in bounds[]
-  var _onCommunitiesLoad = function(geojson) {
-    communityLayer.addData(geojson);
+  var _onCommunitiesLoad = function(layer) {
     storyLocations = storyLocations.concat(communityLayer.getLocations());
     communityLayer.draw();
-    _.forEach(geojson.features, function (v) {
+    _.forEach(layer.geojson.features, function (v) {
       var systemsSel = "#" + _sanitize(v.properties.community) + " .systems";
       var usersSel = "#" + _sanitize(v.properties.community) + " .users";
       // console.log(systemsSel, usersSel);
@@ -331,12 +332,12 @@
   };
   
   // _onProjectAreaLoad adds geojson returned from the JSONP call to the map
-  var _onProjectAreaLoad = function(geojson) {
-    projectLayer.addData(geojson).draw().addFilters();
-    storyLocations = storyLocations.concat(projectLayer.getLocations());
+  var _onProjectAreaLoad = function(layer) {
+    layer.draw().addFilters();
+    storyLocations = storyLocations.concat(layer.getLocations());
     $(window).resize();
     if (communitiesLayerIsLoaded) easeHandler.enable();
-    projectLayerIsLoaded = true;
+    projectLayerIsLoaded = true;  
 
   };
 
