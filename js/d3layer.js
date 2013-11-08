@@ -1,3 +1,5 @@
+if (typeof mapStory === 'undefined') mapStory = {};
+
 // Detect css filter for svg
 // https://github.com/Modernizr/Modernizr/issues/615
 var cssFilter = (function(){
@@ -10,43 +12,40 @@ var cssFilter = (function(){
 })();
 
 
-var d3layer = function(id) {
-  if (!(this instanceof d3layer)) {
-      return new d3layer(id);
+mapStory.d3Layer = function(id) {
+  if (!(this instanceof mapStory.d3Layer)) {
+      return new mapStory.d3Layer(id);
   }
   this.bounds = null;
   this.geojson = null;
-  this.collection = null;
   this.feature = null;
   this.enabled = true;
-  this.first = true;
-  this.url = 'http://clearwater.cartodb.com/api/v2/sql';
+  this.map = null;
 
   var div = d3.select(document.body)
       .append("div")
       .style('position', 'absolute')
-      .style("width", '100%')
-      .style("height", '100%')
+      .style('width', '100%')
+      .style('height', '100%')
       .attr('id', id);
 
   this.parent = div.node();
-  this.svg = div.append('svg');
-  this.g = this.svg.append('g');
-  var defs = this.svg.append('defs');
+  var svg = div.append('svg');
+  this.g = svg.append('g');
+  this.defs = svg.append('defs');
 };
 
-d3layer.prototype.project = function (d) {
+mapStory.d3Layer.prototype.project = function (d) {
   var point = this.map.locationPoint({ lat: d[1], lon: d[0] });
   // Rounding hack from http://jsperf.com/math-round-vs-hack/3
   // Performance increase: http://www.mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
   return [~~(0.5 + point.x), ~~(0.5 + point.y)];
 }
 
-d3layer.prototype.draw = function () {
+mapStory.d3Layer.prototype.draw = function () {
   if (!this.enabled || !this.map || !this.feature) return;
   var i = 0, classString = "", path;
   // *TODO* at the moment the SVG container does not resize on window.resize
-  this.first && this.svg && (this.first = false);
   while (i < this.map.getZoom()) {
     classString += " zoom" + i;
     i++;
@@ -58,7 +57,7 @@ d3layer.prototype.draw = function () {
   return this;
 }
 
-d3layer.prototype.data = function (geojson) {
+mapStory.d3Layer.prototype.addData = function (geojson, callback) {
   this.geojson = geojson;
   var fs = this.geojson.features;
   this.bounds = d3.geo.bounds(this.geojson);
@@ -68,12 +67,23 @@ d3layer.prototype.data = function (geojson) {
       .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.community); })
       .attr("data-label",function(d){ return (d.properties.nationality) ? "Meet the " + d.properties.nationality : ""; });
 
-    this.feature.append("path").attr("class", function(d){ return _sanitize(d.properties.description); });
-
+  this.feature.append("path").attr("class", function(d){ return _sanitize(d.properties.description); });
+  if (callback) callback(this);
   return this;
 }
 
-d3layer.prototype.getLocations = function () {
+mapStory.d3Layer.prototype.loadData = function (url, callback) {
+  var that = this;
+  $.ajax({
+    url: url,
+    dataType: 'jsonp',
+    success: function (data) {
+      that.addData(data, callback);
+    }
+  });
+}
+
+mapStory.d3Layer.prototype.getLocations = function () {
   // Add the bounds of each feature to the storyLocations array
   var locations = []
   for (i=0; i < this.geojson.features.length; i++) {
@@ -87,7 +97,7 @@ d3layer.prototype.getLocations = function () {
   return locations;
 }
 
-d3layer.prototype.addFilters = function() {
+mapStory.d3Layer.prototype.addFilters = function() {
   
   if (cssFilter) {
     this.g.classed("filtered", true);
@@ -98,7 +108,7 @@ d3layer.prototype.addFilters = function() {
   }
   
   // Blur effect for project area
-  var blur = this.svg.select("defs").append("filter")
+  var blur = this.defs.append("filter")
       .attr("id", "blur")
   blur.append("feColorMatrix")
       .attr("in", "SourceAlpha")
@@ -116,7 +126,7 @@ d3layer.prototype.addFilters = function() {
       .attr("in", "coloredBlur")
 
   // Hover effect for project area
-  var blurHover = this.svg.select("defs").append("filter")
+  var blurHover = this.defs.append("filter")
       .attr("id", "blur-hover")
   blurHover.append("feColorMatrix")
       .attr("in", "SourceAlpha")

@@ -100,8 +100,8 @@
     // composite false is necessary to stop mapbox trying to composite server-side
     satLayer = mapStory.bingLayer(BING_API_KEY, 'Aerial');
     labelLayer = mapbox.layer();
-    communityLayer = d3layer("communities");
-    projectLayer = d3layer("project-area");
+    communityLayer = mapStory.d3Layer("communities");
+    projectLayer = mapStory.d3Layer("project-area");
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.
@@ -311,7 +311,7 @@
   // _onCommunitiesLoad adds geojson returned from the JSONP call to the map
   // and caches the bounds of each nationality in bounds[]
   var _onCommunitiesLoad = function(geojson) {
-    communityLayer.data(geojson);
+    communityLayer.addData(geojson);
     storyLocations = storyLocations.concat(communityLayer.getLocations());
     communityLayer.draw();
     _.forEach(geojson.features, function (v) {
@@ -332,7 +332,7 @@
   
   // _onProjectAreaLoad adds geojson returned from the JSONP call to the map
   var _onProjectAreaLoad = function(geojson) {
-    projectLayer.data(geojson).draw().addFilters();
+    projectLayer.addData(geojson).draw().addFilters();
     storyLocations = storyLocations.concat(projectLayer.getLocations());
     $(window).resize();
     if (communitiesLayerIsLoaded) easeHandler.enable();
