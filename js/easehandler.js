@@ -118,8 +118,8 @@ cwm.easeHandler = function () {
                   .easing('linear').setOptimalPath();
         // for some reason the first easing is funky, so we drop it...
         coords = _.tail(easing.future(v.scrollPoint - prevScrollPoint + 1 - padding * 2));
-        coords = fillArray(_.first(coords),padding).concat(coords);
-        coords = coords.concat(fillArray(_.last(coords), padding));
+        coords = cwm.util.fillArray(_.first(coords),padding).concat(coords);
+        coords = coords.concat(cwm.util.fillArray(_.last(coords), padding));
         easings = easings.concat(coords);
       }
       prevCoord = coord;
@@ -139,15 +139,6 @@ cwm.easeHandler = function () {
     } else lastScroll = y;
     eh.easeTo(y);
     requestAnimationFrame(loop);
-  }
-
-  // Fill an array of n length
-  function fillArray(val, len) {
-    a = [];
-    for (var i=0; i<len; i++) {
-      a.push(val);
-    }
-    return a;
   }
   
   return eh;

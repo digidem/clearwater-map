@@ -35,6 +35,15 @@ cwm.util = {
     });
   },
   
+  // Fill an array of n length
+  fillArray: function (val, len) {
+    a = [];
+    for (var i=0; i<len; i++) {
+      a.push(val);
+    }
+    return a;
+  },
+  
   // Detect css filter for svg
   // https://github.com/Modernizr/Modernizr/issues/615
   cssFilter: (function(){
