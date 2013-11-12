@@ -1,3 +1,15 @@
+/*
+ * This handler manages the relationship between scroll positions and
+ * map locations - center point and zoom. It sets up a smooth 3 dimensional
+ * path between an array of locations, and animates the map smoothly
+ * between these locations on scroll. If the user moves or zooms the map 
+ * manually you can call setOverride() to ensure a smooth path back to 
+ * the original path.
+ * 
+ * Requires ModestMaps.js and mapbox easey.js library.
+ * 
+ */
+
 if (typeof cwm === 'undefined') cwm = {};
 
 cwm.easeHandler = function () {
@@ -85,12 +97,11 @@ cwm.easeHandler = function () {
     return Math.floor(override.time);
   };
 
+  // Iterate through the locations array, look up the elements on the page,
+  // calculate their scroll position, and store the result in the array.
   function setScrollPoints () {
     var wHeight = $(window).height();
   
-    // Add the scroll point of each element with an id in location
-    // remove items that are not found on the page
-    // and sort locations by the scroll point on the page.
     locations = _.chain(locations)
                 .map(function (v) {
                   var $el = $("#" + v.id);
@@ -104,11 +115,10 @@ cwm.easeHandler = function () {
                 .sortBy('scrollPoint').value();
   }
 
+  // Creates an array `easings` of `MM.Coordinate` objects that specify
+  // the map zoom and center point for each pixel on the page.
   function setEasings () {
     var easing, coord, coords, prevCoord, prevScrollPoint;
-    // Padding is the space (in pixels) above and below a location
-    // when scrolling will pause.
-    var padding = 0;
     easings = [];
   
     _.forEach(locations, function (v, i) {
@@ -117,9 +127,7 @@ cwm.easeHandler = function () {
         easing = mapbox.ease().map(map).from(prevCoord).to(coord)
                   .easing('linear').setOptimalPath();
         // for some reason the first easing is funky, so we drop it...
-        coords = _.tail(easing.future(v.scrollPoint - prevScrollPoint + 1 - padding * 2));
-        coords = cwm.util.fillArray(_.first(coords),padding).concat(coords);
-        coords = coords.concat(cwm.util.fillArray(_.last(coords), padding));
+        coords = _.tail(easing.future(v.scrollPoint - prevScrollPoint + 1));
         easings = easings.concat(coords);
       }
       prevCoord = coord;
@@ -127,7 +135,8 @@ cwm.easeHandler = function () {
     });
   }
 
-  // This loop uses requestAnimationFrame to check the scroll position and update the map.
+  // This loop uses requestAnimationFrame to check the scroll position 
+  // and update the map.
   function loop() {
     var y = $(window).scrollTop();
     // meter.tick()
