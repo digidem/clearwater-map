@@ -1,4 +1,4 @@
-if (typeof mapStory === 'undefined') mapStory = {};
+if (typeof cwm === 'undefined') cwm = {};
 
 // Detect css filter for svg
 // https://github.com/Modernizr/Modernizr/issues/615
@@ -12,9 +12,9 @@ var cssFilter = (function(){
 })();
 
 
-mapStory.d3Layer = function(id) {
-  if (!(this instanceof mapStory.d3Layer)) {
-      return new mapStory.d3Layer(id);
+cwm.d3Layer = function(id) {
+  if (!(this instanceof cwm.d3Layer)) {
+      return new cwm.d3Layer(id);
   }
   this.bounds = null;
   this.geojson = null;
@@ -28,7 +28,7 @@ mapStory.d3Layer = function(id) {
   this.init(id);
 };
 
-mapStory.d3Layer.prototype.init = function (id) {
+cwm.d3Layer.prototype.init = function (id) {
   var div = d3.select(document.body)
       .append("div")
       .style('position', 'absolute')
@@ -42,14 +42,14 @@ mapStory.d3Layer.prototype.init = function (id) {
   this.defs = svg.append('defs');
 }
 
-mapStory.d3Layer.prototype.project = function (d) {
+cwm.d3Layer.prototype.project = function (d) {
   var point = this.map.locationPoint({ lat: d[1], lon: d[0] });
   // Rounding hack from http://jsperf.com/math-round-vs-hack/3
   // Performance increase: http://www.mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
   return [~~(0.5 + point.x), ~~(0.5 + point.y)];
 }
 
-mapStory.d3Layer.prototype.draw = function () {
+cwm.d3Layer.prototype.draw = function () {
   if (!this.enabled || !this.map || !this.feature) return;
   var i = 0, classString = "", path;
   // *TODO* at the moment the SVG container does not resize on window.resize
@@ -64,8 +64,7 @@ mapStory.d3Layer.prototype.draw = function () {
   return this;
 }
 
-mapStory.d3Layer.prototype.addData = function (geojson, callback) {
-  console.log(geojson, callback);
+cwm.d3Layer.prototype.addData = function (geojson) {
   this.geojson = geojson;
   var fs = this.geojson.features;
   this.bounds = d3.geo.bounds(this.geojson);
@@ -76,22 +75,27 @@ mapStory.d3Layer.prototype.addData = function (geojson, callback) {
       .attr("data-label",function(d){ return (d.properties.nationality) ? "Meet the " + d.properties.nationality : ""; });
 
   this.feature.append("path").attr("class", function(d){ return _sanitize(d.properties.description); });
-  if (callback) callback(this);
+  this.onLoadData(this);
   return this;
 }
 
-mapStory.d3Layer.prototype.loadData = function (url, callback) {
+cwm.d3Layer.prototype.loadData = function (url) {
   var that = this;
   $.ajax({
     url: url,
     dataType: 'jsonp',
     success: function (data) {
-      that.addData(data, callback);
+      that.addData(data);
     }
   });
+  return this;
 }
 
-mapStory.d3Layer.prototype.getLocations = function () {
+cwm.d3Layer.prototype.onLoadData = function () {
+  return;
+}
+
+cwm.d3Layer.prototype.getLocations = function () {
   // Add the bounds of each feature to the storyLocations array
   var locations = []
   for (i=0; i < this.geojson.features.length; i++) {
@@ -105,7 +109,7 @@ mapStory.d3Layer.prototype.getLocations = function () {
   return locations;
 }
 
-mapStory.d3Layer.prototype.addFilters = function() {
+cwm.d3Layer.prototype.addFilters = function() {
   
   if (cssFilter) {
     this.g.classed("filtered", true);
@@ -153,13 +157,13 @@ mapStory.d3Layer.prototype.addFilters = function() {
   return this;
 }
 
-mapStory.d3Layer.prototype.enable = function() {
+cwm.d3Layer.prototype.enable = function() {
   this.enabled = true;
   this.parent.cssText = "position: absolute;";
   return this;
 }
 
-mapStory.d3Layer.prototype.disable = function() {
+cwm.d3Layer.prototype.disable = function() {
   enabled = false;
   this.parent.cssText = "display: none;"
   return this;

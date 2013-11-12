@@ -99,10 +99,9 @@
 
     //--- Set up map layer objects ---//
     // composite false is necessary to stop mapbox trying to composite server-side
-    satLayer = mapStory.bingLayer(BING_API_KEY, 'Aerial');
+    satLayer = cwm.bingLayer(BING_API_KEY, 'Aerial');
     labelLayer = mapbox.layer();
-    communityLayer = mapStory.d3Layer("communities");
-    projectLayer = mapStory.d3Layer("project-area");
+    communityLayer = cwm.d3Layer("communities");
     markerLayer = mapbox.markers.layer();
     
     // Set up the map, with no layers and no handlers.

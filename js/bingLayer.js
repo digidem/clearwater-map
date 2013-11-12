@@ -1,8 +1,8 @@
-if (typeof mapStory === 'undefined') mapStory = {};
+if (typeof cwm === 'undefined') cwm = {};
 
-mapStory.bingLayer = function(key, style) {
-    if (!(this instanceof mapStory.bingLayer)) {
-        return new mapStory.bingLayer(key, style);
+cwm.bingLayer = function(key, style) {
+    if (!(this instanceof cwm.bingLayer)) {
+        return new cwm.bingLayer(key, style);
     }
     
     this._subdomains = [0, 1, 2, 3];
@@ -23,7 +23,7 @@ mapStory.bingLayer = function(key, style) {
     this.loadMetadata();
 };
 
-mapStory.bingLayer.prototype.initMetadata = function (bingjson) {
+cwm.bingLayer.prototype.initMetadata = function (bingjson) {
   var r = this.meta.resourceSets[0].resources[0];
   
   this._subdomains = r.imageUrlSubdomains;
@@ -34,7 +34,7 @@ mapStory.bingLayer.prototype.initMetadata = function (bingjson) {
   this.setProvider(new MM.Template(this._url, this._subdomains));
 }
 
-mapStory.bingLayer.prototype.loadMetadata = function () {
+cwm.bingLayer.prototype.loadMetadata = function () {
   var url = document.location.protocol + "//dev.virtualearth.net/REST/v1/Imagery/Metadata/" + this._style;
   var that = this;
   $.ajax({
@@ -49,4 +49,4 @@ mapStory.bingLayer.prototype.loadMetadata = function () {
   });
 }
 
-MM.extend(mapStory.bingLayer, MM.Layer);
+MM.extend(cwm.bingLayer, MM.Layer);
