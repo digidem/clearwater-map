@@ -127,63 +127,6 @@
   
   //--- Private helper functions ---//
 
-  var _paddedExtentCoordinate = function (locations, precise) {
-    // coerce locations to an array if it's a Extent instance
-    if (locations instanceof MM.Extent) {
-        locations = locations.toArray();
-    }
-
-    var TL, BR;
-    for (var i = 0; i < locations.length; i++) {
-        var coordinate = this.projection.locationCoordinate(locations[i]);
-        if (TL) {
-            TL.row = Math.min(TL.row, coordinate.row);
-            TL.column = Math.min(TL.column, coordinate.column);
-            TL.zoom = Math.min(TL.zoom, coordinate.zoom);
-            BR.row = Math.max(BR.row, coordinate.row);
-            BR.column = Math.max(BR.column, coordinate.column);
-            BR.zoom = Math.max(BR.zoom, coordinate.zoom);
-        }
-        else {
-            TL = coordinate.copy();
-            BR = coordinate.copy();
-        }
-    }
-
-    var width = this.dimensions.x + 1 - mapPadding.left;
-    var height = this.dimensions.y + 1;
-
-    // multiplication factor between horizontal span and map width
-    var hFactor = (BR.column - TL.column) / (width / this.tileSize.x);
-
-    // multiplication factor expressed as base-2 logarithm, for zoom difference
-    var hZoomDiff = Math.log(hFactor) / Math.log(2);
-
-    // possible horizontal zoom to fit geographical extent in map width
-    var hPossibleZoom = TL.zoom - (precise ? hZoomDiff : Math.ceil(hZoomDiff));
-
-    // multiplication factor between vertical span and map height
-    var vFactor = (BR.row - TL.row) / (height / this.tileSize.y);
-
-    // multiplication factor expressed as base-2 logarithm, for zoom difference
-    var vZoomDiff = Math.log(vFactor) / Math.log(2);
-
-    // possible vertical zoom to fit geographical extent in map height
-    var vPossibleZoom = TL.zoom - (precise ? vZoomDiff : Math.ceil(vZoomDiff));
-
-    // initial zoom to fit extent vertically and horizontally
-    var initZoom = Math.min(hPossibleZoom, vPossibleZoom);
-
-    // additionally, make sure it's not outside the boundaries set by map limits
-    initZoom = Math.min(initZoom, this.coordLimits[1].zoom);
-    initZoom = Math.max(initZoom, this.coordLimits[0].zoom);
-
-    // coordinate of extent center
-    var centerRow = (TL.row + BR.row) / 2;
-    var centerColumn = (TL.column + BR.column) / 2;
-    var centerZoom = TL.zoom;
-    return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom - 0.2).left(mapPadding.left / this.tileSize.x / 2);
-  };
 
   // Set up onClick events to scroll the document between anchors
   var _initScrollTos = function () {

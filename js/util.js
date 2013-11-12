@@ -1,20 +1,5 @@
 if (typeof cwm === 'undefined') cwm = {};
 
-// Overwrite ModestMaps getMousePoint function - it does not like
-// the map in position: fixed and gets confused.
-// *WARNING* this will need modified if the map div has padding/margins
-// This only works when filling the browser window.
-MM.getMousePoint = function(e, map) {
-    var point = new MM.Point(e.clientX, e.clientY);
-    return point;
-};
-
-// Get the map center point for a given bounds
-MM.Map.prototype.centerFromBounds = function (b) {
-  var extent = new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]);
-  return this.extentCoordinate(extent, true);
-};
-
 cwm.util = {
   
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
