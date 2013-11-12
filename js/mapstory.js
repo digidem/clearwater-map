@@ -42,7 +42,6 @@
   
   var satLayer,
       labelLayer,
-      projectLayer,
       communityLayer,
       markerLayer,
       map,
@@ -54,9 +53,7 @@
       lastPositionR = -1,
       wHeight = $(window).height(),
       mapPadding = {},
-      markerBounds = [],
-      projectLayerIsLoaded = false,
-      communitiesLayerIsLoaded = false;
+      markerBounds = [];
 
   
   //--- Start of public functions of MapStory ---//
@@ -77,7 +74,7 @@
     // Override the default MM.extentCoordinate function to add padding
     // so that zooms and eases are centered slightly to the right.
     map.extentCoordinate = _paddedExtentCoordinate;
-    
+    console.log(projectLayer);
     // Add all the map layers to the map, in order (they are empty at this point)
     map.addLayer(satLayer);
     map.addLayer(labelLayer);
@@ -85,16 +82,11 @@
     map.addLayer(communityLayer);
     map.addLayer(markerLayer);
 
-    // Set small tilesize if retina display. Set tilesource according to retina.
-    if (retina) {
-      map.tileSize = { x: 128, y: 128 };
-      labelLayer.id('gmaclennan.map-lb73ione');
-    } else {
-      labelLayer.id('gmaclennan.map-y7pgvo15');
-    }
+    labelLayer.id('gmaclennan.map-y7pgvo15');
+
     // Load GeoJSON for polygons and markers from CartoDB
     communityLayer.loadData(baseDataUrl + '&q=' + communitiesSql, _onCommunitiesLoad)
-    projectLayer.loadData(baseDataUrl + '&q=' + projectAreaSql, _onProjectAreaLoad)
+    projectLayer.loadData(baseDataUrl + '&q=' + projectAreaSql);
 
     _loadData(markerSql, _onMarkerLoad);
         
