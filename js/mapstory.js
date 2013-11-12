@@ -5,32 +5,6 @@
 	// be attached to this.
 	var MapStory = this.MapStory = {};
   
-  //--- Some feature detection ---//
-  
-  var retina = false; //window.devicePixelRatio >= 2;
-  
-  // Detect css transform
-  var cssTransform = (function(){
-    var prefixes = 'transform webkitTransform mozTransform oTransform msTransform'.split(' ')
-      , el = document.createElement('div')
-      , cssTransform
-      , i = 0;
-    while ( cssTransform === undefined ) {
-      cssTransform = document.createElement('div')
-                      .style[prefixes[i]] != undefined ? prefixes[i] : undefined;
-      i++;
-   }
-   return cssTransform;
-  })();
-
-  // Detect request animation frame
-  var _requestAnimation = window.requestAnimationFrame
-                        || window.webkitRequestAnimationFrame
-                        || window.mozRequestAnimationFrame
-                        || window.msRequestAnimationFrame
-                        || window.oRequestAnimationFrame
-                        || function (callback) { window.setTimeout(callback, 1000/60) };
-  
   //-- *************** --//
   //-- Customize below --//
   //-- *************** --//
@@ -84,14 +58,6 @@
       projectLayerIsLoaded = false,
       communitiesLayerIsLoaded = false;
 
-  // Overwrite ModestMaps getMousePoint function - it does not like
-  // the map in position: fixed and gets confused.
-  // *WARNING* this will need modified if the map div has padding/margins
-  // This only works when filling the browser window.
-  MM.getMousePoint = function(e, map) {
-      var point = new MM.Point(e.clientX, e.clientY);
-      return point;
-  };
   
   //--- Start of public functions of MapStory ---//
 
@@ -315,8 +281,8 @@
     storyLocations = storyLocations.concat(communityLayer.getLocations());
     communityLayer.draw();
     _.forEach(layer.geojson.features, function (v) {
-      var systemsSel = "#" + _sanitize(v.properties.community) + " .systems";
-      var usersSel = "#" + _sanitize(v.properties.community) + " .users";
+      var systemsSel = "#" + cwm.util.sanitize(v.properties.community) + " .systems";
+      var usersSel = "#" + cwm.util.sanitize(v.properties.community) + " .users";
       // console.log(systemsSel, usersSel);
       $(systemsSel).text(v.properties.systems);
       $(usersSel).text(v.properties.users);
@@ -360,8 +326,8 @@
         img.className = (f.properties.featured) ? 'featured marker' : 'marker';
         var src = (f.properties.featured) ? "http://digidem.github.io/clearwater-map/images/cw-story.png" : "http://digidem.github.io/clearwater-map/images/cw-system.png"
         img.setAttribute('src', src);
-        $.data(img,'id',_sanitize(f.properties.community));
-        if (f.properties.featured) { img.setAttribute('data-link',_sanitize(f.properties.featured_url)); }
+        $.data(img,'id',cwm.util.sanitize(f.properties.community));
+        if (f.properties.featured) { img.setAttribute('data-link',cwm.util.sanitize(f.properties.featured_url)); }
         return img;
     });
     storyLocations = storyLocations.concat(getMarkerLocations(geojson));
@@ -377,7 +343,7 @@
     _.forEach(geojson.features, function (v) {
       if (v.properties.featured) {
         var bounds = [[],[]];
-        var id = _sanitize(v.properties.featured_url);
+        var id = cwm.util.sanitize(v.properties.featured_url);
         bounds[0][0] = bounds[1][0] = v.geometry.coordinates[0];
         bounds[0][1] = bounds[1][1] = v.geometry.coordinates[1];
         locations.push({id: id, bounds: bounds});
@@ -390,7 +356,7 @@
     var b = {};
     for (var i=0; i < geojson.features.length; i++) {
       var f = geojson.features[i];
-      var id = _sanitize(f.properties.community);
+      var id = cwm.util.sanitize(f.properties.community);
       var x = f.geometry.coordinates[0];
       var y = f.geometry.coordinates[1];
       b[id] = b[id] || {};
@@ -399,7 +365,7 @@
       b[id].bounds[0][1] = (b[id].bounds[0][1] < y) ? b[id].bounds[0][1] : y;
       b[id].bounds[1][0] = (b[id].bounds[1][0] > x) ? b[id].bounds[1][0] : x;
       b[id].bounds[1][1] = (b[id].bounds[1][1] > y) ? b[id].bounds[1][1] : y;
-      b[id].loc = _centerFromBounds(b[id].bounds);
+      b[id].loc = map.centerFromBounds(b[id].bounds);
     }
     return b;
   };
@@ -446,11 +412,6 @@
     $('#label').fadeOut(100);
   };
   
-  // Get the map center point for a given bounds
-  function _centerFromBounds (b) {
-    var extent = new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]);
-    return map.extentCoordinate(extent, true);
-  }
   
   // Continually loop and check for page scroll, calling animations that
   // need to fire when the page scrolls.
@@ -459,11 +420,11 @@
     
     // Avoid calculations if not needed and just loop again
     if (lastPositionR == y) {
-        _requestAnimation(_loopReveal);
+        requestAnimationFrame(_loopReveal);
         return false;
     } else lastPositionR = y;
     _reveal(y);
-    _requestAnimation(_loopReveal);
+    requestAnimationFrame(_loopReveal);
   }
 
   // Checks scroll position and reveals images as you scroll
@@ -522,23 +483,7 @@
     $('html,body').animate({scrollTop:targetScroll}, t);
   }
   
-  // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
-  function _sanitize(string) {
-    if (typeof string != "undefined" && string !== null)
-    return string.toLowerCase()
-          .replace('http://www.giveclearwater.org/','a-')
-          .replace('http://beta.giveclearwater.org/','b-')
-          .split(" ").join("-").split("/").join("-");
-  }
-  
-  function preloadImages(geojson, community) {
-    _.forEach(geojson.features, function (v) {
-      if (community === v.properties.community) {
-        var img = new Image();
-        img.src = v.properties.photo;
-      }
-    });
-  }
+
 
   function easeHandler() {
     var eh = {},
@@ -651,7 +596,7 @@
       easings = [];
     
       _.forEach(locations, function (v, i) {
-        coord = centerFromBounds(v.bounds);
+        coord = map.centerFromBounds(v.bounds);
         if (!!prevCoord) {
           easing = mapbox.ease().map(map).from(prevCoord).to(coord)
                     .easing('linear').setOptimalPath();
@@ -673,11 +618,11 @@
       if (!enabled) return false;
       // Avoid calculations if not needed and just loop again
       if (lastScroll == y) {
-          _requestAnimation(loop);
+          requestAnimationFrame(loop);
           return false;
       } else lastScroll = y;
       eh.easeTo(y);
-      _requestAnimation(loop);
+      requestAnimationFrame(loop);
     }
 
     // Fill an array of n length
@@ -687,12 +632,6 @@
         a.push(val);
       }
       return a;
-    }
-    
-    // Get the map center point for a given bounds
-    function centerFromBounds (b) {
-      var extent = new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]);
-      return map.extentCoordinate(extent, true);
     }
     
     return eh;

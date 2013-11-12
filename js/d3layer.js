@@ -1,17 +1,5 @@
 if (typeof cwm === 'undefined') cwm = {};
 
-// Detect css filter for svg
-// https://github.com/Modernizr/Modernizr/issues/615
-var cssFilter = (function(){
-  var prefixes = '-webkit- -moz- -o- -ms-'.split(' ')
-    , el = document.createElement('div');
-  el.style.cssText = prefixes.join('filter:blur(2px); ');
-  return !!el.style.length 
-         && ((document.documentMode === undefined || document.documentMode > 9))
-         ? el.style.cssText.split(":")[0] : undefined;
-})();
-
-
 cwm.d3Layer = function(id) {
   if (!(this instanceof cwm.d3Layer)) {
       return new cwm.d3Layer(id);
@@ -71,10 +59,10 @@ cwm.d3Layer.prototype.addData = function (geojson) {
   this.feature = this.g.selectAll("polygon")
       .data(fs)
       .enter().append("a")
-      .attr("xlink:href", function(d){ return "#" + _sanitize(d.properties.community); })
+      .attr("xlink:href", function(d){ return "#" + cwm.util.sanitize(d.properties.community); })
       .attr("data-label",function(d){ return (d.properties.nationality) ? "Meet the " + d.properties.nationality : ""; });
 
-  this.feature.append("path").attr("class", function(d){ return _sanitize(d.properties.description); });
+  this.feature.append("path").attr("class", function(d){ return cwm.util.sanitize(d.properties.description); });
   this.onLoadData(this);
   return this;
 }
@@ -101,7 +89,7 @@ cwm.d3Layer.prototype.getLocations = function () {
   for (i=0; i < this.geojson.features.length; i++) {
     if (this.geojson.features[i].properties.description !== "Ecuador Border") {
       locations.push({ 
-        id: _sanitize(this.geojson.features[i].properties.community),
+        id: cwm.util.sanitize(this.geojson.features[i].properties.community),
         bounds: d3.geo.bounds(this.geojson.features[i])
       });
     }
@@ -111,7 +99,7 @@ cwm.d3Layer.prototype.getLocations = function () {
 
 cwm.d3Layer.prototype.addFilters = function() {
   
-  if (cssFilter) {
+  if (cwm.util.cssFilter) {
     this.g.classed("filtered", true);
   } else {
     this.feature.style("filter", "url(#blur)")
@@ -169,10 +157,3 @@ cwm.d3Layer.prototype.disable = function() {
   return this;
 }
 
-// Helper to _sanitize a string, replacing spaces with "-" and lowercasing
-function _sanitize(string) {
-  if (typeof string != "undefined" && string !== null)
-  return string.toLowerCase()
-        .replace('http://www.giveclearwater.org/','a-')
-        .split(" ").join("-").split("/").join("-");
-}
