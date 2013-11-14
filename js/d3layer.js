@@ -80,16 +80,14 @@ cwm.d3Layer.prototype.loadData = function (url, callback) {
   return this;
 }
 
-cwm.d3Layer.prototype.getLocations = function () {
-  // Add the bounds of each feature to the storyLocations array
+// Returns an array of bounds for each feature with id from property `p`
+cwm.d3Layer.prototype.getLocations = function (p) {
   var locations = []
   for (i=0; i < this.geojson.features.length; i++) {
-    if (this.geojson.features[i].properties.description !== "Ecuador Border") {
-      locations.push({ 
-        id: cwm.util.sanitize(this.geojson.features[i].properties.community),
-        bounds: d3.geo.bounds(this.geojson.features[i])
-      });
-    }
+    locations.push({ 
+      id: cwm.util.sanitize(this.geojson.features[i].properties[p]),
+      bounds: d3.geo.bounds(this.geojson.features[i])
+    });
   }
   return locations;
 }
