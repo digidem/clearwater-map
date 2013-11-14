@@ -52,7 +52,7 @@ cwm.d3Layer.prototype.draw = function () {
   return this;
 }
 
-cwm.d3Layer.prototype.addData = function (geojson) {
+cwm.d3Layer.prototype.addData = function (geojson, callback) {
   this.geojson = geojson;
   var fs = this.geojson.features;
   this.bounds = d3.geo.bounds(this.geojson);
@@ -63,24 +63,20 @@ cwm.d3Layer.prototype.addData = function (geojson) {
       .attr("data-label",function(d){ return (d.properties.nationality) ? "Meet the " + d.properties.nationality : ""; });
 
   this.feature.append("path").attr("class", function(d){ return cwm.util.sanitize(d.properties.description); });
-  this.onLoadData(this);
+  if (callback) callback();
   return this;
 }
 
-cwm.d3Layer.prototype.loadData = function (url) {
+cwm.d3Layer.prototype.loadData = function (url, callback) {
   var that = this;
   $.ajax({
     url: url,
     dataType: 'jsonp',
     success: function (data) {
-      that.addData(data);
+      that.addData(data, callback);
     }
   });
   return this;
-}
-
-cwm.d3Layer.prototype.onLoadData = function () {
-  return;
 }
 
 cwm.d3Layer.prototype.getLocations = function () {
