@@ -14,10 +14,11 @@
   <script src='vendor/requestAnimationFrame.js'></script>
   <script src='js/bingLayer.js'></script>
   <script src='js/d3layer.js'></script>
+  <script src='js/markerlayer.js'></script>
+  <script src='js/map.js'></script>
   <script src='js/util.js'></script>
   <script src='js/MM.overrides.js'></script>
   <script src='js/easehandler.js'></script>
-  <script src='js/mapstory.js'></script>
   <link href='css/map.css' rel='stylesheet' />
   <style type="text/css">
   </style>
@@ -200,11 +201,42 @@ members by providing them with clean drinking water. </p>
     </section>
   </article>
 </div>
-<script src='js/projectLayer.js'></script>
+
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
-  MapStory.init()
+  
+  // Bing Maps API key for satellite layer
+  // Register for key at http://www.bingmapsportal.com
+  // Currently a basic non-profit key. Need to check limits.
+  var BING_API_KEY = "Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l";
+  
+  // Bounds for the initial view of the map (South America)
+  var startBounds = [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ];
+  
+  // Mapbox ID for overlay map
+  var mapboxId = 'gmaclennan.map-y7pgvo15'
+  
+  // Data sources for overlay and markers (currently CartoDB)
+  var baseUrl = 'http://clearwater.cartodb.com/api/v2/sql?format=geojson&q=';
+  var communityUrl = baseUrl + 'SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.community, c.nationality, systems, users ' +
+                               'FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community ' +
+                               'FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active';
+  var projectUrl = baseUrl + 'SELECT ST_Simplify(the_geom, 0.005) ' +
+                             'AS the_geom, description, name AS community ' +
+                             'FROM project_area';
+  var installationUrl = baseUrl + 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL';
+  
+  var map = cwm.map('map', 'stories', startBounds, { 
+    mapboxId: mapboxId,
+    bingApiKey: BING_API_KEY,
+    projectUrl: projectUrl,
+    communityUrl: communityUrl,
+    installationUrl: installationUrl
+  });
+  
+  window.map = map;
+  
 });
 </script>
 
