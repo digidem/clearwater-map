@@ -18,7 +18,9 @@ MM.Map.prototype.centerFromBounds = function (b) {
 
 // Returns the map zoom and center for an extent, but accounting for the 
 // space taken by the column of stories to the left.
-MM.prototype.extentCoordinate = function (locations, precise, paddingLeft) {
+MM.Map.prototype.extentCoordinate = function (locations, precise, paddingLeft) {
+    var paddingLeft = this.paddingLeft || paddingLeft || 0;
+    
     // coerce locations to an array if it's a Extent instance
     if (locations instanceof MM.Extent) {
         locations = locations.toArray();
@@ -51,7 +53,7 @@ MM.prototype.extentCoordinate = function (locations, precise, paddingLeft) {
     var hZoomDiff = Math.log(hFactor) / Math.log(2);
 
     // possible horizontal zoom to fit geographical extent in map width
-    var hPossibleZoom = TL.zoom - (precise ? hZoomDiff : Math.ceil(hZoomDiff));
+    var hPossibleZoom = TL.zoom - (precise ? hZoomDiff + 0.1 : Math.ceil(hZoomDiff));
 
     // multiplication factor between vertical span and map height
     var vFactor = (BR.row - TL.row) / (height / this.tileSize.y);
@@ -60,7 +62,7 @@ MM.prototype.extentCoordinate = function (locations, precise, paddingLeft) {
     var vZoomDiff = Math.log(vFactor) / Math.log(2);
 
     // possible vertical zoom to fit geographical extent in map height
-    var vPossibleZoom = TL.zoom - (precise ? vZoomDiff : Math.ceil(vZoomDiff));
+    var vPossibleZoom = TL.zoom - (precise ? vZoomDiff + 0.1 : Math.ceil(vZoomDiff));
 
     // initial zoom to fit extent vertically and horizontally
     var initZoom = Math.min(hPossibleZoom, vPossibleZoom);
@@ -73,5 +75,62 @@ MM.prototype.extentCoordinate = function (locations, precise, paddingLeft) {
     var centerRow = (TL.row + BR.row) / 2;
     var centerColumn = (TL.column + BR.column) / 2;
     var centerZoom = TL.zoom;
-    return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom - 0.2).left(paddingLeft / this.tileSize.x / 2);
-  };
+    return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom).left(paddingLeft / this.tileSize.x / 2);
+};
+  
+MM.Map.prototype.setExtent = function(locations, precise, paddingLeft) {
+
+    this.coordinate = this.extentCoordinate(locations, precise, paddingLeft);
+    this.draw(); // draw calls enforceLimits
+    // (if you switch to getFrame, call enforceLimits first)
+
+    this.dispatchCallback('extentset', locations);
+    return this;
+};
+
+// There is a bug in ModestMaps where the MM.moveElement call below does not
+// include the scale when calculating tile position, this causes a "jump" as
+// the map loads.
+MM.Layer.prototype.positionTile = function(tile) {
+    // position this tile (avoids a full draw() call):
+    var theCoord = this.map.coordinate.zoomTo(tile.coord.zoom);
+
+    // Start tile positioning and prevent drag for modern browsers
+    tile.style.cssText = 'position:absolute;-webkit-user-select:none;' +
+        '-webkit-user-drag:none;-moz-user-drag:none;-webkit-transform-origin:0 0;' +
+        '-moz-transform-origin:0 0;-o-transform-origin:0 0;-ms-transform-origin:0 0;' +
+        'width:' + this.map.tileSize.x + 'px; height: ' + this.map.tileSize.y + 'px;';
+
+    // Prevent drag for IE
+    tile.ondragstart = function() { return false; };
+
+    var scale = Math.pow(2, this.map.coordinate.zoom - tile.coord.zoom);
+
+    MM.moveElement(tile, {
+        x: Math.round((this.map.dimensions.x/2) +
+            (tile.coord.column - theCoord.column) * this.map.tileSize.x * scale),
+        y: Math.round((this.map.dimensions.y/2) +
+            (tile.coord.row - theCoord.row) * this.map.tileSize.y * scale),
+        scale: scale,
+        // TODO: pass only scale or only w/h
+        width: this.map.tileSize.x,
+        height: this.map.tileSize.y
+    });
+
+    // add tile to its level
+    var theLevel = this.levels[tile.coord.zoom];
+    theLevel.appendChild(tile);
+
+    // Support style transition if available.
+    tile.className = 'map-tile-loaded';
+
+    // ensure the level is visible if it's still the current level
+    if (Math.round(this.map.coordinate.zoom) == tile.coord.zoom) {
+        theLevel.style.display = 'block';
+    }
+
+    // request a lazy redraw of all levels
+    // this will remove tiles that were only visible
+    // to cover this tile while it loaded:
+    this.requestRedraw();
+};
