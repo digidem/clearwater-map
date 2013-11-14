@@ -4,6 +4,7 @@ cwm.d3Layer = function(id) {
   if (!(this instanceof cwm.d3Layer)) {
       return new cwm.d3Layer(id);
   }
+  this.name = id;
   this.bounds = null;
   this.geojson = null;
   this.feature = null;
