@@ -17,7 +17,7 @@ cwm.easeHandler = function () {
   var eh = {},
       override,
       map,
-      easings = [],
+      easings,
       locations,
       lastScroll,
       enabled = false;
@@ -42,6 +42,7 @@ cwm.easeHandler = function () {
   };
 
   eh.enable = function () {
+    lastScroll = 0
     if (enabled) return eh;
     if (!locations || !map) throw "Map and locations need to be set";
     if (!easings) setEasings();
