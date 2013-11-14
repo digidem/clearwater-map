@@ -79,7 +79,7 @@ cwm.easeHandler = function () {
   eh.setOverride = function (from,start,top,bottom) {
     var t, ease1, ease2,
         from = from || map.coordinate.copy(),
-        start = start || $(window).scrollTop(),
+        start = start || cwm.util.scrollTop(),
         top = Math.max(top || start - 200, 0);
         bottom = bottom || start + 200;
 
@@ -100,15 +100,12 @@ cwm.easeHandler = function () {
   // Iterate through the locations array, look up the elements on the page,
   // calculate their scroll position, and store the result in the array.
   function setScrollPoints () {
-    var wHeight = $(window).height();
+    var wHeight = cwm.util.windowHeight();
   
     locations = _.chain(locations)
                 .map(function (v) {
-                  var $el = $("#" + v.id);
-                  v.scrollPoint = ($el.length > 0)
-                    ? Math.floor($el.offset().top - wHeight + $el.height()) : -1; 
-                  // This is terrible but it will do for now.
-                  if (v.id === "mapstory") v.scrollPoint = 0;
+                  var el = document.getElementById(v.id);
+                  v.scrollPoint = el ? el.offsetTop + el.offsetHeight : -1;
                   return v;
                 })
                 .reject(function (v) { return v.scrollPoint < 0; })
@@ -138,7 +135,7 @@ cwm.easeHandler = function () {
   // This loop uses requestAnimationFrame to check the scroll position 
   // and update the map.
   function loop() {
-    var y = $(window).scrollTop();
+    var y = cwm.util.scrollTop();
     // meter.tick()
     if (!enabled) return false;
     // Avoid calculations if not needed and just loop again
