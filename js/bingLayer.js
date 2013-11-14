@@ -1,13 +1,13 @@
 if (typeof cwm === 'undefined') cwm = {};
 
-cwm.bingLayer = function(key, style) {
+cwm.bingLayer = function(options) {
     if (!(this instanceof cwm.bingLayer)) {
-        return new cwm.bingLayer(key, style);
+        return new cwm.bingLayer(options);
     }
     
     this._subdomains = [0, 1, 2, 3];
-    this._key = key;
-    this._style = style;
+    this._key = options.apiKey;
+    this._style = options.style || 'Aerial';
     this._url = '';
     this.meta = '';
     
