@@ -1,11 +1,13 @@
 if (typeof cwm === 'undefined') cwm = {};
 
 cwm.markerLayer = function (id) {
+  var id = id || "markers"
   var b = {};
   var m = mapbox.markers.layer();
   var interaction = mapbox.markers.interaction(m);
   
-  m.named(id || "markers")
+  m.named(id);
+  m.parent.setAttribute("id", id);
   
   m.loadData = function (url, callback) {
     return m.url(url, callback);
