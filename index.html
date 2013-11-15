@@ -16,6 +16,7 @@
   <script src='js/d3layer.js'></script>
   <script src='js/markerlayer.js'></script>
   <script src='js/map.js'></script>
+  <script src='js/stories.js'></script>
   <script src='js/util.js'></script>
   <script src='js/MM.overrides.js'></script>
   <script src='js/easehandler.js'></script>
@@ -48,7 +49,7 @@
       <img src="images/siona.jpg" class="nocollapse">
       <h1>ClearWater in Ecuador</h1>
       <p>ClearWater is bringing clean drinking water to indigenous communities in the Ecuadorian Amazon. By building rainwater catchment systems, ClearWater works with communities to provide viable clean water solutions.</p>
-      <h3> <small class='scroll'><a href="#nor-oriente">Read about where we work ▼</a></small> </h3>
+      <h3> <small class='scroll'><a href="#overview">Read about where we work ▼</a></small> </h3>
     </section>
     <section id='overview'>
       <img src="images/nor-oriente.jpg">
@@ -231,13 +232,16 @@ $(function() {
                              'FROM project_area';
   var installationUrl = baseUrl + 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL';
   
-  var map = cwm.map('map', 'stories', startBounds, { 
+  var map = cwm.map('map', startBounds, { 
+    padding: 580,
     mapboxId: mapboxId,
     bingApiKey: BING_API_KEY,
     projectUrl: projectUrl,
     communityUrl: communityUrl,
     installationUrl: installationUrl
   });
+  
+  var stories = cwm.stories('stories').map(map);
   
   window.map = map;
   

@@ -23,10 +23,15 @@ cwm.map = function (mapId, startBounds, options) {
   ).setExtent(startBounds, false, paddingLeft).setZoomRange(3,18);
   
   // The easeHandler is what moves the map according to the scroll position
-  var easeHandler = cwm.easeHandler().map(map);
+  map.easeHandler = cwm.easeHandler().map(map);
+  
+  map.stories = function (s) {
+    stories = s;
+    return map;
+  }
   
   map.addCallback("panned", function(map, panOffset) {
-    easeHandler.setOverride();
+    map.easeHandler.setOverride();
   });
   
   window.onresize = function () {
@@ -44,6 +49,7 @@ cwm.map = function (mapId, startBounds, options) {
         communityLayer.geojson &&
         installationLayer.features().length > 0) {
       setLocations();
+      setupScrolling();
       refresh();
     }
   }
@@ -65,8 +71,8 @@ cwm.map = function (mapId, startBounds, options) {
   
   function refresh () {
     // padding accounts for space taken up by the stories
-    easeHandler.locations(locations).enable();
     map.paddingLeft = paddingLeft;
+    map.easeHandler.locations(locations).enable();
   }
   
   return map;

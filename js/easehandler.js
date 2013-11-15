@@ -94,6 +94,11 @@ cwm.easeHandler = function () {
     return eh;
   };
   
+  eh.clearOverride = function () {
+    override = undefined;
+    return eh;
+  }
+  
   eh.getOverrideTime = function () {
     return Math.floor(override.time);
   };
