@@ -1,5 +1,10 @@
 #mapstory #map { position:absolute; top:0; bottom:0; width:100%; }
 
+#mapstory svg {
+  width: 100%;
+  height: 100%;
+}
+
 #mapstory {
   margin:0px;
   padding:0px;
