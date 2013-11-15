@@ -1,13 +1,13 @@
 if (typeof cwm === 'undefined') cwm = {};
 
-cwm.map = function (mapId, storiesId, startBounds, options) {
+cwm.map = function (mapId, startBounds, options) {
   
   var projectLayer = cwm.d3Layer("project-area").loadData(options.projectUrl, onLoad).addFilters(),
       communityLayer = cwm.d3Layer("communities").loadData(options.communityUrl, onLoad),
       installationLayer = cwm.markerLayer().loadData(options.installationUrl, onLoad),
-      $stories = $("#" + storiesId),
-      paddingLeft = $stories.outerWidth(true),
-      lastResize = 0;
+      lastResize = 0,
+      stories,
+      paddingLeft = options.padding || 0;
       
   var map = new MM.Map(
     mapId,
@@ -65,8 +65,8 @@ cwm.map = function (mapId, storiesId, startBounds, options) {
   
   function refresh () {
     // padding accounts for space taken up by the stories
-    map.paddingLeft = paddingLeft = $stories.outerWidth(true);
     easeHandler.locations(locations).enable();
+    map.paddingLeft = paddingLeft;
   }
   
   return map;
