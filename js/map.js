@@ -22,6 +22,8 @@ cwm.map = function (mapId, startBounds, options) {
     [ easey_handlers.DragHandler() ]
   ).setExtent(startBounds, false, paddingLeft).setZoomRange(3,18);
   
+  map.ease = mapbox.ease().map(map);
+  
   // The easeHandler is what moves the map according to the scroll position
   map.easeHandler = cwm.easeHandler().map(map);
   
@@ -75,8 +77,23 @@ cwm.map = function (mapId, startBounds, options) {
     d3.selectAll('#' + mapId + ' a').on('click', function (d, i) {
       stories.scrollTo(this.getAttribute("href").split("#")[1]);
     });
-    d3.selectAll('#' + mapId + ' img[data-link]').on('click', function (d, i) {
-      stories.scrollTo(this.getAttribute("data-link"));
+    d3.selectAll('#markers img').on('click', function (d, i) {
+      var link = this.getAttribute("data-link");
+      
+      if (link) {
+        stories.scrollTo(link);
+      } else {
+        zoomToPoint();
+      }
+      
+      function zoomToPoint () {
+        var z = 18
+        var point = new MM.Point(d3.event.clientX, d3.event.clientY);
+        var to = map.pointCoordinate(point).zoomTo(z);
+        map.ease.to(to).path('about').run(500, function () {
+          map.easeHandler.setOverride();
+        });
+      }
     });
   }
   
