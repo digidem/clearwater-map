@@ -8,8 +8,8 @@
 #mapstory {
   margin:0px;
   padding:0px;
-  font: 400 15px/20px "PT Sans",Arial,sans-serif;
-  background:#333;
+  font: 400 15px/22.5px "PT Sans",Arial,sans-serif;
+  background: black;
 }
 
 #mapstory #nav {
@@ -62,12 +62,11 @@ display: none;
 }
 
 #mapstory #stories {
-  width:400px;
-  min-width:320px;
-  position:absolute;
-  top:100%;
+  width: 30em;
+  position: absolute;
+  top: 100%;
   margin: 0 0 0 40px;
-  color:#eee;
+  color: #eee;
   transition: opacity 0.4s linear;
   -moz-transition: opacity 0.4s linear;
   -webkit-transition: opacity 0.4s linear;
@@ -108,40 +107,63 @@ opacity: 0;
 }
 
 #mapstory #stories section {
-  background-color: #222;
+  margin-top: 20em;
+  position: relative;
+  width: 100%;
   transition:opacity 1s;
   -moz-transition:opacity 1s;
   -webkit-transition:opacity 1s;
-/*  margin-top: 267px;*/
-  }
-
-#mapstory #stories section h1 {
-font-weight: bold;
-font-size: 2.2em;
 }
-#mapstory #stories h1, #stories h2 { font-size:2em; line-height:1em; background-color: #f2c21c; padding: 5px 40px; color: black; font-weight: normal;margin:0 0 0.5em;font-family: "Yanone Kaffeesatz";position:relative;}
+
+#mapstory #stories h1, #mapstory #stories h2 {
+  position: absolute;
+  top: 0;
+  line-height: 1em;
+  padding: 0.25em 1em;
+  margin: 0;
+  font-weight: normal;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+}
+
+#mapstory #stories h1 {
+  padding: 0.2em 0.88889em;
+  margin-left: -0.88889em;
+  width: 11.55556em;
+  font-size: 2.25em;
+  font-weight: 700;
+  z-index: 3;
+  color: black;
+  background-color: #f2c21c;
+}
+
+#mapstory #stories h1.fixedTop {
+  position: fixed;
+}
+
+#mapstory #stories h1.fixedBottom, 
+#mapstory #stories h2.fixedBottom {
+  position: fixed;
+  top: auto;
+  bottom: 0;
+}
+
+
 #mapstory #stories h2 {
+  margin-left: -1em;
+  width: 13em;
+  font-size: 2em;
   color: #f2c21c;
-  background: black;
+  background-color: black;
 }
 
-#mapstory #stories h3 {
-	font-size: 1.4em;
-	line-height: 1em;
-	background-color: #000;
-	color: black;
-	font-weight: normal;
-	font-family: "Yanone Kaffeesatz";
-	position: relative;
-	color: #f2c21c;
-	margin-top: 0;
-	margin-right: 0;
-	margin-bottom: 0em;
-	margin-left: 0;
-	padding-top: 5px;
-	padding-right: 40px;
-	padding-bottom: 5px;
-	padding-left: 40px;
+#mapstory #stories .text {
+  background-color: #333;
+  padding: 3em 2em 0.5em;
+  position: relative;
+}
+
+#mapstory #stories .text.below {
+  position: absolute;
 }
 
 #mapstory .button {
@@ -166,27 +188,36 @@ font-size: 2.2em;
   background: #6d52a8;
 }
 
+#mapstory #stories ul, #mapstory #stories p {
 
-#mapstory #stories p, #mapstory #stories ul { padding:0 40px 1em; 
-margin:0;}
-
-#mapstory #stories section ul {
-list-style-type: none;
-font-size: 1.2em;
 }
-#mapstory #stories section ul li {
+
+#mapstory #stories ul {
+  font-size: 1.1em;
+list-style-type: none;
+}
+
+#mapstory #stories ul li {
 margin-bottom: 0.5em;
 }
 
+#mapstory #stories .image {
+  position: relative;
+  height: 0;
+  padding-bottom: 66%;
+  overflow: hidden;
+}
+
 #mapstory #stories img {
-display: block;
-width: 400px;
-height: 267px;
-left: 0;
-position: relative;
-transform: translate3d(0,0,0);
--moz-transform: translate3d(0,0,0);
--webkit-transform: translate3d(0,0,0);
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 100%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 a 
@@ -296,12 +327,6 @@ filter: alpha(opacity = 70); /* For IE */
     margin-top: 0;
   }
   
-  #mapstory #stories img {
-    display: block;
-    clear: both;
-    width: 100%;
-    height: auto;
-  }
   #mapstory #stories section h3 {
     display: none;
   }
@@ -322,7 +347,7 @@ filter: alpha(opacity = 70); /* For IE */
 @media (max-width:768px) {
   #mapstory {
     font-size:12px;
-    line-height:16px;
+    line-height:18px;
     }
   #mapstory #nav {
     display: none;
@@ -355,16 +380,10 @@ filter: alpha(opacity = 70); /* For IE */
 }
 
 @media (min-width:1280px) {
-#mapstory #stories {width:540px;}
-#mapstory #stories img {
-width: 540px;
-height: 360px;}
-#mapstory #stories section {
-  margin-top: 360px;
-}
+
 #mapstory {
   font-size:18px;
-  line-height:24px;
+  line-height:27px;
   }
 }
   
