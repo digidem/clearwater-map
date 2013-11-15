@@ -69,6 +69,17 @@ cwm.map = function (mapId, startBounds, options) {
                          .concat(installationLayer.getStoryLocations("featured"));
   }
   
+  function setupScrolling () {
+    if (typeof stories === 'undefined') return;
+    
+    d3.selectAll('#' + mapId + ' a').on('click', function (d, i) {
+      stories.scrollTo(this.getAttribute("href").split("#")[1]);
+    });
+    d3.selectAll('#' + mapId + ' img[data-link]').on('click', function (d, i) {
+      stories.scrollTo(this.getAttribute("data-link"));
+    });
+  }
+  
   function refresh () {
     // padding accounts for space taken up by the stories
     map.paddingLeft = paddingLeft;
