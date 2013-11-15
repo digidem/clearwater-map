@@ -72,9 +72,9 @@ cwm.map = function (mapId, startBounds, options) {
   }
   
   function setupScrolling () {
-    if (typeof stories === 'undefined') return;
     
     d3.selectAll('#' + mapId + ' a').on('click', function (d, i) {
+      if (typeof stories === 'undefined') return;
       stories.scrollTo(this.getAttribute("href").split("#")[1]);
     });
     d3.selectAll('#markers img').on('click', function (d, i) {
