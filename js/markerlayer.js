@@ -28,8 +28,8 @@ cwm.markerLayer = function (id) {
   // Set a custom formatter for tooltips
   // Provide a function that returns html to be used in tooltip
   interaction.formatter(function (f) {
-    return '<img src="' + f.properties.photo + '">' +
-           '<p>' + f.properties.name + '</p>';
+    return '<div class="wrapper"><img src="' + f.properties.photo + '"></div>' +
+           '<p>' + f.properties.name.split(" and")[0] + '</p>';
   });
   
   // Returns an array of locations of each featured story in the marker geojson
