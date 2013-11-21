@@ -2,9 +2,12 @@
 <html>
 <head>
   <meta charset='UTF-8'/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width">
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/aight/1.1.1/aight.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/sizzle/1.10.9/sizzle.min.js"></script>
   <![endif]-->
   <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic|Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
   <script src='vendor/d3.js'></script>
@@ -13,25 +16,26 @@
   <script src='vendor/mapbox.uncompressed.js'></script>
   <script src='vendor/requestAnimationFrame.js'></script>
   <script src='js/MM.overrides.js'></script>
+  <script src='js/draghandler.js'></script>
+  <script src='js/domhelpers.js'></script>
+  <script src='js/ecuador.js'></script>
   <script src='js/bingLayer.js'></script>
   <script src='js/d3layer.js'></script>
-  <script src='js/markerlayer.js'></script>
+  <script src='js/markers.js'></script>
   <script src='js/map.js'></script>
   <script src='js/stories.js'></script>
   <script src='js/util.js'></script>
   <script src='js/easehandler.js'></script>
   <script src='js/revealhandler.js'></script>
   <link href='css/map.css' rel='stylesheet' />
+  <link href='css/markers.css' rel='stylesheet' />
+  <link href='css/features.css' rel='stylesheet' />
   <style type="text/css">
   </style>
 </head>
 <body id="mapstory">
 
 <div id="mappane">
-
-  <div id="nav">
-    <a href="#overview">Return to Overview</a>
-  </div>
 
   <div id='map'></div>
 
@@ -45,7 +49,7 @@
 </div>
 
 <div id='stories'>  
-  <article class='active'>
+  <article class='ecuador'>
     <section class='cover active' id="ecuador">
       <div class="image"><img src="images/siona.jpg" class="nocollapse"></div>
       <div class="text">
@@ -53,6 +57,8 @@
       <p>ClearWater is bringing clean drinking water to indigenous communities in the Ecuadorian Amazon. By building rainwater catchment systems, ClearWater works with communities to provide viable clean water solutions.</p>
       
     </div></section>
+  </article>
+  <article class='project'>
     <section id='overview'>
       <div class="image"><img src="images/nor-oriente.jpg"></div><div class="text">
       <h1>The Nor-Oriente Amazon</h1>
@@ -230,16 +236,12 @@ $(function() {
   var communityUrl = baseUrl + 'SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.community, c.nationality, systems, users ' +
                                'FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community ' +
                                'FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active';
-  var projectUrl = baseUrl + 'SELECT ST_Simplify(the_geom, 0.005) ' +
-                             'AS the_geom, description, name AS community ' +
-                             'FROM project_area';
   var installationUrl = baseUrl + 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL';
   
   var map = cwm.map('map', startBounds, { 
     padding: 580,
     mapboxId: mapboxId,
     bingApiKey: BING_API_KEY,
-    projectUrl: projectUrl,
     communityUrl: communityUrl,
     installationUrl: installationUrl
   });

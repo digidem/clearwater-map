@@ -1,0 +1,73 @@
+/* Map elements */
+
+#mapstory path {
+  fill: #f1c21c;
+  fill-opacity: .6;
+  stroke: #f1c21c;
+  stroke-width: 0;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -webkit-transition: opacity 500ms;
+}
+
+#mapstory path:hover {
+  fill: #ab8b1e;
+}
+
+#mapstory #communities { display: none;}
+
+#mapstory.zoom7 #communities { display: block;}
+
+#mapstory #communities path { opacity: 0;}
+
+#mapstory.zoom8 #communities path {opacity:1;}
+
+#mapstory.zoom12 #communities path {
+fill-opacity: 0;
+stroke-width: 2px;
+cursor: default;
+}
+
+#mapstory #communities #label {
+  opacity: 0;
+  transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+}
+#mapstory.zoom8 #communities #label {
+  opacity: 1;
+}
+#mapstory.zoom10 #communities #label {
+  opacity: 0 !important;
+}
+
+#mapstory.zoom12 #communities path:hover {
+fill-opacity: 0;
+}
+
+#mapstory.zoom14 #communities g {display: none;}
+
+#mapstory #project-area path {
+/*filter: url(#blur);*/
+transition:fill-opacity 250ms, opacity 250ms;
+-moz-transition:fill-opacity 250ms, opacity 250ms;
+-webkit-transition:fill-opacity 250ms, opacity 250ms;
+}
+
+#mapstory #interaction .features .ecuador {
+stroke-width: 2px;
+fill-opacity: 0;
+}
+
+#mapstory.zoom6 #project-area path.ecuador-border {
+opacity: 0;
+}
+
+#mapstory.zoom8 #project-area path {
+opacity: 0;
+}
+
+#mapstory.zoom9 #project-area { display: none; }
+

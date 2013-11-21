@@ -1,0 +1,100 @@
+#mapstory .markers {
+
+transition:opacity 500ms;
+-moz-transition:opacity 500ms;
+-webkit-transition:opacity 500ms;
+}
+
+#mapstory .markers.zoom11 {
+display: block;
+}
+
+#mapstory .markers.zoom12 {
+opacity: 1;
+}
+
+#mapstory .marker {
+margin-left: -8px;
+margin-top: -8px;
+width: 16px;
+height: 16px;
+display: block;
+position: absolute;
+cursor: pointer;
+pointer-events: all;
+-webkit-transition-timing-function: cubic-bezier(0.680, 0, 0.265, 1); /* older webkit */
+-webkit-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+   -moz-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+    -ms-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+     -o-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
+        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+-webkit-transition-property: width,height,margin;
+  	-moz-transition-property: width,height,margin;
+	    -o-transition-property: width,height,margin;
+	   -ms-transition-property: width,height,margin;
+	       transition-property: width,height,margin;
+-webkit-transition-duration: 0.1s;
+	 -moz-transition-duration: 0.1s;
+	   -o-transition-duration: 0.1s;
+	  -ms-transition-duration: 0.1s;
+	      transition-duration: 0.1s;
+        z-index: -1;
+}
+
+#mapstory .marker.featured {
+margin-left: -12px;
+margin-top: -12px;
+width: 24px;
+height: 24px;
+z-index: 0;
+}
+
+#mapstory .marker:hover {
+margin-left: -17px;
+margin-top: -17px;
+width: 33px;
+height: 33px;
+z-index:1;
+pointer-events: all;
+
+}
+
+#mapstory .marker-popup {
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:150px;
+  background:#fff;
+  color:#000;
+  padding:0;
+  margin:0;
+  z-index: 9999;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-box-shadow: 0px 0px 10px 0px #222;
+          box-shadow: 0px 0px 10px 0px #222;
+}
+
+#mapstory .marker-popup .wrapper {
+  background-color: #222;
+  position: relative;
+  height: 0;
+  padding-bottom: 66.67%;
+  overflow: hidden;
+}
+
+#mapstory .marker-popup img {
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 100%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+#mapstory .marker-popup p {
+margin: 3px 10px;
+}

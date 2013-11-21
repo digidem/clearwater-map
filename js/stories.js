@@ -3,6 +3,7 @@ if (typeof cwm === 'undefined') cwm = {};
 cwm.stories = function (storiesId) {
   
   var s = {},
+      sa,
       map,
       currentScroll;
   
@@ -13,11 +14,37 @@ cwm.stories = function (storiesId) {
     return s;
   };
   
+  var h1Height = document.getElementsByTagName("h1")[0].offsetHeight;
+  var h2Height = document.getElementsByTagName("h2")[0].offsetHeight;
+
+  sa = scrollAffix()
+    .affixTop(
+      "#stories h1", 
+      function () { return $x(this).parent("article").next().offsetTop() - this.offsetHeight; }
+    )
+    .affixBottom(
+      "#stories h2, #stories h1", 
+      function () { return $x(this).parent("section").previousSiblingOrCousin().offsetBottom() - window.innerHeight  + this.offsetHeight; }
+    )
+    .fadeIn(
+      ".image", 
+      function () { return $x(this).offsetTop() - window.innerHeight; }, 
+      function () { return $x(this).offsetTop() - window.innerHeight + this.offsetHeight; }
+    )
+    .fadeOut(
+      "#stories article > section:not(:first-child)", 
+      function () { return $x(this).offsetTop() + this.offsetHeight - window.innerHeight; }, 
+      function () { return $x(this).offsetTop() + Math.max(window.innerHeight - h1Height - this.offsetHeight, 100); }
+    )
+    .enable();
+  
   // Scroll the map to an element by id
   s.scrollTo = function (id) {
+    var offset = document.getElementsByTagName("h1")[0].offsetHeight;
     var el = document.getElementById(id);
-    var startY = cwm.util.scrollTop();
-    var endY = el ? el.offsetTop + el.offsetHeight : startY;
+    var offset = $x(el).nextSiblingOrCousin()[0].children[1].children[0].offsetHeight;
+    var startY = window.pageYOffset;
+    var endY = el ? el.offsetTop + el.offsetHeight + offset : startY;
     var scrollDiff = Math.round(endY - startY);
     var startTime = Date.now();
     var t;
@@ -57,6 +84,9 @@ cwm.stories = function (storiesId) {
     d3.selectAll('a[href*="#"]').on('click', function (d, i) {
       s.scrollTo(this.getAttribute("href").split("#")[1]);
     });
+    d3.selectAll('#stories h1, #stories h2').on('click', function () {
+      s.scrollTo($x(this).parent("section")[0].getAttribute("id"));
+    })
   }
   
   return s;

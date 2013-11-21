@@ -1,113 +1,149 @@
 if (typeof cwm === 'undefined') cwm = {};
 
 cwm.d3Layer = function(id) {
-  if (!(this instanceof cwm.d3Layer)) {
-      return new cwm.d3Layer(id);
-  }
-  this.name = id;
-  this.bounds = null;
-  this.geojson = null;
-  this.feature = null;
-  this.enabled = true;
-  this.map = null;
-  this.parent = null;
-  this.g = null;
-  this.defs = null;
-  
-  this.init(id);
-};
+  var d3l = {}
+  d3l.name = id;
+  d3l.bounds = {};
+  var featureData = [];
+  var activePopup;
+  var mouseOverPopup;
+  var zoom_break = 13;
+  var prevZoom = 0;
+  var geojson = {
+    "type": "FeatureCollection",
+		"features": featureData
+  };
+  var features;
+  var markers;
 
-cwm.d3Layer.prototype.init = function (id) {
   var div = d3.select(document.body)
       .append("div")
       .style('position', 'absolute')
       .style('width', '100%')
       .style('height', '100%')
       .attr('id', id);
+      
+  d3l.parent = div.node();
+  var svg = div.append('svg').style("position", "absolute");
+  var gFeatures = svg.append('g').attr("class", "features");
+  var gMarkers = svg.append('g').attr("class", "markers");
 
-  this.parent = div.node();
-  var svg = div.append('svg');
-  this.g = svg.append('g');
-  this.defs = svg.append('defs');
-}
+  var projectionStream = d3.geo.transform({
+      point: function (x, y, z) {
+        var point = d3l.map.locationPoint({ lon: x, lat: y });
+        // Rounding hack from http://jsperf.com/math-round-vs-hack/3
+        // Performance increase: http://www.mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
+        this.stream.point(~~(0.5 + point.x), ~~(0.5 + point.y));
+      }});
+      
+  var path = d3.geo.path().projection(projectionStream);
 
-cwm.d3Layer.prototype.project = function (d) {
-  var point = this.map.locationPoint({ lat: d[1], lon: d[0] });
-  // Rounding hack from http://jsperf.com/math-round-vs-hack/3
-  // Performance increase: http://www.mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
-  return [~~(0.5 + point.x), ~~(0.5 + point.y)];
-}
+  // This function is called by ModestMaps every time it redraws the map
+  d3l.draw = function () {
+    var zoom = d3l.map.getZoom();
+    // don't do anything if we haven't been attached to a map yet
+    // or we don't yet have any data to draw
+    if (!d3l.map || !features) return;
 
-cwm.d3Layer.prototype.draw = function () {
-  if (!this.enabled || !this.map || !this.feature) return;
-  var i = 0, classString = "", path;
-  // *TODO* at the moment the SVG container does not resize on window.resize
-  while (i < this.map.getZoom()) {
-    classString += " zoom" + i;
-    i++;
+    // update the features to their new positions
+    features.attr("d", path)
+        .style("fill-opacity", function () {
+          return Math.min(Math.max(zoom_break - zoom, 0), 1) * 0.6;
+        })
+        .classed("outline", function () { return zoom > zoom_break });
+        
+    if (markers) markers.move();
+    
+    prevZoom = zoom;
+    return d3l;
   }
-  d3.select(document.body).node().className = classString;
-  path = d3.geo.path().projection(_.bind(this.project,this));
-  this.feature.select("path").attr("d", path);
 
-  return this;
-}
-
-cwm.d3Layer.prototype.addData = function (geojson, callback) {
-  this.geojson = geojson;
-  var fs = this.geojson.features;
-  this.bounds = d3.geo.bounds(this.geojson);
-  this.feature = this.g.selectAll("polygon")
-      .data(fs)
-      .enter().append("a")
-      .attr("xlink:href", function(d){ return "#" + cwm.util.sanitize(d.properties.community); })
-      .attr("data-label",function(d){ return (d.properties.nationality) ? "Meet the " + d.properties.nationality : ""; });
-
-  this.feature.append("path").attr("class", function(d){ return cwm.util.sanitize(d.properties.description); });
-  if (callback) callback();
-  return this;
-}
-
-cwm.d3Layer.prototype.loadData = function (url, callback) {
-  var that = this;
-  $.ajax({
-    url: url,
-    dataType: 'jsonp',
-    success: function (data) {
-      that.addData(data, callback);
-    }
-  });
-  return this;
-}
-
-// Returns an array of bounds for each feature with id from property `p`
-cwm.d3Layer.prototype.getLocations = function (p) {
-  var locations = []
-  for (i=0; i < this.geojson.features.length; i++) {
-    locations.push({ 
-      id: cwm.util.sanitize(this.geojson.features[i].properties[p]),
-      bounds: d3.geo.bounds(this.geojson.features[i])
-    });
+  d3l.addFeatures = function (json, id, callback) {
+    // add an id to each feature in the geojson
+    json.features.forEach(function (e) { e.properties._id = id; });
+    
+    // add these features to the features already in the layer
+    featureData = featureData.concat(json.features);
+    
+    // store the bounds of this collection of features
+    d3l.bounds[id] = d3.geo.bounds(json);
+    
+    // now add paths for each feature and set class to id
+    features = gFeatures.selectAll("path")
+        .data(featureData);
+        
+    features.enter()
+        .append("path")
+        .attr("class", id);
+      
+    if (callback) callback();
+    return d3l;
   }
-  return locations;
-}
 
-cwm.d3Layer.prototype.addFilters = function() {
+  d3l.addMarkers = function (json, callback) {
+    // store the bounds of this collection of markers
+    d3l.bounds["markers"] = d3.geo.bounds(json);
+    
+    // now add markers for each feature
+    markers = cwm.markers(d3l.map).draw(json.features, gMarkers);
+    
+    if (callback) callback();
+    return d3l;
+  };
   
-  if (cwm.util.cssFilter) {
-    this.g.classed("filtered", true);
-  } else {
-    this.feature.style("filter", "url(#blur)")
+  d3l.loadMarkers = function (url, callback) {
+    d3.json(url, function (e, data) {
+      if (e) throw e.response + ": Could not load " + url;
+      else d3l.addMarkers(data, callback);
+    });
+    return d3l;
+  };
+  
+  d3l.getMarkerBounds = function (filter) {
+    return markers.getBounds(filter);
+  }
+  
+  d3l.getMarkerLocations = function (id, filter) {
+    return markers.getLocations(id, filter);
+  }
+
+  // This will load geojson from `url` and add it to the layer
+  d3l.loadFeatures = function (url, id, callback) {
+    d3.json(url, function (e, data) {
+      if (e) throw e.response + ": Could not load " + url;
+      else d3l.addFeatures(data, id, callback);
+    });
+    return d3l;
+  };
+  
+  // Returns an array of bounds for each feature with id from property `p`
+  d3l.getLocations = function (field) {
+    var locations = []
+    features.each(function (d) {
+      locations.push({ 
+        id: cwm.util.sanitize(d.properties[field]),
+        bounds: d3.geo.bounds(d)
+      });
+    })
+    return locations;
+  }
+  
+
+
+/*---------- Not used any more
+
+d3l.blur = function() {
+  
+  feature.style("filter", "url(#blur)")
       .on("mouseover", function () {this.style.cssText = "filter: url(#blur-hover);"})
       .on("mouseout", function () {this.style.cssText = "filter: url(#blur);"});
-  }
   
   // Blur effect for project area
-  var blur = this.defs.append("filter")
+  var blur = defs.append("filter")
       .attr("id", "blur")
   blur.append("feColorMatrix")
       .attr("in", "SourceAlpha")
-      .attr("color-interpolation-filters", "sRGB")
+      // .attr("color-interpolation-filters", "sRGB")
       .attr("type", "matrix")
       .attr("values", "0 0 0 0.9450980392 0  "
                     + "0 0 0 0.7607843137 0  "
@@ -121,11 +157,11 @@ cwm.d3Layer.prototype.addFilters = function() {
       .attr("in", "coloredBlur")
 
   // Hover effect for project area
-  var blurHover = this.defs.append("filter")
+  var blurHover = defs.append("filter")
       .attr("id", "blur-hover")
   blurHover.append("feColorMatrix")
       .attr("in", "SourceAlpha")
-      .attr("color-interpolation-filters", "sRGB")
+      // .attr("color-interpolation-filters", "sRGB")
       .attr("type", "matrix")
       .attr("values", "0 0 0 0.6705882353 0  "
                     + "0 0 0 0.5450980392 0  "
@@ -137,18 +173,10 @@ cwm.d3Layer.prototype.addFilters = function() {
   blurHover.append("feMerge")
       .append("feMergeNode")
       .attr("in", "coloredBlur");
-  return this;
-}
+  return d3l;
+};
 
-cwm.d3Layer.prototype.enable = function() {
-  this.enabled = true;
-  this.parent.cssText = "position: absolute;";
-  return this;
-}
+--------------------*/
 
-cwm.d3Layer.prototype.disable = function() {
-  enabled = false;
-  this.parent.cssText = "display: none;"
-  return this;
-}
-
+return d3l;
+};

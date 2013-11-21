@@ -2,9 +2,7 @@ if (typeof cwm === 'undefined') cwm = {};
 
 cwm.map = function (mapId, startBounds, options) {
   
-  var projectLayer = cwm.d3Layer("project-area").loadData(options.projectUrl, onLoad).addFilters(),
-      communityLayer = cwm.d3Layer("communities").loadData(options.communityUrl, onLoad),
-      installationLayer = cwm.markerLayer().loadData(options.installationUrl, onLoad),
+  var interactiveLayer = cwm.d3Layer("interaction"),
       lastResize = 0,
       stories,
       paddingLeft = options.padding || 0;
@@ -14,13 +12,16 @@ cwm.map = function (mapId, startBounds, options) {
     [
       cwm.bingLayer({ apiKey: options.bingApiKey }),
       mapbox.layer().id(options.mapboxId),
-      projectLayer,
-      communityLayer,
-      installationLayer
+      interactiveLayer
     ],
     null,
-    [ easey_handlers.DragHandler() ]
+    [ cwm.dragHandler() ]
   ).setExtent(startBounds, false, paddingLeft).setZoomRange(3,18);
+  
+  interactiveLayer.addFeatures(cwm.ecuador, "ecuador")
+                  .loadFeatures(options.communityUrl, "communities", onLoad)
+                  .loadMarkers(options.installationUrl, onLoad);
+  
   
   map.ease = mapbox.ease().map(map);
   
@@ -47,9 +48,7 @@ cwm.map = function (mapId, startBounds, options) {
   // Check all the layers have loaded and set the locations
   // of any places that the map should navigate to
   function onLoad () {
-    if (projectLayer.geojson &&
-        communityLayer.geojson &&
-        installationLayer.features().length > 0) {
+    if ( interactiveLayer.bounds["communities"] && interactiveLayer.bounds["markers"]) {
       setLocations();
       setupScrolling();
       refresh();
@@ -66,9 +65,14 @@ cwm.map = function (mapId, startBounds, options) {
   var locations = [{ id: 'ecuador', bounds: [ [ startBounds[0].lon, startBounds[0].lat],
                                               [ startBounds[1].lon, startBounds[1].lat] ] }];
   function setLocations () {
-    locations = locations.concat([{ id: "overview", bounds: communityLayer.bounds }])
-                         .concat(communityLayer.getLocations("community"))
-                         .concat(installationLayer.getStoryLocations("featured"));
+    var storyLocations = interactiveLayer.getMarkerLocations(
+      function (d) { return cwm.util.sanitize(d.properties.featured_url); },
+      function (d) { return d.properties.featured && true; }
+    );
+    
+    locations = locations.concat([{ id: "overview", bounds: interactiveLayer.bounds["communities"] }])
+        .concat(interactiveLayer.getLocations("community"))
+        .concat(storyLocations);
   }
   
   function setupScrolling () {
@@ -77,7 +81,9 @@ cwm.map = function (mapId, startBounds, options) {
       if (typeof stories === 'undefined') return;
       stories.scrollTo(this.getAttribute("href").split("#")[1]);
     });
-    d3.selectAll('#markers img').on('click', function (d, i) {
+    
+    d3.selectAll('.markers circle').on('click', function (d, i) {
+      if (d3.event.defaultPrevented) return;
       var link = this.getAttribute("data-link");
       
       if (link) {
