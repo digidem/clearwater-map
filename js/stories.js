@@ -1,6 +1,4 @@
-if (typeof cwm === 'undefined') cwm = {};
-
-cwm.stories = function (storiesId) {
+cwm.Stories = function () {
   
   var s = {},
       sa,
@@ -17,7 +15,7 @@ cwm.stories = function (storiesId) {
   var h1Height = document.getElementsByTagName("h1")[0].offsetHeight;
   var h2Height = document.getElementsByTagName("h2")[0].offsetHeight;
 
-  sa = scrollAffix()
+  sa = cwm.handlers.RevealHandler()
     .affixTop(
       "#stories h1", 
       function () { return $x(this).parent("article").next().offsetTop() - this.offsetHeight; }
@@ -40,7 +38,6 @@ cwm.stories = function (storiesId) {
   
   // Scroll the map to an element by id
   s.scrollTo = function (id) {
-    var offset = document.getElementsByTagName("h1")[0].offsetHeight;
     var el = document.getElementById(id);
     var offset = $x(el).nextSiblingOrCousin()[0].children[1].children[0].offsetHeight;
     var startY = window.pageYOffset;
@@ -49,7 +46,7 @@ cwm.stories = function (storiesId) {
     var startTime = Date.now();
     var t;
     
-    if (scrollDiff == 0) return;
+    if (scrollDiff === 0) return;
     if (currentScroll) cancelAnimationFrame(currentScroll);
 
     if (map) {
@@ -81,13 +78,13 @@ cwm.stories = function (storiesId) {
   };
   
   function setupScrolling () {
-    d3.selectAll('a[href*="#"]').on('click', function (d, i) {
+    d3.selectAll('a[href*="#"]').on('click', function () {
       s.scrollTo(this.getAttribute("href").split("#")[1]);
     });
     d3.selectAll('#stories h1, #stories h2').on('click', function () {
       s.scrollTo($x(this).parent("section")[0].getAttribute("id"));
-    })
+    });
   }
   
   return s;
-}
+};

@@ -1,6 +1,4 @@
-if (typeof cwm === 'undefined') cwm = {};
-
-cwm.ecuador = {
+cwm.data.ecuador = {
   "type": "FeatureCollection",
   "features": [{
     "type": "Feature",

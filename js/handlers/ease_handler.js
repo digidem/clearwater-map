@@ -10,9 +10,7 @@
  * 
  */
 
-if (typeof cwm === 'undefined') cwm = {};
-
-cwm.easeHandler = function () {
+cwm.handlers.EaseHandler = function () {
   
   var eh = {},
       override,
@@ -42,7 +40,7 @@ cwm.easeHandler = function () {
   };
 
   eh.enable = function () {
-    lastScroll = 0
+    lastScroll = 0;
     if (enabled) return eh;
     if (!locations || !map) throw "Map and locations need to be set";
     if (!easings) setEasings();
@@ -78,11 +76,12 @@ cwm.easeHandler = function () {
   // pre-defined easing path, or if we need to move quickly between two 
   // points far apart on the page without moving through the intermediary steps 
   eh.setOverride = function (from,start,top,bottom) {
-    var t, ease1, ease2,
-        from = from || map.coordinate.copy(),
-        start = start || window.pageYOffset,
-        top = Math.max(top || start - 200, 0);
-        bottom = bottom || start + 200;
+    from = from || map.coordinate.copy(),
+    start = start || window.pageYOffset,
+    top = Math.max(top || start - 200, 0);
+    bottom = bottom || start + 200;
+
+    var ease1, ease2, topCoord, bottomCoord;
 
     override = {top: top, bottom: bottom};
     topCoord = easings[Math.floor(top)] || _.last(easings);
@@ -97,7 +96,7 @@ cwm.easeHandler = function () {
   eh.clearOverride = function () {
     override = undefined;
     return eh;
-  }
+  };
   
   eh.getOverrideTime = function () {
     return Math.floor(override.time);
@@ -123,7 +122,7 @@ cwm.easeHandler = function () {
     var easing, coord, coords, prevCoord, prevScrollPoint;
     easings = [];
   
-    _.forEach(locations, function (v, i) {
+    _.forEach(locations, function (v) {
       coord = map.centerFromBounds(v.bounds);
       if (!!prevCoord) {
         easing = mapbox.ease().map(map).from(prevCoord).to(coord)
@@ -153,4 +152,4 @@ cwm.easeHandler = function () {
   }
   
   return eh;
-}
+};

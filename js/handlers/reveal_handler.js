@@ -1,8 +1,6 @@
 // Handles the display of elements as the scroll on and off the screen
 // Provides curtain effect & fades elements in and out.
-(function (name, context, definition) {
-  context[name] = definition;
-})('scrollAffix', this, function() {
+cwm.handlers.RevealHandler = function() {
   var sa = {},
       wHeight = window.innerHeight,
       dHeight = document.body.scrollHeight,
@@ -10,8 +8,7 @@
       rangeStyles = [],
       enabled = false,
       animFrame = null,
-      lastScroll,
-      selection;
+      lastScroll;
       
   var query = function(s) { return document.querySelectorAll(s); };
 
@@ -61,7 +58,7 @@
           // Warning - two different object instances will never be equal: {x:20} != {x:20}
           else if (x[i] != y[i]) return false;
         }
-        return true
+        return true;
       }
       return false;
     }
@@ -81,10 +78,10 @@
     this.origStyles[i] = el.getAttribute("style");
     this.length += 1;
     return i;
-  }
+  };
   
-  var elements = new ElementCache,
-      styles = new Cache;
+  var elements = new ElementCache(),
+      styles = new Cache();
 
   // will apply class `classname` to elements selected by `selector` between
   // scroll points `start` and `end`, which can be numbers or functions
@@ -93,7 +90,6 @@
     var i,
         elementId,
         range,
-        v, 
         els = query(selector);
     
     for (i = 0; i < els.length; i++) {
@@ -125,7 +121,7 @@
     }
     sa.addStyle(selector, { position: "fixed", top: offset, bottom: "auto" }, start, e || 999999);
     return sa;
-  }
+  };
   
   sa.affixBottom = function (selector, start, offset) {
     offset = offset || 0;
@@ -146,19 +142,19 @@
     }
     sa.addStyle(selector, { position: "fixed", bottom: offset, top: "auto" }, s || 0, end);
     return sa;
-  }
+  };
   
   sa.fadeIn = function (selector, start, end) {
     fade(selector, end, start);
     sa.addStyle(selector, { opacity: 0 }, 0, start);
     return sa;
-  }
+  };
   
   sa.fadeOut = function (selector, start, end) {
     fade(selector, start, end);
     sa.addStyle(selector, { opacity: 0 }, end, 999999);
     return sa;
-  }
+  };
   
   function fade (selector, start, end) {
     var i, 
@@ -188,7 +184,7 @@
         rangeStyles.push([[e,s], elementId, fadeFunc]);
       }
     }
-  };
+  }
   
   // will apply `style` with `value` (function or string) 
   // to elements selected by `selector` between
@@ -212,7 +208,7 @@
         for (key in styles) {
           value = (typeof styles[key] === "function") ? styles[key].call(els[i]) : styles[key];
           value += (typeof value === "number" && key.match(/top|bottom/)) ? "px" : "";
-          styleString += key + ":" + value + ";"
+          styleString += key + ":" + value + ";";
         }
         rangeStyles.push([range, elementId, styleString]);
       }
@@ -228,7 +224,7 @@
     console.log("caching took " + (t1 - t0) + "ms");
     enabled = true;
     if (animFrame) cancelAnimationFrame(animFrame);
-    loop()
+    loop();
     return sa;
   };
   
@@ -332,8 +328,8 @@
   function wrapElements(selector) {
     var height,
         els = query(selector);
-    for (i = 0; i < els.length; i++) {
-      if (els[i].parentNode.getAttribute("data-wrap") != "") {
+    for (var i = 0; i < els.length; i++) {
+      if (els[i].parentNode.getAttribute("data-wrap") !== "") {
         height = els[i].offsetHeight + "px";
         $(els[i]).wrapAll('<div data-wrap style="position: relative; height: ' + height + '" />');
       }
@@ -341,4 +337,4 @@
   }
   
   return sa;
-});
+};

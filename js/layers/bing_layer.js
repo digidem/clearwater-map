@@ -1,8 +1,6 @@
-if (typeof cwm === 'undefined') cwm = {};
-
-cwm.bingLayer = function(options) {
-    if (!(this instanceof cwm.bingLayer)) {
-        return new cwm.bingLayer(options);
+cwm.layers.BingLayer = function(options) {
+    if (!(this instanceof cwm.layers.BingLayer)) {
+        return new cwm.layers.BingLayer(options);
     }
     
     this._subdomains = [0, 1, 2, 3];
@@ -23,7 +21,7 @@ cwm.bingLayer = function(options) {
     this.loadMetadata();
 };
 
-cwm.bingLayer.prototype.initMetadata = function (bingjson) {
+cwm.layers.BingLayer.prototype.initMetadata = function () {
   var r = this.meta.resourceSets[0].resources[0];
   
   this._subdomains = r.imageUrlSubdomains;
@@ -32,9 +30,9 @@ cwm.bingLayer.prototype.initMetadata = function (bingjson) {
                         .replace('http:', document.location.protocol)
                         .replace('{culture}', '');
   this.setProvider(new MM.Template(this._url, this._subdomains));
-}
+};
 
-cwm.bingLayer.prototype.loadMetadata = function () {
+cwm.layers.BingLayer.prototype.loadMetadata = function () {
   var url = document.location.protocol + "//dev.virtualearth.net/REST/v1/Imagery/Metadata/" + this._style;
   var that = this;
   $.ajax({
@@ -47,6 +45,6 @@ cwm.bingLayer.prototype.loadMetadata = function () {
       that.initMetadata();
     }
   });
-}
+};
 
-MM.extend(cwm.bingLayer, MM.Layer);
+MM.extend(cwm.layers.BingLayer, MM.Layer);

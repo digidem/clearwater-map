@@ -1,9 +1,6 @@
-if (typeof cwm === 'undefined') cwm = {};
-
-cwm.dragHandler = function() {
+cwm.handlers.DragHandler = function() {
     var handler = {},
-        map,
-        prevMouse;
+        map;
 
     var drag = d3.behavior.drag()
         .on("drag", pan)
@@ -21,7 +18,7 @@ cwm.dragHandler = function() {
 
     handler.init = function(m) {
         map = m;
-        d3.select(map.parent).call(drag)
+        d3.select(map.parent).call(drag);
     };
 
     handler.remove = function() {

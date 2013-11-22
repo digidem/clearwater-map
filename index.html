@@ -15,18 +15,30 @@
   <script src='vendor/lodash.custom.js'></script>
   <script src='vendor/mapbox.uncompressed.js'></script>
   <script src='vendor/requestAnimationFrame.js'></script>
-  <script src='js/MM.overrides.js'></script>
-  <script src='js/draghandler.js'></script>
-  <script src='js/domhelpers.js'></script>
-  <script src='js/ecuador.js'></script>
-  <script src='js/bingLayer.js'></script>
-  <script src='js/d3layer.js'></script>
-  <script src='js/markers.js'></script>
+  
+  <script src='js/cwm.js'></script>
   <script src='js/map.js'></script>
   <script src='js/stories.js'></script>
+  <script src='js/render.js'></script>
+
   <script src='js/util.js'></script>
-  <script src='js/easehandler.js'></script>
-  <script src='js/revealhandler.js'></script>
+  <script src='js/util/MM.overrides.js'></script>
+  <script src='js/util/domhelpers.js'></script>
+  
+  <script src='js/layers.js'></script>
+  <script src='js/layers/bing_layer.js'></script>
+  <script src='js/layers/feature_layer.js'></script>
+  <script src='js/layers/marker_layer.js'></script>
+  
+  <script src='js/handlers.js'></script>
+  <script src='js/handlers/drag_handler.js'></script>
+  <script src='js/handlers/ease_handler.js'></script>
+  <script src='js/handlers/reveal_handler.js'></script>
+  <script src='js/handlers/marker_interaction.js'></script>
+
+  <script src='js/data.js'></script>
+  <script src='data/ecuador.js'></script>
+  
   <link href='css/map.css' rel='stylesheet' />
   <link href='css/markers.css' rel='stylesheet' />
   <link href='css/features.css' rel='stylesheet' />
@@ -218,39 +230,9 @@ members by providing them with clean drinking water. </p>
 
 
 <script type="text/javascript" charset="utf-8">
-$(function() {
-  
-  // Bing Maps API key for satellite layer
-  // Register for key at http://www.bingmapsportal.com
-  // Currently a basic non-profit key. Need to check limits.
-  var BING_API_KEY = "Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l";
-  
-  // Bounds for the initial view of the map (South America)
-  var startBounds = [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ];
-  
-  // Mapbox ID for overlay map
-  var mapboxId = 'gmaclennan.map-y7pgvo15'
-  
-  // Data sources for overlay and markers (currently CartoDB)
-  var baseUrl = 'http://clearwater.cartodb.com/api/v2/sql?format=geojson&q=';
-  var communityUrl = baseUrl + 'SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.community, c.nationality, systems, users ' +
-                               'FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community ' +
-                               'FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active';
-  var installationUrl = baseUrl + 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL';
-  
-  var map = cwm.map('map', startBounds, { 
-    padding: 580,
-    mapboxId: mapboxId,
-    bingApiKey: BING_API_KEY,
-    communityUrl: communityUrl,
-    installationUrl: installationUrl
-  });
-  
-  var stories = cwm.stories('stories').map(map);
-  
-  window.map = map;
-  
-});
+
+cwm.init();
+
 </script>
 
 

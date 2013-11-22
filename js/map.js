@@ -1,37 +1,40 @@
-if (typeof cwm === 'undefined') cwm = {};
-
-cwm.map = function (mapId, startBounds, options) {
+cwm.Map = function (mapId, options) {
   
-  var interactiveLayer = cwm.d3Layer("interaction"),
-      lastResize = 0,
+  var lastResize = 0,
       stories,
       paddingLeft = options.padding || 0;
+
+  var layerDiv = cwm.render.LayerContainer("layers");
+
+  var markerLayer = cwm.layers.MarkerLayer(layerDiv, "markers");
+  var featureLayer = cwm.layers.FeatureLayer(layerDiv, "features");
       
   var map = new MM.Map(
     mapId,
     [
-      cwm.bingLayer({ apiKey: options.bingApiKey }),
+      cwm.layers.BingLayer({ apiKey: options.bingApiKey }),
       mapbox.layer().id(options.mapboxId),
-      interactiveLayer
+      featureLayer,
+      markerLayer
     ],
     null,
-    [ cwm.dragHandler() ]
-  ).setExtent(startBounds, false, paddingLeft).setZoomRange(3,18);
+    [ cwm.handlers.DragHandler() ]
+  ).setExtent(options.startBounds, false, paddingLeft).setZoomRange(3,18);
   
-  interactiveLayer.addFeatures(cwm.ecuador, "ecuador")
-                  .loadFeatures(options.communityUrl, "communities", onLoad)
-                  .loadMarkers(options.installationUrl, onLoad);
-  
+  featureLayer.add(cwm.data.ecuador, { id: "ecuador", maxZoom: 7 })
+      .load(options.communityUrl, { id: "communities", maxZoom: 13 }, onLoad);
+      
+  markerLayer.load(options.installationUrl, { minZoom: 13 },onLoad);
   
   map.ease = mapbox.ease().map(map);
   
   // The easeHandler is what moves the map according to the scroll position
-  map.easeHandler = cwm.easeHandler().map(map);
+  map.easeHandler = cwm.handlers.EaseHandler().map(map);
   
   map.stories = function (s) {
     stories = s;
     return map;
-  }
+  };
   
   map.addCallback("panned", function(map, panOffset) {
     map.easeHandler.setOverride();
@@ -48,7 +51,7 @@ cwm.map = function (mapId, startBounds, options) {
   // Check all the layers have loaded and set the locations
   // of any places that the map should navigate to
   function onLoad () {
-    if ( interactiveLayer.bounds["communities"] && interactiveLayer.bounds["markers"]) {
+    if (featureLayer.bounds.communities && markerLayer.bounds) {
       setLocations();
       setupScrolling();
       refresh();
@@ -62,16 +65,15 @@ cwm.map = function (mapId, startBounds, options) {
    * (3) The extent of each community in the communities layer
    * (4) The location of each story in the installations layer
    */
-  var locations = [{ id: 'ecuador', bounds: [ [ startBounds[0].lon, startBounds[0].lat],
-                                              [ startBounds[1].lon, startBounds[1].lat] ] }];
+  var locations = [{ id: 'ecuador', bounds: cwm.util.d3Bounds(options.startBounds) }];
   function setLocations () {
-    var storyLocations = interactiveLayer.getMarkerLocations(
+    var storyLocations = markerLayer.getLocations(
       function (d) { return cwm.util.sanitize(d.properties.featured_url); },
       function (d) { return d.properties.featured && true; }
     );
     
-    locations = locations.concat([{ id: "overview", bounds: interactiveLayer.bounds["communities"] }])
-        .concat(interactiveLayer.getLocations("community"))
+    locations = locations.concat([{ id: "overview", bounds: featureLayer.bounds.communities }])
+        .concat(featureLayer.getLocations("community"))
         .concat(storyLocations);
   }
   
@@ -93,7 +95,7 @@ cwm.map = function (mapId, startBounds, options) {
       }
       
       function zoomToPoint () {
-        var z = 18
+        var z = 18;
         var point = new MM.Point(d3.event.clientX, d3.event.clientY);
         var to = map.pointCoordinate(point).zoomTo(z);
         map.ease.to(to).path('about').run(500, function () {
