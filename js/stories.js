@@ -1,7 +1,48 @@
-cwm.Stories = function () {
+cwm.Stories = function (containerId) {
   
   var stories = {},
       map;
+  
+  var container = d3.select(containerId);
+  
+  var nested_data = d3.nest()
+  .key(function (d) { return d.properties.nationality})
+  .entries(cwm.data.communities.features);
+  
+  var nationalities = container.selectAll("section")
+      .data(nested_data)
+      .enter()
+      .append("section")
+      .attr("id", function (d) { return d.key; })
+
+  var communities = nationalities.selectAll("section")
+      .data(function (d) { return d.values; })
+      .enter()
+      .append("section")
+  
+  var overview = communities.append("article")
+  
+  overview.append("div")
+  .attr("class", "image")
+  .append("img")
+  
+  overview.append("h1")
+  .text(function (d) { return d.properties.nationality; });
+  
+  overview.append("div")
+  .html(function (d) { return d.properties.overview; });
+  
+  var and_clearwater = communities.append("article");
+  
+  and_clearwater.append("div")
+  .attr("class", "image")
+  .append("img")
+  
+  and_clearwater.append("h2")
+  .text(function (d) { return d.properties.community + " and ClearWater"; });
+  
+  and_clearwater.append("div")
+  .html(function (d) { return d.properties.and_clearwater; });
   
   setupScrolling();
   
@@ -10,7 +51,7 @@ cwm.Stories = function () {
     map.s = stories;
     return stories;
   };
-  
+  /*
   var h1Height = document.getElementsByTagName("h1")[0].offsetHeight;
   var h2Height = document.getElementsByTagName("h2")[0].offsetHeight;
 
@@ -34,7 +75,7 @@ cwm.Stories = function () {
       function () { return $x(this).offsetTop() + Math.max(window.innerHeight - h1Height - this.offsetHeight, 100); }
     )
     .enable();
-  
+  */
   // Scroll the map to an element by id
   stories.scrollTo = function (id) {
     var el = document.getElementById(id);

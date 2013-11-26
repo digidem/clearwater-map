@@ -12,107 +12,13 @@
   background: white;
 }
 
-#mapstory #nav {
-position: absolute;
-left: 0px;
-top: 71px;
-background-color: #222;
-opacity: 0;
-z-index: 3;
-transition:opacity 500ms;
--moz-transition:opacity 500ms;
--webkit-transition:opacity 500ms;
-}
-#mapstory.zoom11 #nav {
-opacity: 1;
-}
-
-#mapstory #nav a {
-	font-family: "Yanone Kaffeesatz";
-	font-size: 1.5em;
-	display: block;
-	color: #FFFFFF;
-	text-decoration: none;
-	padding-left: 45px;
-	background-repeat: no-repeat;
-	background-image: url(http://digidem.github.io/clearwater-map/images/arrow_white1.png);
-	padding-top: 7px;
-	padding-right: 10px;
-	padding-bottom: 7px;
-	background-position: 5px;
-	margin: 4px;
-}
-
-#mapstory #nav a:hover {
-	color: #DADADA;
-	background-image: url(http://digidem.github.io/clearwater-map/images/arrow_grey1.png);
-}
-
-#mapstory .instruction {
-margin: 0 0 -122px;
-position: relative;
-top: -500px;
-left: 750px;
-height: 250px;
-width: 228px;
-background: url(http://digidem.github.io/clearwater-map/images/initialclick.png) no-repeat scroll left bottom;
-text-indent: -2000px;
-z-index: 2;
-display: none;
-}
-
 #mapstory #stories {
-  width: 30em;
-  position: absolute;
-  top: 100%;
-  margin: 0 0 0 2.25em;
   color: #eee;
-  transition: opacity 0.4s linear;
-  -moz-transition: opacity 0.4s linear;
-  -webkit-transition: opacity 0.4s linear;
 }
 
-#mapstory #stories article:first-child section:first-child {
-  position: absolute;
-  bottom: 100%;
-  margin-bottom: 3.15em;
-  margin-top: 0;
-}
-
-#mapstory #stories article {
-/*  margin-bottom: 1000px;*/
-}
-
-#mapstory .background {
-  background-color: #222;
-  position: relative;
-  bottom: 0;
-  transform: translate3d(0,0,0);
-  -moz-transform: translate3d(0,0,0);
-  -webkit-transform: translate3d(0,0,0);
-}
-
-#mapstory .affixed {
-position: fixed !important;
-}
-
-#mapstory .collapsed {
-position: absolute !important;
-}
-
-#mapstory .offscreen {
-display: none;
-}
-
-#mapstory .faded {
-opacity: 0;
-}
 
 #mapstory #stories section {
-    margin-bottom: 3.15em;
-  margin-top: 20em;
-  position: relative;
-  width: 100%;
+  width: 30em;
 }
 
 #mapstory #stories h1, #mapstory #stories h2 {

@@ -35,6 +35,21 @@ cwm.util = {
   d3Bounds: function (MMbounds) {
     return [ [ MMbounds[0].lon, MMbounds[0].lat],
              [ MMbounds[1].lon, MMbounds[1].lat] ];
+  },
+  
+  asyncMap: function (inputs, func, callback) {
+      var remaining = inputs.length,
+          results = [],
+          errors = [];
+
+      inputs.forEach(function(d, i) {
+          func(d, function done(err, data) {
+              errors[i] = err;
+              results[i] = data;
+              remaining --;
+              if (!remaining) callback(errors, results);
+          });
+      });
   }
   
 };
