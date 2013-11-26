@@ -35,6 +35,19 @@ cwm.util = {
   d3Bounds: function (MMbounds) {
     return [ [ MMbounds[0].lon, MMbounds[0].lat],
              [ MMbounds[1].lon, MMbounds[1].lat] ];
-  }
+  },
+  
+  transformCSS: (function(props, prefix) {
+    props = props.split(" ");
+    prefix = prefix.split(" ");
+    if (!this.document) return; // node.js safety
+    var style = document.documentElement.style;
+    for (var i = 0; i < props.length; i++) {
+      if (props[i] in style) {
+        return prefix[i];
+      }
+    }
+    return false;
+  })('transform WebkitTransform OTransform MozTransform msTransform', 'transform -webkit-transform -o-transform -moz-transform -ms-transform')
   
 };
