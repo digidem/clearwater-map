@@ -9,7 +9,7 @@
   margin:0px;
   padding:0px;
   font: 400 14px/21px "PT Sans",Arial,sans-serif;
-  background: black;
+  background: white;
 }
 
 #mapstory #nav {
@@ -122,6 +122,8 @@ opacity: 0;
   font-weight: normal;
   font-family: "Yanone Kaffeesatz", sans-serif;
 }
+
+.outline { display: none;}
 
 #mapstory #stories h1 {
   opacity: 1 !important;

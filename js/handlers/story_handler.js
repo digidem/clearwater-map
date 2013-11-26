@@ -1,14 +1,15 @@
-// Handles the display of elements as the scroll on and off the screen
-// Provides curtain effect & fades elements in and out.
-cwm.handlers.RevealHandler = function() {
-  var sa = {},
-      wHeight = window.innerHeight,
-      dHeight = document.body.scrollHeight,
+// Handles the display of stories as you scroll through the map
+// Stories can be set to fade in and out and can be fixed
+// to the top and bottom of the screen.
+// Has been highly optimized for adjusting multiple elements on
+// scroll, and has minimal external dependencies.
+
+cwm.handlers.StoryHandler = function() {
+  var wHeight = window.innerHeight,
+      dHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
       scrollStyles = new Array(dHeight),
       rangeStyles = [],
-      enabled = false,
-      animFrame = null,
-      lastScroll;
+      enabled = false;
       
   var query = function(s) { return document.querySelectorAll(s); };
 
@@ -38,6 +39,7 @@ cwm.handlers.RevealHandler = function() {
   }
   
   Cache.prototype = Object.create(Array.prototype);
+  
   Cache.prototype.add = function (value) {
     for (var i=0; i<this.length; i++) {
       if (equal(this[i], value)) return i;
@@ -80,80 +82,121 @@ cwm.handlers.RevealHandler = function() {
     return i;
   };
   
-  var elements = new ElementCache(),
-      styles = new Cache();
+  var elements = new ElementCache();
+  var styles = new Cache();
 
-  // will apply class `classname` to elements selected by `selector` between
-  // scroll points `start` and `end`, which can be numbers or functions
-  // `this` will be passed to the function as the current element.
-  sa.addClass = function (selector, className, start, end) {
-    var i,
-        elementId,
-        range,
-        els = query(selector);
+  var storyHandler = {
+
+    // will apply class `classname` to elements selected by `selector` between
+    // scroll points `start` and `end`, which can be numbers or functions
+    // `this` will be passed to the function as the current element.
+    addClass: function (selector, className, start, end) {
+      var i,
+          elementId,
+          range,
+          els = query(selector);
     
-    for (i = 0; i < els.length; i++) {
-      elementId = elements.add(els[i]);
-      range = getStartEnd.call(els[i], start, end);
-      if (range[1] >= 0) {
-        rangeStyles.push([range, elementId, className + " "]);
+      for (i = 0; i < els.length; i++) {
+        elementId = elements.add(els[i]);
+        range = getStartEnd.call(els[i], start, end);
+        if (range[1] >= 0) {
+          rangeStyles.push([range, elementId, className + " "]);
+        }
       }
-    }
-    return sa;
-  };
+      return storyHandler;
+    },
   
-  sa.affixTop = function (selector, end, offset) {
-    offset = offset || 0;
-    var e,
-        endOffset,
-        start = function () { return scrollTop(this) - offset; };
+    affixTop: function (selector, end, offset) {
+      offset = offset || 0;
+      var e,
+          endOffset,
+          start = function () { return scrollTop(this) - offset; };
         
-    wrapElements(selector);
-    if (end) {
-      if (typeof end === "function") {
-        e = function () { return end.call(this) - offset; };
-        endOffset = function () { return end.call(this) - scrollTop(this); };
-      } else {
-        e = function () { return end - offset; };
-        endOffset = function () { return end - scrollTop(this); };
+      wrapElements(selector);
+      if (end) {
+        if (typeof end === "function") {
+          e = function () { return end.call(this) - offset; };
+          endOffset = function () { return end.call(this) - scrollTop(this); };
+        } else {
+          e = function () { return end - offset; };
+          endOffset = function () { return end - scrollTop(this); };
+        }
+        storyHandler.addStyle(selector, { position: "relative", top: endOffset }, e, 999999);
       }
-      sa.addStyle(selector, { position: "relative", top: endOffset }, e, 999999);
-    }
-    sa.addStyle(selector, { position: "fixed", top: offset, bottom: "auto" }, start, e || 999999);
-    return sa;
-  };
+      storyHandler.addStyle(selector, { position: "fixed", top: offset, bottom: "auto" }, start, e || 999999);
+      return storyHandler;
+    },
   
-  sa.affixBottom = function (selector, start, offset) {
-    offset = offset || 0;
-    var s,
-        startOffset,
-        end = function () { return scrollTop(this) - wHeight + this.offsetHeight + offset; };
+    affixBottom: function (selector, start, offset) {
+      offset = offset || 0;
+      var s,
+          startOffset,
+          end = function () { return scrollTop(this) - wHeight + this.offsetHeight + offset; };
     
-    wrapElements(selector);
-    if (start) {
-      if (typeof start === "function") {
-        s = function () { return start.call(this) - offset; };
-        startOffset = function () { return start.call(this) - scrollTop(this) + wHeight - this.offsetHeight; };
-      } else {
-        s = function () { return start - offset; };
-        startOffset = function () { return start - scrollTop(this); };
+      wrapElements(selector);
+      if (start) {
+        if (typeof start === "function") {
+          s = function () { return start.call(this) - offset; };
+          startOffset = function () { return start.call(this) - scrollTop(this) + wHeight - this.offsetHeight; };
+        } else {
+          s = function () { return start - offset; };
+          startOffset = function () { return start - scrollTop(this); };
+        }
+        storyHandler.addStyle(selector, { position: "relative", top: startOffset }, 0, s);
       }
-      sa.addStyle(selector, { position: "relative", top: startOffset }, 0, s);
+      storyHandler.addStyle(selector, { position: "fixed", bottom: offset, top: "auto" }, s || 0, end);
+      return storyHandler;
+    },
+  
+    fadeIn: function (selector, start, end) {
+      fade(selector, end, start);
+      storyHandler.addStyle(selector, { opacity: 0 }, 0, start);
+      return storyHandler;
+    },
+  
+    fadeOut: function (selector, start, end) {
+      fade(selector, start, end);
+      storyHandler.addStyle(selector, { opacity: 0 }, end, 999999);
+      return storyHandler;
+    },
+  
+    // will apply `style` with `value` (function or string) 
+    // to elements selected by `selector` between
+    // scroll points `start` and `end`, which can be numbers or functions
+    // `this` will be passed to the function as the current element.
+    addStyle: function (selector, styles, start, end) {
+      var i,
+          elementId,
+          range,
+          key,
+          value,
+          styleString,
+          els = query(selector);  
+    
+      for (i = 0; i < els.length; i++) {
+        elementId = elements.add(els[i]);
+        range = getStartEnd.call(els[i], start, end);
+        styleString = "";
+      
+        if (range[1] >= 0) {
+          for (key in styles) {
+            value = (typeof styles[key] === "function") ? styles[key].call(els[i]) : styles[key];
+            value += (typeof value === "number" && key.match(/top|bottom/)) ? "px" : "";
+            styleString += key + ":" + value + ";";
+          }
+          rangeStyles.push([range, elementId, styleString]);
+        }
+      }
+    
+      return storyHandler;
+    },
+  
+    enable: function () {
+      cacheScrollPointStyles();
+      enabled = true;
+      cwm.scrollHandler.add(storyHandler.updateStyles);
+      return storyHandler;
     }
-    sa.addStyle(selector, { position: "fixed", bottom: offset, top: "auto" }, s || 0, end);
-    return sa;
-  };
-  
-  sa.fadeIn = function (selector, start, end) {
-    fade(selector, end, start);
-    sa.addStyle(selector, { opacity: 0 }, 0, start);
-    return sa;
-  };
-  
-  sa.fadeOut = function (selector, start, end) {
-    fade(selector, start, end);
-    sa.addStyle(selector, { opacity: 0 }, end, 999999);
-    return sa;
   };
   
   function fade (selector, start, end) {
@@ -164,7 +207,7 @@ cwm.handlers.RevealHandler = function() {
         e,
         fadeFunc,
         els = query(selector);
-    
+  
     for (i = 0; i < els.length; i++) {
       elementId = elements.add(els[i]);
       range = getStartEnd.call(els[i], start, end);
@@ -185,48 +228,6 @@ cwm.handlers.RevealHandler = function() {
       }
     }
   }
-  
-  // will apply `style` with `value` (function or string) 
-  // to elements selected by `selector` between
-  // scroll points `start` and `end`, which can be numbers or functions
-  // `this` will be passed to the function as the current element.
-  sa.addStyle = function (selector, styles, start, end) {
-    var i,
-        elementId,
-        range,
-        key,
-        value,
-        styleString,
-        els = query(selector);  
-    
-    for (i = 0; i < els.length; i++) {
-      elementId = elements.add(els[i]);
-      range = getStartEnd.call(els[i], start, end);
-      styleString = "";
-      
-      if (range[1] >= 0) {
-        for (key in styles) {
-          value = (typeof styles[key] === "function") ? styles[key].call(els[i]) : styles[key];
-          value += (typeof value === "number" && key.match(/top|bottom/)) ? "px" : "";
-          styleString += key + ":" + value + ";";
-        }
-        rangeStyles.push([range, elementId, styleString]);
-      }
-    }
-    
-    return sa;
-  };
-  
-  sa.enable = function () {
-    var t0 = performance.now();
-    cacheScrollPointStyles();
-    var t1 = performance.now();
-    console.log("caching took " + (t1 - t0) + "ms");
-    enabled = true;
-    if (animFrame) cancelAnimationFrame(animFrame);
-    loop();
-    return sa;
-  };
   
   function cacheScrollPointStyles () {
     var pixel,
@@ -277,14 +278,14 @@ cwm.handlers.RevealHandler = function() {
     ];  
   }
   
-  function update (y) {
+  storyHandler.updateStyles = function (y) {
     var styleId = scrollStyles[Math.max(y,0)];
     var elementStyles = styles[styleId];
     var i, 
         el,
         styleString,
         j;
-    
+
     for (i = 0; i < elementStyles.length; i++) {
       el = elements[i];
       styleString = elementStyles[i][0];
@@ -295,22 +296,7 @@ cwm.handlers.RevealHandler = function() {
         el.setAttribute("style", styleString);
       }
     }
-  }
-  
-  function loop () {
-    var y = window.pageYOffset;
-
-    if (!enabled) return false;
-    
-    // Avoid calculations if not needed and just loop again
-    if (lastScroll == y) {
-        animFrame = requestAnimationFrame(loop);
-    } else {
-      lastScroll = y;
-      update(y);
-      animFrame = requestAnimationFrame(loop);
-    }
-  }
+  };
   
   function scrollTop (el) {
     if (!el) return 0;
@@ -336,5 +322,5 @@ cwm.handlers.RevealHandler = function() {
     }
   }
   
-  return sa;
+  return storyHandler;
 };

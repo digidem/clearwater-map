@@ -18,7 +18,7 @@ window.cwm = {
       startBounds: [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ],
       
       // Data sources for overlay and markers (currently CartoDB)
-      communityUrl: baseUrl + 'SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.community, c.nationality, systems, users ' +
+      communityUrl: baseUrl + 'SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.cartodb_id, c.community, c.nationality, systems, users ' +
                                  'FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community ' +
                                  'FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active',
                                  
@@ -27,10 +27,11 @@ window.cwm = {
       padding: 580 
            
     };
-  
-    var map = cwm.Map('map', options);
+    
+    cwm.map = cwm.Map('map', options);
+    cwm.scrollHandler = cwm.handlers.ScrollHandler(cwm.map);
 
-    var stories = cwm.Stories('stories').map(map);
+    var stories = cwm.Stories('stories').map(cwm.map);
 
   }
   

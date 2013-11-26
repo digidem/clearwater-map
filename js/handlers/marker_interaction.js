@@ -1,12 +1,17 @@
-cwm.handlers.MarkerInteraction = function (context) {
+cwm.handlers.MarkerInteraction = function () {
   var mouseOverPopup;
 
-  context.on("mouseout.mi", mouseoutMarker)
-      .on("mouseover.mi", mouseoverMarker);
-      // .on("click.mi", popupListener)
-      // .on("mouseover.mi", popupListener)
-      // .on("mouseout.mi", popupListener);
-
+  return function (context) {
+    if (!context[0][0]) return;
+    context.on("mouseout.mi", mouseoutMarker)
+        .on("mouseover.mi", mouseoverMarker);
+        // .on("click.mi", popupListener)
+        // .on("mouseover.mi", popupListener)
+        // .on("mouseout.mi", popupListener);
+        // .filter(function (d) {return d.properties.featured === true; })
+        // .attr("class", "featured")
+        // .each("end", bounceMarkers);
+  };
 
 
   function mouseoverMarker () {

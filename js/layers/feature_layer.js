@@ -3,13 +3,16 @@
 
 cwm.layers.FeatureLayer = function (context, id) {
   
-  var features,
+  var clip,
+      features,
       featureCollectionCount = 0,
       featureData = [];
   
   var svg = context.select("svg");
   
-  var g = svg.append('g');
+  // Ensure the feature layer is inserted before any marker layer
+  // since it would overlay and block the markers and mouse events
+  var g = svg.insert('g', ':first-child');
   
   var projectionStream = d3.geo.transform({
       point: function (x, y) {
@@ -18,6 +21,13 @@ cwm.layers.FeatureLayer = function (context, id) {
         // Performance increase: http://www.mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
         this.stream.point(~~(0.5 + point.x), ~~(0.5 + point.y));
       }});
+  
+  /* -- Using this would clip the shapes to the map extent, can't see a
+  /* -- can't see a performance improvement from this yet.  
+  var clipProjection = { stream: function (s) {
+    return projectionStream.stream(clip.stream(s));
+  }};
+  */
     
   var pathGenerator = d3.geo.path().projection(projectionStream);
     
@@ -34,14 +44,23 @@ cwm.layers.FeatureLayer = function (context, id) {
       if (!featureLayer.map || !features) return;
       
       var zoom = featureLayer.map.getZoom();
-      
+      var extent = featureLayer.map.getExtent();
+      var data = featureData.filter(function (d) {
+        return extent.coversBounds(d.properties._bounds);
+      });
+
       // update the features to their new positions
       // If beyond their max zoom, fade them out
-      features.attr("d", pathGenerator)
+      // Do not display features outside the map
+      features.data(data, function (d) { return d.properties.cartodb_id; })
+          .attr("d", pathGenerator)
           .style("fill-opacity", function (d) {
             return Math.min(Math.max(d.properties._maxZoom - zoom, 0), 1) * 0.6;
           })
-          .classed("outline", function (d) { return zoom > d.properties._maxZoom; });
+          .attr("display", "")
+          .classed("outline", function (d) { return zoom > d.properties._maxZoom; })
+          .exit().attr("display", "none");
+          
       return featureLayer;
     },
     
@@ -53,8 +72,12 @@ cwm.layers.FeatureLayer = function (context, id) {
       var id = options.id || featureCollectionCount++;
       
       // inject maxZoom and id into the feature geojson
-      geojson.features.forEach(function (d) { d.properties._maxZoom = maxZoom; });
-      geojson.features.forEach(function (d) { d.properties._id = id; });
+      geojson.features.forEach(function (d) { 
+        d.properties._maxZoom = maxZoom;
+        d.properties._id = id;
+        d.properties._bounds = d3.geo.bounds(d);
+        d.properties._scrollTo = options.scrollTo(d)
+      });
 
       // add these features to the features already in the layer
       featureData = featureData.concat(geojson.features);
@@ -70,7 +93,14 @@ cwm.layers.FeatureLayer = function (context, id) {
       // for each one.
       features.enter()
           .append("path")
-          .attr("class", id);
+          .attr("class", id)
+          .on("click", function (d) {
+            featureLayer.map.s.scrollTo(d.properties._scrollTo);
+          });
+    
+      // clip = d3.geo.clipExtent()
+      //     .extent([[0, 0], [featureLayer.map.dimensions.x, featureLayer.map.dimensions.y]]);
+
     
       if (callback) callback();
       return featureLayer;

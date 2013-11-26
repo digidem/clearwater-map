@@ -13,23 +13,31 @@ cwm.Map = function (mapId, options) {
     mapId,
     [
       cwm.layers.BingLayer({ apiKey: options.bingApiKey }),
-      mapbox.layer().id(options.mapboxId),
-      featureLayer,
-      markerLayer
+      cwm.layers.MapboxLayer().id(options.mapboxId),
+//      markerLayer,
+      featureLayer
     ],
     null,
-    [ cwm.handlers.DragHandler() ]
+    [ ]
   ).setExtent(options.startBounds, false, paddingLeft).setZoomRange(3,18);
   
-  featureLayer.add(cwm.data.ecuador, { id: "ecuador", maxZoom: 7 })
-      .load(options.communityUrl, { id: "communities", maxZoom: 13 }, onLoad);
+  featureLayer.add(cwm.data.ecuador, { 
+    id: "ecuador", 
+    maxZoom: 7,
+    scrollTo: function () { return "overview"; }
+  });
+  featureLayer.load(options.communityUrl, { 
+    id: "communities", 
+    maxZoom: 14,
+    scrollTo: function (d) { return cwm.util.sanitize(d.properties.community); }
+  }, onLoad);
       
-  markerLayer.load(options.installationUrl, { minZoom: 13 },onLoad);
+  markerLayer.load(options.installationUrl, { minZoom: 14 },onLoad);
   
   map.ease = mapbox.ease().map(map);
   
-  // The easeHandler is what moves the map according to the scroll position
-  map.easeHandler = cwm.handlers.EaseHandler().map(map);
+  // The flightHandler is what moves the map according to the scroll position
+  map.flightHandler = cwm.handlers.FlightHandler().map(map);
   
   map.stories = function (s) {
     stories = s;
@@ -37,7 +45,7 @@ cwm.Map = function (mapId, options) {
   };
   
   map.addCallback("panned", function(map, panOffset) {
-    map.easeHandler.setOverride();
+    map.flightHandler.setOverride();
   });
   
   window.onresize = function () {
@@ -79,14 +87,14 @@ cwm.Map = function (mapId, options) {
   
   function setupScrolling () {
     
-    d3.selectAll('#' + mapId + ' a').on('click', function (d, i) {
+    d3.selectAll('#' + mapId + ' a').on('click', function () {
       if (typeof stories === 'undefined') return;
       stories.scrollTo(this.getAttribute("href").split("#")[1]);
     });
     
-    d3.selectAll('.markers circle').on('click', function (d, i) {
+    d3.selectAll('.markers circle').on('click', function (d) {
       if (d3.event.defaultPrevented) return;
-      var link = this.getAttribute("data-link");
+      var link = cwm.util.sanitize(d.properties.featured_url);
       
       if (link) {
         stories.scrollTo(link);
@@ -99,7 +107,7 @@ cwm.Map = function (mapId, options) {
         var point = new MM.Point(d3.event.clientX, d3.event.clientY);
         var to = map.pointCoordinate(point).zoomTo(z);
         map.ease.to(to).path('about').run(500, function () {
-          map.easeHandler.setOverride();
+          map.flightHandler.setOverride();
         });
       }
     });
@@ -108,7 +116,7 @@ cwm.Map = function (mapId, options) {
   function refresh () {
     // padding accounts for space taken up by the stories
     map.paddingLeft = paddingLeft;
-    map.easeHandler.locations(locations).enable();
+    map.flightHandler.locations(locations).enable();
   }
   
   return map;

@@ -1,9 +1,17 @@
-#mapstory .markers {
-
-transition:opacity 500ms;
--moz-transition:opacity 500ms;
--webkit-transition:opacity 500ms;
+#mapstory .markers circle {
+  stroke-width: 0;
+  fill: #17aae4;
+  opacity: 0.6;
 }
+
+#mapstory .markers circle.featured {
+  stroke-width: 3;
+  fill: #ffffff;
+  stroke: #17aae4;
+  opacity: 0.6;
+}
+
+
 
 #mapstory .markers.zoom11 {
 display: block;

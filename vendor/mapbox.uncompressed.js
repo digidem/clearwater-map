@@ -7412,7 +7412,7 @@ wax.mm.connector = function(options) {
 
         easey.to = function(x) {
             if (!arguments.length) return to.copy();
-            to = map.enforceZoomLimits(x.copy());
+            to = map.enforceZoomLimits(x);
             return easey;
         };
 

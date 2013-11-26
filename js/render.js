@@ -17,7 +17,8 @@ cwm.render = {
         .data(data)
         .enter()
         .append("circle")
-        .attr("r", 0);
+        .attr("r", 0)
+        .style("cursor", "pointer");
   },
   
   PopupWrapper: function (d, context) {

@@ -1,16 +1,19 @@
 cwm.layers.MarkerLayer = function (context, id) {
   
-  var markers,
-      minZoom,
+  var minZoom,
       prevZoom,
       markerSize,
-      interaction,
+      markerData,
+      isBouncing,
       popup,
-      activePopup;
+      activePopup,
+      markersHidden = false;
 
   var svg = context.select("svg");
 
-  var g = svg.append('g');
+  var g = svg.append('g').attr("class", "markers");
+  
+  var addInteraction = cwm.handlers.MarkerInteraction();
   
   // Project markers from map coordinates to screen coordinates
   function project (d) {
@@ -37,6 +40,80 @@ cwm.layers.MarkerLayer = function (context, id) {
     return true;
   }
   
+  function showMarkers () {
+    g.selectAll("circle")
+      .sort(sortFromCenter)
+      .attr("r", 0)
+      .transition()
+      .duration(1000)
+      .delay(function (d, i) { return i * 20; })
+      .ease("elastic", 2)
+      .attr("r", getMarkerSize );
+    markersHidden = false;
+  }
+  
+  function hideMarkers () {
+    g.selectAll("circle")
+      .transition()
+      .attr("r", 0).each("end", function () {
+        d3.select(this).attr("display", "none");
+        markersHidden = true;
+      });
+  }
+  
+  function bounceMarkers (el) {
+    el = (el instanceof Element) ? el : this;
+    if (isBouncing) window.clearTimeout(isBouncing);
+    d3.select(el).transition()
+      .delay(2000)
+      .duration(180)
+      .attr("r", function (d) { return getMarkerSize(d, 2); } )
+      .style("stroke-width", getMarkerSize)
+      .each("end", function () { 
+        d3.select(this)
+          .transition()
+          .duration(1800)
+          .ease("elastic", 1, 0.2)
+          .attr("r", getMarkerSize)
+          .style("stroke-width", 3);      
+        isBouncing = window.setTimeout(bounceMarkers, 3000, this); 
+      });
+  }
+  
+  function drawMarkers() {
+    var extent = markerLayer.map.getExtent();
+    
+    // filter markers that are within the current extent of the map
+    var data = markerData.filter(function (d) {
+      return extent.containsCoordinates(d.geometry.coordinates);
+    });
+    
+    // Join the filtered data for markers in the current map extent
+    var update = g.selectAll("circle").data(data, function (d) { return d.properties.cartodb_id; });
+    
+    // For any new markers appearing in the extent, append a circle
+    // and add the interaction.
+    update.enter()
+      .append("circle")
+      .attr("r", getMarkerSize)
+      .call(addInteraction)
+
+    // For markers leaving the current extent, remove them from the DOM.
+    update.exit().attr("display", "none");
+    
+    // After appending the circles to the enter() selection,
+    // it is merged with the update selection.
+    // Move all displayed markers to the correct location on the map
+    update.attr("cx", function (d) { return project(d)[0]; })
+      .attr("cy", function (d) { return project(d)[1]; })
+      .attr("display", "");
+  }
+  
+  function getMarkerSize (d, i, scale) {
+    scale = scale || 1;
+    return d.properties._markerSize * scale;
+  }
+  
   var markerLayer = {
     
     // parent is used by Modest Maps I think to attach to the map
@@ -46,26 +123,29 @@ cwm.layers.MarkerLayer = function (context, id) {
     draw: function () {
       // don't do anything if we haven't been attached to a map yet
       // (Modest Maps attaches the map to the layer when it is added to the map)
-      if (!markerLayer.map || !markers) return;
+      if (!markerLayer.map || !markerData) return;
       
       var zoom = markerLayer.map.getZoom();
-    
-      markers.attr("cx", function (d) { return project(d)[0]; })
-             .attr("cy", function (d) { return project(d)[1]; });
+      
+      if (zoom < minZoom && prevZoom >= minZoom) {
+        hideMarkers()
+      } else if (zoom >= minZoom && prevZoom < minZoom) {
+        drawMarkers();
+        showMarkers();
+      } else if (zoom >= minZoom && prevZoom >= minZoom) {
+        drawMarkers();
+      } else if (zoom < minZoom && !markersHidden) {
+        drawMarkers();
+      }
+      
            
       if (activePopup) {
        var d = activePopup.datum();
        var point = new MM.Point(project(d)[0], project(d)[1]);
        MM.moveElement(activePopup.node(), point);
       }
-    
-      if (prevZoom < minZoom && zoom > minZoom ) {
-        markerLayer.show();
-      } else if (prevZoom > minZoom && zoom < minZoom ) {
-        markerLayer.hide();
-      }
+      
       prevZoom = zoom;
-    
       return markerLayer;
     },
     
@@ -82,10 +162,8 @@ cwm.layers.MarkerLayer = function (context, id) {
       // store the bounds of this collection of markers
       markerLayer.bounds = d3.geo.bounds(geojson);
   
-      // now render markers for each feature
-      markers = cwm.render.Markers(geojson.features, g);
-  
-      interaction = cwm.handlers.MarkerInteraction(markers);
+      markerData = geojson.features;
+      markers = g.selectAll("circle");
   
       if (callback) callback();
       return markerLayer;
@@ -105,7 +183,7 @@ cwm.layers.MarkerLayer = function (context, id) {
       filter = filter || trueFn;
       var locations = [];
   
-      markers.data().filter(filter).forEach(function (d) {
+      markerData.filter(filter).forEach(function (d) {
         var bounds = [[],[]];
         bounds[0][0] = bounds[1][0] = d.geometry.coordinates[0];
         bounds[0][1] = bounds[1][1] = d.geometry.coordinates[1];
@@ -126,7 +204,7 @@ cwm.layers.MarkerLayer = function (context, id) {
           .sort(sortFromCenter)
           .transition()
           .duration(1000)
-          .delay(function (d, i) { return i * 10; })
+          .delay(function (d, i) { return i * 20; })
           .ease("elastic", 2)
           .attr("r", function (d) { return d.properties._markerSize; } );
       return markerLayer;
