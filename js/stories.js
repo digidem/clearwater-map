@@ -30,8 +30,10 @@ cwm.Stories = function () {
     )
     .fadeOut(
       "#stories article > section:not(:first-child)", 
-      function () { return $x(this).offsetTop() + this.offsetHeight - window.innerHeight; }, 
-      function () { return $x(this).offsetTop() + Math.max(window.innerHeight - h1Height - this.offsetHeight, 100); }
+      function () { return $x(this).offsetTop() + this.offsetHeight - window.innerHeight + h1Height; }, 
+      function () { return (window.innerHeight - this.offsetHeight > 200) ?
+                            $x(this).offsetTop() :
+                            $x(this).offsetTop() + this.offsetHeight - window.innerHeight + 200; }
     )
     .enable();
   

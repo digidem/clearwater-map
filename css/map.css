@@ -77,6 +77,9 @@ display: none;
   bottom: 100%;
   margin-bottom: 3.15em;
   margin-top: 0;
+  transform: translate3d(0,-1px,0);
+  -moz-transform: translate3d(0,-1px,0);
+  -webkit-transform: translate3d(0,-1px,0);
 }
 
 #mapstory #stories article {
@@ -126,7 +129,7 @@ opacity: 0;
 .outline { display: none;}
 
 #mapstory #stories h1 {
-  opacity: 1 !important;
+  position: relative;
   padding: 0.2em 0.88889em;
   margin-left: -0.88889em;
   width: 11.55556em;

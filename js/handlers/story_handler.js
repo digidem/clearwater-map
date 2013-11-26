@@ -6,10 +6,11 @@
 
 cwm.handlers.StoryHandler = function() {
   var wHeight = window.innerHeight,
-      dHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
+      dHeight = d3.select("#stories")[0][0].offsetHeight + wHeight,
       scrollStyles = new Array(dHeight),
       rangeStyles = [],
-      enabled = false;
+      enabled = false,
+      transformCSS = cwm.util.transformCSS;
       
   var query = function(s) { return document.querySelectorAll(s); };
 
@@ -106,24 +107,27 @@ cwm.handlers.StoryHandler = function() {
       return storyHandler;
     },
   
-    affixTop: function (selector, end, offset) {
-      offset = offset || 0;
+    affixTop: function (selector, end) {
       var e,
           endOffset,
-          start = function () { return scrollTop(this) - offset; };
-        
-      wrapElements(selector);
+          start = function () { return scrollTop(this); };
+      
       if (end) {
         if (typeof end === "function") {
-          e = function () { return end.call(this) - offset; };
+          e = function () { return end.call(this); };
           endOffset = function () { return end.call(this) - scrollTop(this); };
         } else {
-          e = function () { return end - offset; };
+          e = function () { return end; };
           endOffset = function () { return end - scrollTop(this); };
         }
-        storyHandler.addStyle(selector, { position: "relative", top: endOffset }, e, 999999);
+        storyHandler.addTranslateY(selector, endOffset, e, 999999);
       }
-      storyHandler.addStyle(selector, { position: "fixed", top: offset, bottom: "auto" }, start, e || 999999);
+      storyHandler.addTranslateY(selector, function () {
+        var offset = scrollTop(this);
+        return function (y) {
+          return transformCSS + ": translate3d(0," + (y - offset) + "px, 0)";
+        };
+      }, start, e || 999999);
       return storyHandler;
     },
   
@@ -133,7 +137,6 @@ cwm.handlers.StoryHandler = function() {
           startOffset,
           end = function () { return scrollTop(this) - wHeight + this.offsetHeight + offset; };
     
-      wrapElements(selector);
       if (start) {
         if (typeof start === "function") {
           s = function () { return start.call(this) - offset; };
@@ -142,9 +145,14 @@ cwm.handlers.StoryHandler = function() {
           s = function () { return start - offset; };
           startOffset = function () { return start - scrollTop(this); };
         }
-        storyHandler.addStyle(selector, { position: "relative", top: startOffset }, 0, s);
+        storyHandler.addTranslateY(selector, startOffset, 0, s);
       }
-      storyHandler.addStyle(selector, { position: "fixed", bottom: offset, top: "auto" }, s || 0, end);
+      storyHandler.addTranslateY(selector, function () {
+        var offset = end.call(this);
+        return function (y) {
+          return transformCSS + ": translate3d(0," + (y - offset) +"px,0)";
+        };
+      }, s || 0, end);
       return storyHandler;
     },
   
@@ -157,6 +165,18 @@ cwm.handlers.StoryHandler = function() {
     fadeOut: function (selector, start, end) {
       fade(selector, start, end);
       storyHandler.addStyle(selector, { opacity: 0 }, end, 999999);
+      return storyHandler;
+    },
+  
+    addTranslateY: function (selector, translateY, start, end) {
+      var elementId, range, y, style;
+      d3.selectAll(selector).each(function () {
+        elementId = elements.add(this);
+        range = getStartEnd.call(this, start, end);
+        y = translateY.call(this);
+        style = (typeof y === "function") ? y : transformCSS + ": translate3d(0px," + y + "px, 0px)";
+        rangeStyles.push([range, elementId, style]);
+      });
       return storyHandler;
     },
   
@@ -199,6 +219,20 @@ cwm.handlers.StoryHandler = function() {
     }
   };
   
+  function fadeOutGen (start, end) {
+    var s = start, e = end;
+    return function (y) {
+      return "opacity:" + easeOut(Math.max(e - y, 0) / (e - s)).toFixed(2) + ";";
+    };
+  }
+  
+  function fadeInGen (start, end) {
+    var s = start, e = end;
+    return function (y) {
+      return "opacity:" + easeIn(Math.min(y - e, s - e) / (s - e)).toFixed(2) + ";";
+    };
+  }
+  
   function fade (selector, start, end) {
     var i, 
         elementId,
@@ -215,15 +249,11 @@ cwm.handlers.StoryHandler = function() {
       e = range[1];
       if (s < e && e > 0) {
         // Fade out
-        fadeFunc = (function (s,e) { return function (y) {
-          return "opacity:" + easeOut(Math.max(e - y, 0) / (e - s)).toFixed(2) + ";";
-        }; })(s,e);
+        fadeFunc = fadeOutGen(s,e);
         rangeStyles.push([[s,e], elementId, fadeFunc]);
       } else if (e < s && s > 0) {
         // Fade in
-        fadeFunc = (function (s,e) { return function (y) {
-          return "opacity:" + easeIn(Math.min(y - e, s - e) / (s - e)).toFixed(2) + ";";
-        }; })(s,e);
+        fadeFunc = fadeInGen(s,e);
         rangeStyles.push([[e,s], elementId, fadeFunc]);
       }
     }
@@ -309,17 +339,6 @@ cwm.handlers.StoryHandler = function() {
   
   function easeOut (t) {
     return 1 - easeIn(1-t);
-  }
-  
-  function wrapElements(selector) {
-    var height,
-        els = query(selector);
-    for (var i = 0; i < els.length; i++) {
-      if (els[i].parentNode.getAttribute("data-wrap") !== "") {
-        height = els[i].offsetHeight + "px";
-        $(els[i]).wrapAll('<div data-wrap style="position: relative; height: ' + height + '" />');
-      }
-    }
   }
   
   return storyHandler;
