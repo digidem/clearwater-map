@@ -213,6 +213,7 @@ cwm.handlers.StoryHandler = function(storyId) {
   
     enable: function () {
       styles.length = 0;
+      cacheScrollPointStyles();
       d3.timer(cacheScrollPointStyles);
       enabled = true;
       cwm.scrollHandler.add(storyHandler.updateStyles);
