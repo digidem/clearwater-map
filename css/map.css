@@ -1,4 +1,7 @@
-#mapstory #map { position:absolute; top:0; bottom:0; width:100%; }
+#mapstory #map { 
+  cursor: grab;
+  position:absolute; top:0; bottom:0; width:100%; 
+}
 
 #mapstory svg {
   width: 100%;
@@ -9,7 +12,7 @@
   margin:0px;
   padding:0px;
   font: 400 14px/21px "PT Sans",Arial,sans-serif;
-  background: white;
+  background: #222;
 }
 
 #mapstory #nav {
@@ -119,14 +122,13 @@ opacity: 0;
 }
 
 #mapstory #stories h1, #mapstory #stories h2 {
+  cursor: pointer;
   line-height: 1em;
   padding: 0.25em 1em;
   margin: 0;
   font-weight: normal;
   font-family: "Yanone Kaffeesatz", sans-serif;
 }
-
-.outline { display: none;}
 
 #mapstory #stories h1 {
   position: relative;
@@ -226,7 +228,7 @@ opacity: 0;
 }
 
 #mapstory #stories ul, #mapstory #stories p {
-
+text-rendering: optimizeLegibility;
 }
 
 #mapstory #stories ul {
