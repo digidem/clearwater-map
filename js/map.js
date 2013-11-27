@@ -61,6 +61,19 @@ cwm.Map = function (mapId, options) {
       setupScrolling();
       refresh();
     }
+    d3.select(map.parent).on("click", function () {
+      if (d3.event.defaultPrevented) return;
+      var b = markerLayer.getNearestBounds();
+      var extent = map.getExtent();
+      if (!extent.containsBounds(b)) {
+        //var d = markerLayer.closest();
+        //var endY = map.s.scrollTo(cwm.util.sanitize(d.properties.community) + "-overview");
+        extent.encloseExtent(new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]));
+        var coord = map.extentCoordinate(extent, true);
+        map.ease.to(coord).path("screen").run(1000);
+        map.flightHandler.setOverride();
+      }
+    });
   }
 
   /*
