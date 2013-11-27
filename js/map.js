@@ -13,8 +13,8 @@ cwm.Map = function (mapId, options) {
     mapId,
     [
       cwm.layers.BingLayer({ apiKey: options.bingApiKey }),
-      cwm.layers.MapboxLayer().id(options.mapboxId),
-//      markerLayer,
+//      cwm.layers.MapboxLayer().id(options.mapboxId),
+      markerLayer,
       featureLayer
     ],
     null,
