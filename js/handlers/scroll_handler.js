@@ -6,13 +6,15 @@ cwm.handlers.ScrollHandler = function(map) {
   var animators = [],
       lastScrollY = -1,
       currentScroll = 0,
-      ticking = false,
-      scrolling = false,
+      paused = false,
       scrollStartTime,
       scrollStartY,
       scrollEndY,
       scrollDiff,
-      scrollTotalTime;
+      scrollTotalTime,
+      callback;
+
+  d3.timer(tick);
 
   // from https://github.com/mbostock/d3/pull/1050/files
   if ('onwheel' in document) {
@@ -34,19 +36,16 @@ cwm.handlers.ScrollHandler = function(map) {
   
   d3.select(map.parent.parentNode).on(d3_behavior_zoom_wheel, onMouseWheel);
   
-  var stories = d3.select("#stories");
-  
   function onMouseWheel () {
     d3.event.preventDefault();
     currentScroll -= d3_behavior_zoom_delta();
     currentScroll = Math.max(0, currentScroll);
-    d3.timer(tick);
   }
   
   function tick () {
+    if (paused) return;
     var y = ~~(0.5 + currentScroll);
     if (y !== lastScrollY) {
-      stories.style(cwm.util.transformCSS, "translate3d(0px,-"+y+"px, 0px)");
       animators.forEach( function(animator) {
         animator(y);
       });
@@ -62,14 +61,11 @@ cwm.handlers.ScrollHandler = function(map) {
   function scroll () {
     var now = Date.now();
 
-    if (now - scrollStartTime > scrollTotalTime) {
-      window.scrollTo(0, scrollEndY);
-      currentScroll = null;
+    if (now - scrollStartTime >= scrollTotalTime) {
+      currentScroll = scrollEndY;
       return true;
     } else {
-      currentScroll = scrollStartY + scrollDiff * ease((now - scrollStartTime) / scrollTotalTime);
-      currentScroll = Math.round(currentScroll);
-      window.scrollTo(0, currentScroll);
+      currentScroll = Math.round(scrollStartY + (scrollEndY - scrollStartY) * ease((now - scrollStartTime) / scrollTotalTime));
     }
   }
   
@@ -77,13 +73,15 @@ cwm.handlers.ScrollHandler = function(map) {
     
     add: function (animator) {
       animators.push(animator);
+      lastScrollY = -1;
     },
     
-    scrollTo: function (y) {
-      scrollStartY = window.scrollY;
-      scrollEndY = y;
+    scrollTo: function (y, cb) {
+      scrollStartY = Math.round(currentScroll);
+      scrollEndY = Math.round(y);
       scrollDiff = Math.abs(scrollStartY - scrollEndY);
       scrollStartTime = Date.now();
+      callback = cb;
       
       if (map) {
         map.flightHandler.clearOverride();
@@ -93,6 +91,18 @@ cwm.handlers.ScrollHandler = function(map) {
         scrollTotalTime = scrollDiff;
       }
       d3.timer(scroll);
+    },
+    
+    currentScroll: function () {
+      return Math.round(currentScroll);
+    },
+    
+    pause: function () {
+      paused = true;
+    },
+    
+    resume: function () {
+      paused = false;
     }
   };
   

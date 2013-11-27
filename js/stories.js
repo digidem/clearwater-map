@@ -38,7 +38,8 @@ cwm.Stories = function () {
     .enable();
   
   // Scroll the map to an element by id
-  stories.scrollTo = function (id) {
+  stories.scrollTo = function (id, callback) {
+    var y;
     var el = document.getElementById(id);
     var offset = $x(el).nextSiblingOrCousin()[0] ? $x(el).nextSiblingOrCousin()[0].children[1].children[0].offsetHeight : 0;
     
