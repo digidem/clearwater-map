@@ -24,8 +24,9 @@ cwm.Map = function (mapId, options) {
   featureLayer.add(cwm.data.ecuador, { 
     id: "ecuador", 
     maxZoom: 7,
-    scrollTo: function () { return "overview"; }
+    scrollTo: function () { return "project-overview"; }
   });
+  
   featureLayer.load(options.communityUrl, { 
     id: "communities", 
     maxZoom: 14,
@@ -79,9 +80,13 @@ cwm.Map = function (mapId, options) {
       function (d) { return cwm.util.sanitize(d.properties.featured_url); },
       function (d) { return d.properties.featured && true; }
     );
-    
-    locations = locations.concat([{ id: "overview", bounds: featureLayer.bounds.communities }])
+    var overviewLocations = markerLayer.getBounds(
+      function (d) { return cwm.util.sanitize(d) + "-overview"; },
+      function (d) { return d.properties.community; }
+    );
+    locations = locations.concat([{ id: "project-overview", bounds: featureLayer.bounds.communities }])
         .concat(featureLayer.getLocations("community"))
+        .concat(overviewLocations)
         .concat(storyLocations);
   }
   
