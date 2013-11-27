@@ -7,7 +7,7 @@
 cwm.handlers.StoryHandler = function() {
   var wHeight = window.innerHeight,
       dHeight = d3.select("#stories")[0][0].offsetHeight + wHeight,
-      scrollStyles = new Array(dHeight),
+      scrollStyles = [],
       rangeStyles = [],
       enabled = false,
       transformCSS = cwm.util.transformCSS;
@@ -212,7 +212,8 @@ cwm.handlers.StoryHandler = function() {
     },
   
     enable: function () {
-      cacheScrollPointStyles();
+      styles.length = 0;
+      d3.timer(cacheScrollPointStyles);
       enabled = true;
       cwm.scrollHandler.add(storyHandler.updateStyles);
       return storyHandler;
@@ -269,11 +270,11 @@ cwm.handlers.StoryHandler = function() {
         elementId,
         style,
         elementStyles;
-    
-    styles.length = 0;
+
     styleId = styles.add(cwm.util.fillArray([""], elements.length));
+    var length = scrollStyles.length;
     
-    for (pixel = 0; pixel < dHeight; pixel++) {
+    for (pixel = length; pixel < (length + 500); pixel++) {
       elementStyles = cwm.util.fillArray([""], elements.length);
       updated = false;
       
@@ -299,6 +300,8 @@ cwm.handlers.StoryHandler = function() {
       
       scrollStyles[pixel] = styleId;
     }
+    
+    return scrollStyles.length > dHeight;
   }
 
   function getStartEnd (start, end) {
