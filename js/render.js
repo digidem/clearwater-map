@@ -21,20 +21,20 @@ cwm.render = {
         .style("cursor", "pointer");
   },
   
-  PopupWrapper: function (d, context) {
-    var popupWrapper = context.append("div")
+  Popup: function (d, context) {
+    var popup = context.append("div")
         .attr("class", "marker-tooltip")
         .style("width", "100%")
         .datum(d);
       
-    popupWrapper.append("div")
+    popup.append("div")
         .style("position", "absolute")
         .style("pointer-events", "none")
         .append("div")
         .attr("class", "marker-popup")
         .style("pointer-events", "auto");
         
-    return popupWrapper;
+    return popup;
   },
   
   PopupSmall: function (d, context) {
@@ -46,6 +46,43 @@ cwm.render = {
     context.append("p")
         .text(d.properties.name.split(" and")[0]);
         
+    return context;
+  },
+  
+  PopupLarge: function (d, context) {
+    var format = d3.time.format("%b %e %Y")
+    context.append("div")
+        .attr("class", "wrapper")
+        .append("img")
+        .attr("src", d.properties.photo);
+      
+    var table = context.append("table")
+
+    var row = table.append("tr")
+    row.append("th").text("Family:");
+    row.append("td").text(d.properties.name);
+    
+    row = table.append("tr")
+    row.append("th").text("Village:");
+    row.append("td").text(d.properties.community);
+
+    row = table.append("tr")
+    row.append("th").text("Installed:");
+    row.append("td").text(format(new Date(d.properties.date)));
+
+    row = table.append("tr")
+    row.append("th").text("Users:");
+    row.append("td").text(d.properties.users);
+
+    if (d.properties.featured === true) {
+      row = table.append("tr")
+      row.append("th").text("Story:");
+      row.append("td")
+        .append("a")
+        .attr("href", d.properties.featured_url)
+        .text("Read more on our blog...");
+    }
+
     return context;
   }
 };

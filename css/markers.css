@@ -2,6 +2,7 @@
   stroke-width: 0;
   fill: #17aae4;
   opacity: 0.6;
+  cursor: pointer;
 }
 
 #mapstory .markers circle.featured {
@@ -68,6 +69,7 @@ pointer-events: all;
 }
 
 #mapstory .marker-popup {
+  cursor: pointer;
   position:absolute;
   left:0;
   bottom:0;
@@ -81,6 +83,35 @@ pointer-events: all;
   pointer-events: none;
   -webkit-box-shadow: 0px 0px 10px 0px #222;
           box-shadow: 0px 0px 10px 0px #222;
+}
+
+#mapstory .marker-popup.large {
+  cursor: auto;
+  width: 300px;
+}
+
+#mapstory .marker-popup table {
+  margin: 0.25em 0.5em;
+  border: 0;
+}
+
+#mapstory .marker-popup th {
+  padding: 0 0.25em;
+  color: #999;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  text-align: right;
+}
+#mapstory .marker-popup td {
+  line-height: 1.3em;
+  padding: 0 0.25em;
+}
+#mapstory .marker-popup a {
+  color: #17aae4;
+}
+
+#mapstory .marker-popup a:hover {
+  text-decoration: underline;
 }
 
 #mapstory .marker-popup .wrapper {
