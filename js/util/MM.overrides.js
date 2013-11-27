@@ -21,11 +21,18 @@ MM.Extent.prototype.coversBounds = function (bounds) {
            bounds[0][1] > this.north ||
            bounds[1][0] < this.west ||
            bounds[1][1] < this.south);
-}
+};
+
+MM.Extent.prototype.containsBounds = function (bounds) {
+  return (bounds[0][0] > this.west &&
+           bounds[0][1] > this.south &&
+           bounds[1][0] < this.east &&
+           bounds[1][1] < this.north);
+};
 
 MM.Extent.prototype.containsCoordinates = function (coords) {
   return this.containsLocation(new MM.Location(coords[1], coords[0]));
-}
+};
 
 // Returns the map zoom and center for an extent, but accounting for the 
 // space taken by the column of stories to the left.
