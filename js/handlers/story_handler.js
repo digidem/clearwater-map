@@ -4,7 +4,7 @@
 // Has been highly optimized for adjusting multiple elements on
 // scroll, and has minimal external dependencies.
 
-cwm.handlers.StoryHandler = function() {
+cwm.handlers.StoryHandler = function(storyId) {
   var wHeight = window.innerHeight,
       dHeight = d3.select("#stories")[0][0].offsetHeight + wHeight,
       scrollStyles = [],
@@ -312,6 +312,7 @@ cwm.handlers.StoryHandler = function() {
   }
   
   storyHandler.updateStyles = function (y) {
+    d3.select(storyId).style(cwm.util.transformCSS, "translate3d(0px,-"+y+"px, 0px)");
     var styleId = scrollStyles[Math.max(y,0)];
     var elementStyles = styles[styleId];
     var i, 

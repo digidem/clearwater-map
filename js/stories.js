@@ -14,7 +14,7 @@ cwm.Stories = function () {
   var h1Height = document.getElementsByTagName("h1")[0].offsetHeight;
   var h2Height = document.getElementsByTagName("h2")[0].offsetHeight;
 
-  var storyHandler = cwm.handlers.StoryHandler()
+  var storyHandler = cwm.handlers.StoryHandler("#stories")
     .affixTop(
       "#stories h1", 
       function () { return $x(this).parent("article").next().offsetTop() - this.offsetHeight; }
