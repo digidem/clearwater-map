@@ -44,8 +44,10 @@ cwm.Stories = function () {
     var offset = $x(el).nextSiblingOrCousin()[0] ? $x(el).nextSiblingOrCousin()[0].children[1].children[0].offsetHeight : 0;
     
     if (el) {
-      cwm.scrollHandler.scrollTo(el.offsetTop + el.offsetHeight + offset);
+      y = el.offsetTop + el.offsetHeight + offset
+      cwm.scrollHandler.scrollTo(y);
     }
+    return y;
   };
   
   function setupScrolling () {
