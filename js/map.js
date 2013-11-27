@@ -18,7 +18,7 @@ cwm.Map = function (mapId, options) {
       featureLayer
     ],
     null,
-    [ ]
+    [ cwm.handlers.DragHandler() ]
   ).setExtent(options.startBounds, false, paddingLeft).setZoomRange(3,18);
   
   featureLayer.add(cwm.data.ecuador, { 
@@ -44,10 +44,6 @@ cwm.Map = function (mapId, options) {
     stories = s;
     return map;
   };
-  
-  map.addCallback("panned", function(map, panOffset) {
-    map.flightHandler.setOverride();
-  });
   
   window.onresize = function () {
     $('html,body').stop(true);
