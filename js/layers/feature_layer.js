@@ -95,7 +95,9 @@ cwm.layers.FeatureLayer = function (context, id) {
           .append("path")
           .attr("class", id)
           .on("click", function (d) {
-            featureLayer.map.s.scrollTo(d.properties._scrollTo);
+            var endY = featureLayer.map.s.scrollTo(d.properties._scrollTo);
+            if (endY === cwm.scrollHandler.currentScroll())
+            featureLayer.map.s.scrollTo(d.properties._scrollTo + "-overview");
           });
     
       // clip = d3.geo.clipExtent()
