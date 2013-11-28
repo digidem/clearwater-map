@@ -9,6 +9,8 @@ cwm.handlers.StoryHandler = function(storyId) {
       dHeight = d3.select("#stories")[0][0].offsetHeight + wHeight,
       scrollStyles = [],
       rangeStyles = [],
+      rangeKlasses = [],
+      scrollKlasses = [],
       enabled = false,
       transformCSS = cwm.util.transformCSS;
       
@@ -85,23 +87,26 @@ cwm.handlers.StoryHandler = function(storyId) {
   
   var elements = new ElementCache();
   var styles = new Cache();
+  var klasses = new Cache();
+
+  var elementsK = new ElementCache();
 
   var storyHandler = {
 
     // will apply class `classname` to elements selected by `selector` between
     // scroll points `start` and `end`, which can be numbers or functions
     // `this` will be passed to the function as the current element.
-    addClass: function (selector, className, start, end) {
+    addKlass: function (selector, className, start, end) {
       var i,
           elementId,
           range,
           els = query(selector);
     
       for (i = 0; i < els.length; i++) {
-        elementId = elements.add(els[i]);
+        elementId = elementsK.add(els[i]);
         range = getStartEnd.call(els[i], start, end);
         if (range[1] >= 0) {
-          rangeStyles.push([range, elementId, className + " "]);
+          rangeKlasses.push([range, elementId, className]);
         }
       }
       return storyHandler;
@@ -122,6 +127,8 @@ cwm.handlers.StoryHandler = function(storyId) {
         }
         storyHandler.addTranslateY(selector, endOffset, e, 999999);
       }
+      
+      storyHandler.addKlass(selector, "fixedTop", start, e || 999999);
       storyHandler.addTranslateY(selector, function () {
         var offset = scrollTop(this);
         return function (y) {
@@ -147,6 +154,7 @@ cwm.handlers.StoryHandler = function(storyId) {
         }
         storyHandler.addTranslateY(selector, startOffset, 0, s);
       }
+      storyHandler.addKlass(selector, "fixedBottom", s || 0, end);
       storyHandler.addTranslateY(selector, function () {
         var offset = end.call(this);
         return function (y) {
@@ -213,8 +221,8 @@ cwm.handlers.StoryHandler = function(storyId) {
   
     enable: function () {
       styles.length = 0;
-      cacheScrollPointStyles();
-      d3.timer(cacheScrollPointStyles);
+      cacheScrollPoints();
+      d3.timer(cacheScrollPoints);
       enabled = true;
       cwm.scrollHandler.add(storyHandler.updateStyles);
       return storyHandler;
@@ -261,22 +269,27 @@ cwm.handlers.StoryHandler = function(storyId) {
     }
   }
   
-  function cacheScrollPointStyles () {
+  function cacheScrollPoints () {
     var pixel,
         updated,
         styleId,
+        klassId,
         i,
         start,
         end,
         elementId,
         style,
-        elementStyles;
-
+        klass,
+        elementStyles,
+        elementKlasses;
+        var now = Date.now();
     styleId = styles.add(cwm.util.fillArray([""], elements.length));
+    klassId = klasses.add(cwm.util.fillArray("", elementsK.length));
     var length = scrollStyles.length;
     
-    for (pixel = length; pixel < (length + 500); pixel++) {
+    for (pixel = length; pixel < (length + 100); pixel++) {
       elementStyles = cwm.util.fillArray([""], elements.length);
+      elementKlasses = cwm.util.fillArray("", elementsK.length);
       updated = false;
       
       for (i = 0; i < rangeStyles.length; i++) {
@@ -298,10 +311,25 @@ cwm.handlers.StoryHandler = function(storyId) {
       }
       
       if (updated) styleId = styles.add(elementStyles);
-      
       scrollStyles[pixel] = styleId;
+      
+      updated = false;
+      for (i = 0; i < rangeKlasses.length; i++) {
+        start = rangeKlasses[i][0][0];
+        end = rangeKlasses[i][0][1];
+        elementId = rangeKlasses[i][1];
+        klass = rangeKlasses[i][2];
+        
+        if (pixel >= start && pixel < end) {
+          elementKlasses[elementId] += " " + klass;
+          updated = true;
+        }
+      }
+      
+      if (updated) klassId = klasses.add(elementKlasses);
+      scrollKlasses[pixel] = klassId;
     }
-    
+    console.log(Date.now() - now);
     return scrollStyles.length > dHeight;
   }
 
@@ -313,12 +341,17 @@ cwm.handlers.StoryHandler = function(storyId) {
   }
   
   storyHandler.updateStyles = function (y) {
+    // scroll the stories to y
     d3.select(storyId).style(cwm.util.transformCSS, "translate3d(0px,-"+y+"px, 0px)");
+    
     var styleId = scrollStyles[Math.max(y,0)];
+    var klassId = scrollKlasses[Math.max(y,0)];
     var elementStyles = styles[styleId];
+    var elementKlasses = klasses[klassId];
     var i, 
         el,
         styleString,
+        klassString,
         j;
 
     for (i = 0; i < elementStyles.length; i++) {
@@ -329,6 +362,14 @@ cwm.handlers.StoryHandler = function(storyId) {
       }
       if (el.getAttribute("style") !== styleString) {
         el.setAttribute("style", styleString);
+      }
+    }
+    
+    for (i = 0; i < elementKlasses.length; i++) {
+      el = elementsK[i];
+      klassString = elementKlasses[i].trim();
+      if (el.getAttribute("class") !== klassString) {
+        el.setAttribute("class", klassString);
       }
     }
   };
