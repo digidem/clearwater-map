@@ -48,6 +48,8 @@ cwm.layers.MarkerLayer = function (context, id) {
       .delay(function (d, i) { return i * 20; })
       .ease("elastic", 2)
       .attr("r", getMarkerSize );
+      
+    g.selectAll("circle").sort(sortFeaturedLast);
   }
   
   function hideMarkers () {
@@ -57,6 +59,10 @@ cwm.layers.MarkerLayer = function (context, id) {
         d3.select(this).attr("display", "none");
         markersHiding = null;
       });
+  }
+  
+  function sortFeaturedLast (a, b) {
+    return (a.properties.featured === true) ? 1 : 0;
   }
   
   function drawMarkers() {
