@@ -1,0 +1,131 @@
+#mapstory #stories h2.fixedBottom:hover, #mapstory #stories h1.fixedBottom:hover {
+  -webkit-animation: animationFrames ease-in-out 400ms;
+  -webkit-animation-iteration-count: 2;
+
+  -moz-animation: animationFrames ease-in-out 400ms;
+  -moz-animation-iteration-count: 2;
+
+  -o-animation: animationFrames ease-in-out 400ms;
+  -o-animation-iteration-count: 2;
+
+  animation: animationFrames ease-in-out 400ms;
+  animation-iteration-count: 2;
+}
+
+@-webkit-keyframes animationFrames {
+  0% {
+    background-position: 97.5% 50%;
+  }
+  50% {
+    background-position: 97.5% 75%;
+  }
+  100% {
+    background-position: 97.5% 50%;
+  }
+
+}
+
+@-moz-keyframes animationFrames {
+  0% {
+    background-position: 97.5% 50%;
+  }
+  50% {
+    background-position: 97.5% 75%;
+  }
+  100% {
+    background-position: 97.5% 50%;
+  }
+
+}
+
+@-o-keyframes animationFrames {
+  0% {
+    background-position: 97.5% 50%;
+  }
+  50% {
+    background-position: 97.5% 75%;
+  }
+  100% {
+    background-position: 97.5% 50%;
+  }
+
+}
+
+@keyframes animationFrames {
+  0% {
+    background-position: 97.5% 50%;
+  }
+  50% {
+    background-position: 97.5% 75%;
+  }
+  100% {
+    background-position: 97.5% 50%;
+  }
+
+}
+
+#mapstory #stories h1.fixedTop:hover:before {
+  -webkit-animation: animationFrames2 ease-in-out 400ms;
+  -webkit-animation-iteration-count: 2;
+
+  -moz-animation: animationFrames2 ease-in-out 400ms;
+  -moz-animation-iteration-count: 2;
+
+  -o-animation: animationFrames2 ease-in-out 400ms;
+  -o-animation-iteration-count: 2;
+
+  animation: animationFrames2 ease-in-out 400ms;
+  animation-iteration-count: 2;
+}
+
+@-webkit-keyframes animationFrames2 {
+  0% {
+    background-size: 1em;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@-moz-keyframes animationFrames2 {
+  0% {
+    background-size: 1em;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@-o-keyframes animationFrames2 {
+  0% {
+    background-size: 1em;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@keyframes animationFrames2 {
+  0% {
+    background-size: 1em;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
