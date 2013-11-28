@@ -29,11 +29,11 @@ cwm.Map = function (mapId, options) {
   
   featureLayer.load(options.communityUrl, { 
     id: "communities", 
-    maxZoom: 14,
+    maxZoom: 12.5,
     scrollTo: function (d) { return cwm.util.sanitize(d.properties.community); }
   }, onLoad);
       
-  markerLayer.load(options.installationUrl, { minZoom: 14 },onLoad);
+  markerLayer.load(options.installationUrl, { minZoom: 12.5 },onLoad);
   
   map.ease = mapbox.ease().map(map);
   
