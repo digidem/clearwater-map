@@ -101,6 +101,7 @@ pointer-events: all;
   text-transform: uppercase;
   font-size: 0.8em;
   text-align: right;
+  vertical-align: top;
 }
 #mapstory .marker-popup td {
   line-height: 1.3em;
