@@ -49,14 +49,15 @@ cwm.render = {
         .style("pointer-events", "none")
         .append("div")
         .attr("class", "marker-popup")
-        .style("pointer-events", "auto");
+        .style("pointer-events", "auto")
+        .classed("featured", function () { return d.properties.featured === true; });
         
     return popup;
   },
   
   PopupSmall: function (d, context) {
     context.append("div")
-        .attr("class", "wrapper")
+        .attr("class", "image-wrapper")
         .append("img")
         .attr("src", d.properties.photo);
       
@@ -69,7 +70,7 @@ cwm.render = {
   PopupLarge: function (d, context) {
     var format = d3.time.format("%b %e %Y")
     context.append("div")
-        .attr("class", "wrapper")
+        .attr("class", "image-wrapper")
         .append("img")
         .attr("src", d.properties.photo);
       

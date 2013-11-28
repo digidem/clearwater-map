@@ -80,6 +80,10 @@ pointer-events: all;
   width: 300px;
 }
 
+#mapstory .marker-popup .image-wrapper {
+  font-size: 0.8em;
+}
+
 #mapstory .marker-popup table {
   margin: 0.25em 0.5em;
   border: 0;
@@ -103,14 +107,6 @@ pointer-events: all;
 
 #mapstory .marker-popup a:hover {
   text-decoration: underline;
-}
-
-#mapstory .marker-popup .wrapper {
-  background-color: #222;
-  position: relative;
-  height: 0;
-  padding-bottom: 66.67%;
-  overflow: hidden;
 }
 
 #mapstory .marker-popup img {

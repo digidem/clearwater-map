@@ -173,14 +173,6 @@
 margin-bottom: 0.5em;
 }
 
-#mapstory #stories .image {
-  background-color: #222;
-  position: relative;
-  height: 0;
-  padding-bottom: 66.67%;
-  overflow: hidden;
-}
-
 #mapstory #stories img {
   position: absolute;
   top: 50%;
