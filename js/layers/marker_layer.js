@@ -198,7 +198,7 @@ cwm.layers.MarkerLayer = function (context, id) {
     
     // returns an array of bounds for each group of markers
     // used by the map to locate overviews
-    getBounds: function (id, key) {
+    getOverviewLocations: function (id, key) {
       var locations = [];
       var groupedMarkers = d3.nest().key(key).entries(markerData);
       

@@ -89,7 +89,7 @@ cwm.Map = function (mapId, options) {
       function (d) { return cwm.util.sanitize(d.properties.featured_url); },
       function (d) { return d.properties.featured && true; }
     );
-    var overviewLocations = markerLayer.getBounds(
+    var overviewLocations = markerLayer.getOverviewLocations(
       function (d) { return cwm.util.sanitize(d) + "-overview"; },
       function (d) { return d.properties.community; }
     );
