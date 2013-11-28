@@ -71,7 +71,7 @@ cwm.layers.MarkerLayer = function (context, id) {
     
     var point = new MM.Point(x, y);
     var to = map.pointCoordinate(point).zoomTo(z);
-    map.ease.to(to).path('about').run(500, function () {
+    map.ease.to(to).path('about').run(1000, function () {
       map.flightHandler.setOverride();
     });
   }
