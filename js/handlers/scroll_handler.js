@@ -63,6 +63,7 @@ cwm.handlers.ScrollHandler = function(map) {
 
     if (now - scrollStartTime >= scrollTotalTime) {
       currentScroll = scrollEndY;
+      if (callback) { callback(); callback = null; }
       return true;
     } else {
       currentScroll = Math.round(scrollStartY + (scrollEndY - scrollStartY) * ease((now - scrollStartTime) / scrollTotalTime));

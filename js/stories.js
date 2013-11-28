@@ -45,7 +45,7 @@ cwm.Stories = function () {
     
     if (el) {
       y = el.offsetTop + el.offsetHeight + offset
-      cwm.scrollHandler.scrollTo(y);
+      cwm.scrollHandler.scrollTo(y, callback);
     }
     return y;
   };
