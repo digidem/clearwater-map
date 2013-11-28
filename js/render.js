@@ -21,6 +21,23 @@ cwm.render = {
         .style("cursor", "pointer");
   },
   
+  Label: function (d, context) {
+    var label = context.append("div")
+        .attr("class", "marker-tooltip")
+        .style("width", "100%")
+        .datum(d);
+      
+    label.append("div")
+        .style("position", "absolute")
+        .style("pointer-events", "none")
+        .append("div")
+        .attr("class", "feature-label")
+        .style("pointer-events", "auto")
+        .text(d.properties.community || d.properties.description);
+        
+    return label;
+  },
+  
   Popup: function (d, context) {
     var popup = context.append("div")
         .attr("class", "marker-tooltip")

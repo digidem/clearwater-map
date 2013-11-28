@@ -5,6 +5,8 @@ cwm.layers.FeatureLayer = function (context, id) {
   
   var clip,
       features,
+      label,
+      mouseoverLabel,
       featureCollectionCount = 0,
       featureData = [];
   
@@ -28,7 +30,38 @@ cwm.layers.FeatureLayer = function (context, id) {
     return projectionStream.stream(clip.stream(s));
   }};
   */
-    
+  
+  function showLabel () {
+    var d = this.__data__;
+    if (label && label.node().parentNode) return;
+    label = cwm.render.Label(d, context);
+    label._feature = this;
+    label.on("mouseover", function () { mouseoverLabel = true; })
+         .on("mouseout", function () { mouseoverLabel = false; label.remove(); })
+         .on("click", function () {
+           d3.event.stopPropagation();
+           mouseoverLabel = false;
+           label.remove();
+           d3.select(label._feature).on("click").call(label._feature, d);
+         });
+    drawLabel();
+  }
+  
+  function drawLabel () {
+    if (label) {
+      var d = label.datum();
+      var point = featureLayer.map.locationPoint(new MM.Location(d.properties._labelXY[1], d.properties._labelXY[0]));
+      MM.moveElement(label.node(), point);
+    }
+  }
+  
+  function hideLabel () {
+    window.setTimeout(function () {
+      if (!mouseoverLabel)
+      label.remove();
+    }, 10);
+  }
+  
   var pathGenerator = d3.geo.path().projection(projectionStream);
     
   var featureLayer = {
@@ -55,12 +88,15 @@ cwm.layers.FeatureLayer = function (context, id) {
       features.data(data, function (d) { return d.properties.cartodb_id; })
           .attr("d", pathGenerator)
           .style("fill-opacity", function (d) {
-            return Math.min(Math.max(d.properties._maxZoom - zoom, 0), 1) * 0.6;
+            return Math.min(Math.max(d.properties._maxZoom + 1 - zoom, 0), 1) * 0.6;
           })
           .attr("display", "")
           .classed("outline", function (d) { return zoom > d.properties._maxZoom; })
+          .on("mouseover", showLabel)
+          .on("mouseout", hideLabel)
           .exit().attr("display", "none");
-          
+
+      drawLabel();
       return featureLayer;
     },
     
@@ -76,7 +112,8 @@ cwm.layers.FeatureLayer = function (context, id) {
         d.properties._maxZoom = maxZoom;
         d.properties._id = id;
         d.properties._bounds = d3.geo.bounds(d);
-        d.properties._scrollTo = options.scrollTo(d)
+        d.properties._labelXY = d3.geo.centroid(d);
+        d.properties._scrollTo = options.scrollTo(d);
       });
 
       // add these features to the features already in the layer
