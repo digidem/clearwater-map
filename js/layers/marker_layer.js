@@ -211,6 +211,16 @@ cwm.layers.MarkerLayer = function (context, id) {
         });
       });
       return locations;
+    },
+    
+    // Gets the bounds of the nearest group of markers for a community
+    getBounds: function (filter) {
+      filter = filter || trueFn;
+      var filtered = markerData.filter(filter);
+      return d3.geo.bounds({
+  "type": "FeatureCollection",
+  "features": filtered });
+    },
     
     closest: function (location) {
       return markerData.sort(sortFromLocation(location))[0];
