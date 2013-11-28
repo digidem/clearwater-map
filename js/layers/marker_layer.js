@@ -23,13 +23,15 @@ cwm.layers.MarkerLayer = function (context, id) {
   
   // Sorts points according to distance from center point of map
   // used for animating `show` making markers appear from center
-  function sortFromCenter (a, b) {
-    var c = markerLayer.map.getCenter();
-    var ac = a.geometry.coordinates;
-    var bc = b.geometry.coordinates;
-    var ad = Math.pow(ac[0] - c.lon, 2) + Math.pow(ac[1] - c.lat, 2);
-    var bd = Math.pow(bc[0] - c.lon, 2) + Math.pow(bc[1] - c.lat, 2);
-    return d3.ascending(ad, bd);
+  function sortFromLocation (location) {
+    var loc = location || new MM.Location(0,0);
+    return function (a, b) {
+      var ac = a.geometry.coordinates;
+      var bc = b.geometry.coordinates;
+      var ad = Math.pow(ac[0] - loc.lon, 2) + Math.pow(ac[1] - loc.lat, 2);
+      var bd = Math.pow(bc[0] - loc.lon, 2) + Math.pow(bc[1] - loc.lat, 2);
+      return d3.ascending(ad, bd);
+    };
   }
   
   // A function that always returns true (used for default arguments)
@@ -39,7 +41,7 @@ cwm.layers.MarkerLayer = function (context, id) {
   
   function showMarkers () {
     g.selectAll("circle")
-      .sort(sortFromCenter)
+      .sort(sortFromLocation(markerLayer.map.getCenter()))
       .attr("r", 0)
       .transition()
       .duration(1000)
@@ -186,6 +188,9 @@ cwm.layers.MarkerLayer = function (context, id) {
         });
       });
       return locations;
+    
+    closest: function (location) {
+      return markerData.sort(sortFromLocation(location))[0];
     }
   };
   
