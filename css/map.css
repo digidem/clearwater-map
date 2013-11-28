@@ -27,17 +27,14 @@
 }
 
 #mapstory #legend {
-position: absolute;
-bottom: 0;
-right: 0;
-width: 340px;
-/* 60% transparent black PNG-24 */
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWNgYGCYCQAAngCaAmUi4AAAAABJRU5ErkJggg==);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* background set to opacity 60% with data uri */
 }
 
 #mapstory #legend dl {
-	margin: 10px;
-	padding: 10px;
+	margin: 0.5em;
 	font-family: "Yanone Kaffeesatz"; /* main font/type */
 	font-size: 1.5em;
 	display: block;
@@ -47,19 +44,19 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFc
 
 #mapstory #legend dt {
   display: block;
-  margin: 0; padding: 0 0 0 1.65em;
-  line-height: 1.2em;
+  margin: 0 0 0.75em; 
+  padding: 0 0.5em 0 1.5em;
   background-repeat: no-repeat;
   background-size: 0.95em 0.95em;
-  background-position: 5px;
+  background-position: 0 50%;
 }
 
 #mapstory #legend dt.system {
-  background-image: url(http://digidem.github.io/clearwater-map/images/cw-system.png);
+  /* Background image cw system icon set with data uri */
 }
 
 #mapstory #legend dt.story {
-  background-image: url(http://digidem.github.io/clearwater-map/images/cw-story.png);
+  /* Background image featured story set with data uri */
 }
 
 @media (max-width:640px) {
