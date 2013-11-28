@@ -12,16 +12,6 @@
   opacity: 0.6;
 }
 
-
-
-#mapstory .markers.zoom11 {
-display: block;
-}
-
-#mapstory .markers.zoom12 {
-opacity: 1;
-}
-
 #mapstory .marker {
 margin-left: -8px;
 margin-top: -8px;
