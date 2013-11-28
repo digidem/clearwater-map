@@ -90,6 +90,7 @@ cwm.handlers.ScrollHandler = function(map) {
       } else {
         scrollTotalTime = scrollDiff;
       }
+      if (scrollDiff < 5) scrollTotalTime = 100;
       d3.timer(scroll);
     },
     
