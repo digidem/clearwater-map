@@ -85,7 +85,6 @@ cwm.handlers.ScrollHandler = function(map) {
       callback = cb;
       
       if (map) {
-        map.flightHandler.clearOverride();
         map.flightHandler.setOverride(null, null, Math.min(scrollEndY, scrollStartY), Math.max(scrollEndY,scrollStartY));
         scrollTotalTime = map.flightHandler.getOverrideTime();
       } else {
