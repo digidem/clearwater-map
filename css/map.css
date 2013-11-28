@@ -99,22 +99,6 @@ display: none;
   -webkit-transform: translate3d(0,0,0);
 }
 
-#mapstory .affixed {
-position: fixed !important;
-}
-
-#mapstory .collapsed {
-position: absolute !important;
-}
-
-#mapstory .offscreen {
-display: none;
-}
-
-#mapstory .faded {
-opacity: 0;
-}
-
 #mapstory #stories section {
   pointer-events: auto;
     margin-bottom: 3.15em;
