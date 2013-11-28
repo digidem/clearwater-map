@@ -1,11 +1,10 @@
 cwm.handlers.MarkerInteraction = function (context) {
   var popup,
-      popupDisplayed,
+      popupFixed,
       isBouncing;
 
   function mouseoverMarker () {
     if (d3.event.defaultPrevented) return;
-    if (popupDisplayed === "large") return;
     var d = this.__data__;
     if (d.properties.featured === true) window.clearTimeout(isBouncing);
     d3.select(this)
@@ -13,16 +12,17 @@ cwm.handlers.MarkerInteraction = function (context) {
       .duration(500)
       .ease("elastic", 1.5)
       .attr("r", function (d) { return getMarkerSize(d, 2); });
-    displayPopup.call(this);
+    if (!popup || popup && this !== popup._marker) displayPopup.call(this);
   }
       
   function mouseoutMarker () {
     if (d3.event.defaultPrevented) return;
-    if (popupDisplayed) return;
-    if (popup) {
+
+    if (popup && !popupFixed) {
       popup.remove();
       popup = null;
     }
+    if (popup && (popup._marker === this)) return;
     d3.select(this)
       .transition()
       .attr("r", getMarkerSize);
@@ -37,41 +37,50 @@ cwm.handlers.MarkerInteraction = function (context) {
     var dim = cwm.map.dimensions;
     
     if (popup) {
-      d3.select(popup._marker)
-        .transition()
-        .attr("r", getMarkerSize);
+      if (popup._marker !== marker) {
+        d3.select(popup._marker)
+          .transition()
+          .attr("r", getMarkerSize);
+      }
       popup.remove();
       popup = null;
     }
     
     popup = cwm.render.Popup(d, context);
+    popup._marker = marker;
     
     var wrapper = popup.select(".marker-popup");
     
     if (d3.event.type === "click") {
       d3.event.stopPropagation();
-      popupDisplayed = "large";
-      popup._marker = marker;
+      popupFixed = "large";
       cwm.render.PopupLarge(d, wrapper.classed("large", true));
       popup.on("click.popup", function () {
-          popupDisplayed = false;
+          if (d3.event.defaultPrevented) return;
+          d3.event.stopPropagation();
+          popupFixed = false;
           mouseoutMarker.call(marker);
         });
-      context.on("click.popup", function () {
-        d3.event.stopPropagation();
-        popupDisplayed = false;
-        mouseoutMarker.call(marker);
+      context.on("click", function () {
+          if (d3.event.defaultPrevented) return;
+          popupFixed = false;
+          mouseoutMarker.call(marker);
       });
     } else {
       cwm.render.PopupSmall(d, wrapper);
-      popup.on("click.popup", function () { displayPopup.call(marker); })
+      popup.on("click.popup", function () {
+          if (d3.event.defaultPrevented) return;
+          displayPopup.call(marker);
+          d3.select(marker).on("click.zoom").call(marker);
+          d3.select(marker).on("click.scroll").call(marker);
+        })
         .on("mouseleave.popup", function () {
           if (d3.event.defaultPrevented) return;
-          popupDisplayed = false;
+          popupFixed = false;
           mouseoutMarker.call(marker);
         })
         .on("mouseenter.popup", function () {
-                popupDisplayed = true;
+                popupFixed = true;
               });
     }
   
@@ -86,7 +95,11 @@ cwm.handlers.MarkerInteraction = function (context) {
   }
   
   function bounceMarkers (marker) {
-    marker = (marker instanceof Element) ? this : marker;
+    // removes the featured marker and puts it on top
+    // if (first) {
+    //   marker = marker.remove();
+    //   d3.select("g.markers").append(function () { return marker.node(); });
+    // }
     if (isBouncing) window.clearTimeout(isBouncing);
     marker.transition()
       .delay(2000)
@@ -104,6 +117,16 @@ cwm.handlers.MarkerInteraction = function (context) {
     isBouncing = window.setTimeout(bounceMarkers, 5000, marker); 
   }
   
+  function scrollToStory () {
+    var d = this.__data__;
+    if (d.properties.featured === true) {
+      cwm.map.flightHandler.pause();
+      cwm.map.s.scrollTo(cwm.util.sanitize(d.properties.featured_url), function () {
+        cwm.map.flightHandler.resume();
+      });
+    }
+  }
+  
   function getMarkerSize (d, scale) {
     scale = scale || 1;
     return d.properties._markerSize * scale;
@@ -112,9 +135,10 @@ cwm.handlers.MarkerInteraction = function (context) {
   return {
     add: function (context) {
       if (!context[0][0]) return;
-      context.on("mouseout.mi", mouseoutMarker)
-          .on("mouseover.mi", mouseoverMarker)
-          .on("click.mi", mouseoverMarker)
+      context.on("mouseout.popup", mouseoutMarker)
+          .on("mouseover.popup", mouseoverMarker)
+          .on("click.popup", displayPopup)
+          .on("click.scroll", scrollToStory)
           .filter(function (d) {return d.properties.featured === true; })
           .attr("class", "featured")
           .call(bounceMarkers);
@@ -129,7 +153,7 @@ cwm.handlers.MarkerInteraction = function (context) {
     },
     
     removePopup: function () {
-      popupDisplayed = false;
+      popupFixed = false;
       if (popup) {
         popup.remove();
         popup = null;
