@@ -61,6 +61,21 @@ cwm.layers.MarkerLayer = function (context, id) {
       });
   }
   
+  function zoomToMarker () {
+    var z = 18;
+    var map = markerLayer.map;
+    var x = this.getAttribute("cx");
+    var y = this.getAttribute("cy");
+    if (d3.event.defaultPrevented) return;
+    if (map.getZoom() >= z) return;
+    
+    var point = new MM.Point(x, y);
+    var to = map.pointCoordinate(point).zoomTo(z);
+    map.ease.to(to).path('about').run(500, function () {
+      map.flightHandler.setOverride();
+    });
+  }
+  
   function sortFeaturedLast (a, b) {
     return (a.properties.featured === true) ? 1 : 0;
   }
@@ -80,8 +95,10 @@ cwm.layers.MarkerLayer = function (context, id) {
     // and add the interaction.
     update.enter()
       .append("circle")
-      .attr("r", getMarkerSize)
-      .call(markerInteraction.add);
+      .attr("r", getMarkerSize);
+
+    update.call(markerInteraction.add)
+      .on("click.zoom", zoomToMarker);
 
     // For markers leaving the current extent, remove them from the DOM.
     update.exit().attr("display", "none");
@@ -109,8 +126,8 @@ cwm.layers.MarkerLayer = function (context, id) {
       // don't do anything if we haven't been attached to a map yet
       // (Modest Maps attaches the map to the layer when it is added to the map)
       if (!markerLayer.map || !markerData) return;
-      
       var zoom = markerLayer.map.getZoom();
+      markerLayer.markersShown = zoom >= minZoom;
       
       if (zoom < minZoom && prevZoom >= minZoom) {
         // If we just zoomed out, animate hide the markers
