@@ -65,6 +65,7 @@ display: none;
 }
 
 #mapstory #stories {
+  pointer-events: none;
   width: 30em;
   position: absolute;
   top: 100%;
@@ -115,6 +116,7 @@ opacity: 0;
 }
 
 #mapstory #stories section {
+  pointer-events: auto;
     margin-bottom: 3.15em;
   margin-top: 20em;
   position: relative;
