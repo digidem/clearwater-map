@@ -1,3 +1,5 @@
+/* globals cwm, mapbox, _ , $x */
+
 /*
  * This handler manages the relationship between scroll positions and
  * map locations - center point and zoom. It sets up a smooth 3 dimensional
@@ -35,7 +37,7 @@ cwm.handlers.FlightHandler = function () {
   // and bounds, an array of two LatLon arrays, south-west, north-east
   // e.g. { id: 'elementid', bounds: [ [0, 0], [100, 100] ] }
   flightHandler.locations = function (l) {
-    if (!arguments.length) return locations; 
+    if (!arguments.length) return locations;
     locations = l;
     setScrollPoints();
     if (!!map) setEasings();
@@ -82,7 +84,7 @@ cwm.handlers.FlightHandler = function () {
   flightHandler.setOverride = function (from,start,top,bottom) {
     from = from || map.coordinate.copy(),
     start = start || cwm.scrollHandler.currentScroll(),
-    top = Math.max(top || start - 200, 0);
+    top = Math.max(top || start - 200, 0),
     bottom = bottom || start + 200;
 
     flightHandler.clearOverride();
@@ -109,7 +111,7 @@ cwm.handlers.FlightHandler = function () {
   flightHandler.resume = function () {
     paused = false;
     return flightHandler;
-  }
+  };
   
   flightHandler.clearOverride = function () {
     override = undefined;
