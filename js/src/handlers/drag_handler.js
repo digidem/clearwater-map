@@ -1,3 +1,6 @@
+/**
+ * ModestMaps handler to add D3 drag functionality to the map
+ */
 cwm.handlers.DragHandler = function() {
     var handler = {},
         map;

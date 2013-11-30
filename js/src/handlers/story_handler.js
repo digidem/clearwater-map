@@ -1,3 +1,6 @@
+/*jshint proto:true */
+/* globals cwm, d3, Sizzle */
+
 // Handles the display of stories as you scroll through the map
 // Stories can be set to fade in and out and can be fixed
 // to the top and bottom of the screen.
@@ -6,50 +9,56 @@
 
 cwm.handlers.StoryHandler = function(storyId) {
   var wHeight = window.innerHeight,
-      dHeight = d3.select("#stories")[0][0].offsetHeight + wHeight,
-      scrollStyles = [],
-      rangeStyles = [],
-      rangeKlasses = [],
-      scrollKlasses = [],
-      enabled = false,
-      transformCSS = cwm.util.transformCSS;
-      
-  var query = function(s) { return document.querySelectorAll(s); };
+    dHeight = d3.select("#stories")[0][0].offsetHeight + wHeight,
+    scrollStyles = [],
+    rangeStyles = [],
+    rangeKlasses = [],
+    scrollKlasses = [],
+    enabled = false,
+    transformCSS = cwm.util.transformCSS;
+
+  var query = function(s) {
+    return document.querySelectorAll(s);
+  };
 
   // Prefer Sizzle, if available.
   if (typeof Sizzle === "function") {
-    query = function(s) { return Sizzle(s) ; };
+    query = function(s) {
+      return Sizzle(s);
+    };
   }
-  
-  var subclass = {}.__proto__?
 
-    // Until ECMAScript supports array subclassing, prototype injection works well. 
-    // See http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
+  var subclass = {}.__proto__ ?
+
+  // Until ECMAScript supports array subclassing, prototype injection works well. 
+  // See http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
+
     function(object, prototype) {
       object.__proto__ = prototype;
-    }:
+    } :
 
     // And if your browser doesn't support __proto__, we'll use direct extension.
+
     function(object, prototype) {
       for (var property in prototype) object[property] = prototype[property];
     };
-  
-  function Cache () {
-    var arr = [ ];
+
+  function Cache() {
+    var arr = [];
     arr.push.apply(arr, arguments);
     subclass(arr, Cache.prototype);
     return arr;
   }
-  
+
   Cache.prototype = Object.create(Array.prototype);
-  
-  Cache.prototype.add = function (value) {
-    for (var i=0; i<this.length; i++) {
+
+  Cache.prototype.add = function(value) {
+    for (var i = 0; i < this.length; i++) {
       if (equal(this[i], value)) return i;
     }
     return this.push(value) - 1;
-    
-    function equal (x, y) {
+
+    function equal(x, y) {
       if (!x || !y) return false;
       if (x == y) return true;
       if (x instanceof Array && y instanceof Array) {
@@ -57,8 +66,8 @@ cwm.handlers.StoryHandler = function(storyId) {
         for (var i = 0; i < x.length; i++) {
           // Check if we have nested arrays
           if (x[i] instanceof Array && y[i] instanceof Array) {
-              // recurse into the nested arrays
-              if (!equal(x[i], y[i])) return false;
+            // recurse into the nested arrays
+            if (!equal(x[i], y[i])) return false;
           }
           // Warning - two different object instances will never be equal: {x:20} != {x:20}
           else if (x[i] != y[i]) return false;
@@ -68,15 +77,15 @@ cwm.handlers.StoryHandler = function(storyId) {
       return false;
     }
   };
-  
-  function ElementCache () {
+
+  function ElementCache() {
     this.origStyles = {};
     this.length = 0;
     this.wrapped = {};
   }
-  
-  ElementCache.prototype.add = function (el) {
-    for (var i=0; i<this.length; i++) {
+
+  ElementCache.prototype.add = function(el) {
+    for (var i = 0; i < this.length; i++) {
       if (this[i] == el) return i;
     }
     this[i] = el;
@@ -84,7 +93,7 @@ cwm.handlers.StoryHandler = function(storyId) {
     this.length += 1;
     return i;
   };
-  
+
   var elements = new ElementCache();
   var styles = new Cache();
   var klasses = new Cache();
@@ -96,12 +105,12 @@ cwm.handlers.StoryHandler = function(storyId) {
     // will apply class `classname` to elements selected by `selector` between
     // scroll points `start` and `end`, which can be numbers or functions
     // `this` will be passed to the function as the current element.
-    addKlass: function (selector, className, start, end) {
+    addKlass: function(selector, className, start, end) {
       var i,
-          elementId,
-          range,
-          els = query(selector);
-    
+        elementId,
+        range,
+        els = query(selector);
+
       for (i = 0; i < els.length; i++) {
         elementId = elementsK.add(els[i]);
         range = getStartEnd.call(els[i], start, end);
@@ -111,74 +120,86 @@ cwm.handlers.StoryHandler = function(storyId) {
       }
       return storyHandler;
     },
-  
-    affixTop: function (selector, end) {
+
+    affixTop: function(selector, end) {
       var e,
-          endOffset,
-          start = function () { return scrollTop(this); };
-      
+        endOffset,
+        start = function() {
+          return scrollTop(this);
+        };
+
       if (end) {
-        if (typeof end === "function") {
-          e = function () { return end.call(this); };
-          endOffset = function () { return end.call(this) - scrollTop(this); };
-        } else {
-          e = function () { return end; };
-          endOffset = function () { return end - scrollTop(this); };
-        }
+        endOffset = function() {
+          return d3.functor(end).call(this) - scrollTop(this);
+        };
         storyHandler.addTranslateY(selector, endOffset, e, 999999);
       }
-      
+
       storyHandler.addKlass(selector, "fixedTop", start, e || 999999);
-      storyHandler.addTranslateY(selector, function () {
+      storyHandler.addTranslateY(selector, function() {
         var offset = scrollTop(this);
-        return function (y) {
+        return function(y) {
           return transformCSS + ": translate3d(0," + (y - offset) + "px, 0)";
         };
       }, start, e || 999999);
       return storyHandler;
     },
-  
-    affixBottom: function (selector, start, offset) {
+
+    affixBottom: function(selector, start, offset) {
       offset = offset || 0;
       var s,
-          startOffset,
-          end = function () { return scrollTop(this) - wHeight + this.offsetHeight + offset; };
-    
+        startOffset,
+        end = function() {
+          return scrollTop(this) - wHeight + this.offsetHeight + offset;
+        };
+
       if (start) {
         if (typeof start === "function") {
-          s = function () { return start.call(this) - offset; };
-          startOffset = function () { return start.call(this) - scrollTop(this) + wHeight - this.offsetHeight; };
+          s = function() {
+            return start.call(this) - offset;
+          };
+          startOffset = function() {
+            return start.call(this) - scrollTop(this) + wHeight - this.offsetHeight;
+          };
         } else {
-          s = function () { return start - offset; };
-          startOffset = function () { return start - scrollTop(this); };
+          s = function() {
+            return start - offset;
+          };
+          startOffset = function() {
+            return start - scrollTop(this);
+          };
         }
         storyHandler.addTranslateY(selector, startOffset, 0, s);
       }
       storyHandler.addKlass(selector, "fixedBottom", s || 0, end);
-      storyHandler.addTranslateY(selector, function () {
+      storyHandler.addTranslateY(selector, function() {
         var offset = end.call(this);
-        return function (y) {
-          return transformCSS + ": translate3d(0," + (y - offset) +"px,0)";
+        return function(y) {
+          return transformCSS + ": translate3d(0," + (y - offset) + "px,0)";
         };
       }, s || 0, end);
       return storyHandler;
     },
-  
-    fadeIn: function (selector, start, end) {
+
+    fadeIn: function(selector, start, end) {
       fade(selector, end, start);
-      storyHandler.addStyle(selector, { opacity: 0 }, 0, start);
+      storyHandler.addStyle(selector, {
+        opacity: 0
+      }, 0, start);
       return storyHandler;
     },
-  
-    fadeOut: function (selector, start, end) {
+
+    fadeOut: function(selector, start, end) {
       fade(selector, start, end);
-      storyHandler.addStyle(selector, { opacity: 0 }, end, 999999);
+      storyHandler.addStyle(selector, {
+        opacity: 0
+      }, end, 999999);
       return storyHandler;
     },
-  
-    addTranslateY: function (selector, translateY, start, end) {
+
+    addTranslateY: function(selector, translateY, start, end) {
       var elementId, range, y, style;
-      d3.selectAll(selector).each(function () {
+      d3.selectAll(selector).each(function() {
         elementId = elements.add(this);
         range = getStartEnd.call(this, start, end);
         y = translateY.call(this);
@@ -187,25 +208,25 @@ cwm.handlers.StoryHandler = function(storyId) {
       });
       return storyHandler;
     },
-  
+
     // will apply `style` with `value` (function or string) 
     // to elements selected by `selector` between
     // scroll points `start` and `end`, which can be numbers or functions
     // `this` will be passed to the function as the current element.
-    addStyle: function (selector, styles, start, end) {
+    addStyle: function(selector, styles, start, end) {
       var i,
-          elementId,
-          range,
-          key,
-          value,
-          styleString,
-          els = query(selector);  
-    
+        elementId,
+        range,
+        key,
+        value,
+        styleString,
+        els = query(selector);
+
       for (i = 0; i < els.length; i++) {
         elementId = elements.add(els[i]);
         range = getStartEnd.call(els[i], start, end);
         styleString = "";
-      
+
         if (range[1] >= 0) {
           for (key in styles) {
             value = (typeof styles[key] === "function") ? styles[key].call(els[i]) : styles[key];
@@ -215,11 +236,11 @@ cwm.handlers.StoryHandler = function(storyId) {
           rangeStyles.push([range, elementId, styleString]);
         }
       }
-    
+
       return storyHandler;
     },
-  
-    enable: function () {
+
+    enable: function() {
       styles.length = 0;
       cacheScrollPoints();
       d3.timer(cacheScrollPoints);
@@ -228,30 +249,32 @@ cwm.handlers.StoryHandler = function(storyId) {
       return storyHandler;
     }
   };
-  
-  function fadeOutGen (start, end) {
-    var s = start, e = end;
-    return function (y) {
+
+  function fadeOutGen(start, end) {
+    var s = start,
+      e = end;
+    return function(y) {
       return "opacity:" + easeOut(Math.max(e - y, 0) / (e - s)).toFixed(2) + ";";
     };
   }
-  
-  function fadeInGen (start, end) {
-    var s = start, e = end;
-    return function (y) {
+
+  function fadeInGen(start, end) {
+    var s = start,
+      e = end;
+    return function(y) {
       return "opacity:" + easeIn(Math.min(y - e, s - e) / (s - e)).toFixed(2) + ";";
     };
   }
-  
-  function fade (selector, start, end) {
-    var i, 
-        elementId,
-        range,
-        s,
-        e,
-        fadeFunc,
-        els = query(selector);
-  
+
+  function fade(selector, start, end) {
+    var i,
+      elementId,
+      range,
+      s,
+      e,
+      fadeFunc,
+      els = query(selector);
+
     for (i = 0; i < els.length; i++) {
       elementId = elements.add(els[i]);
       range = getStartEnd.call(els[i], start, end);
@@ -259,45 +282,49 @@ cwm.handlers.StoryHandler = function(storyId) {
       e = range[1];
       if (s < e && e > 0) {
         // Fade out
-        fadeFunc = fadeOutGen(s,e);
-        rangeStyles.push([[s,e], elementId, fadeFunc]);
+        fadeFunc = fadeOutGen(s, e);
+        rangeStyles.push([
+          [s, e], elementId, fadeFunc
+        ]);
       } else if (e < s && s > 0) {
         // Fade in
-        fadeFunc = fadeInGen(s,e);
-        rangeStyles.push([[e,s], elementId, fadeFunc]);
+        fadeFunc = fadeInGen(s, e);
+        rangeStyles.push([
+          [e, s], elementId, fadeFunc
+        ]);
       }
     }
   }
-  
-  function cacheScrollPoints () {
+
+  function cacheScrollPoints() {
     var pixel,
-        updated,
-        styleId,
-        klassId,
-        i,
-        start,
-        end,
-        elementId,
-        style,
-        klass,
-        elementStyles,
-        elementKlasses;
-        var now = Date.now();
+      updated,
+      styleId,
+      klassId,
+      i,
+      start,
+      end,
+      elementId,
+      style,
+      klass,
+      elementStyles,
+      elementKlasses;
+    var now = Date.now();
     styleId = styles.add(cwm.util.fillArray([""], elements.length));
     klassId = klasses.add(cwm.util.fillArray("", elementsK.length));
     var length = scrollStyles.length;
-    
+
     for (pixel = length; pixel < (length + 100); pixel++) {
       elementStyles = cwm.util.fillArray([""], elements.length);
       elementKlasses = cwm.util.fillArray("", elementsK.length);
       updated = false;
-      
+
       for (i = 0; i < rangeStyles.length; i++) {
         start = rangeStyles[i][0][0];
         end = rangeStyles[i][0][1];
         elementId = rangeStyles[i][1];
         style = rangeStyles[i][2];
-        
+
         if (pixel >= start && pixel < end) {
           if (typeof style === "function") {
             // For now only handle one function style per element
@@ -309,23 +336,23 @@ cwm.handlers.StoryHandler = function(storyId) {
           updated = true;
         }
       }
-      
+
       if (updated) styleId = styles.add(elementStyles);
       scrollStyles[pixel] = styleId;
-      
+
       updated = false;
       for (i = 0; i < rangeKlasses.length; i++) {
         start = rangeKlasses[i][0][0];
         end = rangeKlasses[i][0][1];
         elementId = rangeKlasses[i][1];
         klass = rangeKlasses[i][2];
-        
+
         if (pixel >= start && pixel < end) {
           elementKlasses[elementId] += " " + klass;
           updated = true;
         }
       }
-      
+
       if (updated) klassId = klasses.add(elementKlasses);
       scrollKlasses[pixel] = klassId;
     }
@@ -333,38 +360,37 @@ cwm.handlers.StoryHandler = function(storyId) {
     return scrollStyles.length > dHeight;
   }
 
-  function getStartEnd (start, end) {
+  function getStartEnd(start, end) {
     return [
-      (typeof start === "function") ? start.call(this) : start,
-      (typeof end === "function") ? end.call(this) : end
-    ];  
+      (typeof start === "function") ? start.call(this) : start, (typeof end === "function") ? end.call(this) : end
+    ];
   }
-  
-  storyHandler.updateStyles = function (y) {
+
+  storyHandler.updateStyles = function(y) {
     // scroll the stories to y
-    d3.select(storyId).style(cwm.util.transformCSS, "translate3d(0px,-"+y+"px, 0px)");
-    
-    var styleId = scrollStyles[Math.max(y,0)];
-    var klassId = scrollKlasses[Math.max(y,0)];
+    d3.select(storyId).style(cwm.util.transformCSS, "translate3d(0px,-" + y + "px, 0px)");
+
+    var styleId = scrollStyles[Math.max(y, 0)];
+    var klassId = scrollKlasses[Math.max(y, 0)];
     var elementStyles = styles[styleId];
     var elementKlasses = klasses[klassId];
-    var i, 
-        el,
-        styleString,
-        klassString,
-        j;
+    var i,
+      el,
+      styleString,
+      klassString,
+      j;
 
     for (i = 0; i < elementStyles.length; i++) {
       el = elements[i];
       styleString = elementStyles[i][0];
       for (j = 1; j < elementStyles[i].length; j++) {
-        styleString += elementStyles[i][j].call(el,y);
+        styleString += elementStyles[i][j].call(el, y);
       }
       if (el.getAttribute("style") !== styleString) {
         el.setAttribute("style", styleString);
       }
     }
-    
+
     for (i = 0; i < elementKlasses.length; i++) {
       el = elementsK[i];
       klassString = elementKlasses[i].trim();
@@ -373,19 +399,19 @@ cwm.handlers.StoryHandler = function(storyId) {
       }
     }
   };
-  
-  function scrollTop (el) {
+
+  function scrollTop(el) {
     if (!el) return 0;
     return el.offsetTop + scrollTop(el.offsetParent);
   }
-  
-  function easeIn (t) {
-    return t*t;
+
+  function easeIn(t) {
+    return t * t;
   }
-  
-  function easeOut (t) {
-    return 1 - easeIn(1-t);
+
+  function easeOut(t) {
+    return 1 - easeIn(1 - t);
   }
-  
+
   return storyHandler;
 };
