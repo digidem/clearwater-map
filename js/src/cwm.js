@@ -18,11 +18,11 @@ window.cwm = {
       startBounds: [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ],
       
       // Data sources for overlay and markers (currently CartoDB)
-      communityUrl: baseUrl + 'SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.cartodb_id, c.community, c.nationality, systems, users ' +
-                                 'FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community ' +
-                                 'FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active',
+      communityUrl: baseUrl + "SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.cartodb_id, c.community, c.nationality, systems, users " +
+                                 "FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community " +
+                                 "FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active",
                                  
-      installationUrl: baseUrl + 'SELECT * FROM clearwater_well_installations WHERE photo IS NOT NULL',
+      installationUrl: baseUrl + "SELECT *, to_char(date, 'YYYY-MM-DD') AS date FROM clearwater_well_installations WHERE photo IS NOT NULL",
       
       padding: 580 
            
