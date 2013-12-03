@@ -40,6 +40,7 @@ cwm.handlers.ScrollHandler = function(map) {
     d3.event.preventDefault();
     currentScroll -= d3_behavior_zoom_delta();
     currentScroll = Math.max(0, currentScroll);
+    d3.timer(tick);
   }
   
   function tick () {
@@ -51,6 +52,7 @@ cwm.handlers.ScrollHandler = function(map) {
       });
       lastScrollY = y;
     }
+    return true;
   }
   
   // ease-in-out
@@ -64,9 +66,11 @@ cwm.handlers.ScrollHandler = function(map) {
     if (now - scrollStartTime >= scrollTotalTime) {
       currentScroll = scrollEndY;
       if (callback) { callback(); callback = null; }
+      d3.timer(tick);
       return true;
     } else {
       currentScroll = Math.round(scrollStartY + (scrollEndY - scrollStartY) * ease((now - scrollStartTime) / scrollTotalTime));
+      d3.timer(tick);
     }
   }
   
@@ -75,6 +79,7 @@ cwm.handlers.ScrollHandler = function(map) {
     add: function (animator) {
       animators.push(animator);
       lastScrollY = -1;
+      d3.timer(tick);
     },
     
     scrollTo: function (y, cb) {
