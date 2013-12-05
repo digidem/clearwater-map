@@ -1,0 +1,46 @@
+
+#mapstory .image-wrapper {
+  background-color: #000;
+  position: relative;
+  height: 0;
+  z-index: -1;
+  padding-bottom: 66.67%;
+  overflow: hidden;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  /* Background image set with data uri */
+}
+
+#mapstory .featured .image-wrapper:before {
+  /* &nbsp in unicode */
+  content: '\00A0';
+  position: absolute;
+  width: 100%;
+  background: black;
+  bottom: 0;
+  left: 0;
+  padding: 0.25em 0.5em;
+  z-index: 1;
+  opacity: 0.6;
+  /* leaves a gap of 1 pixel below for some reason */
+  -webkit-transform: translate3d(0,0.5px,0);
+  -moz-transform: translate3d(0,0.5px,0);
+  -o-transform: translate3d(0,0.5px,0);
+  -ms-transform: translate3d(0,0.5px,0);
+  transform: translate3d(0,0.5px,0);
+}
+
+#mapstory .featured .image-wrapper:after {
+  content: "Featured Story";
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  color: #eeeeee;
+  padding: 0.25em 2em 0.15em;
+  z-index: 2;
+  background-repeat: no-repeat;
+  background-position: 0.5em 50%;
+  background-size: 1.1em;
+  /* Background image set with data uri */
+}

@@ -55,7 +55,7 @@ cwm.Stories = function (containerId) {
   var h1Height = document.getElementsByTagName("h1")[0].offsetHeight;
   var h2Height = document.getElementsByTagName("h2")[0].offsetHeight;
 
-  var storyHandler = cwm.handlers.StoryHandler()
+  var storyHandler = cwm.handlers.StoryHandler("#stories")
     .affixTop(
       "#stories h1", 
       function () { return $x(this).parent("article").next().offsetTop() - this.offsetHeight; }
@@ -71,19 +71,26 @@ cwm.Stories = function (containerId) {
     )
     .fadeOut(
       "#stories article > section:not(:first-child)", 
-      function () { return $x(this).offsetTop() + this.offsetHeight - window.innerHeight; }, 
-      function () { return $x(this).offsetTop() + Math.max(window.innerHeight - h1Height - this.offsetHeight, 100); }
+      function () { return $x(this).offsetTop() + this.offsetHeight - window.innerHeight + h1Height; }, 
+      function () { return (window.innerHeight - this.offsetHeight > 200) ?
+                            $x(this).offsetTop() :
+                            $x(this).offsetTop() + this.offsetHeight - window.innerHeight + 200; }
     )
     .enable();
   */
+  d3.selectAll("#stories article > section").call(cwm.scrollHandler.spy);
+
   // Scroll the map to an element by id
-  stories.scrollTo = function (id) {
+  stories.scrollTo = function (id, callback) {
+    var y;
     var el = document.getElementById(id);
     var offset = $x(el).nextSiblingOrCousin()[0] ? $x(el).nextSiblingOrCousin()[0].children[1].children[0].offsetHeight : 0;
     
     if (el) {
-      cwm.scrollHandler.scrollTo(el.offsetTop + el.offsetHeight + offset);
+      y = el.offsetTop + el.offsetHeight + offset;
+      cwm.scrollHandler.scrollTo(y, callback);
     }
+    return y;
   };
   
   function setupScrolling () {

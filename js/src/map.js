@@ -13,26 +13,27 @@ cwm.Map = function (mapId, options) {
     mapId,
     [
       cwm.layers.BingLayer({ apiKey: options.bingApiKey }),
-      cwm.layers.MapboxLayer().id(options.mapboxId),
-//      markerLayer,
+//      cwm.layers.MapboxLayer().id(options.mapboxId),
+      markerLayer,
       featureLayer
     ],
     null,
-    [ ]
+    [ cwm.handlers.DragHandler() ]
   ).setExtent(options.startBounds, false, paddingLeft).setZoomRange(3,18);
   
   featureLayer.add(cwm.data.ecuador, { 
     id: "ecuador", 
     maxZoom: 7,
-    scrollTo: function () { return "overview"; }
+    scrollTo: function () { return "project-overview"; }
   });
+  
   featureLayer.load(options.communityUrl, { 
     id: "communities", 
-    maxZoom: 14,
+    maxZoom: 12.5,
     scrollTo: function (d) { return cwm.util.sanitize(d.properties.community); }
   }, onLoad);
       
-  markerLayer.load(options.installationUrl, { minZoom: 14 },onLoad);
+  markerLayer.load(options.installationUrl, { minZoom: 12.5 },onLoad);
   
   map.ease = mapbox.ease().map(map);
   
@@ -43,10 +44,6 @@ cwm.Map = function (mapId, options) {
     stories = s;
     return map;
   };
-  
-  map.addCallback("panned", function(map, panOffset) {
-    map.flightHandler.setOverride();
-  });
   
   window.onresize = function () {
     $('html,body').stop(true);
@@ -64,6 +61,35 @@ cwm.Map = function (mapId, options) {
       setupScrolling();
       refresh();
     }
+    d3.select(map.parent).on("click", function () {
+      var z = 18;
+      if (d3.event.defaultPrevented) return;
+      if (markerLayer.markersShown) {
+        var location = map.pointLocation(new MM.Point(d3.event.x, d3.event.y));
+        var d = markerLayer.closest(location);
+        var b = markerLayer.getBounds(function (e) { return e.properties.community === d.properties.community; });
+        var extent = new MM.Extent(b[1][1], b[0][0], b[0][1], b[1][0]);
+        var coord = map.extentCoordinate(extent, true);
+        // Do not zoom in quite all the way
+        if (coord.zoom > z-2) coord = coord.zoomTo(z-2);
+        
+        map.flightHandler.pause();
+        var endY = map.s.scrollTo(cwm.util.sanitize(d.properties.community) + "-overview", function () {
+          map.flightHandler.resume();
+        });
+        if (endY !== cwm.scrollHandler.currentScroll() || map.getZoom() >= z) {
+          map.ease.to(coord).path("screen").setOptimalPath().run(1500, function () {
+            map.flightHandler.setOverride();
+          });
+        } else {
+          var point = new MM.Point(d3.event.x, d3.event.y);
+          var to = map.pointCoordinate(point).zoomTo(z);
+          map.ease.to(to).path('about').run(500, function () {
+            map.flightHandler.setOverride();
+          });
+        }
+      }
+    });
   }
 
   /*
@@ -79,9 +105,13 @@ cwm.Map = function (mapId, options) {
       function (d) { return cwm.util.sanitize(d.properties.featured_url); },
       function (d) { return d.properties.featured && true; }
     );
-    
-    locations = locations.concat([{ id: "overview", bounds: featureLayer.bounds.communities }])
+    var overviewLocations = markerLayer.getOverviewLocations(
+      function (d) { return cwm.util.sanitize(d) + "-overview"; },
+      function (d) { return d.properties.community; }
+    );
+    locations = locations.concat([{ id: "project-overview", bounds: featureLayer.bounds.communities }])
         .concat(featureLayer.getLocations("community"))
+        .concat(overviewLocations)
         .concat(storyLocations);
   }
   

@@ -1,3 +1,6 @@
+/**
+ * ModestMaps handler to add D3 drag functionality to the map
+ */
 cwm.handlers.DragHandler = function() {
     var handler = {},
         map;
@@ -9,6 +12,7 @@ cwm.handlers.DragHandler = function() {
         })
         .on("dragend", function () {
           map.parent.style.cursor = 'auto';
+          map.flightHandler.setOverride();
         });
 
     function pan () {

@@ -1,0 +1,24 @@
+/* Fonts generated at http://www.fontsquirrel.com/tools/webfont-generator */
+/* svg first to fix Chrome: http://www.fontspring.com/blog/smoother-web-font-rendering-chrome */
+
+@font-face {
+    font-family: 'yanone_kaffeesatz';
+    src: url('yanonekaffeesatz-regular-webfont.eot');
+    src: url('yanonekaffeesatz-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('yanonekaffeesatz-regular-webfont.svg#yanone_kaffeesatzregular') format('svg'),
+         url('yanonekaffeesatz-regular-webfont.woff') format('woff'),
+         url('yanonekaffeesatz-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'pt_sansregular';
+    src: url('pts55f-webfont.eot');
+    src: url('pts55f-webfont.eot?#iefix') format('embedded-opentype'),
+         url('pts55f-webfont.svg#pt_sansregular') format('svg'),
+         url('pts55f-webfont.woff') format('woff'),
+         url('pts55f-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

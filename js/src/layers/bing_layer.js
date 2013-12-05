@@ -21,6 +21,14 @@ cwm.layers.BingLayer = function(options) {
     this.loadMetadata();
 };
 
+cwm.layers.BingLayer.prototype = function () {
+  var that = this;
+  d3.timer(function () { 
+    MM.Layer.prototype.draw.call(that);
+    return true;
+  });
+};
+
 cwm.layers.BingLayer.prototype.initMetadata = function () {
   var r = this.meta.resourceSets[0].resources[0];
   

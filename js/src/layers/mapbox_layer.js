@@ -135,8 +135,12 @@ cwm.layers.MapboxLayer.prototype.draw = function() {
             // .draw() called by .tilejson()
         }
     }
-
-    return MM.Layer.prototype.draw.call(this);
+    var that = this;
+    d3.timer(function () { 
+      MM.Layer.prototype.draw.call(that);
+      return true;
+    });
+    //return MM.Layer.prototype.draw.call(this);
 };
 
 cwm.layers.MapboxLayer.prototype.composite = function(x) {

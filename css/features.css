@@ -1,6 +1,6 @@
 /* Map elements */
 
-#mapstory path {
+#mapstory path.communities {
   fill: #f1c21c;
   fill-opacity: .6;
   stroke: #f1c21c;
@@ -12,62 +12,61 @@
   -webkit-transition: opacity 500ms;
 }
 
-#mapstory path:hover {
+#mapstory path.communities:hover {
   fill: #ab8b1e;
+  cursor: pointer;
 }
 
-#mapstory #communities { display: none;}
-
-#mapstory.zoom7 #communities { display: block;}
-
-#mapstory #communities path { opacity: 0;}
-
-#mapstory.zoom8 #communities path {opacity:1;}
-
-#mapstory.zoom12 #communities path {
-fill-opacity: 0;
-stroke-width: 2px;
-cursor: default;
+#mapstory .feature-label {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 2em;
+  position:relative;
+  left:0;
+  bottom:0;
+  background:#f1c21c;
+  color:#000;
+  cursor: pointer;
+  padding:0.25em;
+  margin:0;
+  z-index: 9999;
+  -webkit-box-shadow: 0px 0px 10px 0px #222;
+          box-shadow: 0px 0px 10px 0px #222;
 }
 
-#mapstory #communities #label {
-  opacity: 0;
-  transition: opacity 0.5s;
-  -moz-transition: opacity 0.5s;
-  -webkit-transition: opacity 0.5s;
-}
-#mapstory.zoom8 #communities #label {
-  opacity: 1;
-}
-#mapstory.zoom10 #communities #label {
-  opacity: 0 !important;
+#mapstory .feature-label::after {
+  content: "";
+  background-color: black;
+  opacity: 0.4;
+  height: 0.25em;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 100%;
 }
 
-#mapstory.zoom12 #communities path:hover {
-fill-opacity: 0;
+#mapstory path.communities.outline {
+  stroke-width: 4px;
+  opacity: 0.5;
+  cursor: auto;
+  pointer-events: none;
 }
 
-#mapstory.zoom14 #communities g {display: none;}
-
-#mapstory #project-area path {
-/*filter: url(#blur);*/
-transition:fill-opacity 250ms, opacity 250ms;
--moz-transition:fill-opacity 250ms, opacity 250ms;
--webkit-transition:fill-opacity 250ms, opacity 250ms;
+#mapstory path.communities.outline:hover {
+  cursor: auto;
+  fill: inherit;
 }
 
-#mapstory #interaction .features .ecuador {
-stroke-width: 2px;
-fill-opacity: 0;
+#mapstory path.ecuador {
+  stroke: #f1c21c;
+  stroke-width: 2px;
+  fill-opacity: 0 !important;
 }
 
-#mapstory.zoom6 #project-area path.ecuador-border {
-opacity: 0;
+#mapstory path.ecuador:hover {
+  stroke: #ab8b1e;
+  cursor: pointer;
 }
 
-#mapstory.zoom8 #project-area path {
-opacity: 0;
+#mapstory path.ecuador.outline {
+  display: none;
 }
-
-#mapstory.zoom9 #project-area { display: none; }
-
