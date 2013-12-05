@@ -4,6 +4,8 @@
 
 cwm.handlers.ScrollHandler = function(map) {
   var animators = [],
+      offsets = [],
+      names = [],
       lastScrollY = -1,
       currentScroll = 0,
       ticking,
@@ -110,7 +112,28 @@ cwm.handlers.ScrollHandler = function(map) {
     currentScroll: function () {
       return Math.round(currentScroll);
     },
+
+    spy: function (selection) {
+      selection.each(function () {
+        offsets.push({
+          scrollPoint: $x(this).offsetTop() + this.offsetHeight - window.innerHeight,
+          section: this.getAttribute("id"),
+          nationality: this.parentNode.getAttribute("class")
+        });
+      });
+      offsets = _.sortBy(offsets, "scrollPoint").reverse();
     },
+
+    currentSection: function () {
+      return _.find(offsets, function (offset) {
+        return offsets.scrollPoint < currentScroll;
+      }).section;
+    },
+
+    currentNationality: function () {
+      return _.find(offsets, function (offset) {
+        return offsets.scrollPoint < currentScroll;
+      }).nationality;
     }
     
   };

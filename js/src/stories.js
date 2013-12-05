@@ -37,6 +37,8 @@ cwm.Stories = function () {
     )
     .enable();
   
+  d3.selectAll("#stories article > section").call(cwm.scrollHandler.spy);
+
   // Scroll the map to an element by id
   stories.scrollTo = function (id, callback) {
     var y;
@@ -44,7 +46,7 @@ cwm.Stories = function () {
     var offset = $x(el).nextSiblingOrCousin()[0] ? $x(el).nextSiblingOrCousin()[0].children[1].children[0].offsetHeight : 0;
     
     if (el) {
-      y = el.offsetTop + el.offsetHeight + offset
+      y = el.offsetTop + el.offsetHeight + offset;
       cwm.scrollHandler.scrollTo(y, callback);
     }
     return y;
