@@ -5,7 +5,42 @@ cwm.Stories = function (containerId) {
   
   var container = d3.select(containerId);
   
-  var nested_data = d3.nest()
+  var storyData = nest(cwm.data.nationalities.features, cwm.data.communities.features, "nationality");
+
+  var templates = cwm.Templates();
+
+  function nest(array1, array2, id) {
+      var filterFunc = function(feature) { 
+        return function(d) {
+          return feature.properties[id] === d.properties[id];
+        };
+      };
+
+      array1.forEach(function(feature) {
+        feature.properties.communities = _.filter(array2, filterFunc(feature));
+      });
+
+      return array1;
+    }
+
+  var nationalities = container.selectAll("section")
+      .data(storyData)
+      .enter()
+      .append("section")
+      .attr("id", function(d) { return d.properties.nationality; })
+      .append("article")
+      .attr("class", "nationality")
+      .html(templates.nationality);
+
+  var communities = nationalities.selectAll("section")
+      .data(function(d) { return d.properties.communities; })
+      .enter()
+      .append("section")
+      .attr("id", function(d) { return d.properties.community; })
+      .append("article")
+      .html(templates.community);
+
+  /*var nested_data = d3.nest()
   .key(function (d) { return d.properties.nationality})
   .entries(cwm.data.communities.features);
   
@@ -42,7 +77,7 @@ cwm.Stories = function (containerId) {
   .text(function (d) { return d.properties.community + " and ClearWater"; });
   
   and_clearwater.append("div")
-  .html(function (d) { return d.properties.and_clearwater; });
+  .html(function (d) { return d.properties.and_clearwater; });*/
   
   setupScrolling();
   
