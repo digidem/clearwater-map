@@ -309,12 +309,12 @@ cwm.handlers.StoryHandler = function(storyId) {
       klass,
       elementStyles,
       elementKlasses;
-    var now = Date.now();
+
     styleId = styles.add(cwm.util.fillArray([""], elements.length));
     klassId = klasses.add(cwm.util.fillArray("", elementsK.length));
     var length = scrollStyles.length;
 
-    for (pixel = length; pixel < (length + 100); pixel++) {
+    for (pixel = length; pixel < (length + 500); pixel++) {
       elementStyles = cwm.util.fillArray([""], elements.length);
       elementKlasses = cwm.util.fillArray("", elementsK.length);
       updated = false;
@@ -356,7 +356,7 @@ cwm.handlers.StoryHandler = function(storyId) {
       if (updated) klassId = klasses.add(elementKlasses);
       scrollKlasses[pixel] = klassId;
     }
-    console.log(Date.now() - now);
+
     return scrollStyles.length > dHeight;
   }
 
