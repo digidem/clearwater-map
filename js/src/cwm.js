@@ -29,7 +29,7 @@ window.cwm = {
     cwm.map = cwm.Map('map', options);
     cwm.scrollHandler = cwm.handlers.ScrollHandler(cwm.map);
 
-    var stories = cwm.Stories('stories').map(cwm.map);
+    var stories = cwm.Stories('#stories').map(cwm.map);
 
   }
   
