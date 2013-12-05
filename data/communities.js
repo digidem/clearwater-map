@@ -3,13 +3,10 @@ cwm.data.communities = {
   "features": [{
     "type": "Feature",
     "properties": {
-      "cartodb_id": 2,
       "community": "Cofan Dureno",
       "nationality": "Cofan",
-      "overview": "<p>Centuries ago, the Cofán people moved down from the foothills of the Andes Mountains to inhabit a large territory in the northern Ecuadorian Amazon. The Cofán have been inspiring protagonists in the 19-year legal battle against the oil companies, yet they continue to suffer from the devastating contamination in their communities, most significantly the lack of clean water.</p>",
-      "and_clearwater": "<p>The ClearWater project broke ground in the community of Cofán Dureno from November, 2011 when 52 rainwater catchment systems were built, providing 350 people with much-needed clean water.</p>",
-      "systems": 69,
-      "users": 237
+      "image_url": "images/confan2.jpg",
+      "text": "<p>Centuries ago, the Cofán people moved down from the foothills of the Andes Mountains to inhabit a large territory in the northern Ecuadorian Amazon. The Cofán have been inspiring protagonists in the 19-year legal battle against the oil companies, yet they continue to suffer from the devastating contamination in their communities, most significantly the lack of clean water.</p>"
     },
     "geometry": {
       "type": "MultiPolygon",
@@ -118,13 +115,10 @@ cwm.data.communities = {
   }, {
     "type": "Feature",
     "properties": {
-      "cartodb_id": 11,
       "community": "Secoya",
       "nationality": "Secoya",
-      "overview": "<p>The Secoya suffer heavily from oil-related contamination. Rivers have been contaminated, making much of the water unsafe to drink or bathe in; traditional subsistence activities like hunting, fishing, and growing edible crops are at risk.</p>",
-      "and_clearwater": "<p>Despite the challenges, the Secoya are highly organized and\ndedicated to building clean water solutions for their people. Over the months of July and August 2013 ClearWater has installed an additional 56 rainwater systems in Secoya territory.</p>",
-      "systems": 81,
-      "users": 434
+      "image_url": "images/secoya2.jpg",
+      "text": "<p>The Secoya suffer heavily from oil-related contamination. Rivers have been contaminated, making much of the water unsafe to drink or bathe in; traditional subsistence activities like hunting, fishing, and growing edible crops are at risk.</p>"
     },
     "geometry": {
       "type": "MultiPolygon",
@@ -474,13 +468,10 @@ cwm.data.communities = {
   }, {
     "type": "Feature",
     "properties": {
-      "cartodb_id": 14,
       "community": "Waorani",
       "nationality": "Waorani",
-      "overview": "<p>The Waorani were the most recently contacted of all Ecuadorian indigenous peoples. Since first contact in 1956, the Waorani have experienced a rapid and difficult insertion into mainstream Ecuadorian society. Their territories have been greatly reduced, and their remaining lands impacted by logging, oil extraction, and colonist settlement. Oil activity and the construction of oil roads has been severely detrimental to Waorani lands. </p>",
-      "and_clearwater": "<p>ClearWater began a pilot project in the Waorani communities in March of 2013 using a new design for metal catchment system frames that will last five times longer than wooden frames. 13 systems were built, benefitting 75 people. </p>",
-      "systems": 13,
-      "users": 146
+      "image_url": "images/waorani2.jpg",
+      "text": "<p>The Waorani were the most recently contacted of all Ecuadorian indigenous peoples. Since first contact in 1956, the Waorani have experienced a rapid and difficult insertion into mainstream Ecuadorian society. Their territories have been greatly reduced, and their remaining lands impacted by logging, oil extraction, and colonist settlement. Oil activity and the construction of oil roads has been severely detrimental to Waorani lands. </p>"
     },
     "geometry": {
       "type": "MultiPolygon",
@@ -513,13 +504,10 @@ cwm.data.communities = {
   }, {
     "type": "Feature",
     "properties": {
-      "cartodb_id": 15,
       "community": "Rumipamba",
       "nationality": "Kichwa",
-      "overview": "<p>The Kichwa of the Amazon are the most numerous of Ecuador’s indigenous Amazonian peoples and have taken cleaning up after the oil companies into their own hands. They have taken the environmental remediation into their own hands, painstakingly cleaning up the mess that the oil companies have left behind. </p>",
-      "and_clearwater": "<p>Installation of 53 catchment systems has already begun in the Kichwa village of Rumipamba, starting in May of 2013, which will benefit approximately 350 people. ClearWater will also be working with other Kichwa communities in the near future, ensuring clean water for all oil-affected indigenous communities.  </p>",
-      "systems": null,
-      "users": null
+      "image_url": "images/kichwa2.jpg",
+      "text": "<p>The Kichwa of the Amazon are the most numerous of Ecuador’s indigenous Amazonian peoples and have taken cleaning up after the oil companies into their own hands. They have taken the environmental remediation into their own hands, painstakingly cleaning up the mess that the oil companies have left behind. </p>"
     },
     "geometry": {
       "type": "MultiPolygon",
@@ -558,13 +546,10 @@ cwm.data.communities = {
   }, {
     "type": "Feature",
     "properties": {
-      "cartodb_id": 12,
       "community": "Siona",
       "nationality": "Siona",
-      "overview": "<p>Like the Secoya, the Siona currently suffer from oil contamination, African palm production, deforestation, and expanding colonist settlement in their territory.</p>",
-      "and_clearwater": "<p>ClearWater began installation in the Siona community in October 2012 and 20 rain catchment systems were built, benefitting over 100 people. Siona technicians working for ClearWater are dedicated to improving the living conditions for all Siona community\nmembers by providing them with clean drinking water. </p>",
-      "systems": 19,
-      "users": 151
+      "image_url": "images/siona2.jpg",
+      "text": "<p>ClearWater began installation in the Siona community in October 2012 and 20 rain catchment systems were built, benefitting over 100 people. Siona technicians working for ClearWater are dedicated to improving the living conditions for all Siona community\nmembers by providing them with clean drinking water. </p>"
     },
     "geometry": {
       "type": "MultiPolygon",
@@ -652,4 +637,4 @@ cwm.data.communities = {
       ]
     }
   }]
-}
+};
