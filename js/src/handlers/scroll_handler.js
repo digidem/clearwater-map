@@ -6,30 +6,32 @@ cwm.handlers.ScrollHandler = function(map) {
   var animators = [],
       lastScrollY = -1,
       currentScroll = 0,
-      paused = false,
+      ticking,
       scrollStartTime,
       scrollStartY,
       scrollEndY,
       scrollDiff,
       scrollTotalTime,
-      callback;
+      callback,
+      d3_behavior_zoom_wheel,
+      d3_behavior_zoom_delta;
 
-  d3.timer(tick);
+  tick();
 
   // from https://github.com/mbostock/d3/pull/1050/files
   if ('onwheel' in document) {
-      var d3_behavior_zoom_wheel = 'wheel';
-      var d3_behavior_zoom_delta = function () {
+      d3_behavior_zoom_wheel = 'wheel';
+      d3_behavior_zoom_delta = function () {
           return -d3.event.deltaY * (d3.event.deltaMode ? 40 : 1);
       };
   } else if ('onmousewheel' in document) {
-      var d3_behavior_zoom_wheel = 'mousewheel';
-      var d3_behavior_zoom_delta = function () {
+      d3_behavior_zoom_wheel = 'mousewheel';
+      d3_behavior_zoom_delta = function () {
           return d3.event.wheelDelta;
       };
   } else {
-      var d3_behavior_zoom_wheel = 'MozMousePixelScroll';
-      var d3_behavior_zoom_delta = function () {
+      d3_behavior_zoom_wheel = 'MozMousePixelScroll';
+      d3_behavior_zoom_delta = function () {
           return -d3.event.detail;
       };
   }
@@ -40,11 +42,17 @@ cwm.handlers.ScrollHandler = function(map) {
     d3.event.preventDefault();
     currentScroll -= d3_behavior_zoom_delta();
     currentScroll = Math.max(0, currentScroll);
-    d3.timer(tick);
+    tick();
   }
   
   function tick () {
-    if (paused) return;
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(animate);
+    }
+  }
+
+  function animate() {
     var y = ~~(0.5 + currentScroll);
     if (y !== lastScrollY) {
       animators.forEach( function(animator) {
@@ -52,7 +60,7 @@ cwm.handlers.ScrollHandler = function(map) {
       });
       lastScrollY = y;
     }
-    return true;
+    ticking = false;
   }
   
   // ease-in-out
@@ -65,12 +73,12 @@ cwm.handlers.ScrollHandler = function(map) {
 
     if (now - scrollStartTime >= scrollTotalTime) {
       currentScroll = scrollEndY;
+      tick();
       if (callback) { callback(); callback = null; }
-      d3.timer(tick);
       return true;
     } else {
       currentScroll = Math.round(scrollStartY + (scrollEndY - scrollStartY) * ease((now - scrollStartTime) / scrollTotalTime));
-      d3.timer(tick);
+      tick();
     }
   }
   
@@ -79,7 +87,7 @@ cwm.handlers.ScrollHandler = function(map) {
     add: function (animator) {
       animators.push(animator);
       lastScrollY = -1;
-      d3.timer(tick);
+      tick();
     },
     
     scrollTo: function (y, cb) {
@@ -102,17 +110,10 @@ cwm.handlers.ScrollHandler = function(map) {
     currentScroll: function () {
       return Math.round(currentScroll);
     },
-    
-    pause: function () {
-      paused = true;
     },
-    
-    resume: function () {
-      paused = false;
     }
+    
   };
-  
 
-  
   return scrollHandler;
 };
