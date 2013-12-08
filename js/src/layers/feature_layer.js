@@ -90,11 +90,11 @@ cwm.layers.FeatureLayer = function (context, id) {
           .style("fill-opacity", function (d) {
             return Math.min(Math.max(d.properties._maxZoom + 1 - zoom, 0), 1) * 0.6;
           })
-          .attr("display", "")
+          .style("display", "")
           .classed("outline", function (d) { return zoom > d.properties._maxZoom; })
           .on("mouseover", showLabel)
           .on("mouseout", hideLabel)
-          .exit().attr("display", "none");
+          .exit().style("display", "none");
 
       drawLabel();
       return featureLayer;
