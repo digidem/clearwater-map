@@ -8,12 +8,12 @@ cwm.Map = function (mapId, options) {
 
   var markerLayer = cwm.layers.MarkerLayer(layerDiv, "markers");
   var featureLayer = cwm.layers.FeatureLayer(layerDiv, "features");
-      
+  var bingLayer = cwm.layers.BingLayer({ apiKey: options.bingApiKey });
   var map = new MM.Map(
     mapId,
     [
-      cwm.layers.BingLayer({ apiKey: options.bingApiKey }),
-//      cwm.layers.MapboxLayer().id(options.mapboxId),
+      bingLayer,
+      cwm.layers.MapboxLayer(bingLayer.parent).id(options.mapboxId),
       markerLayer,
       featureLayer
     ],
