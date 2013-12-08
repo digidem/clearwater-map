@@ -84,7 +84,7 @@ cwm.layers.MapboxLayer.prototype.tilejson = function(x) {
 
     return this;
 };
-
+/*
 cwm.layers.MapboxLayer.prototype.draw = function() {
     if (!this.enabled || !this.map) return;
 
@@ -139,6 +139,7 @@ cwm.layers.MapboxLayer.prototype.draw = function() {
             // .draw() called by .tilejson()
         }
     }
+
     var that = this;
     d3.timer(function () { 
       MM.Layer.prototype.draw.call(that);
@@ -146,6 +147,7 @@ cwm.layers.MapboxLayer.prototype.draw = function() {
     });
     //return MM.Layer.prototype.draw.call(this);
 };
+*/
 
 cwm.layers.MapboxLayer.prototype.positionTile = function(tile) {
     // position this tile (avoids a full draw() call):
