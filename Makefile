@@ -1,15 +1,15 @@
 all: \
+	dist/cwm.css \
+	dist/cwm.min.css \
 	dist/cwm.js \
 	dist/cwm.min.js
   
 dist/cwm.js: \
     js/lib/d3.v3.js \
-    js/lib/lodash.modern-2.4.1.js \
     js/lib/requestAnimationFrame.js \
     node_modules/modestmaps/modestmaps.js \
-    node_modules/wax/dist/wax.mm.js \
+    node_modules/wax/connectors/mm/waxconnector.js \
     node_modules/easey/src/easey.js \
-    js/src/start.js \
     js/src/cwm.js \
     js/src/map.js \
     js/src/stories.js \
@@ -29,8 +29,8 @@ dist/cwm.js: \
     js/src/handlers/story_handler.js \
     js/src/handlers/marker_interaction.js \
     js/src/data.js \
-    data/ecuador.js \
-    js/src/end.js
+    data/ecuador.js
+
 
 dist/cwm.js: node_modules/.install Makefile
 	@rm -f $@
@@ -39,6 +39,23 @@ dist/cwm.js: node_modules/.install Makefile
 dist/cwm.min.js: dist/cwm.js Makefile
 	@rm -f $@
 	node_modules/.bin/uglifyjs $< -c -m -o $@
+
+dist/cwm.css: \
+	css/data_uris.css \
+	css/map.css \
+	css/images.css \
+	css/stories.css \
+	css/markers.css \
+	css/features.css \
+	css/animation.css
+
+dist/cwm.css: Makefile
+	@rm -f $@
+	cat $(filter %.css,$^) > $@
+
+dist/cwm.min.css: dist/cwm.css Makefile
+	@rm -f $@
+	node_modules/.bin/cleancss -o $@ $<
 
 node_modules/.install: package.json
 	npm install && touch node_modules/.install

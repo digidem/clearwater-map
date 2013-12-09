@@ -30,9 +30,14 @@ cwm.layers.MapboxLayer.prototype.refresh = function(callback) {
     var that = this;
     // When the async request for a TileJSON blob comes back,
     // this resets its own tilejson and calls setProvider on itself.
-    wax.tilejson(this._url, function(o) {
-        that.tilejson(o);
-        if (callback) callback(that);
+    $.ajax({
+        url: this._url + (~this._url.indexOf('?') ? '&' : '?') + 'callback=?',
+        type: 'jsonp',
+        dataType: 'jsonp',
+        success: function(o) {
+            that.tilejson(o);
+            if (callback) callback(that);
+        }
     });
     return this;
 };

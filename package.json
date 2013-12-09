@@ -18,7 +18,8 @@
   "devDependencies": {
     "uglify-js": "~2.2.5",
     "d3": "3",
-    "smash": "0.0"
+    "smash": "0.0",
+    "clean-css": "2"
   },
   "author": "Gregor MacLennan (Digital Democracy)",
   "license": "MIT",
