@@ -3,30 +3,31 @@
  */
 cwm.handlers.DragHandler = function() {
     var handler = {},
-        map;
+        map,
+        parent;
 
     var drag = d3.behavior.drag()
         .on("drag", pan)
         .on("dragstart", function() {
+          parent.classed("dragging", true);
           d3.event.sourceEvent.stopPropagation(); // silence other listeners
         })
         .on("dragend", function () {
-          map.parent.style.cursor = 'auto';
+          parent.classed("dragging", false);
           map.flightHandler.setOverride();
         });
 
     function pan () {
-      map.parent.style.cursor = 'move';
       map.panBy(d3.event.dx, d3.event.dy);
     }
 
     handler.init = function(m) {
         map = m;
-        d3.select(map.parent).call(drag);
+        parent = d3.select(map.parent).call(drag);
     };
 
     handler.remove = function() {
-        d3.select(map.parent).on('mousedown.drag', null);
+        parent.on('mousedown.drag', null);
     };
 
     return handler;

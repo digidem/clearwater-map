@@ -3,7 +3,7 @@ cwm.Map = function (mapId, options) {
   var lastResize = 0,
       stories,
       paddingLeft = options.padding || 0;
-
+  
   var layerDiv = cwm.render.LayerContainer("layers");
 
   var markerLayer = cwm.layers.MarkerLayer(layerDiv, "markers");
@@ -20,6 +20,8 @@ cwm.Map = function (mapId, options) {
     null,
     [ cwm.handlers.DragHandler() ]
   ).setExtent(options.startBounds, false, paddingLeft).setZoomRange(3,18);
+  
+  var mapContainer = d3.select(map.parent)
   
   featureLayer.add(cwm.data.ecuador, { 
     id: "ecuador", 
@@ -64,7 +66,7 @@ cwm.Map = function (mapId, options) {
     d3.select(map.parent).on("click", function () {
       var z = 18;
       if (d3.event.defaultPrevented) return;
-      if (markerLayer.markersShown) {
+      if (mapContainer.classed("markers-shown")) {
         var location = map.pointLocation(new MM.Point(d3.event.x, d3.event.y));
         var d = markerLayer.closest(location);
         var b = markerLayer.getBounds(function (e) { return e.properties.community === d.properties.community; });
@@ -81,12 +83,14 @@ cwm.Map = function (mapId, options) {
           map.ease.to(coord).path("screen").setOptimalPath().run(1500, function () {
             map.flightHandler.setOverride();
           });
+          mapContainer.classed("zoomed-in", false);
         } else {
           var point = new MM.Point(d3.event.x, d3.event.y);
           var to = map.pointCoordinate(point).zoomTo(z);
           map.ease.to(to).path('about').run(500, function () {
             map.flightHandler.setOverride();
           });
+          mapContainer.classed("zoomed-in", true);
         }
       }
     });
