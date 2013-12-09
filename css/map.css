@@ -59,9 +59,7 @@
 }
 
 #mapstory #legend dl {
-	margin: 0.5em;
-	font-family: "Yanone Kaffeesatz"; /* main font/type */
-	font-size: 1.5em;
+	margin: 0.7em;
 	display: block;
 	color: #eeeeee;
 	text-decoration: none;
@@ -69,10 +67,10 @@
 
 #mapstory #legend dt {
   display: block;
-  margin: 0 0 0.75em; 
+  margin: 0 0 0.3em; 
   padding: 0 0.5em 0 1.5em;
   background-repeat: no-repeat;
-  background-size: 0.95em 0.95em;
+  background-size: 1em 1em;
   background-position: 0 50%;
 }
 
