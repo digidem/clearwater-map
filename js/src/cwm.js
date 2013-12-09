@@ -12,7 +12,7 @@ window.cwm = {
       bingApiKey: "Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l",
       
       // Mapbox ID for overlay map
-      mapboxId: 'gmaclennan.map-y7pgvo15',
+      mapboxId: 'gmaclennan.clearwater,gmaclennan.map-y7pgvo15',
       
       // Bounds for the initial view of the map (South America)
       startBounds: [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ],
