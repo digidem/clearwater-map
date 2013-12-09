@@ -7,9 +7,9 @@ all: \
 dist/cwm.js: \
     js/lib/d3.v3.js \
     js/lib/requestAnimationFrame.js \
-    node_modules/modestmaps/modestmaps.js \
-    node_modules/wax/connectors/mm/waxconnector.js \
-    node_modules/easey/src/easey.js \
+    js/lib/modestmaps.js \
+    js/lib/waxconnector.js \
+    js/lib/easey.js \
     js/src/cwm.js \
     js/src/map.js \
     js/src/stories.js \
@@ -62,6 +62,32 @@ node_modules/.install: package.json
   
 clean:
 	rm -f dist/cwm*.js dist/cwm.css
+
+lib: \
+	js/lib/d3.v3.js \
+	js/lib/modestmaps.js \
+	js/lib/waxconnector.js \
+	js/lib/easey.js \
+	js/lib/lodash.modern-2.4.1.js \
+	js/lib/jquery-1.8.3.js
+
+js/lib/lodash.modern-2.4.1.js:
+	curl https://raw.github.com/lodash/lodash/2.4.1/dist/lodash.js -o $@
+
+js/lib/jquery-1.8.3.js:
+	curl http://code.jquery.com/jquery-1.8.3.js -o $@
+
+js/lib/modestmaps.js: node_modules/.install
+	@rm -f $@
+	cp node_modules/modestmaps/modestmaps.js $@
+
+js/lib/waxconnector.js: node_modules/.install
+	@rm -f $@
+	cp node_modules/wax/connectors/mm/waxconnector.js $@
+
+js/lib/easey.js: node_modules/.install
+	@rm -f $@
+	cp node_modules/easey/src/easey.js $@
 
 D3_FILES = \
 	node_modules/d3/src/start.js \

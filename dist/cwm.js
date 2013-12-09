@@ -9738,7 +9738,7 @@ window.cwm = {
       bingApiKey: "Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l",
       
       // Mapbox ID for overlay map
-      mapboxId: 'gmaclennan.map-y7pgvo15',
+      mapboxId: 'gmaclennan.clearwater,gmaclennan.map-y7pgvo15',
       
       // Bounds for the initial view of the map (South America)
       startBounds: [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ],
@@ -10127,6 +10127,7 @@ window.cwm = {
   transformCSS: (function(props, prefix) {
     props = props.split(" ");
     prefix = prefix.split(" ");
+    if (!this.document) return; // node.js safety
     var style = document.documentElement.style;
     for (var i = 0; i < props.length; i++) {
       if (props[i] in style) {
