@@ -55,7 +55,22 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  /* background set to opacity 60% with data uri */
+}
+
+#mapstory #attribution {
+position: absolute;
+padding: 0 0.5em;
+font-size: 0.8em;
+bottom: 0;
+left: 50%;
+}
+
+#mapstory #attribution a {
+  color: #1e0fbe;
+}
+
+#mapstory #attribution a:hover {
+  text-decoration: underline;
 }
 
 
