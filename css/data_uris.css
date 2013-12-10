@@ -1,3 +1,9 @@
+
+#mapstory #legend dt.community {
+background-image: url('../images/community.png');
+}
+
+
 /* Featured story icon */
 /* http://digidem.github.io/clearwater-map/images/cw-story.png */
 #mapstory .featured .image-wrapper:after, 
@@ -11,13 +17,23 @@ background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAY
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAC7UlEQVRYw82YS09TURDHb1uKUmmbVGxDMcT4NYwu3FG1CCoqkJhUfESRaNVEEWvcYFy4cGtMNEbd+KK8pL0FjAlo0OhnoL19pLLEhNhI/Y+Zk9zWUm9te+Lin9Bye+d3ZubMzDmK78WyYlT5fN4EmSEL1ABZoUaWlb8383Mmg+9UKjFMRjdDdsgFeSAvtB1qg1qhFsgJ2RjM8jeYshA641Z+KRluH11a6TwdS4d6JrRn/tfxuX0vl5dI+Hv2cDjxNBBJjdxczPrwrJuBy8JsCMEAFl65K/dzfcfQu0yw8008hv9/NqIDAByIpgaTqzkvL6KhFEhJCB0A/dA9vJDtq8R4CRj1wnzmEN7lYK+YykIUAXjh9hv/arxYxye1Ec6XApACiGKAvunk/VoBCCFn7rFHrAKkGMLMOeA5GU3drjWA0LFJLcQJaymAYC+Qm1zXF7L99QIQQpi7eMEmPQR5wfY9t76zmiQ0qv2v4urX7No2Dr8ivEAx2jo4nwnWG0Cofzp5VnhDQNCHdio4siDIG5ykZhEK+51PK35ZAELn59J7qYgpHBfXKTUdkg2BnXKVNoTC5dSDXvBcNsTBsfhj2G5SOCm91IxkQyAvZmlXKlwf2tAJP8qGgJZge8v/AGET4WiVuT2FsHBVQNDuaDkyrj2RDYHq/Ai2N4k64QxEU8OyIXrGtSBFQlRM260P3zpkQwyoqT0UCX0HdSMvVIn5EOXZxaTvonZUzXMSq2WAN8Uf84QbM2FUghciX7JrDl58wWT1e7RDO++W0MZ9YsQrNWNSH3H0TiWv1QsAc+Zl9rq53LRNDzixfe7WoWGN8uxiNnLuIBAH3HaxVgDd4cSVYgAjJzCKWfOZWNqPbjdTRRK+xWI69CGo9CwqjoLOEzPJAGAildQBHHgC2uqPZv05o5pTuYCx40i3u3dKu9Q1lnhIUDC2CL3H1g7juwdHJ7Qh1JtdXIis4qqgqquBDa4IGhnKplMTNSPdPYXh+4lfhgUDJwHYgcsAAAAASUVORK5CYII=');
 }
 
+#mapstory #legend dt.pipeline {
+	background-size: 1.2em;
+background-image: url('../images/pipeline.png');
+}
+
 #mapstory #legend dt.oilwell {
-background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAACKUlEQVRYw82YsU4CQRCGURGChNNgQ4OamKghWmnAjljYacDERh8BtFO0IcHHkGinjyCdFvoWqCRWaoX4AK7zm9vLMhzccrk7Ifmz3LA787F3uztzIbG9HxpCWVKN1CC9kr5IwmxfTXvN7KftV6dTjFQmNc2AunomHZnj9SDsPmQvkN6GDM6F8cU+/vtD0HWUdMkdtrcK4jqzIQ5Tc2I5nhDT4UmB7ga1uIYdv39RPxsY+ItqQdB3g/TAg1cWlkVsfOIvqJPQ74z6t3th4NcYCEFthHSvDrxZzYrZyYhWcC6Mw3gGAv+RQRDWLfghndK/cROcC7P4w26NLQQeHpX4fGHFEwAp+GMzUuQQMXUV3K5lPQWQgl+2amIqRFn++JnfFTPmU++14Pcjv6OCHKkQ1kZUTi/6AiAF/wpEU0Lk1KWouwzdCv7Z0s0BoioN2Gj8BJBCHAWiCog7aThIpQOBQBwFogGIljRk4kYgEIijQLQA0ZEGw6dVwYU4CsR3SN1AggCQ6or7HzORCId7ZmIknomRWB3WPnGVWQ8EAnH4PjESO2bX2VHy+ewo9Tk7uk5RnHJ+nqLvA07RQPIJlur15BO+Z1ZIFZ0yK5lj1tUc82R+yRMA+GE5Zt0p237k2XbSZbadtM+2n2T94XvdUXFbd+hWYNjxlqYS1lmDFtewe1KBsU5Fj2rRPa1a1KEqPya9DBn8xRynX5W7fD8h04CO8n7igrRJGtP1+wtPAD+GXwFIbAAAAABJRU5ErkJggg==')
+background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAACKUlEQVRYw82YsU4CQRCGURGChNNgQ4OamKghWmnAjljYacDERh8BtFO0IcHHkGinjyCdFvoWqCRWaoX4AK7zm9vLMhzccrk7Ifmz3LA787F3uztzIbG9HxpCWVKN1CC9kr5IwmxfTXvN7KftV6dTjFQmNc2AunomHZnj9SDsPmQvkN6GDM6F8cU+/vtD0HWUdMkdtrcK4jqzIQ5Tc2I5nhDT4UmB7ga1uIYdv39RPxsY+ItqQdB3g/TAg1cWlkVsfOIvqJPQ74z6t3th4NcYCEFthHSvDrxZzYrZyYhWcC6Mw3gGAv+RQRDWLfghndK/cROcC7P4w26NLQQeHpX4fGHFEwAp+GMzUuQQMXUV3K5lPQWQgl+2amIqRFn++JnfFTPmU++14Pcjv6OCHKkQ1kZUTi/6AiAF/wpEU0Lk1KWouwzdCv7Z0s0BoioN2Gj8BJBCHAWiCog7aThIpQOBQBwFogGIljRk4kYgEIijQLQA0ZEGw6dVwYU4CsR3SN1AggCQ6or7HzORCId7ZmIknomRWB3WPnGVWQ8EAnH4PjESO2bX2VHy+ewo9Tk7uk5RnHJ+nqLvA07RQPIJlur15BO+Z1ZIFZ0yK5lj1tUc82R+yRMA+GE5Zt0p237k2XbSZbadtM+2n2T94XvdUXFbd+hWYNjxlqYS1lmDFtewe1KBsU5Fj2rRPa1a1KEqPya9DBn8xRynX5W7fD8h04CO8n7igrRJGtP1+wtPAD+GXwFIbAAAAABJRU5ErkJggg==');
+background-image: url('../images/oilwell.png');
 }
 
 /* 60% transparent black PNG-24 */
-#mapstory #legend {
+#mapstory #legend dl {
 background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWNgYGCYCQAAngCaAmUi4AAAAABJRU5ErkJggg==');
+}
+
+#mapstory #attribution {
+	background: url('../images/white60.png');
 }
 
 /* Black down arrow */
