@@ -8,6 +8,7 @@ cwm.handlers.ScrollHandler = function(map) {
       names = [],
       lastScrollY = -1,
       currentScroll = 0,
+      maxScroll = 0,
       ticking,
       scrollStartTime,
       scrollStartY,
@@ -43,7 +44,7 @@ cwm.handlers.ScrollHandler = function(map) {
   function onMouseWheel () {
     d3.event.preventDefault();
     currentScroll -= d3_behavior_zoom_delta();
-    currentScroll = Math.max(0, currentScroll);
+    currentScroll = Math.max(0, Math.min(currentScroll, maxScroll));
     tick();
   }
   
@@ -116,7 +117,7 @@ cwm.handlers.ScrollHandler = function(map) {
     spy: function (selection) {
       selection.each(function () {
         offsets.push({
-          scrollPoint: $x(this).offsetTop() + this.offsetHeight - window.innerHeight,
+          scrollPoint: $x(this).offsetTop() + this.offsetHeight - wHeight,
           section: this.getAttribute("id"),
           nationality: this.parentNode.getAttribute("class")
         });
@@ -134,6 +135,11 @@ cwm.handlers.ScrollHandler = function(map) {
       return _.find(offsets, function (offset) {
         return offsets.scrollPoint < currentScroll;
       }).nationality;
+    },
+
+    setMaxScroll: function (y) {
+      maxScroll = y;
+      return scrollHandler;
     }
     
   };
