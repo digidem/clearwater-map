@@ -18,6 +18,7 @@ cwm.Place.prototype = {
 		this.centroid = feature.geometry && d3.geo.centroid(feature);
 		this.id = options.id(feature);
 		this.parent = options.parent && d3.functor(options.parent)(feature);
+		this.children = [];
 		return this;
 	},
 
