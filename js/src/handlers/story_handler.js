@@ -8,7 +8,7 @@
 // scroll, and has minimal external dependencies.
 
 cwm.handlers.StoryHandler = function(storyId) {
-  var wHeight = window.innerHeight,
+  var wHeight = $("#stories").parent().innerHeight(),
     dHeight = d3.select("#stories")[0][0].offsetHeight + wHeight,
     scrollStyles = [],
     rangeStyles = [],
@@ -356,7 +356,7 @@ cwm.handlers.StoryHandler = function(storyId) {
       if (updated) klassId = klasses.add(elementKlasses);
       scrollKlasses[pixel] = klassId;
     }
-
+    cwm.scrollHandler.setMaxScroll(Math.min(scrollStyles.length - 1, dHeight - wHeight));
     return scrollStyles.length > dHeight;
   }
 

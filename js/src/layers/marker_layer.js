@@ -4,7 +4,8 @@ cwm.layers.MarkerLayer = function (context, id) {
       prevZoom = 0,
       markerSize,
       markerData,
-      markersHiding;
+      markersHiding,
+      mapContainer;
 
   var svg = context.select("svg");
 
@@ -74,6 +75,7 @@ cwm.layers.MarkerLayer = function (context, id) {
     map.ease.to(to).path('about').run(1000, function () {
       map.flightHandler.setOverride();
     });
+    d3.select(map.parent).classed("zoomed-in", true);
   }
   
   function sortFeaturedLast (a, b) {
@@ -126,8 +128,9 @@ cwm.layers.MarkerLayer = function (context, id) {
       // don't do anything if we haven't been attached to a map yet
       // (Modest Maps attaches the map to the layer when it is added to the map)
       if (!markerLayer.map || !markerData) return;
+      var mapContainer = mapContainer || d3.select(markerLayer.map.parent);
       var zoom = markerLayer.map.getZoom();
-      markerLayer.markersShown = zoom >= minZoom;
+      mapContainer.classed("markers-shown", (zoom >= minZoom));
       
       if (zoom < minZoom && prevZoom >= minZoom) {
         // If we just zoomed out, animate hide the markers

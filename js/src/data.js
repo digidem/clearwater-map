@@ -1,1 +1,1 @@
-cwm.data = {}
+cwm.data = {};

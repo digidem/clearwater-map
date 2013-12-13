@@ -4,6 +4,7 @@ cwm.Stories = function (containerId) {
       map;
   
   var container = d3.select(containerId);
+  var wHeight = $("#stories").parent().innerHeight();
   
   var storyData = nest(cwm.data.nationalities.features, cwm.data.communities.features, "nationality");
 
@@ -97,19 +98,19 @@ cwm.Stories = function (containerId) {
     )
     .affixBottom(
       "#stories h2, #stories h1", 
-      function () { return $x(this).parent("section").previousSiblingOrCousin().offsetBottom() - window.innerHeight  + this.offsetHeight; }
+      function () { return $x(this).parent("section").previousSiblingOrCousin().offsetBottom() - wHeight  + this.offsetHeight; }
     )
     .fadeIn(
       ".image", 
-      function () { return $x(this).offsetTop() - window.innerHeight; }, 
-      function () { return $x(this).offsetTop() - window.innerHeight + this.offsetHeight; }
+      function () { return $x(this).offsetTop() - wHeight; }, 
+      function () { return $x(this).offsetTop() - wHeight + this.offsetHeight; }
     )
     .fadeOut(
       "#stories article > section:not(:first-child)", 
-      function () { return $x(this).offsetTop() + this.offsetHeight - window.innerHeight + h1Height; }, 
-      function () { return (window.innerHeight - this.offsetHeight > 200) ?
+      function () { return $x(this).offsetTop() + this.offsetHeight - wHeight + h1Height; }, 
+      function () { return (wHeight - this.offsetHeight > 200) ?
                             $x(this).offsetTop() :
-                            $x(this).offsetTop() + this.offsetHeight - window.innerHeight + 200; }
+                            $x(this).offsetTop() + this.offsetHeight - wHeight + 200; }
     )
     .enable();
   */

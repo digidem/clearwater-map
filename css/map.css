@@ -20,6 +20,31 @@
   width:100%;
   height:100%;
 }
+
+#mapstory #map.markers-shown {
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in;
+}
+
+#mapstory #map.zoomed-in {
+  cursor: -webkit-zoom-out;
+  cursor: -moz-zoom-out;
+  cursor: zoom-out;
+}
+
+#mapstory #map {
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+#mapstory #map.dragging {
+  cursor: -webkit-grabbing !important;
+}
+
+#mapstory #map img {
+  -webkit-transition: opacity 1000ms;
+}
   
 #mapstory svg {
   width: 100%;
@@ -30,24 +55,47 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  /* background set to opacity 60% with data uri */
 }
 
+#mapstory #attribution {
+position: absolute;
+padding: 0 0.5em;
+font-size: 0.8em;
+bottom: 0;
+left: 50%;
+}
+
+#mapstory #attribution a {
+  color: #1e0fbe;
+}
+
+#mapstory #attribution a:hover {
+  text-decoration: underline;
+}
+
+
 #mapstory #legend dl {
-	margin: 0.5em;
-	font-family: "Yanone Kaffeesatz"; /* main font/type */
-	font-size: 1.5em;
+  position: relative; 
+  top:0;
+  margin: 0;
+	padding: 0.7em;
 	display: block;
 	color: #eeeeee;
 	text-decoration: none;
+  /* background set to opacity 60% with data uri */
+  -webkit-transition: top 500ms ease;
+}
+
+#mapstory #legend:hover dl {
+  top: 10.5em;
 }
 
 #mapstory #legend dt {
   display: block;
-  margin: 0 0 0.75em; 
+  margin: 0 0 0.3em; 
   padding: 0 0.5em 0 1.5em;
   background-repeat: no-repeat;
-  background-size: 0.95em 0.95em;
+  background-size: 1em 1em;
   background-position: 0 50%;
 }
 
