@@ -1,32 +1,41 @@
 /**
  * A place can either be a polygon or a point
  * @param {object}	feature A geoJSON feature with properties and geometry
- * @param {object}	options	An options object
  */
-cwm.Place = function(feature, options) {
+cwm.Place = function(feature) {
 	if (!(this instanceof cwm.Place))
-		return (new cwm.Place()).init(feature, options);
-	return this.init(feature, options);
+		return new cwm.Place(feature);
+	feature = feature || {};
+	this._properties = feature.properties || {};
+	this._geometry = feature.geometry || {};
+
+	// Default fields used for parentId and id.
+	this.id("id").parentId("parent");
 };
 
 cwm.Place.prototype = {
-	init: function(feature, options) {
-		this.properties = feature.properties;
-		this.geometry = feature.geometry;
-		// Bounds will be null if feature.geometry is null
-		this.bounds = feature.geometry && d3.geo.bounds(feature);
-		this.centroid = feature.geometry && d3.geo.centroid(feature);
-		this.id = options.id(feature);
-		this.parent = options.parent && d3.functor(options.parent)(feature);
+
+	// Add any custom events as arguments to d3.dispatch
+    event: d3.dispatch('changed'),
+
+    // Copies this 'on' method from d3_dispatch to the prototype
+    on: function() { 
+        var value = this.event.on.apply(this.event, arguments);
+        return value === this.event ? this : value;
+    },
+
+	// Set the field that contains the unique id. `v` can be a string or a function
+	id: function(v) {
+		if (!arguments.length) return this._id;
+		this._id = typeof v === "function" ? v(this._properties) : this._properties[v];
 		return this;
 	},
 
-	event: d3.dispatch('changed'),
-
-	// Copies this 'on' method from d3_dispatch to the prototype
-	on: function() { 
-		var value = this.event.on.apply(this.event, arguments);
-		return value === this.event ? this : value;
+	// Set the field that contains the parent id. `v` can be a string or a function
+	parentId: function(v) {
+		if (!arguments.length) return this._parentId;
+		this._parentId = typeof v === "function" ? v(this._properties) : this._properties[v];
+		return this;
 	},
 
 	/**
@@ -35,11 +44,11 @@ cwm.Place.prototype = {
 	 * @return {this}        Reference to self for chaining
 	 */
 	story: function(html) {
-		return attr(this.options.idKey, text);
+		return attr("story", text);
 	},
 
 	storyTitle: function(text) {
-		return attr(this.options.titleKey, text);
+		return attr("title", text);
 	},
 
 	/**
@@ -49,10 +58,18 @@ cwm.Place.prototype = {
 	 * @return {}             If value isNull, returns property value
 	 */
 	attr: function(key, value) {
-		if (!value) return this.properties[key];
-		this.properties[key] = value;
+		if (!value) return this._properties[key];
+		this._properties[key] = value;
 		this.event.changed(this);
 		return this;
+	},
+
+	bounds: function() {
+		return this._geometry && d3.geo.bounds(this.asGeoJSON());
+	},
+
+	centroid: function() {
+		return this._geometry && d3.geo.centroid(this.asGeoJSON());
 	},
 
 	/**
@@ -61,8 +78,8 @@ cwm.Place.prototype = {
 	asGeoJSON: function() {
 		return {
 			type: 'Feature',
-			properties: this.properties,
-			geometry: this.geometry
+			properties: this._properties,
+			geometry: this._geometry
 		};
 	}
 };

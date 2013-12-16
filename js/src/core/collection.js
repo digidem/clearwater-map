@@ -1,65 +1,130 @@
 /**
  * A collection of places
- * @param {text} id Identifier for this collection
  */
-cwm.Collection = function(id) {
-	var event = d3.dispatch("changed"),
-		byId = {},
-		byParent = {},
-		places,
-		parents = [],
-		bounds;
+cwm.Collection = function() {
+	if (!(this instanceof cwm.Collection))
+		return new cwm.Collection();
 
-	var defaults = {
-		// id is either a string or a function which returns the id
-		id: function(d) { return d.properties.id; },
-		storyKey: "story",
-		titleKey: "title",
-		parent: null
-	};
+	var arr = [];
+	cwm.util.subclass(arr, cwm.Collection.prototype);
 
-	var collection = {
-		add: function(geojson, options) {
-			_.defaults(options, defaults);
-			// Faster to create a fixed size array http://jsperf.com/array-push-vs-array-length23333/8
-			places = new Array(geojson.features.length);
-			bounds = d3.geo.bounds(geojson);
+	cwm.util.extend(arr, {
+		_byId: {},
+		_byParent: {},
+		_idField: "id",
+		_parentIdField: "parent"
+	});
 
-			// Create a new place for each feature in the geoJSON
-			geojson.features.forEach(function(feature, i) {
-				var place = cwm.Place(feature, options).on("changed", event.changed);
-				// Build an array of unique parents referenced from incoming data
-				if (!(place.parent in byParent)) byParent[place.parent] = [];
-				byParent[place.parent].push(place);
-				byId[place.id] = place;
-				places[i] = place;
-			});
-			return collection;
-		},
-
-		get: function(id) {
-			return byId[id];
-		},
-
-		getByParent: function(parentId) {
-			return byParent[parentId];
-		},
-
-		asGeoJSON: function() {
-			return {
-				type: "FeatureCollection",
-				features: places.map(function(place) {
-					return place.asGeoJSON();
-				})
-			};
-		},
-	};
-
-	return d3.rebind(collection, event, 'on');
+    return arr;
 };
 
-// // Insert new places with parent = id after their parent with that id
-// parents.forEach(function(id) {
-// var index = _.findIndex(places, { id: id }) + 1;
-// Array.prototype.splice.apply(places, [index, 0].concat(_.filter(newPlaces, { parent: id })));
-// });
+cwm.Collection.prototype = Object.create(Array.prototype);
+
+cwm.util.extend(cwm.Collection.prototype, {
+
+	// Add any custom events as arguments to d3.dispatch
+    event: d3.dispatch('changed'),
+
+    // Copies this 'on' method from d3_dispatch to the prototype
+    on: function() { 
+        var value = this.event.on.apply(this.event, arguments);
+        return value === this.event ? this : value;
+    },
+
+    model: cwm.Place,
+
+	// add one or more features to the collection
+	// features can be a single geoJSON feature, an array of geoJSON features,
+	// or a cwm.Place or array of cwm.Place
+	add: function(features, index) {
+		// Add the features to a byParentId and byId index. Defaults to true
+		if (typeof index === "undefined") index = true;
+		// force into array
+		if (!(features instanceof Array)) features = [features];
+
+		// Create a new place for each feature in the geoJSON
+		features.forEach(function(model) {
+
+			if (!(model instanceof this.model)) {
+				model = this.model(model)
+					.on("changed", this.event.changed)
+					.parentId(this._parentIdField)
+					.id(this._idField);
+			}
+
+			this.push(model);
+
+			if (index) {
+				// Index by id and parent id
+				var parentId = model.parentId();
+				// Creates a sub-collection for each group of places belonging to the same parent
+				if (!(parentId in this._byParent)) this._byParent[parentId] = cwm.Collection();
+				// We don't want to recurse forever, so we don't create an index for this one.
+				this._byParent[parentId].add(model, false);
+				this._byId[model.id()] = model;
+			}
+
+		}, this);
+
+		return this;
+	},
+
+	placeId: function(idField) {
+		if (!arguments.length) return this._idField;
+		this._idField = idField;
+		this._reindex();
+		return this;
+	},
+
+	placeParentId: function(parentIdField) {
+		if (!arguments.length) return _parentIdField;
+		this._parentIdField = parentIdField;
+		this._reindex();
+		return this;
+	},
+
+	get: function(id) {
+		return this._byId[id];
+	},
+
+	// Returns an array of places with a `parentId`
+	getByParent: function(parentId) {
+		if (!arguments.length) return this._byParent;
+		return this._byParent[parentId] || [];
+	},
+
+	bounds: function() {
+		return d3.geo.bounds(this.asGeoJSON);
+	},
+
+	asGeoJSON: function() {
+		return {
+			type: "FeatureCollection",
+			features: this.map(function(place) {
+				return place.asGeoJSON();
+			})
+		};
+	},
+
+	// Rebuilds byId and byParent index when the field changes.
+	// This could be more efficient by doing one at a time, but 
+	// this is not a bottleneck at this stage.
+	_reindex: function() {
+		this._byId = {};
+		this._byParent = {};
+
+		this.forEach(function(place) {
+			place.id(this._idField);
+			this._byId[place.id()] = place;
+			place.parentId(this._parentIdField);
+			var parentId = place.parentId();
+			if (!(parentId in this._byParent)) this._byParent[parentId] = [];
+			this._byParent[parentId].push(place);
+		}, this);
+
+		return this;
+	}
+
+});
+
+
