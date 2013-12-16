@@ -19,6 +19,8 @@ cwm.handlers.ScrollHandler = function(map) {
       d3_behavior_zoom_wheel,
       d3_behavior_zoom_delta;
 
+  var wHeight = $(map.parentNode).innerHeight();
+
   tick();
 
   // from https://github.com/mbostock/d3/pull/1050/files
