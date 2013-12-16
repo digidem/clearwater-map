@@ -1,3 +1,5 @@
+/*jshint proto:true */
+
 cwm.util = {
 
   // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
@@ -49,6 +51,32 @@ cwm.util = {
               if (!remaining) callback(errors, results);
           });
       });
+  },
+
+  subclass: (function() {
+    return {}.__proto__ ?
+      // Until ECMAScript supports array subclassing, prototype injection works well. 
+      // See http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
+      function(object, prototype) {
+        object.__proto__ = prototype;
+      } :
+
+      // And if your browser doesn't support __proto__, we'll use direct extension.
+      function(object, prototype) {
+        for (var property in prototype) object[property] = prototype[property];
+      };
+  })(),
+
+  // borrowed from underscore
+  extend: function(obj) {
+    Array.prototype.slice.call(arguments, 1).forEach(function(source) {
+      if (source) {
+        for (var prop in source) {
+          obj[prop] = source[prop];
+        }
+      }
+    });
+    return obj;
   }
   
 };

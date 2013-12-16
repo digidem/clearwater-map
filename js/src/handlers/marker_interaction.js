@@ -114,7 +114,7 @@ cwm.handlers.MarkerInteraction = function (context) {
           .attr("r", getMarkerSize)
           .style("stroke-width", 3);      
       });
-    isBouncing = window.setTimeout(bounceMarkers, 5000, marker); 
+    isBouncing = window.setTimeout(bounceMarkers, 3000, marker); 
   }
   
   function scrollToStory () {

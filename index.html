@@ -18,6 +18,7 @@
   <script src='js/lib/waxconnector.js'></script>
   <script src='js/lib/easey.js'></script>
 
+
   <script src='js/src/cwm.js'></script>
   <script src='js/src/map.js'></script>
   <script src='js/src/stories.js'></script>
@@ -27,6 +28,10 @@
   <script src='js/src/util.js'></script>
   <script src='js/src/util/MM.overrides.js'></script>
   <script src='js/src/util/domhelpers.js'></script>
+
+  <script src='js/src/core/place.js'></script>
+  <script src='js/src/core/collection.js'></script>
+  <script src='js/src/core/narrative.js'></script>
   
   <script src='js/src/layers.js'></script>
   <script src='js/src/layers/bing_layer.js'></script>
@@ -56,13 +61,9 @@
   <style type="text/css">
   </style>
 </head>
-<body id="mapstory">
+<body>
 
-<div id="mappane">
-
-  <div id='map'></div>
-  
-  <div id='stories'></div>
+<div id="mapstory">
 
   <div id='legend'>
     <dl>
@@ -111,7 +112,7 @@
 
 <script type="text/javascript" charset="utf-8">
 
-cwm.init();
+cwm.init("#mapstory");
 
 </script>
 
