@@ -91,7 +91,7 @@ cwm.layers.MarkerLayer = function (context, id) {
     });
     
     // Join the filtered data for markers in the current map extent
-    var update = g.selectAll("circle").data(data, function (d) { return d.properties.cartodb_id; });
+    var update = g.selectAll("circle").data(data, function (d) { return d.properties._id; });
     
     // For any new markers appearing in the extent, append a circle
     // and add the interaction.
@@ -177,10 +177,27 @@ cwm.layers.MarkerLayer = function (context, id) {
     },
     
     load: function (url, options, callback) {
-      d3.json(url, function (e, data) {
-        if (e) throw e.response + ": Could not load " + url;
-        else markerLayer.add(data, options, callback);
-      });
+      d3.csv(url)
+        .row(function(d) {
+          var geometry = JSON.parse(d._geom);
+          delete d._geom;
+          // Coerce types
+          d.featured = (d.featured === "TRUE");
+          d.users = +d.users;
+          d.families = +d.families;
+          return {
+            "type": "Feature",
+            properties: d,
+            geometry: geometry
+          };
+        })
+        .get(function (e, data) {
+          if (e) throw e.response + ": Could not load " + url;
+          else markerLayer.add({
+            "type": "FeatureCollection",
+            "features": data
+          }, options, callback);
+        });
       return markerLayer;
     },
     

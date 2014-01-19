@@ -102,6 +102,7 @@ D3_FILES = \
 	node_modules/d3/src/selection/index.js \
 	node_modules/d3/src/transition/index.js \
 	node_modules/d3/src/xhr/index.js \
+	node_modules/d3/src/dsv/index.js \
 	node_modules/d3/src/end.js
 
 js/lib/d3.v3.js: $(D3_FILES)
