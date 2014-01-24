@@ -2,7 +2,7 @@ window.cwm = {
 
   init: function (mapId, storiesId) {
     
-    var baseUrl = 'https://docs.google.com/spreadsheet/pub?key=0ArHJ46D4DMthdFRCV1VGc1RoVThlSHEzSzRrbHMtclE&single=true&output=csv';
+    var baseUrl = 'http://clearwater.cartodb.com/api/v2/sql?format=geojson&q=';
     
     var options = {
       
@@ -18,9 +18,11 @@ window.cwm = {
       startBounds: [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ],
       
       // Data sources for overlay and markers (currently CartoDB)
-      communityUrl: baseUrl + "&gid=1",
+      communityUrl: baseUrl + "SELECT ST_Simplify(the_geom, 0.0002) AS the_geom, c.cartodb_id, c.community, c.nationality, systems, users " +
+                                 "FROM communities AS c LEFT JOIN (SELECT COUNT(*) AS systems, SUM(users) AS users, community " +
+                                 "FROM clearwater_well_installations GROUP BY community) AS cwi ON c.community = cwi.community WHERE active",
                                  
-      installationUrl: baseUrl + "&gid=0",
+      installationUrl: baseUrl + "SELECT *, to_char(date, 'YYYY-MM-DD') AS date FROM clearwater_well_installations WHERE photo IS NOT NULL",
       
       padding: 580 
            

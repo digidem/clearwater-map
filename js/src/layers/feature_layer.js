@@ -85,7 +85,7 @@ cwm.layers.FeatureLayer = function (context, id) {
       // update the features to their new positions
       // If beyond their max zoom, fade them out
       // Do not display features outside the map
-      features.data(data, function (d) { return d.properties.community; })
+      features.data(data, function (d) { return d.properties.cartodb_id; })
           .attr("d", pathGenerator)
           .style("fill-opacity", function (d) {
             return Math.min(Math.max(d.properties._maxZoom + 1 - zoom, 0), 1) * 0.6;
@@ -147,23 +147,10 @@ cwm.layers.FeatureLayer = function (context, id) {
     
     // This will load geojson from `url` and add it to the layer
     load: function (url, options, callback) {
-      d3.csv(url)
-        .row(function(d) {
-          var geometry = JSON.parse(d._geom);
-          delete d._geom;
-          return {
-            "type": "Feature",
-            properties: d,
-            geometry: geometry
-          };
-        })
-        .get(function (e, data) {
-          if (e) throw e.response + ": Could not load " + url;
-          else featureLayer.add({
-            "type": "FeatureCollection",
-            "features": data
-          }, options, callback);
-        });
+      d3.json(url, function (e, data) {
+        if (e) throw e.response + ": Could not load " + url;
+        else featureLayer.add(data, options, callback);
+      });
       return featureLayer;
     },
     
