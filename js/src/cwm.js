@@ -18,9 +18,9 @@ window.cwm = {
       startBounds: [ { lat: -55, lon: -90 }, { lat: 14, lon: -33 } ],
       
       // Data sources for overlay and markers (currently CartoDB)
-      communityUrl: baseUrl + "/data/communities.geojson",
+      communityUrl: baseUrl + "data/communities.geojson",
                                  
-      installationUrl: baseUrl + "/data/installations.geojson",
+      installationUrl: baseUrl + "data/installations.geojson",
       
       padding: 580 
            
