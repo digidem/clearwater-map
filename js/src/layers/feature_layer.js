@@ -85,7 +85,7 @@ cwm.layers.FeatureLayer = function (context, id) {
       // update the features to their new positions
       // If beyond their max zoom, fade them out
       // Do not display features outside the map
-      features.data(data, function (d) { return d.properties.cartodb_id; })
+      features.data(data, function (d) { return d.properties.community; })
           .attr("d", pathGenerator)
           .style("fill-opacity", function (d) {
             return Math.min(Math.max(d.properties._maxZoom + 1 - zoom, 0), 1) * 0.6;

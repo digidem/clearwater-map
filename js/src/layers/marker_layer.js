@@ -91,7 +91,7 @@ cwm.layers.MarkerLayer = function (context, id) {
     });
     
     // Join the filtered data for markers in the current map extent
-    var update = g.selectAll("circle").data(data, function (d) { return d.properties.cartodb_id; });
+    var update = g.selectAll("circle").data(data, function (d) { return d.properties._id; });
     
     // For any new markers appearing in the extent, append a circle
     // and add the interaction.
