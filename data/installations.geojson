@@ -4,99 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7668234370355524,
-        "lon": -76.68234369,
-        "lat": 0.03555242,
-        "community": "Cofan Dureno",
-        "users": 1,
-        "families": 1,
-        "project": "School",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7036432833/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.68234369,
-          0.03555242
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669666770450761,
-        "lon": -76.69666771,
-        "lat": 0.04507597,
-        "community": "Cofan Dureno",
-        "families": 1,
-        "project": "School"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.69666771,
-          0.04507597
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669695020450624,
-        "lon": -76.6969502472486,
-        "lat": 0.045062362683379,
-        "community": "Cofan Dureno",
-        "families": 1,
-        "project": "School"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.6969502472486,
-          0.045062362683379
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669742390450180,
-        "lon": -76.6974239074999,
-        "lat": 0.045017952668641,
-        "community": "Cofan Dureno",
-        "families": 1,
-        "project": "Old Assembly Room"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.6974239074999,
-          0.045017952668641
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669757750452038,
-        "lon": -76.6975775160707,
-        "lat": 0.045203871990551,
-        "community": "Cofan Dureno",
-        "photo": "http://farm9.staticflickr.com/8154/7264260384_0c5ff04014_m.jpg",
-        "families": 1,
-        "project": "Old School"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.6975775160707,
-          0.045203871990551
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "_id": 7643583496974250,
         "lon": -76.435835,
         "lat": -0.302575,
@@ -230,25 +137,6 @@
         "coordinates": [
           -76.28802,
           -0.28869
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669700560454868,
-        "lon": -76.6970056180078,
-        "lat": 0.045486787878845,
-        "community": "Cofan Dureno",
-        "families": 1,
-        "project": "Community center",
-        "video": "http://www.youtube.com/embed/E4XkF0nlTlI"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.6970056180078,
-          0.045486787878845
         ]
       }
     },
@@ -520,7 +408,6 @@
       "type": "Feature",
       "properties": {
         "_id": 7670320410465470,
-        "featured": true,
         "lon": -76.70320413,
         "lat": 0.0465471,
         "community": "Cofan Dureno",
@@ -1885,7 +1772,6 @@
       "type": "Feature",
       "properties": {
         "_id": 7676519992307599,
-        "featured": true,
         "lon": -76.7652,
         "lat": -0.76924,
         "community": "Waorani",
@@ -2391,7 +2277,6 @@
       "type": "Feature",
       "properties": {
         "_id": 7643774997596899,
-        "featured": true,
         "lon": -76.43775,
         "lat": -0.24031,
         "community": "Siona",
