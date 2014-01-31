@@ -187,28 +187,6 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7642927596982760,
-        "lon": -76.429276,
-        "lat": -0.301724,
-        "community": "Secoya",
-        "name": "Jose Payaguaje",
-        "users": 8,
-        "settlement": "Bellavista",
-        "families": 1,
-        "project": "No System",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7264245840/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.429276,
-          -0.301724
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "_id": 7669665460468491,
         "lon": -76.69665465,
         "lat": 0.04684914,
@@ -4274,7 +4252,7 @@
         "name": "Allmer Piaguaje",
         "users": 4,
         "date": "Tue Aug 20 2013",
-        "photo": "https://drive.google.com/a/groundworkopportunities.org/file/d/0BxOXpO0jPWb1dHpza0pZdTI5S1k/edit?usp=sharing",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/ed0ad7a238ac5d8c7cab0d899aa3eccc4604583d.jpg",
         "settlement": "Siekoya Remolino",
         "families": 1,
         "project": "Secoya Second Installation"
