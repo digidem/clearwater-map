@@ -158,7 +158,7 @@
         easey.getCoordinate = function(t) {
           path(from, to, easing(t), static_coord);
           return static_coord;
-        }
+        };
 
         easey.future = function(parts) {
             var futures = [];
@@ -251,8 +251,8 @@
           function cosh(n) { return (Math.exp(n) + Math.exp(-n)) / 2; }
           function tanh(n) { return sinh(n) / cosh(n); }
 
-          if (from) map.coordinate = from; // For when `from` not current coordinate
-          else from = map.coordinate.copy();
+          if (!from) //map.coordinate = from; // For when `from` not current coordinate
+            from = map.coordinate.copy();
 
           // Width is measured in coordinate units at zoom 0
           var TL = map.pointCoordinate(new MM.Point(0, 0)).zoomTo(0),

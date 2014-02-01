@@ -6,17 +6,18 @@ cwm.Place = function(feature) {
 	if (!(this instanceof cwm.Place))
 		return new cwm.Place(feature);
 	feature = feature || {};
-	this._properties = feature.properties || {};
-	this._geometry = feature.geometry || {};
+	this.properties = feature.properties || {};
+	this.geometry = feature.geometry || {};
+	this.type = feature.type;
+
+	// Add any custom events as arguments to d3.dispatch
+	this.event = d3.dispatch('changed');
 
 	// Default fields used for parentId and id.
 	this.id("id").parentId("parent");
 };
 
 cwm.Place.prototype = {
-
-	// Add any custom events as arguments to d3.dispatch
-    event: d3.dispatch('changed'),
 
     // Copies this 'on' method from d3_dispatch to the prototype
     on: function() { 
@@ -27,28 +28,15 @@ cwm.Place.prototype = {
 	// Set the field that contains the unique id. `v` can be a string or a function
 	id: function(v) {
 		if (!arguments.length) return this._id;
-		this._id = typeof v === "function" ? v(this._properties) : this._properties[v];
+		this._id = typeof v === "function" ? v(this.properties) : this.properties[v];
 		return this;
 	},
 
 	// Set the field that contains the parent id. `v` can be a string or a function
 	parentId: function(v) {
 		if (!arguments.length) return this._parentId;
-		this._parentId = typeof v === "function" ? v(this._properties) : this._properties[v];
+		this._parentId = typeof v === "function" ? v(this.properties) : this.properties[v];
 		return this;
-	},
-
-	/**
-	 * Gets or sets the story associated with a Place
-	 * @param  {string} html Sets the new html text for the story
-	 * @return {this}        Reference to self for chaining
-	 */
-	story: function(html) {
-		return attr("story", text);
-	},
-
-	storyTitle: function(text) {
-		return attr("title", text);
 	},
 
 	/**
@@ -58,18 +46,22 @@ cwm.Place.prototype = {
 	 * @return {}             If value isNull, returns property value
 	 */
 	attr: function(key, value) {
-		if (!value) return this._properties[key];
-		this._properties[key] = value;
+		if (!value) return this.properties[key];
+		this.properties[key] = value;
 		this.event.changed(this);
 		return this;
 	},
 
 	bounds: function() {
-		return this._geometry && d3.geo.bounds(this.asGeoJSON());
-	},
+        return this._bounds || (this._bounds = this.geometry && d3.geo.bounds(this.asGeoJSON()));
+    },
+
+    extent: function() {
+        return this._extent || (this._extent = new MM.Extent(this.bounds()[1][1], this.bounds()[0][0], this.bounds()[0][1], this.bounds()[1][0]));
+    },
 
 	centroid: function() {
-		return this._geometry && d3.geo.centroid(this.asGeoJSON());
+		return this._centroid || (this._centroid = this.geometry && d3.geo.centroid(this.asGeoJSON()));
 	},
 
 	/**
@@ -78,8 +70,8 @@ cwm.Place.prototype = {
 	asGeoJSON: function() {
 		return {
 			type: 'Feature',
-			properties: this._properties,
-			geometry: this._geometry
+			properties: this.properties,
+			geometry: this.geometry
 		};
 	}
 };

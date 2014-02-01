@@ -1,40 +1,14 @@
-#mapstory #stories {
-  pointer-events: none;
+#mapstory #stories article {
   width: 30em;
   position: absolute;
-  top: 100%;
-  margin: 0 0 0 2.25em;
+  margin: 0;
   color: #eee;
-  transition: opacity 0.4s linear;
-  -moz-transition: opacity 0.4s linear;
-  -webkit-transition: opacity 0.4s linear;
+  background-color: #333;
 }
 
-#mapstory #stories article:first-child section:first-child {
-  position: absolute;
-  bottom: 100%;
-  margin-bottom: 3.15em;
-  margin-top: 0;
-  transform: translate3d(0,-1px,0);
-  -moz-transform: translate3d(0,-1px,0);
-  -webkit-transform: translate3d(0,-1px,0);
-}
-
-#mapstory #stories article {
-/*  margin-bottom: 1000px;*/
-}
-
-#mapstory #stories section {
-  pointer-events: auto;
-    margin-bottom: 3.15em;
-  margin-top: 20em;
-  position: relative;
-  width: 100%;
-}
 
 #mapstory #stories h1, #mapstory #stories h2 {
   line-height: 1em;
-  padding: 0.25em 1em;
   margin: 0;
   font-weight: normal;
   font-family: "Yanone Kaffeesatz", sans-serif;
@@ -45,13 +19,10 @@
 }
 
 #mapstory #stories h1 {
-  position: relative;
-  padding: 0.2em 0.88889em;
-  margin-left: -0.88889em;
-  width: 11.55556em;
+  padding: 0.2em 0.444444em;
+  margin-bottom: 0.444444em;
   font-size: 2.25em;
   font-weight: 700;
-  z-index: 3;
   color: black;
   background-color: #f2c21c;
 	/* background image black down arrow from data uri */
@@ -61,14 +32,6 @@
   -ms-transition: background-position 100ms linear, padding, margin;
 }
 
-#mapstory #stories h1.fixedTop {
-  margin-left: -1.88889em;
-  padding-left: 1.88889em;
-}
-
-#mapstory #stories h1.fixedTop:hover, #mapstory #stories h1.fixedBottom:hover {
-  background-color: #ab8b1e;
-}
 
 #mapstory #stories h1:before {
   background-position: 0 50%;
@@ -121,9 +84,13 @@
   background-position: 97.5% 50%;
 }
 
+#mapstory #stories .text {
+  padding: 1em;
+}
+
 #mapstory #stories h2 {
-  margin-left: -1em;
-  width: 13em;
+  padding: 0.25em 0.5em;
+  margin-bottom: 0.5em;
   font-size: 2em;
   color: #f2c21c;
   background-color: black;
@@ -131,12 +98,6 @@
   transition: background-position 100ms linear;
   -moz-transition: background-position 100ms linear;
   -webkit-transition: background-position 100ms linear;
-}
-
-#mapstory #stories .text {
-  background-color: #333;
-  padding: 0 2em 0.5em;
-  position: relative;
 }
 
 #mapstory .button {

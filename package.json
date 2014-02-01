@@ -13,7 +13,8 @@
   "dependencies": {
     "modestmaps": "3.3.6",
     "wax": "7.0.0dev13",
-    "easey": "2.0.7"
+    "easey": "2.0.7",
+    "queue-async": "1"
   },
   "devDependencies": {
     "uglify-js": "~2.2.5",
