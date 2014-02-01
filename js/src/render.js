@@ -1,15 +1,17 @@
 cwm.render = {
   
   // Container for the interactive layer
-  LayerContainer: function (id) {
-    var div = d3.select(document.body)
-      .append("div")
-      .style('position', 'absolute')
-      .style('width', '100%')
-      .style('height', '100%')
-      .attr('id', id);
-    div.append('svg').style("position", "absolute");
-    return div;
+  SvgContainer: function (selection) {
+    var svg;
+
+    svg = selection.select('svg');
+
+    if (!svg.node()) {
+      svg = selection.append('svg')
+        .style("position", "absolute");
+    }
+
+    return svg;
   },
   
   Markers: function (data, context) {
@@ -33,7 +35,7 @@ cwm.render = {
         .append("div")
         .attr("class", "feature-label")
         .style("pointer-events", "auto")
-        .text(d.properties.community || d.properties.description);
+        .text(d.attr("community") || d.id());
         
     return label;
   },
@@ -50,54 +52,56 @@ cwm.render = {
         .append("div")
         .attr("class", "marker-popup")
         .style("pointer-events", "auto")
-        .classed("featured", function () { return d.properties.featured === true; });
+        .classed("featured", function () { return d.attr("featured") === true; });
         
     return popup;
   },
   
   PopupSmall: function (d, context) {
+    var imgUrl = (d.attr("photo")) ? d.attr("photo").replace(".jpg", "-150.jpg") : cwm.util.emptyGIF;
     context.append("div")
         .attr("class", "image-wrapper")
         .append("img")
-        .attr("src", d.properties.photo);
+        .attr("src", imgUrl);
       
     context.append("p")
-        .text(d.properties.name.split(" and")[0]);
+        .text((d.attr("name")) ? d.attr("name").split(" and")[0] : "");
         
     return context;
   },
   
   PopupLarge: function (d, context) {
+    var imgUrl = (d.attr("photo")) ? d.attr("photo").replace(".jpg", "-150.jpg") : cwm.util.emptyGIF;
     var format = d3.time.format("%b %e %Y")
     context.append("div")
         .attr("class", "image-wrapper")
         .append("img")
-        .attr("src", d.properties.photo);
+        .attr("src", imgUrl);
       
     var table = context.append("table")
 
     var row = table.append("tr")
     row.append("th").text("Family:");
-    row.append("td").text(d.properties.name);
+    row.append("td").text(d.attr("name"));
     
     row = table.append("tr")
     row.append("th").text("Village:");
-    row.append("td").text(d.properties.community);
+    row.append("td").text(d.attr("community"));
 
     row = table.append("tr")
     row.append("th").text("Installed:");
-    row.append("td").text(format(new Date(d.properties.date)));
+    row.append("td").text(format(new Date(d.attr("date"))));
 
     row = table.append("tr")
     row.append("th").text("Users:");
-    row.append("td").text(d.properties.users);
+    row.append("td").text(d.attr("users"));
 
-    if (d.properties.featured === true) {
+    if (d.attr("featured") === true) {
       row = table.append("tr")
       row.append("th").text("Story:");
       row.append("td")
         .append("a")
-        .attr("href", d.properties.featured_url)
+        .attr("href", d.attr("blog_url"))
         .text("Read more on our blog...");
     }
 

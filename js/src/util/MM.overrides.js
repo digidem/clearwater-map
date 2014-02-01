@@ -34,10 +34,17 @@ MM.Extent.prototype.containsCoordinates = function (coords) {
   return this.containsLocation(new MM.Location(coords[1], coords[0]));
 };
 
+MM.Map.prototype.setCoordinate = function (coordinate) {
+    this.coordinate = this.enforceLimits(coordinate);
+    MM.getFrame(this.getRedraw());
+    this.dispatchCallback('extentset', coordinate);
+    return this;
+};
+
 // Returns the map zoom and center for an extent, but accounting for the 
 // space taken by the column of stories to the left.
-MM.Map.prototype.extentCoordinate = function (locations, precise, paddingLeft) {
-    var paddingLeft = this.paddingLeft || paddingLeft || 0;
+MM.Map.prototype.extentCoordinate = function (locations, precise, _paddingLeft) {
+    var paddingLeft = this._paddingLeft || _paddingLeft || 0;
     
     // coerce locations to an array if it's a Extent instance
     if (locations instanceof MM.Extent) {
@@ -95,14 +102,3 @@ MM.Map.prototype.extentCoordinate = function (locations, precise, paddingLeft) {
     var centerZoom = TL.zoom;
     return new MM.Coordinate(centerRow, centerColumn, centerZoom).zoomTo(initZoom).left(paddingLeft / this.tileSize.x / 2);
 };
-  
-MM.Map.prototype.setExtent = function(locations, precise, paddingLeft) {
-
-    this.coordinate = this.extentCoordinate(locations, precise, paddingLeft);
-    this.draw(); // draw calls enforceLimits
-    // (if you switch to getFrame, call enforceLimits first)
-
-    this.dispatchCallback('extentset', locations);
-    return this;
-};
-
