@@ -5232,9 +5232,9 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7743161001239001,
+        "_id": 7743160998761001,
         "lon": -77.43161,
-        "lat": 0.1239,
+        "lat": -0.1239,
         "community": "Sinangue",
         "name": "Victor Quenama and Inez Umena",
         "users": 11,
@@ -5248,7 +5248,7 @@
         "type": "Point",
         "coordinates": [
           -77.43161,
-          0.1239
+          -0.1239
         ]
       }
     },
@@ -5553,8 +5553,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7688159999136401,
-        "lon": -76.8816,
+        "_id": 7788159999136401,
+        "lon": -77.8816,
         "lat": -0.08636,
         "community": "Sinangue",
         "name": "Edison Lucitante and Celia Tapuy",
@@ -5568,7 +5568,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -76.8816,
+          -77.8816,
           -0.08636
         ]
       }
