@@ -5553,29 +5553,6 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7788159999136401,
-        "lon": -77.8816,
-        "lat": -0.08636,
-        "community": "Sinangue",
-        "name": "Edison Lucitante and Celia Tapuy",
-        "users": 6,
-        "date": "Sat Jan 18 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/70bde4d1ccd32bbd05e64644cb550e4442ce1de3.jpg",
-        "settlement": "Sinangue",
-        "families": 1,
-        "project": "Sinangue"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.8816,
-          -0.08636
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "_id": 7743167998769600,
         "lon": -77.43168,
         "lat": -0.12304,
