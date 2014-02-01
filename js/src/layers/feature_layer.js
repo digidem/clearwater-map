@@ -156,11 +156,13 @@ cwm.layers.FeatureLayer = function (context, id) {
     
     getLocations: function (field) {
       var locations = [];
-      features.each(function (d) {
-        locations.push({ 
-          id: cwm.util.sanitize(d.properties[field]),
-          bounds: d3.geo.bounds(d)
-        });
+      var nest = d3.nest().key(function(d) { return d.properties.nationality; }).entries(featureData);
+      nest.forEach(function (d) {
+        if (d.key !== "ecuador") 
+          locations.push({ 
+            id: cwm.util.sanitize(d.key),
+            bounds: d3.geo.bounds({ type: "FeatureCollection", features: d.values })
+          });
       });
       return locations;
     }

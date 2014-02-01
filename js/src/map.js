@@ -21,7 +21,7 @@ cwm.Map = function (mapId, options) {
     [ cwm.handlers.DragHandler() ]
   ).setExtent(options.startBounds, false, paddingLeft).setZoomRange(3,18);
   
-  var mapContainer = d3.select(map.parent)
+  var mapContainer = d3.select(map.parent);
   
   featureLayer.add(cwm.data.ecuador, { 
     id: "ecuador", 
@@ -29,14 +29,16 @@ cwm.Map = function (mapId, options) {
     scrollTo: function () { return "project-overview"; }
   });
   
-  featureLayer.load(options.communityUrl, { 
+  featureLayer.add(cwm.data.communities.asGeoJSON(), { 
     id: "communities", 
     maxZoom: 12.5,
     scrollTo: function (d) { return cwm.util.sanitize(d.properties.community); }
-  }, onLoad);
+  });
       
-  markerLayer.load(options.installationUrl, { minZoom: 12.5 },onLoad);
-  
+  markerLayer.add(cwm.data.installations.asGeoJSON(), { minZoom: 12.5 });
+
+  var locations = [{ id: 'ecuador', bounds: cwm.util.d3Bounds(options.startBounds) }];
+
   map.ease = mapbox.ease().map(map);
   
   // The flightHandler is what moves the map according to the scroll position
@@ -55,9 +57,11 @@ cwm.Map = function (mapId, options) {
     lastResize = Date.now();
   };
 
+
+
   // Check all the layers have loaded and set the locations
   // of any places that the map should navigate to
-  function onLoad () {
+  map.onLoad = function() {
     if (featureLayer.bounds.communities && markerLayer.bounds) {
       setLocations();
       setupScrolling();
@@ -103,10 +107,9 @@ cwm.Map = function (mapId, options) {
    * (3) The extent of each community in the communities layer
    * (4) The location of each story in the installations layer
    */
-  var locations = [{ id: 'ecuador', bounds: cwm.util.d3Bounds(options.startBounds) }];
   function setLocations () {
     var storyLocations = markerLayer.getLocations(
-      function (d) { return cwm.util.sanitize(d.properties.featured_url); },
+      function (d) { return cwm.util.sanitize(d.properties.story_url); },
       function (d) { return d.properties.featured && true; }
     );
     var overviewLocations = markerLayer.getOverviewLocations(
@@ -114,7 +117,7 @@ cwm.Map = function (mapId, options) {
       function (d) { return d.properties.community; }
     );
     locations = locations.concat([{ id: "project-overview", bounds: featureLayer.bounds.communities }])
-        .concat(featureLayer.getLocations("community"))
+        .concat(featureLayer.getLocations("nationality"))
         .concat(overviewLocations)
         .concat(storyLocations);
   }
@@ -128,7 +131,7 @@ cwm.Map = function (mapId, options) {
     
     d3.selectAll('.markers circle').on('click', function (d) {
       if (d3.event.defaultPrevented) return;
-      var link = cwm.util.sanitize(d.properties.featured_url);
+      var link = cwm.util.sanitize(d.properties.story_url);
       
       if (link) {
         stories.scrollTo(link);

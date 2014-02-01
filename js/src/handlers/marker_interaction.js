@@ -121,7 +121,7 @@ cwm.handlers.MarkerInteraction = function (context) {
     var d = this.__data__;
     if (d.properties.featured === true) {
       cwm.map.flightHandler.pause();
-      cwm.map.s.scrollTo(cwm.util.sanitize(d.properties.featured_url), function () {
+      cwm.map.s.scrollTo(cwm.util.sanitize(d.properties.story_url), function () {
         cwm.map.flightHandler.resume();
       });
     }
