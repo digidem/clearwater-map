@@ -363,6 +363,7 @@
       "type": "Feature",
       "properties": {
         "_id": 7670320410465470,
+        "featured": true,
         "lon": -76.70320413,
         "lat": 0.0465471,
         "community": "Cofan Dureno",
@@ -478,30 +479,6 @@
         "coordinates": [
           -76.419445,
           -0.299589
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7642362197021109,
-        "lon": -76.423622,
-        "lat": -0.297889,
-        "community": "Secoya",
-        "name": "Gregorio Paiaguaje",
-        "users": 9,
-        "date": "Tue May 15 2012",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/7d373ac8a8b5f50d063d42a68e0d003fdfeb94d5.jpg",
-        "settlement": "Bellavista",
-        "families": 1,
-        "project": "ClearWater San Pablo project",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7264220874/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.423622,
-          -0.297889
         ]
       }
     },
@@ -1729,6 +1706,7 @@
       "type": "Feature",
       "properties": {
         "_id": 7676519992307599,
+        "featured": true,
         "lon": -76.7652,
         "lat": -0.76924,
         "community": "Waorani",
@@ -2236,6 +2214,7 @@
       "type": "Feature",
       "properties": {
         "_id": 7643774997596899,
+        "featured": true,
         "lon": -76.43775,
         "lat": -0.24031,
         "community": "Siona",
@@ -2404,6 +2383,7 @@
       "type": "Feature",
       "properties": {
         "_id": 7688736992043700,
+        "featured": true,
         "lon": -76.88737,
         "lat": -0.79563,
         "community": "Rumipamba",
@@ -4953,29 +4933,6 @@
         "coordinates": [
           -76.43818,
           -0.30615
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7641313996991000,
-        "lon": -76.41314,
-        "lat": -0.3009,
-        "community": "Secoya",
-        "name": "Alirio Payaguaje",
-        "users": 8,
-        "date": "Wed Sep 11 2013",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/155670239d5d21f209c02053361487660336c3dd.jpg",
-        "settlement": "Bellavista",
-        "families": 1,
-        "project": "Secoya Pilot 2012"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.41314,
-          -0.3009
         ]
       }
     },
