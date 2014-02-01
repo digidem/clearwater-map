@@ -4,30 +4,6 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7643583496974250,
-        "lon": -76.435835,
-        "lat": -0.302575,
-        "community": "Secoya",
-        "name": "Alirio Lucitante",
-        "users": 5,
-        "date": "Thu May 17 2012",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/e63e8c06d0c589652ff311eb08cab4773de251b3.jpg?",
-        "settlement": "Bellavista",
-        "families": 1,
-        "project": "ClearWater San Pablo project",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7264260384/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.435835,
-          -0.302575
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "_id": 7669656900458148,
         "lon": -76.69656899,
         "lat": 0.04581485,
@@ -4552,7 +4528,7 @@
         "name": "Javier Piaguaje",
         "users": 5,
         "date": "Tue Sep 10 2013",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/38546d852b5aefae3b7bcee3fb9d7f9567d6cf08.jpg",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/2452ec7e996bff290e6a09c77a34cb680b4079a1.jpg",
         "settlement": "San Pablo",
         "families": 1,
         "project": "Secoya Pilot 2012"
@@ -4967,7 +4943,7 @@
         "name": "Ramiro Payaguaje",
         "users": 8,
         "date": "Wed Sep 11 2013",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/797c4a3a37362e53a5a4147da5f03a914ab67518.jpg",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/404fdf935d2f1eac0b22ee37b73ba5c48a12e5e4.jpg",
         "settlement": "Bellavista",
         "families": 1,
         "project": "Secoya Pilot 2012"
