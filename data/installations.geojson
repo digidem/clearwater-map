@@ -5164,6 +5164,7 @@
       "type": "Feature",
       "properties": {
         "_id": -7743051001236600,
+        "featured": true,
         "lon": 77.43051,
         "lat": -0.12366,
         "community": "Sinangue",
