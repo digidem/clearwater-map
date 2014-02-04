@@ -5576,6 +5576,55 @@
           -0.12304
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Teyo Criollo and Cecilia Lucitante",
+        "settlement": "Bavoroe"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement": "Bavoroe"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement": "Bavoroe"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement": "Bavoroe"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement": "Bavoroe"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement": "Bavoroe"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement": "Bavoroe"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "settlement": "Bavoroe"
+      }
     }
   ]
 }
