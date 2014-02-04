@@ -5580,49 +5580,71 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7643725000000001,
+        "lon": -76.43725,
         "name": "Teyo Criollo and Cecilia Lucitante",
+        "users": 8,
+        "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.43725
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Daniel Lucitante",
+        "users": 6,
         "settlement": "Bavoroe"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "name": "Olivero Lucitante and Devika Yiyoguaje",
+        "users": 4,
         "settlement": "Bavoroe"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "name": "Lasteña Criollo",
+        "users": 2,
         "settlement": "Bavoroe"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "name": "Esteban Lucitante and Marcia Criollo",
+        "users": 4,
         "settlement": "Bavoroe"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "name": "José Criollo and Sonia Lucitante",
+        "users": 5,
         "settlement": "Bavoroe"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "name": "Ermel Criollo",
+        "users": 3,
         "settlement": "Bavoroe"
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "settlement": "Bavoroe"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
+        "name": "Escuela Api (Schoolhouse)",
         "settlement": "Bavoroe"
       }
     }
