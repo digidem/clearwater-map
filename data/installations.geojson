@@ -5647,6 +5647,70 @@
         "name": "Escuela Api (Schoolhouse)",
         "settlement": "Bavoroe"
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rene Ruiz and Sara Quenama",
+        "users": 11,
+        "settlement": "Ukavati"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Edmundo Ruiz and Lila Quenama",
+        "users": 8,
+        "settlement": "Ukavati"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Aurelio Quenama and Rosalina Mendua",
+        "users": 10,
+        "settlement": "Ukavati"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Francisca Quenama",
+        "users": 3,
+        "settlement": "Ukavati"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nely Quenama",
+        "users": 2,
+        "settlement": "Ukavati"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Angela Quenama and Guillermo Quenama",
+        "users": 4,
+        "settlement": "Ukavati"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fredy Queta and Tsenene Criollo",
+        "users": 4,
+        "settlement": "Ukavati"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ejidio Quenama and Otilia Criollo",
+        "users": 4,
+        "settlement": "Ukavati"
+      }
     }
   ]
 }
