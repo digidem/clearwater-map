@@ -5935,8 +5935,80 @@
     {
       "type": "Feature",
       "properties": {
+        "lon": -76.54359,
         "lat": -0.19517,
-        "name": "José Grefa and Teresa Payaguaje"
+        "name": "José Grefa and Teresa Payaguaje",
+        "users": 5,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.53988,
+        "lat": -0.19938,
+        "name": "Norma Tanguy and Milton Grefa",
+        "users": 4,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54204,
+        "lat": -0.19502,
+        "name": "Fausto Grefa and María Quenama",
+        "users": 5,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54443,
+        "lat": -0.19423,
+        "name": "José Grefa and Marcela Dawa",
+        "users": 3,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54198,
+        "lat": -0.19307,
+        "name": "Manuel Grefa Payaguaje and Nila Tunay",
+        "users": 6,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54057,
+        "lat": -0.19078,
+        "name": "Segundo Payaguaje ",
+        "users": 4,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.53814,
+        "lat": -0.18931,
+        "name": "Leonardo Payaguaje",
+        "users": 8,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76,
+        "lat": -0.1905,
+        "name": "Juventino Juampushir and Antonia Yiyocuro",
+        "users": 4
       }
     }
   ]
