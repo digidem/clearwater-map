@@ -5715,8 +5715,11 @@
     {
       "type": "Feature",
       "properties": {
+        "lon": -76.4815,
+        "lat": -0.20593,
         "name": "Migeul Angel Yiyocuro and Liliana Payaguaje",
-        "users": 6
+        "users": 6,
+        "settlement": "Aboquehuira"
       }
     }
   ]
