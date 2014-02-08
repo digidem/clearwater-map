@@ -5721,6 +5721,73 @@
         "users": 6,
         "settlement": "Aboquehuira"
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.48115,
+        "lat": -0.20582,
+        "name": "Reidy Payaguaje",
+        "users": 2,
+        "settlement": "Aboquehuira"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.48103,
+        "lat": -0.20624,
+        "name": "Angel Payaguaje and Virginia Yiyocuro",
+        "users": 5,
+        "settlement": "Aboquehuira"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.48124,
+        "lat": -0.20536,
+        "name": "Fredy Yiyocuro and Mirian Payaguaje",
+        "users": 5,
+        "settlement": "Aboquehuira"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.48167,
+        "lat": -0.20473,
+        "name": "Linber Payaguaje and Marili Biaguaje",
+        "users": 4,
+        "settlement": "Aboquehuira"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.48257,
+        "lat": -0.20479,
+        "name": "Adolfo Payaguaje and Romelia Yiyocura",
+        "users": 3,
+        "settlement": "Aboquehuira"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.48181,
+        "lat": -0.20619,
+        "name": "Hugo Payaguaje and Flor Tanguy",
+        "users": 8,
+        "settlement": "Aboquehuira"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lat": -0.24671,
+        "name": "Pablo Yiyocuro and Udulia Piaguaje"
+      }
     }
   ]
 }
