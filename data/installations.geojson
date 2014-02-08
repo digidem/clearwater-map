@@ -5879,7 +5879,64 @@
         "lat": -0.20949,
         "name": "Marcelo Payaguaje and Flora Maniguaje",
         "users": 5,
-        "settlement": "Bi'aña"
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54307,
+        "lat": -0.20842,
+        "name": "Mariel Maniguaje",
+        "users": 3,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54237,
+        "lat": -0.20844,
+        "name": "Samuel Maniguaje and Teodora Piaguaje",
+        "users": 2,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54258,
+        "lat": -0.20826,
+        "name": "Javier Maniguaje and Donila Payaguaje",
+        "users": 4,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54202,
+        "lat": -0.20858,
+        "name": "Hernan Criollo and Alda Maniguaje",
+        "users": 5,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.54344,
+        "lat": -0.1935,
+        "name": "Luis Grefa and Guadalupe Yumbo",
+        "users": 7,
+        "settlement": "Orahuëaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lat": -0.19517,
+        "name": "José Grefa and Teresa Payaguaje"
       }
     }
   ]
