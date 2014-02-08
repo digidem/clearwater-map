@@ -5711,6 +5711,13 @@
         "users": 4,
         "settlement": "Ukavati"
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Migeul Angel Yiyocuro and Liliana Payaguaje",
+        "users": 6
+      }
     }
   ]
 }
