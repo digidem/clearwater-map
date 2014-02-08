@@ -5785,8 +5785,58 @@
     {
       "type": "Feature",
       "properties": {
+        "lon": -76.46589,
         "lat": -0.24671,
-        "name": "Pablo Yiyocuro and Udulia Piaguaje"
+        "name": "Pablo Yiyocuro and Udulia Piaguaje",
+        "users": 4,
+        "settlement": "Bi'aña"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.47088,
+        "lat": -0.22784,
+        "name": "Alfonso Tucupi and Patricia Yiyocuro",
+        "users": 8,
+        "settlement": "Bi'aña"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.47158,
+        "lat": -0.22746,
+        "name": "Jesus Payaguaje and Natalia Yiyocuro",
+        "users": 3,
+        "settlement": "Bi'aña"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.48225,
+        "lat": -0.22584,
+        "name": "Claudio Yiyocguaje",
+        "users": 3,
+        "settlement": "Bi'aña"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.486,
+        "lat": -0.2126,
+        "name": "Gilberto Yiyocuro",
+        "users": 2,
+        "settlement": "Aboquehuira"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Telmo Yiycuro and Edemira Payaguaje",
+        "users": 8
       }
     }
   ]
