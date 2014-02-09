@@ -55,7 +55,7 @@ cwm.MissionControl = function() {
             timelineStart = timeline;
             timelineEnd = place._time;
             end = start + Math.abs(timelineEnd - timelineStart);
-            console.log(start,timelineStart,timelineEnd,end);
+            // console.log(start,timelineStart,timelineEnd,end);
             window.requestAnimationFrame(scroll);
         } else {
             time(place._time);
@@ -68,7 +68,7 @@ cwm.MissionControl = function() {
             time(timelineEnd);
             return true;
         } else {
-            console.log(timelineStart < timelineEnd ? timelineStart + now - start : timelineStart - now + start);
+            // console.log(timelineStart < timelineEnd ? timelineStart + now - start : timelineStart - now + start);
             time(timelineStart < timelineEnd ? timelineStart + now - start : timelineStart - now + start);
             window.requestAnimationFrame(scroll);
         }

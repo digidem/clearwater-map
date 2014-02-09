@@ -14,25 +14,17 @@ cwm.Collection = function(id) {
         _byParent: {},
         _idField: "id",
         _parentIdField: "parent",
-        _boundsFn: function() { return d3.geo.bounds(this.asGeoJSON); },
         // Add any custom events as arguments to d3.dispatch
-        event: d3.dispatch('changed', 'reset', 'load')
+        event: d3.dispatch('changed', 'reset', 'load', 'add')
     });
 
     return arr;
-};
+};  
 
-cwm.Collection.extend = cwm.util.extendClass;
-
-cwm.Collection.prototype = Object.create(Array.prototype);
+// A collection is an instance of an array, which also inherits the methods of cwm.Base()
+cwm.Collection.prototype = Object.create(cwm.util.extend(Object.create(Array.prototype), cwm.Base.prototype));
 
 cwm.util.extend(cwm.Collection.prototype, {
-
-    // Copies this 'on' method from d3_dispatch to the prototype
-    on: function() { 
-        var value = this.event.on.apply(this.event, arguments);
-        return value === this.event ? this : value;
-    },
 
     model: cwm.Place,
 
@@ -102,12 +94,6 @@ cwm.util.extend(cwm.Collection.prototype, {
         return this;
     },
 
-    id: function(_) {
-        if (!arguments.length) return this._id;
-        this._id = _;
-        return this;
-    },
-
     placeId: function(idField) {
         if (!arguments.length) return this._idField;
         this._idField = idField;
@@ -172,21 +158,22 @@ cwm.util.extend(cwm.Collection.prototype, {
     },
 
     bounds: function() {
-        if (this._bounds) {
-            return this._bounds;
-        } else {
-            var bounds = d3.geo.bounds(this.asGeoJSON());
-            this._bounds = isNaN(bounds[0][0]) ? null : bounds;
-            return this._bounds;
+        if (typeof this._bounds !== "undefined") return this._bounds;
+        this._bounds = d3.geo.bounds(this.asGeoJSON());
+        if (isNaN(this._bounds[0][0])) {
+            var features = [];
+            this.forEach(function(d) {
+                if (d.children) {
+                    features = features.concat(d.children.asGeoJSON().features);
+                }
+            });
+            this._bounds = d3.geo.bounds({
+                type: "FeatureCollection",
+                features: features
+            });
+            this._bounds = isNaN(this._bounds[0][0]) ? null : this._bounds;
         }
-    },
-
-    // I apologize for this (and the above)
-    extent: function() {
-        return this._extent || 
-        (this._extent = this.bounds() ?
-            new MM.Extent(this.bounds()[1][1], this.bounds()[0][0], this.bounds()[0][1], this.bounds()[1][0]) :
-            null);
+        return this._bounds;
     },
 
     asGeoJSON: function() {
