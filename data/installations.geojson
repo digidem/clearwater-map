@@ -5715,6 +5715,7 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648149997940700,
         "lon": -76.4815,
         "lat": -0.20593,
         "name": "Migeul Angel Yiyocuro and Liliana Payaguaje",
@@ -5722,11 +5723,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.4815,
+          -0.20593
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648114997941800,
         "lon": -76.48115,
         "lat": -0.20582,
         "name": "Reidy Payaguaje",
@@ -5734,11 +5743,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48115,
+          -0.20582
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648102997937600,
         "lon": -76.48103,
         "lat": -0.20624,
         "name": "Angel Payaguaje and Virginia Yiyocuro",
@@ -5746,11 +5763,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48103,
+          -0.20624
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648123997946400,
         "lon": -76.48124,
         "lat": -0.20536,
         "name": "Fredy Yiyocuro and Mirian Payaguaje",
@@ -5758,11 +5783,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48124,
+          -0.20536
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648166997952699,
         "lon": -76.48167,
         "lat": -0.20473,
         "name": "Linber Payaguaje and Marili Biaguaje",
@@ -5770,11 +5803,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48167,
+          -0.20473
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648256997952100,
         "lon": -76.48257,
         "lat": -0.20479,
         "name": "Adolfo Payaguaje and Romelia Yiyocura",
@@ -5782,11 +5823,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48257,
+          -0.20479
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648180997938100,
         "lon": -76.48181,
         "lat": -0.20619,
         "name": "Hugo Payaguaje and Flor Tanguy",
@@ -5794,11 +5843,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48181,
+          -0.20619
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7646588997532900,
         "lon": -76.46589,
         "lat": -0.24671,
         "name": "Pablo Yiyocuro and Udulia Piaguaje",
@@ -5806,11 +5863,19 @@
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.46589,
+          -0.24671
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7647087997721599,
         "lon": -76.47088,
         "lat": -0.22784,
         "name": "Alfonso Tucupi and Patricia Yiyocuro",
@@ -5818,11 +5883,19 @@
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.47088,
+          -0.22784
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7647157997725400,
         "lon": -76.47158,
         "lat": -0.22746,
         "name": "Jesus Payaguaje and Natalia Yiyocuro",
@@ -5830,11 +5903,19 @@
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.47158,
+          -0.22746
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648224997741599,
         "lon": -76.48225,
         "lat": -0.22584,
         "name": "Claudio Yiyocguaje",
@@ -5842,11 +5923,19 @@
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48225,
+          -0.22584
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648599997874000,
         "lon": -76.486,
         "lat": -0.2126,
         "name": "Gilberto Yiyocuro",
@@ -5854,11 +5943,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.486,
+          -0.2126
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7648827997856700,
         "lon": -76.48828,
         "lat": -0.21433,
         "name": "Telmo Yiycuro and Edemira Payaguaje",
@@ -5866,11 +5963,19 @@
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.48828,
+          -0.21433
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7651475997695800,
         "lon": -76.51476,
         "lat": -0.23042,
         "name": "Carlos Chiriap and Dalna Payaguaje",
@@ -5878,11 +5983,19 @@
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.51476,
+          -0.23042
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7651384997667201,
         "lon": -76.51385,
         "lat": -0.23328,
         "name": "Susana Payaguaje and Camilo Payaguaje",
@@ -5890,11 +6003,19 @@
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.51385,
+          -0.23328
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7651185997664600,
         "lon": -76.51186,
         "lat": -0.23354,
         "name": "Flavio Chambuiquin and Flavia Payaguaje",
@@ -5902,11 +6023,19 @@
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.51186,
+          -0.23354
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654281997905101,
         "lon": -76.54282,
         "lat": -0.20949,
         "name": "Marcelo Payaguaje and Flora Maniguaje",
@@ -5914,11 +6043,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54282,
+          -0.20949
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654306997915800,
         "lon": -76.54307,
         "lat": -0.20842,
         "name": "Mariel Maniguaje",
@@ -5926,11 +6063,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54307,
+          -0.20842
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654236997915601,
         "lon": -76.54237,
         "lat": -0.20844,
         "name": "Samuel Maniguaje and Teodora Piaguaje",
@@ -5938,11 +6083,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54237,
+          -0.20844
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654257997917400,
         "lon": -76.54258,
         "lat": -0.20826,
         "name": "Javier Maniguaje and Donila Payaguaje",
@@ -5950,11 +6103,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54258,
+          -0.20826
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654201997914199,
         "lon": -76.54202,
         "lat": -0.20858,
         "name": "Hernan Criollo and Alda Maniguaje",
@@ -5962,11 +6123,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54202,
+          -0.20858
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654343998065000,
         "lon": -76.54344,
         "lat": -0.1935,
         "name": "Luis Grefa and Guadalupe Yumbo",
@@ -5974,11 +6143,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54344,
+          -0.1935
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654358998048299,
         "lon": -76.54359,
         "lat": -0.19517,
         "name": "José Grefa and Teresa Payaguaje",
@@ -5986,11 +6163,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54359,
+          -0.19517
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7653987998006200,
         "lon": -76.53988,
         "lat": -0.19938,
         "name": "Norma Tanguy and Milton Grefa",
@@ -5998,11 +6183,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.53988,
+          -0.19938
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654203998049800,
         "lon": -76.54204,
         "lat": -0.19502,
         "name": "Fausto Grefa and María Quenama",
@@ -6010,11 +6203,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54204,
+          -0.19502
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654442998057701,
         "lon": -76.54443,
         "lat": -0.19423,
         "name": "José Grefa and Marcela Dawa",
@@ -6022,11 +6223,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54443,
+          -0.19423
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654197998069300,
         "lon": -76.54198,
         "lat": -0.19307,
         "name": "Manuel Grefa Payaguaje and Nila Tunay",
@@ -6034,11 +6243,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54198,
+          -0.19307
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7654056998092200,
         "lon": -76.54057,
         "lat": -0.19078,
         "name": "Segundo Payaguaje ",
@@ -6046,11 +6263,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.54057,
+          -0.19078
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7653813998106900,
         "lon": -76.53814,
         "lat": -0.18931,
         "name": "Leonardo Payaguaje and Catalina Piaguaje",
@@ -6058,11 +6283,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.53814,
+          -0.18931
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7599999998095000,
         "lon": -76,
         "lat": -0.1905,
         "name": "Juventino Juampushir and Antonia Yiyocuro",
@@ -6070,11 +6303,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76,
+          -0.1905
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7653754998083700,
         "lon": -76.53755,
         "lat": -0.19163,
         "name": "David Yiyocuro and Fanny Piaguaje ",
@@ -6082,11 +6323,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.53755,
+          -0.19163
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7653525998083299,
         "lon": -76.53526,
         "lat": -0.19167,
         "name": "Chala Yiyocuro ",
@@ -6094,11 +6343,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.53526,
+          -0.19167
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7653438998070700,
         "lon": -76.53439,
         "lat": -0.19293,
         "name": "Alejandro Piaguaje",
@@ -6106,11 +6363,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.53439,
+          -0.19293
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7653363998061501,
         "lon": -76.53364,
         "lat": -0.19385,
         "name": "Rodolfo Yiyocuro",
@@ -6118,11 +6383,19 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.53364,
+          -0.19385
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7653393998061400,
         "lon": -76.53394,
         "lat": -0.19386,
         "name": "Ines Yiyocuro and Pedro Andi",
@@ -6130,6 +6403,13 @@
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.53394,
+          -0.19386
+        ]
       }
     }
   ]
