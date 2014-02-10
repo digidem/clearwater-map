@@ -5094,8 +5094,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7742917001226000,
-        "lon": 77.42917,
+        "_id": 7742916998774000,
+        "lon": -77.42917,
         "lat": -0.1226,
         "community": "Sinangue",
         "name": "Sergio Criollo",
@@ -5109,7 +5109,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.42917,
+          -77.42917,
           -0.1226
         ]
       }
@@ -5117,8 +5117,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7742987001235599,
-        "lon": 77.42987,
+        "_id": 7742986998764399,
+        "lon": -77.42987,
         "lat": -0.12356,
         "community": "Sinangue",
         "name": "Bautista Umenda and Patricia Criollo",
@@ -5132,7 +5132,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.42987,
+          -77.42987,
           -0.12356
         ]
       }
@@ -5140,8 +5140,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7743025001239100,
-        "lon": 77.43025,
+        "_id": 7743024998760900,
+        "lon": -77.43025,
         "lat": -0.12391,
         "community": "Sinangue",
         "name": "Mario Criollo and Erica Narvaez",
@@ -5155,7 +5155,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.43025,
+          -77.43025,
           -0.12391
         ]
       }
@@ -5163,9 +5163,9 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7743051001236600,
+        "_id": 7743050998763400,
         "featured": true,
-        "lon": 77.43051,
+        "lon": -77.43051,
         "lat": -0.12366,
         "community": "Sinangue",
         "name": "Fabian Umenda and Lola Criollo",
@@ -5182,7 +5182,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.43051,
+          -77.43051,
           -0.12366
         ]
       }
@@ -5190,8 +5190,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7743078001240500,
-        "lon": 77.43078,
+        "_id": 7743077998759500,
+        "lon": -77.43078,
         "lat": -0.12405,
         "community": "Sinangue",
         "name": "Jorge Criollo and Graciela Quenama",
@@ -5205,7 +5205,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.43078,
+          -77.43078,
           -0.12405
         ]
       }
@@ -5213,8 +5213,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7743092001239000,
-        "lon": 77.43092,
+        "_id": 7743091998761000,
+        "lon": -77.43092,
         "lat": -0.1239,
         "community": "Sinangue",
         "name": "Juan Umenda and Sandra Criollo",
@@ -5228,7 +5228,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.43092,
+          -77.43092,
           -0.1239
         ]
       }
@@ -5236,8 +5236,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7743161001239001,
-        "lon": 77.43161,
+        "_id": 7743160998761001,
+        "lon": -77.43161,
         "lat": -0.1239,
         "community": "Sinangue",
         "name": "Victor Quenama and Inez Umena",
@@ -5251,7 +5251,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.43161,
+          -77.43161,
           -0.1239
         ]
       }
@@ -5259,8 +5259,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7743178001225900,
-        "lon": 77.43178,
+        "_id": 7743177998774100,
+        "lon": -77.43178,
         "lat": -0.12259,
         "community": "Sinangue",
         "name": "Francisco Criollo and Maura Quenama",
@@ -5274,7 +5274,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.43178,
+          -77.43178,
           -0.12259
         ]
       }
@@ -5282,8 +5282,8 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": -7743190001230300,
-        "lon": 77.4319,
+        "_id": 7743189998769700,
+        "lon": -77.4319,
         "lat": -0.12303,
         "community": "Sinangue",
         "name": "Romulo Waharaya and Delma Calderon",
@@ -5297,7 +5297,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.4319,
+          -77.4319,
           -0.12303
         ]
       }
