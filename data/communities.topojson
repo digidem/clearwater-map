@@ -6,6 +6,15 @@
       "geometries": [
         {
           "type": "Polygon",
+          "properties": {
+            "featured": true,
+            "community": "Cofan Dureno",
+            "nationality": "Cofan",
+            "technicians": 4,
+            "story_title": "Cofan Dureno & Clearwater",
+            "story_excerpt": "The ClearWater project broke ground in the community of Cofan Dureno from November, 2011 when 52 rainwater catchment systems were built, providing 350 people with much-needed clean water."
+          },
+          "id": "Cofan Dureno",
           "arcs": [
             [
               0
@@ -14,6 +23,15 @@
         },
         {
           "type": "MultiPolygon",
+          "properties": {
+            "featured": true,
+            "community": "Secoya",
+            "nationality": "Secoya",
+            "technicians": 6,
+            "story_title": "Secoya & Clearwater",
+            "story_excerpt": "Despite the challenges, the Secoya are highly organized and dedicated to building clean water solutions for their people. Over the months of July and August 2013 ClearWater has installed an additional 56 rainwater systems in Secoya territory."
+          },
+          "id": "Secoya",
           "arcs": [
             [
               [
@@ -39,6 +57,15 @@
         },
         {
           "type": "Polygon",
+          "properties": {
+            "featured": true,
+            "community": "Waorani",
+            "nationality": "Waorani",
+            "technicians": 4,
+            "story_title": "Waorani & Clearwater",
+            "story_excerpt": "ClearWater began a pilot project in the Waorani communities in March of 2013 using a new design for metal catchment system frames that will last five times longer than wooden frames. 13 systems were built, benefitting 75 people. "
+          },
+          "id": "Waorani",
           "arcs": [
             [
               7
@@ -47,6 +74,15 @@
         },
         {
           "type": "Polygon",
+          "properties": {
+            "featured": true,
+            "community": "Rumipamba",
+            "nationality": "Kichwa",
+            "technicians": 2,
+            "story_title": "Rumipamba & Clearwater",
+            "story_excerpt": "Installation of 53 catchment systems has already begun in the Kichwa village of Rumipamba, starting in May of 2013, which will benefit approximately 350 people. ClearWater will also be working with other Kichwa communities in the near future, ensuring clean water for all oil-affected indigenous communities.  "
+          },
+          "id": "Rumipamba",
           "arcs": [
             [
               8
@@ -55,6 +91,15 @@
         },
         {
           "type": "Polygon",
+          "properties": {
+            "featured": true,
+            "community": "Siona",
+            "nationality": "Siona",
+            "technicians": 4,
+            "story_title": "Siona & Clearwater",
+            "story_excerpt": "ClearWater began installation in the Siona community in October 2012 and 20 rain catchment systems were built, benefitting over 100 people. Siona technicians working for ClearWater are dedicated to improving the living conditions for all Siona community members by providing them with clean drinking water. "
+          },
+          "id": "Siona",
           "arcs": [
             [
               -6,
@@ -66,6 +111,15 @@
         },
         {
           "type": "Polygon",
+          "properties": {
+            "featured": true,
+            "community": "Sinangue",
+            "nationality": "Cofan",
+            "technicians": 1,
+            "story_title": "Sinangue & Clearwater",
+            "story_excerpt": "ClearWater began installations in the Cofán community of Sinangue, located in the foothills of the Andes mountains, in late November of 2013. 24 systems were built, benefitting over 100 people. Systems were completed in January of 2014."
+          },
+          "id": "Sinangue",
           "arcs": [
             [
               11
