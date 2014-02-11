@@ -5646,6 +5646,7 @@
         "community": "Cofan Dureno",
         "name": "Lasteña Criollo",
         "users": 2,
+        "date": "Thu Dec 19 2013",
         "settlement": "Bavoroe"
       },
       "geometry": {
@@ -5662,6 +5663,7 @@
         "community": "Cofan Dureno",
         "name": "Esteban Lucitante and Marcia Criollo",
         "users": 4,
+        "date": "Fri Dec 21 2103",
         "settlement": "Bavoroe"
       }
     },
@@ -5671,6 +5673,7 @@
         "community": "Cofan Dureno",
         "name": "José Criollo and Sonia Lucitante",
         "users": 5,
+        "date": "Sun Dec 22 2013",
         "settlement": "Bavoroe"
       }
     },
@@ -5680,6 +5683,7 @@
         "community": "Cofan Dureno",
         "name": "Ermel Criollo",
         "users": 3,
+        "date": "Tue Dec 17 2013",
         "settlement": "Bavoroe"
       }
     },
@@ -5688,6 +5692,8 @@
       "properties": {
         "community": "Cofan Dureno",
         "name": "Escuela Api (Schoolhouse)",
+        "users": 17,
+        "date": "Mon Dec 22 2014",
         "settlement": "Bavoroe"
       }
     },
