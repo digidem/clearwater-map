@@ -851,7 +851,7 @@
         "community": "Cofan Dureno",
         "name": "Jorge Mendua",
         "users": 4,
-        "date": "Sun Jan 01 2012",
+        "date": "Sat Jan 01 2011",
         "photo": "http://s3.amazonaws.com/clearwater-photos/8daec6ca8326d705b28f657afe71c5214d135ff4.jpg",
         "settlement": "Cofan Dureno",
         "families": 1,
@@ -6415,9 +6415,21 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7675188800075499,
+        "lon": -76.751888,
+        "lat": 0.00755,
+        "community": "Cofan Dureno",
         "name": "Servio Hernandez and Blanca Yumbo",
         "users": 7,
+        "date": "Fri Jan 31 2014",
         "settlement": "Pisorie Canqque"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.751888,
+          0.00755
+        ]
       }
     }
   ]
