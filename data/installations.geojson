@@ -6455,6 +6455,40 @@
           0.013166
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7675920000144831,
+        "lon": -76.7592,
+        "lat": 0.014483,
+        "community": "Cofan Dureno",
+        "name": "Nexar Mansava and Soila Quenama",
+        "users": 7,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7592,
+          0.014483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "community": "Cofan Dureno",
+        "name": "Abelino Quenama and Mariana Mendua",
+        "users": 9,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 2,
+        "project": "Cofán Second Installation"
+      }
     }
   ]
 }
