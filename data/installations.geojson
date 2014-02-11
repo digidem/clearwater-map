@@ -6481,12 +6481,56 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7675968300139660,
+        "lon": -76.759683,
+        "lat": 0.013966,
         "community": "Cofan Dureno",
         "name": "Abelino Quenama and Mariana Mendua",
         "users": 9,
         "date": "Thu Jan 30 2014",
         "settlement": "Pisorie Canqque",
         "families": 2,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.759683,
+          0.013966
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7675870000148660,
+        "lon": -76.7587,
+        "lat": 0.014866,
+        "community": "Cofan Dureno",
+        "name": "Darwin Quenama and Alexandra Mausaba",
+        "users": 3,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7587,
+          0.014866
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "community": "Cofan Dureno",
+        "name": "Benito Quenama and María Vargas",
+        "users": 7,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 1,
         "project": "Cofán Second Installation"
       }
     }
