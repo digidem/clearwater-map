@@ -6422,13 +6422,37 @@
         "name": "Servio Hernandez and Blanca Yumbo",
         "users": 7,
         "date": "Fri Jan 31 2014",
-        "settlement": "Pisorie Canqque"
+        "settlement": "Pisorie Canqque",
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
           -76.751888,
           0.00755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7675833300131659,
+        "lon": -76.758333,
+        "lat": 0.013166,
+        "community": "Cofan Dureno",
+        "name": "Nelson Quenama and Rocio Gomez",
+        "users": 7,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.758333,
+          0.013166
         ]
       }
     }
