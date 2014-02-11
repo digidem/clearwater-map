@@ -6569,6 +6569,9 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7676318100135160,
+        "lon": -76.763181,
+        "lat": 0.013516,
         "community": "Cofan Dureno",
         "name": "Alcides Quenama and Marta Umenda",
         "users": 5,
@@ -6576,6 +6579,41 @@
         "settlement": "Pisorie Canqque",
         "families": 1,
         "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.763181,
+          0.013516
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7675720000591500,
+        "lon": -76.7572,
+        "lat": 0.05915,
+        "community": "Cofan Dureno",
+        "name": "Angel Chimbo and Rita Yumbo",
+        "users": 7,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7572,
+          0.05915
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Marcial Yumbo and Carmen Salazar"
       }
     }
   ]
