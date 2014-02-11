@@ -6411,6 +6411,14 @@
           -0.19386
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Servio Hernandez and Blanca Yumbo",
+        "users": 7,
+        "settlement": "Pisorie Canqque"
+      }
     }
   ]
 }
