@@ -5586,6 +5586,7 @@
         "community": "Cofan Dureno",
         "name": "Teyo Criollo and Cecilia Lucitante",
         "users": 8,
+        "date": "Wed Dec 18 2013",
         "settlement": "Bavoroe"
       },
       "geometry": {
@@ -5605,6 +5606,7 @@
         "community": "Cofan Dureno",
         "name": "Daniel Lucitante",
         "users": 6,
+        "date": "Wed Dec 18 2013",
         "settlement": "Bavoroe"
       },
       "geometry": {
@@ -5618,19 +5620,40 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7672811600528500,
+        "lon": -76.728116,
+        "lat": 0.05285,
         "community": "Cofan Dureno",
         "name": "Olivero Lucitante and Devika Yiyoguaje",
         "users": 4,
+        "date": "Thu Dec 19 2013",
         "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.728116,
+          0.05285
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7672735000533000,
+        "lon": -76.72735,
+        "lat": 0.0533,
         "community": "Cofan Dureno",
         "name": "Lasteña Criollo",
         "users": 2,
         "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72735,
+          0.0533
+        ]
       }
     },
     {
