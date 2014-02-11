@@ -9,8 +9,8 @@
         "nationality": "Cofan",
         "technicians": 4,
         "story_title": "Cofan Dureno & Clearwater",
-        "story_excerpt": "The ClearWater project broke ground in the community of Cofán Dureno from November, 2011 when 52 rainwater catchment systems were built, providing 350 people with much-needed clean water."
-      }, 
+        "story_excerpt": "The ClearWater project broke ground in the community of Cofan Dureno from November, 2011 when 52 rainwater catchment systems were built, providing 350 people with much-needed clean water."
+      },
       "geometry": {
         "type": "MultiPolygon",
         "coordinates": [
@@ -409,7 +409,7 @@
         "nationality": "Secoya",
         "technicians": 6,
         "story_title": "Secoya & Clearwater",
-        "story_excerpt": "Despite the challenges, the Secoya are highly organized and dedicated to building clean water solutions for their people. Over the months of July and August 2013 ClearWater has installed an additional 56 rainwater systems in Secoya territory."
+        "story_excerpt": "The Secoya are highly organized and dedicated to building clean water solutions for the nationality. ClearWater first began building in the communities of San Pablo and Bellavista in 2012. Over the months of July and August 2013 ClearWater installed an additional 55 rainwater systems in Secoya territory, in the communities of San Pablo and Siecoya Remolino."
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1727,7 +1727,7 @@
         "nationality": "Waorani",
         "technicians": 4,
         "story_title": "Waorani & Clearwater",
-        "story_excerpt": "ClearWater began a pilot project in the Waorani communities in March of 2013 using a new design for metal catchment system frames that will last five times longer than wooden frames. 13 systems were built, benefitting 75 people. "
+        "story_excerpt": "ClearWater began a pilot project in the Waorani community of Yawepare in March of 2013 using a new design for metal catchment system frames that will last five times longer than wooden frames. 13 systems were built, benefitting 75 people. ClearWater will expand construction in additional Waorani communities starting in early 2014. "
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1895,7 +1895,7 @@
         "nationality": "Siona",
         "technicians": 4,
         "story_title": "Siona & Clearwater",
-        "story_excerpt": "ClearWater began installation in the Siona community in October 2012 and 20 rain catchment systems were built, benefitting over 100 people. Siona technicians working for ClearWater are dedicated to improving the living conditions for all Siona community members by providing them with clean drinking water. "
+        "story_excerpt": "ClearWater began installations with the Siona nationality in October 2012, constructing 20 rain catchment systems in the community of Sotosiaya, benefitting over 100 people. From November 2013 through January 2014, an additional 36 rainwater systems were built in the communities of Aboquehuira, Bi'aña, and Orahuëaya. Siona technicians working for ClearWater are dedicated to improving the living conditions for all Siona community members by providing them with clean drinking water. "
       },
       "geometry": {
         "type": "MultiPolygon",
