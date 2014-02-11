@@ -6613,7 +6613,45 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Marcial Yumbo and Carmen Salazar"
+        "_id": 7675120000596160,
+        "lon": -76.7512,
+        "lat": 0.059616,
+        "community": "Cofan Dureno",
+        "name": "Marcial Yumbo and Carmen Salazar",
+        "users": 5,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7512,
+          0.059616
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7674561660576501,
+        "lon": -76.7456166,
+        "lat": 0.05765,
+        "community": "Cofan Dureno",
+        "name": "Vicente Lucitante and Saida Yumbo",
+        "users": 3,
+        "date": "Thu Jan 30 2014",
+        "settlement": "Pisorie Canqque",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7456166,
+          0.05765
+        ]
       }
     }
   ]
