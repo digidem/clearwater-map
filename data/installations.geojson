@@ -5580,8 +5580,10 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7643725000000001,
-        "lon": -76.43725,
+        "_id": 7672875000521001,
+        "lon": -76.72875,
+        "lat": 0.0521,
+        "community": "Cofan Dureno",
         "name": "Teyo Criollo and Cecilia Lucitante",
         "users": 8,
         "settlement": "Bavoroe"
@@ -5589,21 +5591,34 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -76.43725
+          -76.72875,
+          0.0521
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7672903300534500,
+        "lon": -76.729033,
+        "lat": 0.05345,
+        "community": "Cofan Dureno",
         "name": "Daniel Lucitante",
         "users": 6,
         "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.729033,
+          0.05345
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Olivero Lucitante and Devika Yiyoguaje",
         "users": 4,
         "settlement": "Bavoroe"
@@ -5612,6 +5627,7 @@
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Lasteña Criollo",
         "users": 2,
         "settlement": "Bavoroe"
@@ -5620,6 +5636,7 @@
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Esteban Lucitante and Marcia Criollo",
         "users": 4,
         "settlement": "Bavoroe"
@@ -5628,6 +5645,7 @@
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "José Criollo and Sonia Lucitante",
         "users": 5,
         "settlement": "Bavoroe"
@@ -5636,6 +5654,7 @@
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Ermel Criollo",
         "users": 3,
         "settlement": "Bavoroe"
@@ -5644,6 +5663,7 @@
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Escuela Api (Schoolhouse)",
         "settlement": "Bavoroe"
       }
