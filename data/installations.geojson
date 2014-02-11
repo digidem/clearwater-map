@@ -5587,7 +5587,8 @@
         "name": "Teyo Criollo and Cecilia Lucitante",
         "users": 8,
         "date": "Wed Dec 18 2013",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5607,7 +5608,8 @@
         "name": "Daniel Lucitante",
         "users": 6,
         "date": "Wed Dec 18 2013",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5627,7 +5629,8 @@
         "name": "Olivero Lucitante and Devika Yiyoguaje",
         "users": 4,
         "date": "Thu Dec 19 2013",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5647,7 +5650,8 @@
         "name": "Lasteña Criollo",
         "users": 2,
         "date": "Thu Dec 19 2013",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5667,7 +5671,8 @@
         "name": "Esteban Lucitante and Marcia Criollo",
         "users": 4,
         "date": "Fri Dec 21 2103",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5687,7 +5692,8 @@
         "name": "José Criollo and Sonia Lucitante",
         "users": 5,
         "date": "Sun Dec 22 2013",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5707,7 +5713,8 @@
         "name": "Ermel Criollo",
         "users": 3,
         "date": "Tue Dec 17 2013",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5727,7 +5734,8 @@
         "name": "Escuela Api (Schoolhouse)",
         "users": 17,
         "date": "Mon Dec 22 2014",
-        "settlement": "Bavoroe"
+        "settlement": "Bavoroe",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -5740,64 +5748,103 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7666276599934340,
+        "lon": -76.662766,
+        "lat": -0.006566,
+        "community": "Cofan Dureno",
         "name": "Rene Ruiz and Sara Quenama",
         "users": 11,
-        "settlement": "Ukavati"
+        "date": "Wed Jan 15 2014",
+        "settlement": "Ukavati",
+        "families": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.662766,
+          -0.006566
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7667388499833500,
+        "lon": -76.673885,
+        "lat": -0.01665,
+        "community": "Cofan Dureno",
         "name": "Edmundo Ruiz and Lila Quenama",
         "users": 8,
-        "settlement": "Ukavati"
+        "date": "Thu Jan 16 2014",
+        "settlement": "Ukavati",
+        "families": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.673885,
+          -0.01665
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Aurelio Quenama and Rosalina Mendua",
         "users": 10,
-        "settlement": "Ukavati"
+        "date": "Sat Jan 18 2014",
+        "settlement": "Ukavati",
+        "families": 2
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Francisca Quenama",
         "users": 3,
+        "date": "Thu Jan 16 2014",
         "settlement": "Ukavati"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Nely Quenama",
         "users": 2,
+        "date": "Fri Jan 17 2014",
         "settlement": "Ukavati"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Angela Quenama and Guillermo Quenama",
         "users": 4,
+        "date": "Sat Jan 18 2014",
         "settlement": "Ukavati"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Fredy Queta and Tsenene Criollo",
         "users": 4,
+        "date": "Thu Jan 23 2014",
         "settlement": "Ukavati"
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "community": "Cofan Dureno",
         "name": "Ejidio Quenama and Otilia Criollo",
         "users": 4,
+        "date": "Thu Jan 23 2014",
         "settlement": "Ukavati"
       }
     },
