@@ -5660,41 +5660,81 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7672706600532829,
+        "lon": -76.727066,
+        "lat": 0.053283,
         "community": "Cofan Dureno",
         "name": "Esteban Lucitante and Marcia Criollo",
         "users": 4,
         "date": "Fri Dec 21 2103",
         "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.727066,
+          0.053283
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7672715000530999,
+        "lon": -76.72715,
+        "lat": 0.0531,
         "community": "Cofan Dureno",
         "name": "José Criollo and Sonia Lucitante",
         "users": 5,
         "date": "Sun Dec 22 2013",
         "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72715,
+          0.0531
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7672673300529660,
+        "lon": -76.726733,
+        "lat": 0.052966,
         "community": "Cofan Dureno",
         "name": "Ermel Criollo",
         "users": 3,
         "date": "Tue Dec 17 2013",
         "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.726733,
+          0.052966
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7672765000530500,
+        "lon": -76.72765,
+        "lat": 0.05305,
         "community": "Cofan Dureno",
         "name": "Escuela Api (Schoolhouse)",
         "users": 17,
         "date": "Mon Dec 22 2014",
         "settlement": "Bavoroe"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72765,
+          0.05305
+        ]
       }
     },
     {
