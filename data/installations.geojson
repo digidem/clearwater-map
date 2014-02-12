@@ -5790,32 +5790,62 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7667546599866167,
+        "lon": -76.675466,
+        "lat": -0.0133833,
         "community": "Cofan Dureno",
         "name": "Aurelio Quenama and Rosalina Mendua",
         "users": 10,
         "date": "Sat Jan 18 2014",
         "settlement": "Ukavati",
         "families": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.675466,
+          -0.0133833
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7667563299870170,
+        "lon": -76.675633,
+        "lat": -0.012983,
         "community": "Cofan Dureno",
         "name": "Francisca Quenama",
         "users": 3,
         "date": "Thu Jan 16 2014",
         "settlement": "Ukavati"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.675633,
+          -0.012983
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7667589999867170,
+        "lon": -76.6759,
+        "lat": -0.013283,
         "community": "Cofan Dureno",
         "name": "Nely Quenama",
         "users": 2,
         "date": "Fri Jan 17 2014",
         "settlement": "Ukavati"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.6759,
+          -0.013283
+        ]
       }
     },
     {
