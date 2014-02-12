@@ -5588,7 +5588,8 @@
         "users": 8,
         "date": "Wed Dec 18 2013",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5609,7 +5610,8 @@
         "users": 6,
         "date": "Wed Dec 18 2013",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5630,7 +5632,8 @@
         "users": 4,
         "date": "Thu Dec 19 2013",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5651,7 +5654,8 @@
         "users": 2,
         "date": "Thu Dec 19 2013",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5672,7 +5676,8 @@
         "users": 4,
         "date": "Fri Dec 21 2103",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5693,7 +5698,8 @@
         "users": 5,
         "date": "Sun Dec 22 2013",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5714,7 +5720,8 @@
         "users": 3,
         "date": "Tue Dec 17 2013",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5735,7 +5742,8 @@
         "users": 17,
         "date": "Mon Dec 22 2014",
         "settlement": "Bavoroe",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5756,7 +5764,8 @@
         "users": 11,
         "date": "Wed Jan 15 2014",
         "settlement": "Ukavati",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5777,7 +5786,8 @@
         "users": 8,
         "date": "Thu Jan 16 2014",
         "settlement": "Ukavati",
-        "families": 1
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5798,7 +5808,8 @@
         "users": 10,
         "date": "Sat Jan 18 2014",
         "settlement": "Ukavati",
-        "families": 2
+        "families": 2,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5818,7 +5829,9 @@
         "name": "Francisca Quenama",
         "users": 3,
         "date": "Thu Jan 16 2014",
-        "settlement": "Ukavati"
+        "settlement": "Ukavati",
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5838,7 +5851,9 @@
         "name": "Nely Quenama",
         "users": 2,
         "date": "Fri Jan 17 2014",
-        "settlement": "Ukavati"
+        "settlement": "Ukavati",
+        "families": 1,
+        "project": "Cofán Second Installation"
       },
       "geometry": {
         "type": "Point",
@@ -5851,31 +5866,67 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7667589999876667,
+        "lon": -76.6759,
+        "lat": -0.0123333,
         "community": "Cofan Dureno",
         "name": "Angela Quenama and Guillermo Quenama",
         "users": 4,
         "date": "Sat Jan 18 2014",
-        "settlement": "Ukavati"
+        "settlement": "Ukavati",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.6759,
+          -0.0123333
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7667871599839339,
+        "lon": -76.678716,
+        "lat": -0.016066,
         "community": "Cofan Dureno",
         "name": "Fredy Queta and Tsenene Criollo",
         "users": 4,
         "date": "Thu Jan 23 2014",
-        "settlement": "Ukavati"
+        "settlement": "Ukavati",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.678716,
+          -0.016066
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
+        "_id": 7641001993166340,
+        "lon": -76.41002,
+        "lat": -0.683366,
         "community": "Cofan Dureno",
         "name": "Ejidio Quenama and Otilia Criollo",
         "users": 4,
         "date": "Thu Jan 23 2014",
-        "settlement": "Ukavati"
+        "settlement": "Ukavati",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.41002,
+          -0.683366
+        ]
       }
     },
     {
