@@ -5366,6 +5366,10 @@
         "users": 7,
         "date": "Sat Jan 18 2014",
         "photo": "http://s3.amazonaws.com/clearwater-photos/73fdf508a8e80486f859b828bba1bd9cbb5fc93a.jpg",
+        "story_photo": "http://s3.amazonaws.com/clearwater-photos/c9a354a4e3ec1f0f58c07b1a4d00562b55fcb34f.jpg",
+        "story_url": "http://www.giveclearwater.org/2013/09/cofan-sinague-masters-river/",
+        "story_title": "The Cofán of Sinangüe: Masters of the River",
+        "story_excerpt": "The Cofán community of Sinangüe is located in the tropical foothills of the Andes Mountains. Just beyond, the landscape levels out into the seemingly infinite Western Amazon Basin. This is the ancestral homeland of the Cofán people. They have lived here in these mountain forests for hundreds, if not thousands of years.",
         "settlement": "Sinangue",
         "families": 1,
         "project": "Sinangue"
@@ -6075,6 +6079,10 @@
         "name": "Hugo Payaguaje and Flor Tanguy",
         "users": 8,
         "date": "Mon Jan 20 2014",
+        "story_photo": "http://s3.amazonaws.com/clearwater-photos/3f886a54542a95159156ccab3eb78816de84223a.jpg",
+        "story_url": "http://www.giveclearwater.org/2014/01/meet-hugo-payaguaje-clearwater-coordinator-siona-nationality/",
+        "story_title": "Meet Hugo Payaguaje, ClearWater Coordinator for the Siona Nationality",
+        "story_excerpt": "Hugo, from the community of Aboquehuira, is president of the Siona federation, a teacher, and ClearWater coordinator for the Siona nationality.",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6599,6 +6607,7 @@
         "lat": -0.19167,
         "name": "Chala Yiyocuro ",
         "users": 4,
+        "date": "Fri Jan 31 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6619,6 +6628,7 @@
         "lat": -0.19293,
         "name": "Alejandro Piaguaje",
         "users": 1,
+        "date": "Fri Jan 31 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6639,6 +6649,7 @@
         "lat": -0.19385,
         "name": "Rodolfo Yiyocuro",
         "users": 3,
+        "date": "Sun Feb 02 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6659,6 +6670,7 @@
         "lat": -0.19386,
         "name": "Ines Yiyocuro and Pedro Andi",
         "users": 8,
+        "date": "Thu Feb 06 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
