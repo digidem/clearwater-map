@@ -5902,6 +5902,7 @@
         "name": "Fredy Queta and Tsenene Criollo",
         "users": 4,
         "date": "Thu Jan 23 2014",
+        "story_photo": "http://s3.amazonaws.com/clearwater-photos/52d532896ccf20292e5c0454ea38da3dd170c108.jpg",
         "story_url": "http://www.giveclearwater.org/2014/01/trip-pisorie-river/",
         "story_title": "A Trip Up the Pisorie River",
         "story_excerpt": "A journey up the Pissorie River with the Cofán of Ukavati.",
@@ -5945,8 +5946,9 @@
         "_id": 7648149997940700,
         "lon": -76.4815,
         "lat": -0.20593,
-        "name": "Migeul Angel Yiyocuro and Liliana Payaguaje",
+        "name": "Miguel Angel Yiyocuro and Liliana Payaguaje",
         "users": 6,
+        "date": "Thu Jan 23 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -5967,6 +5969,7 @@
         "lat": -0.20582,
         "name": "Reidy Payaguaje",
         "users": 2,
+        "date": "Thu Jan 23 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -5987,6 +5990,7 @@
         "lat": -0.20624,
         "name": "Angel Payaguaje and Virginia Yiyocuro",
         "users": 5,
+        "date": "Fri Jan 24 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6007,6 +6011,7 @@
         "lat": -0.20536,
         "name": "Fredy Yiyocuro and Mirian Payaguaje",
         "users": 5,
+        "date": "Sat Jan 25 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6027,6 +6032,7 @@
         "lat": -0.20473,
         "name": "Linber Payaguaje and Marili Biaguaje",
         "users": 4,
+        "date": "Mon Jan 20 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6047,6 +6053,7 @@
         "lat": -0.20479,
         "name": "Adolfo Payaguaje and Romelia Yiyocura",
         "users": 3,
+        "date": "Tue Jan 21 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6067,6 +6074,7 @@
         "lat": -0.20619,
         "name": "Hugo Payaguaje and Flor Tanguy",
         "users": 8,
+        "date": "Mon Jan 20 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6087,6 +6095,7 @@
         "lat": -0.24671,
         "name": "Pablo Yiyocuro and Udulia Piaguaje",
         "users": 4,
+        "date": "Mon Jan 20 2014",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6107,6 +6116,7 @@
         "lat": -0.22784,
         "name": "Alfonso Tucupi and Patricia Yiyocuro",
         "users": 8,
+        "date": "Wed Jan 29 2014",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6127,6 +6137,7 @@
         "lat": -0.22746,
         "name": "Jesus Payaguaje and Natalia Yiyocuro",
         "users": 3,
+        "date": "Wed Jan 29 2014",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6147,6 +6158,7 @@
         "lat": -0.22584,
         "name": "Claudio Yiyocguaje",
         "users": 3,
+        "date": "Tue Jan 28 2014",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6167,6 +6179,7 @@
         "lat": -0.2126,
         "name": "Gilberto Yiyocuro",
         "users": 2,
+        "date": "Thu Jan 23 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6187,6 +6200,7 @@
         "lat": -0.21433,
         "name": "Telmo Yiycuro and Edemira Payaguaje",
         "users": 8,
+        "date": "Tue Jan 21 2014",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6207,6 +6221,7 @@
         "lat": -0.23042,
         "name": "Carlos Chiriap and Dalna Payaguaje",
         "users": 8,
+        "date": "Tue Jan 28 2014",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6227,6 +6242,7 @@
         "lat": -0.23328,
         "name": "Susana Payaguaje and Camilo Payaguaje",
         "users": 5,
+        "date": "Tue Jan 28 2014",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6247,6 +6263,7 @@
         "lat": -0.23354,
         "name": "Flavio Chambuiquin and Flavia Payaguaje",
         "users": 6,
+        "date": "Thu Jan 30 2014",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6267,6 +6284,7 @@
         "lat": -0.20949,
         "name": "Marcelo Payaguaje and Flora Maniguaje",
         "users": 5,
+        "date": "Thu Jan 30 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6287,6 +6305,7 @@
         "lat": -0.20842,
         "name": "Mariel Maniguaje",
         "users": 3,
+        "date": "Sat Feb 01 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6307,6 +6326,7 @@
         "lat": -0.20844,
         "name": "Samuel Maniguaje and Teodora Piaguaje",
         "users": 2,
+        "date": "Sat Feb 01 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6327,6 +6347,7 @@
         "lat": -0.20826,
         "name": "Javier Maniguaje and Donila Payaguaje",
         "users": 4,
+        "date": "Sun Feb 02 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6347,6 +6368,7 @@
         "lat": -0.20858,
         "name": "Hernan Criollo and Alda Maniguaje",
         "users": 5,
+        "date": "Mon Feb 03 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6367,6 +6389,7 @@
         "lat": -0.1935,
         "name": "Luis Grefa and Guadalupe Yumbo",
         "users": 7,
+        "date": "Tue Feb 04 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6387,6 +6410,7 @@
         "lat": -0.19517,
         "name": "José Grefa and Teresa Payaguaje",
         "users": 5,
+        "date": "Tue Feb 04 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6407,6 +6431,7 @@
         "lat": -0.19938,
         "name": "Norma Tanguy and Milton Grefa",
         "users": 4,
+        "date": "Mon Feb 03 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6427,6 +6452,7 @@
         "lat": -0.19502,
         "name": "Fausto Grefa and María Quenama",
         "users": 5,
+        "date": "Thu Feb 06 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6447,6 +6473,7 @@
         "lat": -0.19423,
         "name": "José Grefa and Marcela Dawa",
         "users": 3,
+        "date": "Thu Feb 06 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6467,6 +6494,7 @@
         "lat": -0.19307,
         "name": "Manuel Grefa Payaguaje and Nila Tunay",
         "users": 6,
+        "date": "Mon Feb 03 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6487,6 +6515,7 @@
         "lat": -0.19078,
         "name": "Segundo Payaguaje ",
         "users": 4,
+        "date": "Mon Feb 03 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6507,6 +6536,7 @@
         "lat": -0.18931,
         "name": "Leonardo Payaguaje and Catalina Piaguaje",
         "users": 8,
+        "date": "Wed Feb 05 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6527,6 +6557,7 @@
         "lat": -0.1905,
         "name": "Juventino Juampushir and Antonia Yiyocuro",
         "users": 4,
+        "date": "Wed Feb 05 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6547,6 +6578,7 @@
         "lat": -0.19163,
         "name": "David Yiyocuro and Fanny Piaguaje ",
         "users": 3,
+        "date": "Tue Feb 04 2014",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
