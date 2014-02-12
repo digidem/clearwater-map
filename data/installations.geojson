@@ -83,7 +83,8 @@
         "users": 11,
         "date": "Thu Aug 15 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/2eb797d2eec6c9be6460e3d7cb8fb7c8c1657acb.jpg",
-        "settlement": "Rumipamba"
+        "settlement": "Rumipamba",
+        "families": 1
       },
       "geometry": {
         "type": "Point",
@@ -1045,7 +1046,9 @@
         "users": 14,
         "date": "Thu Aug 15 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/6eaa5f00d49fc2e97b5ae8e1d6421a22cb660979.jpg",
-        "settlement": "Rumipamba"
+        "settlement": "Rumipamba",
+        "families": 1,
+        "project": "Kichwa"
       },
       "geometry": {
         "type": "Point",
