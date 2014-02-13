@@ -1,20 +1,23 @@
 /* Map elements */
 
-#mapstory path.communities {
+#mapstory .communities path {
   fill: #f1c21c;
   fill-opacity: .6;
   stroke: #f1c21c;
   stroke-width: 0;
   stroke-linejoin: round;
   cursor: pointer;
-  transition: opacity 500ms;
-  -moz-transition: opacity 500ms;
-  -webkit-transition: opacity 500ms;
 }
 
-#mapstory path.communities:hover {
+#mapstory .communities path:hover {
   fill: #ab8b1e;
   cursor: pointer;
+}
+
+#mapstory .communities path.parentActive {
+  fill: #ab8b1e;
+  -webkit-transition: fill 500ms;
+  transition: fill 500ms;
 }
 
 #mapstory .feature-label {
@@ -44,29 +47,29 @@
   top: 100%;
 }
 
-#mapstory path.communities.outline {
+#mapstory .communities path.outline {
   stroke-width: 4px;
   opacity: 0.5;
   cursor: auto;
   pointer-events: none;
 }
 
-#mapstory path.communities.outline:hover {
+#mapstory .communities path.outline:hover {
   cursor: auto;
   fill: inherit;
 }
 
-#mapstory path.ecuador {
+#mapstory .ecuador path {
   stroke: #f1c21c;
   stroke-width: 2px;
   fill-opacity: 0 !important;
 }
 
-#mapstory path.ecuador:hover {
+#mapstory .ecuador path:hover {
   stroke: #ab8b1e;
   cursor: pointer;
 }
 
-#mapstory path.ecuador.outline {
+#mapstory .ecuador path.outline {
   display: none;
 }

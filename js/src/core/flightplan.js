@@ -102,7 +102,17 @@ cwm.util.extend(cwm.Flightplan.prototype, {
         // in order to check whether anything else needs inserted.
         if (inserted && Object.keys(byParent).length > 0) this.add();
 
+        this._addFamily();
+
         return this;
+    },
+
+    _addFamily: function() {
+        for (var i = 0; i < this.length; i++) {
+            this[i]._prev = this[i - 1] || this[i];
+            this[i]._next = this[i + 1] || this[i];
+            this[i]._lastDescendant = this[i].lastDescendant(this._filterFn);
+        }
     }
 
 });

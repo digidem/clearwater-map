@@ -17,25 +17,14 @@ cwm.Place = function(feature) {
 	this.id("id").parentId("parent");
 };
 
-cwm.Place.prototype = {
+cwm.Place.prototype = Object.create(cwm.Base.prototype);
 
-    // Copies this 'on' method from d3_dispatch to the prototype
-    on: function() { 
-        var value = this.event.on.apply(this.event, arguments);
-        return value === this.event ? this : value;
-    },
-
-	// Set the field that contains the unique id. `v` can be a string or a function
-	id: function(v) {
-		if (!arguments.length) return this._id;
-		this._id = typeof v === "function" ? v(this.properties) : this.properties[v];
-		return this;
-	},
+cwm.util.extend(cwm.Place.prototype, {
 
 	// Set the field that contains the parent id. `v` can be a string or a function
-	parentId: function(v) {
+	parentId: function(x) {
 		if (!arguments.length) return this._parentId;
-		this._parentId = typeof v === "function" ? v(this.properties) : this.properties[v];
+		this._parentId = typeof x === "function" ? x(this) : x;
 		return this;
 	},
 
@@ -52,26 +41,48 @@ cwm.Place.prototype = {
 		return this;
 	},
 
-	bounds: function() {
-        return this._bounds || (this._bounds = this.geometry && d3.geo.bounds(this.asGeoJSON()));
+    next: function() {
+        var collection = this.collection;
+        if (collection) {
+            return collection[collection.indexOf(this) + 1];
+        }
     },
 
-    extent: function() {
-        return this._extent || (this._extent = new MM.Extent(this.bounds()[1][1], this.bounds()[0][0], this.bounds()[0][1], this.bounds()[1][0]));
+    lastDescendant: function(filter) {
+        if (this._lastDescendant) return this._lastDescendant;
+
+        var children = this.children && this.children.filter(filter);
+
+        if (!children || !children.length) return this;
+
+        return this._lastDescendant = children[children.length - 1].lastDescendant(filter);
     },
 
-	centroid: function() {
-		return this._centroid || (this._centroid = this.geometry && d3.geo.centroid(this.asGeoJSON()));
-	},
+    // If the place does not have bounds, return the bounds of its children. Cache the result.
+    bounds: function() {
+        if (typeof this._bounds !== "undefined") return this._bounds;
+        
+        this._bounds = d3.geo.bounds(this.asGeoJSON());
+        
+        if (!isNaN(this._bounds[0][0])) return this._bounds;
+
+        if (this.children) {
+            this._bounds = this.children.bounds();
+        } else {
+            this._bounds = null;
+        }
+        
+        return this._bounds;
+    },
 
 	/**
-	 * @return {object} A geoJSON representation of the place
-	 */
-	asGeoJSON: function() {
-		return {
-			type: 'Feature',
-			properties: this.properties,
-			geometry: this.geometry
-		};
-	}
-};
+     * @return {object} A geoJSON representation of the place
+     */
+    asGeoJSON: function() {
+        return {
+            type: this.type,
+            properties: this.properties,
+            geometry: this.geometry
+        };
+    }
+});

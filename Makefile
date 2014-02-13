@@ -69,7 +69,8 @@ lib: \
 	js/lib/waxconnector.js \
 	js/lib/easey.js \
 	js/lib/lodash.modern-2.4.1.js \
-	js/lib/jquery-1.8.3.js
+	js/lib/jquery-1.8.3.js \
+	js/lib/queue.js
 
 js/lib/lodash.modern-2.4.1.js:
 	curl https://raw.github.com/lodash/lodash/2.4.1/dist/lodash.js -o $@
@@ -89,6 +90,10 @@ js/lib/easey.js: node_modules/.install
 	@rm -f $@
 	cp node_modules/easey/src/easey.js $@
 
+js/lib/queue.js: node_modules/.install
+	@rm -f $@
+	cp node_modules/queue-async/queue.js $@
+
 D3_FILES = \
 	node_modules/d3/src/start.js \
 	node_modules/d3/src/arrays/index.js \
@@ -102,6 +107,7 @@ D3_FILES = \
 	node_modules/d3/src/selection/index.js \
 	node_modules/d3/src/transition/index.js \
 	node_modules/d3/src/xhr/index.js \
+	node_modules/d3/src/dsv/index.js \
 	node_modules/d3/src/end.js
 
 js/lib/d3.v3.js: $(D3_FILES)

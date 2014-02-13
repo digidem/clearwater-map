@@ -1,103 +1,97 @@
 window.cwm = {
 
-    init: function(mapId, storiesId) {
-
-        var baseUrl = '';
+    launch: function (selector) {
 
         var options = {
-
+          
             // Bing Maps API key for satellite layer
             // Register for key at http://www.bingmapsportal.com
             // Currently a basic non-profit key. Need to check limits.
-            bingApiKey: "Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l",
+            bingApiKey: 'Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l',
 
-            // Mapbox ID for overlay map
+            // Mapbox ID for overlay map (this actually composites two Mapbox maps)
             mapboxId: 'gmaclennan.clearwater,gmaclennan.map-y7pgvo15',
 
-            // Bounds for the initial view of the map (South America)
-            startBounds: [{
-                lat: -55,
-                lon: -90
-            }, {
-                lat: 14,
-                lon: -33
-            }],
-
-            // Data sources for overlay and markers (currently CartoDB)
-            communityUrl: baseUrl + "data/communities.geojson",
-
-            installationUrl: baseUrl + "data/installations.geojson",
-
-            padding: 580
-
         };
+
+        var container = d3.select(selector);
+        var storiesDiv = container.insert("div", ":first-child").attr("id", "stories");
+        var mapDiv = container.insert("div", ":first-child").attr("id", "map");
 
         // used to keep track of map data as it loads.
         var loaded = { length: 0 };
 
         var flightplan = cwm.flightplan = cwm.Flightplan().show("featured");
 
+        var stories = cwm.stories = cwm.Stories(storiesDiv).data(flightplan);
+
+        var map = cwm.map = cwm.Map(mapDiv).paddingLeft(580);
+
+        var missionControl = cwm.mc = cwm.MissionControl().map(map);
+
+        var bingLayer = cwm.layers.BingLayer(options).addTo(map);
+        var installationsLayer = cwm.layers.MarkerLayer().addTo(map);
+        var communitiesLayer = cwm.layers.FeatureLayer().addTo(map);
+        var ecuadorLayer = cwm.layers.FeatureLayer().addTo(map);
+
         // We augment the community field to use it as an id, since it can potentially
         // clash with the nationality id (e.g. nationality = Secoya && community = Secoya)
-        cwm.data.installations = cwm.Collection("installations")
-            .placeId("_id")
-            .placeParentId(function(d) {
-                return "c-" + d.community;
-            })
+        var installations = cwm.Collection("installations")
+            .placeId(function(d) { return d.attr("_id"); })
+            .placeParentId(function(d) { return "c-" + d.attr("community"); })
             .url("data/installations.geojson")
+            .on("load", installationsLayer.data)
             .fetch(onLoad);
 
-        cwm.data.communities = cwm.Collection("communities")
-            .placeId(function(d) {
-                return "c-" + d.community;
-            })
-            .placeParentId("nationality")
-            .url("data/communities.geojson")
+        var communities = cwm.Collection("communities")
+            .placeId(function(d) { return "c-" + d.attr("community"); })
+            .placeParentId(function(d) { return d.attr("nationality"); })
+            .url("data/communities.topojson")
+            .on("load", communitiesLayer.data)
             .fetch(onLoad);
 
-        cwm.data.nationalities = cwm.Collection("nationalities")
-            .placeId("nationality")
+        var nationalities = cwm.Collection("nationalities")
+            .placeId(function(d) { return d.attr("nationality"); })
+            .placeParentId("Ecuador")
             .url("data/nationalities.geojson")
-            .placeParentId(function() {
-                return "Ecuador";
-            })
             .fetch(onLoad);
 
-        cwm.data.other = cwm.Collection("other")
-            .placeId("id")
-            .placeParentId("parent")
-            .url("data/other.geojson")
+        var other = cwm.Collection("other")
+            .placeId(function(d) { return d.attr("id"); })
+            .placeParentId(function(d) { return d.attr("parent"); })
+            .url("data/other.topojson")
             .on("load", function(d) {
-                cwm.data.ecuador = {
-                    "type": "FeatureCollection",
-                    "features": [d.get("Ecuador")]
-                };
-                cwm.data.ecuador.features[0].properties.nationality = "ecuador";
+                ecuadorLayer.data(d.get("Ecuador"));
             })
             .fetch(onLoad);
 
+        // When each dataset loads, add it to the flightplan
         function onLoad() {
             var loadedId = this.id();
             flightplan.add(this);
             loaded[loadedId] = true;
 
+            // As soon as we can, set the map extents for the first view
+            if (loadedId === "other") {
+                setExtentCoords([this.get("Intro")]);
+                map.setCoordinate(this.get("Intro")._extentCoordinate);
+            }
+
             // Once everything is loaded, set the map extent for each place
             if (loaded.length++ == 3) {
-                cwm.render.stories(flightplan);
-                cwm.map = cwm.Map('map', options);
-                cwm.scrollHandler = cwm.handlers.ScrollHandler(cwm.map);
-
-                cwm.map.onLoad();
-                var stories = cwm.Stories('stories').map(cwm.map);
+                installationsLayer.setMinZooms();
+                setExtents();
+                missionControl.stories(stories);
             }
         }
 
         function setExtents() {
-            setExtentCoords(cwm.data.other);
-            setExtentCoords([cwm.data.other.get("Ecuador")], 0, true);
-            setExtentCoords(cwm.data.nationalities, -0.5);
-            setExtentCoords(cwm.data.communities);
-            setExtentCoords(cwm.data.installations);
+            setExtentCoords(other);
+            setExtentCoords([other.get("Ecuador")], 0, true);
+            setExtentCoords(nationalities, -0.5);
+            setExtentCoords(communities, 0, true);
+            setExtentCoords(installations);
+            missionControl.setEasings();
         }
 
         function setExtentCoords(places, offset, fromChildren) {
@@ -114,6 +108,11 @@ window.cwm = {
             });
         }
 
-    }
+        d3.select(window).on("resize.extents", setExtents);
 
+        // cwm.scrollHandler = cwm.handlers.ScrollHandler(cwm.map);
+        // cwm.stories = cwm.Stories(storiesDiv).map(cwm.map);
+
+    }
+  
 };

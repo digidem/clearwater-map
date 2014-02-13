@@ -17,23 +17,26 @@
   <script src='js/lib/modestmaps.js'></script>
   <script src='js/lib/waxconnector.js'></script>
   <script src='js/lib/easey.js'></script>
+  <script src='js/lib/d3.dimensions.js'></script>
+  <script src='js/lib/d3.keybinding.js'></script>
+  <script src='js/lib/topojson.js'></script>
 
   <script src='js/src/cwm.js'></script>
   <script src='js/src/map.js'></script>
   <script src='js/src/stories.js'></script>
+  <script src='js/src/mission_control.js'></script>
   <script src='js/src/render.js'></script>
-  <script src='js/src/stories_renderer.js'></script>
   <script src='js/src/templates.js'></script>
 
   <script src='js/src/util.js'></script>
   <script src='js/src/util/MM.overrides.js'></script>
   <script src='js/src/util/domhelpers.js'></script>
-  
+
+  <script src='js/src/core/base.js'></script>
   <script src='js/src/core/place.js'></script>
   <script src='js/src/core/collection.js'></script>
   <script src='js/src/core/flightplan.js'></script>
-
-
+  
   <script src='js/src/layers.js'></script>
   <script src='js/src/layers/bing_layer.js'></script>
   <script src='js/src/layers/mapbox_layer.js'></script>
@@ -48,7 +51,6 @@
   <script src='js/src/handlers/marker_interaction.js'></script>
 
   <script src='js/src/data.js'></script>
-  <script src='data/ecuador.js'></script>
   
   <link href='css/data_uris.css' rel='stylesheet' />
   <link href='css/map.css' rel='stylesheet' />
@@ -60,15 +62,9 @@
   <style type="text/css">
   </style>
 </head>
-<body id="mapstory">
+<body>
 
-<div id="mappane">
-
-  <div id='map'></div>
-  
-  <div id='stories'>  
-
-  </div>
+<div id="mapstory">
 
   <div id='legend'>
     <dl>
@@ -88,43 +84,39 @@
 
 <script type="text/html" id="template-other">
   {{ renderMedia() }}
-  <div class="text">
   <h1>{{ attr("story_title") }}</h1>
-  
-    <p>{{ attr("story_excerpt") }}</p>
+  <div class="text">
+    {{ attr("story_excerpt") }}
   </div>
 </script>
 
 <script type="text/html" id="template-nationalities">
   {{ renderMedia() }}
-  <div class="text">
   <h1>{{ attr("story_title") }}</h1>
-  
-    <p>{{ attr("story_excerpt") }}</p>
+  <div class="text">
+    {{ attr("story_excerpt") }}
   </div>
 </script>
 
 <script type="text/html" id="template-communities">
   {{ renderMedia() }}
-  <div class="text">
   <h2>{{ attr("story_title") }}</h2>
-  <ul>
-    <li>+  {{ children.count() }} Rainwater Catchment Systems</li>
-    <li>+  {{ children.count("users") }} people benefitted</li>
-    <li>+  {{ attr("technicians") }} community technicians trained</li>
-  </ul>
-  
-    <p>{{ attr("story_excerpt") }}</p>
+  <div class="text">
+    <ul>
+      <li>+  {{ children.count() }} Rainwater Catchment Systems</li>
+      <li>+  {{ children.count("users") }} people benefitted</li>
+      <li>+  {{ attr("technicians") }} community technicians trained</li>
+    </ul>
+    {{ attr("story_excerpt") }}
   </div>
 </script>
 
 <script type="text/html" id="template-installations">
   {{ renderMedia() }}
-  <div class="text">
   <h2>{{ attr("story_title") }}</h2>
-  
-    <p>{{ attr("story_excerpt") }} 
-    {{ attr("story_url") ? '<a href="' + attr("story_url") + '">Read more&hellip;</a>' : '' }}</p>
+  <div class="text">
+    {{ attr("story_excerpt") }} 
+    {{ attr("story_url") ? '<a href="' + attr("story_url") + '">Read more&hellip;</a>' : '' }}
   </div>
 </script>
 
@@ -135,7 +127,7 @@
 
 <script type="text/javascript" charset="utf-8">
 
-cwm.init();
+cwm.launch("#mapstory");
 
 </script>
 
