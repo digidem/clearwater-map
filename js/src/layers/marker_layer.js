@@ -8,9 +8,8 @@ cwm.layers.MarkerLayer = function() {
         markerLayer,
         markersHiding,
         mapContainer,
-        markerInteraction;
-
-    d3.select(window).on("resize." + id, setMinZooms);
+        markerInteraction
+        event = d3.dispatch("click");
 
     // Project markers from map coordinates to screen coordinates
     function project(d) {
@@ -18,7 +17,8 @@ cwm.layers.MarkerLayer = function() {
             lon: d.geometry.coordinates[0],
             lat: d.geometry.coordinates[1]
         });
-        return [~~(0.5 + point.x), ~~ (0.5 + point.y)];
+        //return [~~(0.5 + point.x), ~~ (0.5 + point.y)];
+        return [point.x, point.y];
     }
 
     // Used to sort featured places so they appear above others on the map
@@ -117,9 +117,9 @@ cwm.layers.MarkerLayer = function() {
         update.enter()
             .append("circle")
             .attr("r", 0)
+            .on("click.marker", event.click)
             .call(showMarkers)
-            .call(markerInteraction.add)
-            .on("click.zoom", zoomToMarker);
+            .call(markerInteraction.add);
 
         // For markers leaving the current extent, remove them from the DOM.
         update.exit().call(hideMarkers);
@@ -140,8 +140,15 @@ cwm.layers.MarkerLayer = function() {
         return markerLayer;
     }
 
+    function highlight(d) {
+
+    }
+
     function data(collection) {
         markerData = collection;
+        markerLayer.name = collection.id();
+        d3.select(window).on("resize." + markerLayer.name, setMinZooms);
+        g.classed(markerLayer.name, true);
         draw();
         return markerLayer;
     }
@@ -151,6 +158,7 @@ cwm.layers.MarkerLayer = function() {
         map.addLayer(markerLayer);
         mapContainer = d3.select(map.parent);
         markerInteraction = cwm.handlers.MarkerInteraction(mapContainer);
+        markerInteraction.on("click", event.click);
         g = cwm.render.SvgContainer(mapContainer)
             .append('g')
             .attr("class", id);
@@ -160,16 +168,16 @@ cwm.layers.MarkerLayer = function() {
 
     markerLayer = {
 
-        name: id,
-
         setMinZooms: setMinZooms,
 
         draw: draw,
 
         data: data,
 
-        addTo: addTo
+        addTo: addTo,
+
+        highlight: highlight
     };
 
-    return markerLayer;
+    return d3.rebind(markerLayer, event, "on");
 };

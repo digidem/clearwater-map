@@ -1,11 +1,29 @@
-#mapstory #stories article {
+#mapstory #stories article
+, #mapstory .top-headings
+, #mapstory .next-headings {
   width: 30em;
   position: absolute;
   margin: 0;
   color: #eee;
   background-color: #333;
+  margin-left: 2em;
 }
 
+#mapstory .top-headings div
+, #mapstory .next-headings div {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+}
+
+#mapstory .top-headings div {
+  top: 0;
+}
+
+#mapstory .next-headings, #mapstory .next-headings div {
+  bottom: 0;
+}
 
 #mapstory #stories h1, #mapstory #stories h2 {
   line-height: 1em;
@@ -20,7 +38,6 @@
 
 #mapstory #stories h1 {
   padding: 0.2em 0.444444em;
-  margin-bottom: 0.444444em;
   font-size: 2.25em;
   font-weight: 700;
   color: black;
@@ -48,15 +65,8 @@
   content: "";
 }
 
-#mapstory #stories h1.fixedTop:before {
-  opacity: 1;
-}
 
-#mapstory #stories .fixedBottom, #mapstory #stories .fixedTop {
-	cursor: pointer;
-}
-
-#mapstory #stories .fixedBottom {
+#mapstory #stories .next-headings {
 	-webkit-transition-duration: 250ms;
 	-moz-transition-duration: 250ms;
 	-o-transition-duration: 250ms;
@@ -71,16 +81,13 @@
 }
 
 
-#mapstory #stories h2.fixedBottom:hover {
+#mapstory #stories .top-headings h2:hover {
   color: #ab8b1e;
 	/* background image orange down arrow from data uri */
 }
 
-#mapstory #stories h1.fixedBottom {
-  background-position: 97.5% 50%;
-}
-
-#mapstory #stories h2.fixedBottom {
+#mapstory #stories .next-headings h1
+, #mapstory #stories .next-headings h2 {
   background-position: 97.5% 50%;
 }
 
@@ -90,7 +97,6 @@
 
 #mapstory #stories h2 {
   padding: 0.25em 0.5em;
-  margin-bottom: 0.5em;
   font-size: 2em;
   color: #f2c21c;
   background-color: black;
@@ -130,10 +136,12 @@
 #mapstory #stories ul {
   font-size: 1.1em;
   list-style-type: none;
+  margin: 0;
+  padding-left: 0.5em;
 }
 
 #mapstory #stories ul li {
-margin-bottom: 0.5em;
+margin-bottom: 0.6em;
 }
 
 #mapstory #stories img {

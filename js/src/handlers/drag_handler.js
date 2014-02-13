@@ -14,7 +14,7 @@ cwm.handlers.DragHandler = function() {
         })
         .on("dragend", function () {
           parent.classed("dragging", false);
-          map.flightHandler.setOverride();
+          //map.flightHandler.setOverride();
         });
 
     function pan () {

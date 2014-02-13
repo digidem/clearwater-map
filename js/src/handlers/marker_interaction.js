@@ -1,7 +1,8 @@
 cwm.handlers.MarkerInteraction = function(container) {
     var popup,
         popupFixed,
-        isBouncing;
+        isBouncing,
+        event = d3.dispatch("click");
 
     function mouseoverMarker() {
         if (d3.event.defaultPrevented) return;
@@ -70,11 +71,10 @@ cwm.handlers.MarkerInteraction = function(container) {
             });
         } else {
             cwm.render.PopupSmall(d, wrapper);
-            popup.on("click.popup", function() {
+            popup.on("click.popup", function(d) {
                 if (d3.event.defaultPrevented) return;
                 displayPopup.call(marker);
-                d3.select(marker).on("click.zoom").call(marker);
-                d3.select(marker).on("click.scroll").call(marker);
+                event.click(d)
             })
                 .on("mouseleave.popup", function() {
                     if (d3.event.defaultPrevented) return;
@@ -128,15 +128,6 @@ cwm.handlers.MarkerInteraction = function(container) {
         isBouncing = window.setTimeout(bounceMarkers, 3000, marker);
     }
 
-    function scrollToStory() {
-        var d = this.__data__;
-        if (d.attr("featured") === true) {
-            cwm.map.flightHandler.pause();
-            cwm.map.s.scrollTo(cwm.util.sanitize(d.attr("featured_url")), function() {
-                cwm.map.flightHandler.resume();
-            });
-        }
-    }
 
     function getMarkerSize(d, scale) {
         scale = scale || 1;
@@ -148,7 +139,6 @@ cwm.handlers.MarkerInteraction = function(container) {
         context.on("mouseout.popup", mouseoutMarker)
             .on("mouseover.popup", mouseoverMarker)
             .on("click.popup", displayPopup)
-            .on("click.scroll", scrollToStory)
             .filter(function(d) {
                 return d.attr("featured") === true;
             })
@@ -175,11 +165,9 @@ cwm.handlers.MarkerInteraction = function(container) {
         }
     }
 
-    return {
+    return d3.rebind({
         add: add,
-
         drawPopup: drawPopup,
-
         removePopup: removePopup
-    };
+    }, event, "on");
 };

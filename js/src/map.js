@@ -1,17 +1,20 @@
 cwm.Map = function(container) {
   
   var lastResize = 0,
-      stories;
+      stories,
+      event = d3.dispatch("click");
   
   var map = new MM.Map(
     container.node(),
     null,
     null,
-    [  MM.MouseHandler() ] // cwm.handlers.DragHandler(),
+    [  cwm.handlers.DragHandler() ]
   ).setZoomRange(3,18);
 
   map.addLayer = function(layer) {
     map.layers.push(layer);
+    // pass through layer events
+    layer.on("click", event.click);
     if (map.coordinate) {
       MM.getFrame(map.getRedraw());
     }
@@ -107,5 +110,5 @@ cwm.Map = function(container) {
     });
   }
   
-  return map;
+  return d3.rebind(map, event, "on");
 };

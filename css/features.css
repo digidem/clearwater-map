@@ -7,14 +7,17 @@
   stroke-width: 0;
   stroke-linejoin: round;
   cursor: pointer;
-  transition: opacity 500ms;
-  -moz-transition: opacity 500ms;
-  -webkit-transition: opacity 500ms;
 }
 
 #mapstory .communities path:hover {
   fill: #ab8b1e;
   cursor: pointer;
+}
+
+#mapstory .communities path.parentActive {
+  fill: #ab8b1e;
+  -webkit-transition: fill 500ms;
+  transition: fill 500ms;
 }
 
 #mapstory .feature-label {

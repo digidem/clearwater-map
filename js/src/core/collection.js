@@ -86,7 +86,11 @@ cwm.util.extend(cwm.Collection.prototype, {
         d3.json(self._url)
             .get(function loaded(e, data) {
                 if (e) throw e.response + ": Could not load " + url;
-                else self.reset(data.features);
+                if (data.type.toLowerCase() === "topology") {
+                    topojson.presimplify(data);
+                    data = topojson.feature(data, data.objects.collection);
+                }
+                self.reset(data.features);
                 self.event.load(self);
                 if (typeof callback === "function") callback.call(self, e, data);
             });

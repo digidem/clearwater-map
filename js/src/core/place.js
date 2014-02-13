@@ -24,7 +24,7 @@ cwm.util.extend(cwm.Place.prototype, {
 	// Set the field that contains the parent id. `v` can be a string or a function
 	parentId: function(x) {
 		if (!arguments.length) return this._parentId;
-		this._parentId = typeof x === "function" ? x(this.properties) : x;
+		this._parentId = typeof x === "function" ? x(this) : x;
 		return this;
 	},
 
@@ -40,6 +40,23 @@ cwm.util.extend(cwm.Place.prototype, {
 		this.event.changed(this);
 		return this;
 	},
+
+    next: function() {
+        var collection = this.collection;
+        if (collection) {
+            return collection[collection.indexOf(this) + 1];
+        }
+    },
+
+    lastDescendant: function(filter) {
+        if (this._lastDescendant) return this._lastDescendant;
+
+        var children = this.children && this.children.filter(filter);
+
+        if (!children || !children.length) return this;
+
+        return this._lastDescendant = children[children.length - 1].lastDescendant(filter);
+    },
 
     // If the place does not have bounds, return the bounds of its children. Cache the result.
     bounds: function() {

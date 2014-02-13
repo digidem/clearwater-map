@@ -18,6 +18,8 @@
   <script src='js/lib/waxconnector.js'></script>
   <script src='js/lib/easey.js'></script>
   <script src='js/lib/d3.dimensions.js'></script>
+  <script src='js/lib/d3.keybinding.js'></script>
+  <script src='js/lib/topojson.js'></script>
 
   <script src='js/src/cwm.js'></script>
   <script src='js/src/map.js'></script>
@@ -99,12 +101,12 @@
 <script type="text/html" id="template-communities">
   {{ renderMedia() }}
   <h2>{{ attr("story_title") }}</h2>
-  <ul>
-    <li>+  {{ children.count() }} Rainwater Catchment Systems</li>
-    <li>+  {{ children.count("users") }} people benefitted</li>
-    <li>+  {{ attr("technicians") }} community technicians trained</li>
-  </ul>
   <div class="text">
+    <ul>
+      <li>+  {{ children.count() }} Rainwater Catchment Systems</li>
+      <li>+  {{ children.count("users") }} people benefitted</li>
+      <li>+  {{ attr("technicians") }} community technicians trained</li>
+    </ul>
     {{ attr("story_excerpt") }}
   </div>
 </script>

@@ -1,7 +1,7 @@
 // Can display multiple collections of geojson features in the same layer,
 // each collection with its own g, class and max zoom.
 
-cwm.layers.FeatureLayer = function(id) {
+cwm.layers.FeatureLayer = function() {
 
     var g,
         mapContainer,
@@ -10,10 +10,15 @@ cwm.layers.FeatureLayer = function(id) {
         label,
         mouseoverLabel,
         featureCollectionCount = 0,
-        featureData =[];
+        featureData =[],
+        zoom,
+        event = d3.dispatch("click");
 
     var projectionStream = d3.geo.transform({
-        point: function(x, y) {
+        point: function(x, y, z) {
+            // We used topojson to presimplify the feature, which adds the z value, the effective area of each point
+            // This formula was from http://wiki.openstreetmap.org/wiki/Zoom_levels and tweaked until it looked right.
+            if (z < 63.728 / Math.pow(2, zoom + 12)) return;
             var point = cwm.map.locationPoint({
                 lon: x,
                 lat: y
@@ -25,8 +30,6 @@ cwm.layers.FeatureLayer = function(id) {
     });
 
     var pathGenerator = d3.geo.path().projection(projectionStream);
-
-    d3.select(window).on("resize." + id, setMaxZooms);
 
     /* -- Using this would clip the shapes to the map extent, can't see a
     /* -- can't see a performance improvement from this yet.  
@@ -85,28 +88,31 @@ cwm.layers.FeatureLayer = function(id) {
         // (Modest Maps attaches the map to the layer when it is added to the map)
         if (!map || !featureData) return;
 
-        var zoom = map.getZoom();
+        zoom = map.getZoom();
         var extent = map.getExtent();
-        var data = featureData.filter(function(d) {
-            // Only draw features that either overlap with the map view, or, if it is
-            // Ecuador, do not draw if beyond the max zoom.
-            return extent.coversBounds(d.bounds()) && (d.id() !== "Ecuador" || zoom < (d._maxZoom + 1));
-        });
 
         // update the features to their new positions
         // If beyond their max zoom, fade them out
         // Do not display features outside the map
         features = g.selectAll("path")
-            .data(data, function(d) {
+            .data(featureData, function(d) {
                 return d.id();
             });
 
         features.enter()
             .append("path")
             .on("mouseover", showLabel)
-            .on("mouseout", hideLabel);
+            .on("mouseout", hideLabel)
+            .on("click", event.click);
 
-        features.attr("d", pathGenerator)
+        features.attr("display", "none")
+            .filter(function(d) {
+                // Only draw features that either overlap with the map view, or, if it is
+                // Ecuador, do not draw if beyond the max zoom.
+                return extent.coversBounds(d.bounds()) && (d.id() !== "Ecuador" || zoom < (d._maxZoom + 1));
+            })
+            .attr("display", null)
+            .attr("d", pathGenerator)
             .style("fill-opacity", function(d) {
                 return Math.min(Math.max(d._maxZoom + 1 - zoom, 0), 1) * 0.6;
             })
@@ -121,8 +127,12 @@ cwm.layers.FeatureLayer = function(id) {
     }
 
     function data(collection) {
+        featureLayer.name = collection.id();
+        if (!(collection instanceof Array)) collection = [collection];
         // add these features to the features already in the layer
         featureData = collection;
+        d3.select(window).on("resize." + featureLayer.name, setMaxZooms);
+        g.classed(featureLayer.name, true);
         setMaxZooms();
         draw();
         return featureLayer;
@@ -134,21 +144,31 @@ cwm.layers.FeatureLayer = function(id) {
         mapContainer = d3.select(map.parent);
         g = cwm.render.SvgContainer(mapContainer)
             .append('g')
-            .attr("class", id);
+            .attr("class", featureLayer.name);
 
         return featureLayer;
     }
 
-    var featureLayer = {
+    function highlight(place) {
+        g.selectAll("path")
+            .classed("active", function(d) {
+                return place === d;
+            })
+            .classed("parentActive", function(d) {
+                return d.parent && place === d.parent;
+            });
+    }
 
-        name: id,
+    var featureLayer = {
 
         draw: draw,
 
         data: data,
 
-        addTo: addTo
+        addTo: addTo,
+
+        highlight: highlight
     };
 
-    return featureLayer;
+    return d3.rebind(featureLayer, event, "on");
 };

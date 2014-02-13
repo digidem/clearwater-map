@@ -31,37 +31,37 @@ window.cwm = {
 
         var bingLayer = cwm.layers.BingLayer(options).addTo(map);
         var installationsLayer = cwm.layers.MarkerLayer().addTo(map);
-        var communitiesLayer = cwm.layers.FeatureLayer("communities").addTo(map);
-        var ecuadorLayer = cwm.layers.FeatureLayer("ecuador").addTo(map);
+        var communitiesLayer = cwm.layers.FeatureLayer().addTo(map);
+        var ecuadorLayer = cwm.layers.FeatureLayer().addTo(map);
 
         // We augment the community field to use it as an id, since it can potentially
         // clash with the nationality id (e.g. nationality = Secoya && community = Secoya)
         var installations = cwm.Collection("installations")
-            .placeId("_id")
-            .placeParentId(function(d) { return "c-" + d.community; })
+            .placeId(function(d) { return d.attr("_id"); })
+            .placeParentId(function(d) { return "c-" + d.attr("community"); })
             .url("data/installations.geojson")
             .on("load", installationsLayer.data)
             .fetch(onLoad);
 
         var communities = cwm.Collection("communities")
-            .placeId(function(d) { return "c-" + d.community; })
-            .placeParentId("nationality")
-            .url("data/communities.geojson")
+            .placeId(function(d) { return "c-" + d.attr("community"); })
+            .placeParentId(function(d) { return d.attr("nationality"); })
+            .url("data/communities.topojson")
             .on("load", communitiesLayer.data)
             .fetch(onLoad);
 
         var nationalities = cwm.Collection("nationalities")
-            .placeId("nationality")
-            .placeParentId(function() { return "Ecuador"; })
+            .placeId(function(d) { return d.attr("nationality"); })
+            .placeParentId("Ecuador")
             .url("data/nationalities.geojson")
             .fetch(onLoad);
 
         var other = cwm.Collection("other")
-            .placeId("id")
-            .placeParentId("parent")
-            .url("data/other.geojson")
+            .placeId(function(d) { return d.attr("id"); })
+            .placeParentId(function(d) { return d.attr("parent"); })
+            .url("data/other.topojson")
             .on("load", function(d) {
-                ecuadorLayer.data([d.get("Ecuador")]);
+                ecuadorLayer.data(d.get("Ecuador"));
             })
             .fetch(onLoad);
 
@@ -89,7 +89,7 @@ window.cwm = {
             setExtentCoords(other);
             setExtentCoords([other.get("Ecuador")], 0, true);
             setExtentCoords(nationalities, -0.5);
-            setExtentCoords(communities);
+            setExtentCoords(communities, 0, true);
             setExtentCoords(installations);
             missionControl.setEasings();
         }

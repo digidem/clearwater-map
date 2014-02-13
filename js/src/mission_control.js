@@ -9,20 +9,103 @@ cwm.MissionControl = function() {
         end,
         timelineStart,
         timelineEnd,
-        pendingRedraw;
+        speed = 1,
+        pendingRedraw,
+        scrolling,
+        adjusting,
+        easeOverride,
+        current = {},
+        ease = d3.ease("linear"),
+        event = d3.dispatch("scroll");
 
-    function stories(_) {
+    d3.select(window).on("resize.mc", setEasings);
+
+    // from https://github.com/mbostock/d3/pull/1050/files
+    if ('onwheel' in document) {
+        d3_behavior_zoom_wheel = 'wheel';
+        d3_behavior_zoom_delta = function() {
+            return -d3.event.deltaY * (d3.event.deltaMode ? 30 : 1);
+        };
+    } else if ('onmousewheel' in document) {
+        d3_behavior_zoom_wheel = 'mousewheel';
+        d3_behavior_zoom_delta = function() {
+            return d3.event.wheelDelta;
+        };
+    } else {
+        d3_behavior_zoom_wheel = 'MozMousePixelScroll';
+        d3_behavior_zoom_delta = function() {
+            return -d3.event.detail;
+        };
+    }
+
+    d3.select("body")
+        .call(d3.keybinding()
+            .on("arrow-down", onArrowKey("down"))
+            .on("arrow-up", onArrowKey("up")))
+        .on(d3_behavior_zoom_wheel, onMouseWheel)
+        .on('keyup', scrollToNearest);
+
+    function onArrowKey(direction) {
+        return function() {
+            if (adjusting) window.clearTimeout(adjusting);
+            if (!scrolling) {
+                start = Date.now();
+                timelineStart = timeline;
+                timelineEnd = direction === "up" ? 0 : 99999;
+                end = start + Math.abs(timelineEnd - timelineStart);
+                scroll();
+            }
+        };
+    }
+
+    function onMouseWheel() {
+        d3.event.preventDefault();
+        stopOtherThingsHappening();
+        time(timeline - d3_behavior_zoom_delta());
+        // If we stop scrolling for 500ms, move to the next place if it is close.
+        adjusting = window.setTimeout(scrollToNearest, 200);
+    }
+
+    function stopOtherThingsHappening() {
+        if (adjusting) window.clearTimeout(adjusting);
+        if (scrolling) window.cancelAnimationFrame(scrolling);
+        scrolling = adjunsting = easeOverride = null;
+        ease = d3.ease("linear");
+    }
+
+    // Moves the map / scroll to the nearest story
+
+    function scrollToNearest(offset) {
+        var adjusted;
+        offset = offset || 100;
+
+        stopOtherThingsHappening();
+
+        _places.forEach(function(place) {
+            if (Math.abs(place._time - timeline) < offset) {
+                go(place, false);
+                adjusted = true;
+            }
+        });
+
+        // If we haven't adjusted the scroll, try again, this time searching a bit further.
+        //if (!adjusted) adjusting = window.setTimeout(scrollToNearest, offset + 100, offset + 100);
+    }
+
+    function stories(x) {
         if (!arguments.length) return _places;
-        _stories = _;
+        _stories = x;
         _places = _stories.data();
         setEasings();
+        _stories.on("click", go);
         return missionControl;
     }
 
-    function map(_) {
+    function map(x) {
         if (!arguments.length) return map;
-        _map = _;
+        _map = x;
         setEasings();
+        _map.on("click", go);
         return missionControl;
     }
 
@@ -35,48 +118,67 @@ cwm.MissionControl = function() {
             var ease = place.ease || (place.ease = mapbox.ease().map(_map));
             ease.from(place._extentCoordinate);
 
-            var nextPlace = _places[i+1];
+            var nextPlace = _places[i + 1];
 
             if (nextPlace) {
                 ease.to(nextPlace._extentCoordinate).setOptimalPath();
                 nextPlace._time = place._time + Math.max(ease.getOptimalTime(), 2000);
             } else {
-                delete place.ease;
+                ease.to(place._extentCoordinate).setOptimalPath();
                 _maxTime = place._time;
             }
         });
     }
 
-    function go(place, smooth) {
+    function go(place, override) {
         if (typeof place === "string") place = _places.get(place);
-        
-        if (smooth) {
-            start = Date.now();
-            timelineStart = timeline;
-            timelineEnd = place._time;
-            end = start + Math.abs(timelineEnd - timelineStart);
-            // console.log(start,timelineStart,timelineEnd,end);
-            window.requestAnimationFrame(scroll);
+        if (scrolling) window.cancelAnimationFrame(scrolling);
+        var destination;
+
+        ease = d3.ease("quad-in-out");
+        start = Date.now();
+        timelineStart = timeline;
+        timelineEnd = (typeof place._time !== "undefined") ? place._time : timeline;
+
+        if (override === false) {
+            end = start + Math.max(Math.abs(timelineEnd - timelineStart), 500);
         } else {
-            time(place._time);
+            if (_map.getZoom() !== _map.coordLimits[1].zoom) {
+                destination = place._extentCoordinate;
+            } else {
+                destination = map.extentCoordinate(place.collection.extent(), true);
+            }
+            easeOverride = _map.ease.from(_map.coordinate.copy()).to(destination).setOptimalPath();
+            end = start + Math.max(easeOverride.getOptimalTime(), 2000);
         }
+
+        scrolling = window.requestAnimationFrame(scroll);
+    }
+
+    function next() {
+        var i = 0;
+        while (_places[i] && _places[i]._time < timeline) i++;
+        go(_places[i]);
     }
 
     function scroll() {
         var now = Date.now();
         if (now > end) {
+            stopOtherThingsHappening(); 
             time(timelineEnd);
-            return true;
         } else {
-            // console.log(timelineStart < timelineEnd ? timelineStart + now - start : timelineStart - now + start);
-            time(timelineStart < timelineEnd ? timelineStart + now - start : timelineStart - now + start);
-            window.requestAnimationFrame(scroll);
+            var t = (now - start) / (end - start);
+            var delta = ease(t) * (timelineEnd - timelineStart);
+
+            if (easeOverride) easeOverride.t(t);
+            time(timelineStart + delta);
+            scrolling = window.requestAnimationFrame(scroll);
         }
     }
 
-    function time(_) {
+    function time(x) {
         if (!arguments.length) return _;
-        timeline = _;
+        timeline = Math.min(_maxTime, Math.max(0, x));
         if (!pendingRedraw) {
             draw();
             pendingRedraw = false;
@@ -87,20 +189,45 @@ cwm.MissionControl = function() {
     function draw() {
         var t, i = 0;
         // move things
-        while (_places[i] && _places[i]._time < timeline) i++;
+        if (!easeOverride) {
+            while (_places[i] && _places[i]._time < timeline) i++;
 
-        if (_places[i] && _places[i - 1]) {
-            t = (timeline - _places[i - 1]._time) / (_places[i]._time - _places[i - 1]._time);
-        } else {
-            t = 0;
+            if (_places[i] && _places[i - 1]) {
+                t = (timeline - _places[i - 1]._time) / (_places[i]._time - _places[i - 1]._time);
+            } else {
+                t = 0;
+            }
+
+            (_places[i - 1] || _places[i]).ease.t(t + 1e-9);
         }
 
-        (_places[i - 1] || _places[i]).ease.t(t);
+        scrolled();
         _stories.render(timeline);
-        
+
         pendingRedraw = false;
 
         return missionControl;
+    }
+
+    function scrolled() {
+        var section, layer;
+        var d;
+
+        for (var i = 0; i < _places.length; i++) {
+            if (Math.abs(_places[i]._time - timeline) < 200) d = _places[i];
+        }
+
+        _map.layers.forEach(function(layer) {
+            if (layer.highlight) layer.highlight(d);
+        });
+
+        while (d) {
+            current.place = d;
+            section = d.collection.id();
+            current[section] = d.id();
+            d = d.parent;
+        }
+
     }
 
     missionControl = {
@@ -111,6 +238,6 @@ cwm.MissionControl = function() {
         setEasings: setEasings
     };
 
-    return missionControl;
+    return d3.rebind(missionControl, event, "on");
 
 };

@@ -6,7 +6,7 @@ cwm.Base.prototype = {
     // Set the field that contains the unique id. `x` can be a string or a function
     id: function(x) {
         if (!arguments.length) return this._id;
-        this._id = typeof x === "function" ? x(this.properties) : x;
+        this._id = typeof x === "function" ? x(this) : x;
         return this;
     },
 
