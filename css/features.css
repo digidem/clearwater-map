@@ -15,9 +15,10 @@
 }
 
 #mapstory .communities path.parentActive {
-  fill: #ab8b1e;
-  -webkit-transition: fill 500ms;
-  transition: fill 500ms;
+  stroke-width: 3;
+  stroke-color: #f1c21c;
+  -webkit-transition: stroke-color 500ms;
+  transition: stroke-color 500ms;
 }
 
 #mapstory .feature-label {
