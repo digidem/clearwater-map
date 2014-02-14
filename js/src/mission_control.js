@@ -209,13 +209,25 @@ cwm.MissionControl = function() {
         return missionControl;
     }
 
-    function scrolled() {
-        var section, layer;
-        var d;
+    // Returns the nearest place 
+    function nearest(distance) {
+        var place;
+        
+        distance = (arguments.length) ? distance : Infinity;
 
         for (var i = 0; i < _places.length; i++) {
-            if (Math.abs(_places[i]._time - timeline) < 200) d = _places[i];
+            if (Math.abs(_places[i]._time - timeline) < distance) {
+                place = _places[i];
+                distance = Math.abs(_places[i]._time - timeline);
+            }
         }
+
+        return place;
+    }
+
+    function scrolled() {
+        var section, layer;
+        var d = nearest();
 
         _map.layers.forEach(function(layer) {
             if (layer.highlight) layer.highlight(d);
