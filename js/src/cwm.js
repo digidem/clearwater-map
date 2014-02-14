@@ -30,6 +30,7 @@ window.cwm = {
         var missionControl = cwm.mc = cwm.MissionControl().map(map);
 
         var bingLayer = cwm.layers.BingLayer(options).addTo(map);
+        var mapboxLayer = cwm.layers.MapboxLayer().id(options.mapboxId).addTo(map);
         var installationsLayer = cwm.layers.MarkerLayer().addTo(map);
         var communitiesLayer = cwm.layers.FeatureLayer().addTo(map);
         var ecuadorLayer = cwm.layers.FeatureLayer().addTo(map);

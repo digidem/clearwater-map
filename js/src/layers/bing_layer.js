@@ -11,6 +11,7 @@ cwm.layers.BingLayer = function(options) {
 
     this.parent = document.createElement('div');
     this.parent.style.cssText = 'position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; margin: 0; padding: 0; z-index: 0';
+    this.parent.setAttribute("id", "tile-layers");
     this.levels = {};
     this.requestManager = new MM.RequestManager();
     this.requestManager.addCallback('requestcomplete', this.getTileComplete());

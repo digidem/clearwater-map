@@ -4,7 +4,7 @@ if (typeof mapbox === 'undefined') mapbox = {};
 
 mapbox.MAPBOX_URL = 'http://a.tiles.mapbox.com/v3/';
 
-cwm.layers.MapboxLayer = function(parent) {
+cwm.layers.MapboxLayer = function() {
     if (!(this instanceof cwm.layers.MapboxLayer)) {
         return new cwm.layers.MapboxLayer(parent);
     }
@@ -15,7 +15,8 @@ cwm.layers.MapboxLayer = function(parent) {
     this._composite = false;
 
     this.name = '';
-    this.parent = parent || document.createElement('div');
+    // Try to attach this to an existing DOM element, before creating a new one.
+    this.parent = document.getElementById("tile-layers") || document.createElement('div');
     this.parent.style.cssText = 'position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; margin: 0; padding: 0; z-index: 0';
     this.levels = {};
     this.requestManager = new MM.RequestManager();
@@ -24,6 +25,12 @@ cwm.layers.MapboxLayer = function(parent) {
     this.setProvider(new wax.mm._provider({
         tiles: ['data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7']
     }));
+};
+
+cwm.layers.MapboxLayer.prototype.addTo = function(map) {
+    map.layers.push(this);
+    this.map = map;
+    return this;
 };
 
 cwm.layers.MapboxLayer.prototype.refresh = function(callback) {
