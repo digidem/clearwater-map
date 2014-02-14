@@ -127,7 +127,7 @@ cwm.layers.FeatureLayer = function() {
     }
 
     function data(collection) {
-        featureLayer.name = collection.id();
+        featureLayer.name = collection.id().toLowerCase();
         if (!(collection instanceof Array)) collection = [collection];
         // add these features to the features already in the layer
         featureData = collection;
