@@ -8,8 +8,8 @@ cwm.Templates = function() {
 		'interpolate': /{{([\s\S]+?)}}/g
 	};
 
-    function renderMedia() {
-        var mediaUrl = this.mediaUrl = this.attr("photo") || this.attr("media");
+    function renderMedia(popup) {
+        var mediaUrl = this.mediaUrl = this.attr("story_photo") || this.attr("photo") || this.attr("media");
         if (mediaUrl && mediaUrl.match(imagesRegex)) {
             this.mediaUrl = mediaUrl.replace(imagesRegex, "-480$&");
             return getTemplate("image")(this);
