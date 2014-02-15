@@ -5599,6 +5599,7 @@
         "name": "Teyo Criollo and Cecilia Lucitante",
         "users": 8,
         "date": "Wed Dec 18 2013",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/124dc6eaed2083f8f002037e43e3948e2eac30c8.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5621,6 +5622,7 @@
         "name": "Daniel Lucitante",
         "users": 6,
         "date": "Wed Dec 18 2013",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/3a94ad713f325b712c23ba319ca6212c72bf964a.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5643,6 +5645,7 @@
         "name": "Olivero Lucitante and Devika Yiyoguaje",
         "users": 4,
         "date": "Thu Dec 19 2013",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/ee715d288acd6afeccb02d671cfd25f4d2d9e125.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5665,6 +5668,7 @@
         "name": "Lasteña Criollo",
         "users": 2,
         "date": "Thu Dec 19 2013",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/0bb3cda65e781a5a62c27bf163f5fa6b6b9881fa.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5687,6 +5691,7 @@
         "name": "Esteban Lucitante and Marcia Criollo",
         "users": 4,
         "date": "Fri Dec 21 2103",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/19d3aa38dca0bd51e06601e26f517102d2b76e02.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5709,6 +5714,7 @@
         "name": "José Criollo and Sonia Lucitante",
         "users": 5,
         "date": "Sun Dec 22 2013",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/67cdd4a822b64a0ef6636a3859a984b5f22f9658.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5731,6 +5737,7 @@
         "name": "Ermel Criollo",
         "users": 3,
         "date": "Tue Dec 17 2013",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/067b85942ff8b7d809cfaecdccca8a4e6c24ffe9.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5751,8 +5758,9 @@
         "lat": 0.05305,
         "community": "Cofan Dureno",
         "name": "Escuela Api (Schoolhouse)",
-        "users": 17,
+        "users": 9,
         "date": "Mon Dec 22 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/af2c8abd4ac4d75e8c5dd4b41efdb54a20c66765.jpg",
         "settlement": "Bavoroe",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -6907,6 +6915,7 @@
         "name": "Angel Chimbo and Rita Yumbo",
         "users": 7,
         "date": "Thu Jan 30 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/ab31019fa447a7fd5e57bb964ef6e2b533adb80b.jpg",
         "settlement": "Pisorie Canqque",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -6929,6 +6938,7 @@
         "name": "Marcial Yumbo and Carmen Salazar",
         "users": 5,
         "date": "Thu Jan 30 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/fff20ab6e02f737b0bd035b8667a9f0ed3e4621e.jpg",
         "settlement": "Pisorie Canqque",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -6951,6 +6961,7 @@
         "name": "Vicente Lucitante and Saida Yumbo",
         "users": 3,
         "date": "Thu Jan 30 2014",
+        "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRQmxOWE9SdHpvRlU/edit?usp=sharing",
         "settlement": "Pisorie Canqque",
         "families": 1,
         "project": "Cofán Second Installation"
