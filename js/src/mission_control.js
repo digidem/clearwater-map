@@ -141,11 +141,7 @@ cwm.MissionControl = function() {
         if (override === false) {
             end = start + Math.max(Math.abs(timelineEnd - timelineStart), 500);
         } else {
-            if (_map.getZoom() !== _map.coordLimits[1].zoom) {
-                destination = place._extentCoordinate;
-            } else {
-                destination = map.extentCoordinate(place.collection.extent(), true);
-            }
+            destination = place._extentCoordinate;
             easeOverride = _map.ease.from(_map.coordinate.copy()).to(destination).setOptimalPath();
             end = start + Math.max(easeOverride.getOptimalTime(), 2000);
         }

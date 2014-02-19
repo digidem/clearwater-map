@@ -147,11 +147,9 @@ cwm.Stories = function(container) {
             .on("click", onClick)
             .each(appendHeadings);
 
-        nextHeadings.style("opacity", function(d) {
-                return d._time - d._height.text > time ? 1 : 0;
-            })
-            .style(cwm.util.transformProperty, function(d) {
+        nextHeadings.style(cwm.util.transformProperty, function(d) {
                 var offset = Math.max(0, d._prev._time - time);
+                if (d._time - d._height.text <= time ) offset += 1000;
                 return translate(0, offset);
             });
 
