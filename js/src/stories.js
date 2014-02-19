@@ -115,7 +115,7 @@ cwm.Stories = function(container) {
     }
 
     function renderTopHeadings(time) {
-        var data = storyData.filter(headingsFilter).reverse();
+        var data = storyData.filter(headingsFilter);
 
         var topHeadings = topDiv.selectAll("div")
             .data(data, function(d) {
@@ -127,11 +127,9 @@ cwm.Stories = function(container) {
             .on("click", onClick)
             .each(appendHeadings);
 
-        topHeadings.style("opacity", function(d) {
-                return d._topHeading.appear < time ? 1 : 0;
-            })
-            .style(cwm.util.transformProperty, function(d) {
+        topHeadings.style(cwm.util.transformProperty, function(d) {
                 var offset = Math.min(0, d._topHeading.scrollOut(time) - time);
+                if (d._topHeading.appear > time) offset -= 1000;
                 return translate(0, offset);
             });
 
