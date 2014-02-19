@@ -72,37 +72,36 @@ cwm.render = {
   
   PopupLarge: function (d, context) {
     var imgUrl = (d.attr("photo")) ? d.attr("photo").replace(".jpg", "-150.jpg") : cwm.util.emptyGIF;
-    var format = d3.time.format("%b %e %Y")
+    var format = d3.time.format("%b %e %Y");
     context.append("div")
         .attr("class", "image-wrapper")
         .append("img")
         .attr("src", imgUrl);
       
-    var table = context.append("table")
+    var text = context.append("p")
+        .html("<em>" + d.attr("name") + "’s</em> rainwater collection system, in the village of <em>" + d.attr("community") + 
+            "</em>, was installed on <em>" + format(new Date(d.attr("date"))) + "</em>, and provides clean drinking water to <strong>" +
+            d.attr("users") + " people</strong>.");
 
-    var row = table.append("tr")
-    row.append("th").text("Family:");
-    row.append("td").text(d.attr("name"));
+    // var row = table.append("tr")
+    // row.append("th").text("Family:");
+    // row.append("td").text(d.attr("name"));
     
-    row = table.append("tr")
-    row.append("th").text("Village:");
-    row.append("td").text(d.attr("community"));
+    // row = table.append("tr")
+    // row.append("th").text("Village:");
+    // row.append("td").text(d.attr("community"));
 
-    row = table.append("tr")
-    row.append("th").text("Installed:");
-    row.append("td").text(format(new Date(d.attr("date"))));
+    // row = table.append("tr")
+    // row.append("th").text("Installed:");
+    // row.append("td").text(format(new Date(d.attr("date"))));
 
-    row = table.append("tr")
-    row.append("th").text("Users:");
-    row.append("td").text(d.attr("users"));
+    // row = table.append("tr")
+    // row.append("th").text("Users:");
+    // row.append("td").text(d.attr("users"));
 
     if (d.attr("featured") === true) {
-      row = table.append("tr")
-      row.append("th").text("Story:");
-      row.append("td")
-        .append("a")
-        .attr("href", d.attr("blog_url"))
-        .text("Read more on our blog...");
+      text.append("p")
+        .html('<a href="' + d.attr("blog_url") + '">Read more about this.</a>');
     }
 
     return context;
