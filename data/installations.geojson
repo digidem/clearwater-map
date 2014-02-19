@@ -5932,28 +5932,7 @@
         ]
       }
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7641001993166340,
-        "lon": -76.41002,
-        "lat": -0.683366,
-        "community": "Cofan Dureno",
-        "name": "Ejidio Quenama and Otilia Criollo",
-        "users": 4,
-        "date": "Thu Jan 23 2014",
-        "settlement": "Ukavati",
-        "families": 1,
-        "project": "Cofán Second Installation"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.41002,
-          -0.683366
-        ]
-      }
-    },
+
     {
       "type": "Feature",
       "properties": {
@@ -6597,28 +6576,7 @@
         ]
       }
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7599999998095000,
-        "lon": -76,
-        "lat": -0.1905,
-        "community": "Siona",
-        "name": "Juventino Juampushir and Antonia Yiyocuro",
-        "users": 4,
-        "date": "Wed Feb 05 2014",
-        "settlement": "Orahuëaya",
-        "families": 1,
-        "project": "Siona Second Installation"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76,
-          -0.1905
-        ]
-      }
-    },
+
     {
       "type": "Feature",
       "properties": {
