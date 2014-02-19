@@ -31,9 +31,30 @@ window.cwm = {
 
         var bingLayer = cwm.layers.BingLayer(options).addTo(map);
         var mapboxLayer = cwm.layers.MapboxLayer().id(options.mapboxId).addTo(map);
-        var installationsLayer = cwm.layers.MarkerLayer().addTo(map);
-        var communitiesLayer = cwm.layers.FeatureLayer().addTo(map);
-        var ecuadorLayer = cwm.layers.FeatureLayer().addTo(map);
+
+        var installationsLayer = cwm.layers.MarkerLayer()
+            .addTo(map)
+            .on("click", function(d) {
+                missionControl.go(d);
+            });
+
+        var communitiesLayer = cwm.layers.FeatureLayer()
+            .addTo(map)
+            .on("click", function(d) {
+                if (missionControl.current().place === d.parent) {
+                    missionControl.go(d);
+                } else {
+                    missionControl.go(d.parent);
+                }
+            });
+
+        var ecuadorLayer = cwm.layers.FeatureLayer()
+            .addTo(map)
+            .on("click", function(d) {
+                if (missionControl.current().place === d.parent) {
+                    missionControl.go(d);
+                }
+            });
 
         // We augment the community field to use it as an id, since it can potentially
         // clash with the nationality id (e.g. nationality = Secoya && community = Secoya)
@@ -57,12 +78,12 @@ window.cwm = {
             .url("data/nationalities.geojson")
             .fetch(onLoad);
 
-        var other = cwm.Collection("other")
+        var other = cwm.Collection("overview")
             .placeId(function(d) { return d.attr("id"); })
             .placeParentId(function(d) { return d.attr("parent"); })
             .url("data/other.topojson")
             .on("load", function(d) {
-                ecuadorLayer.data(d.get("Ecuador"));
+                ecuadorLayer.data(cwm.Collection("country").add(d.get("Ecuador")));
             })
             .fetch(onLoad);
 

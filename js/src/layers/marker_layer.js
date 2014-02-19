@@ -8,7 +8,8 @@ cwm.layers.MarkerLayer = function() {
         markerLayer,
         markersHiding,
         mapContainer,
-        markerInteraction
+        markerInteraction,
+        _current,
         event = d3.dispatch("click");
 
     // Project markers from map coordinates to screen coordinates
@@ -104,7 +105,9 @@ cwm.layers.MarkerLayer = function() {
 
         // filter markers that are within the current extent of the map
         var data = markerData.filter(function(d) {
-            return zoom > d._minZoom && extent.containsBounds(d.bounds());
+            for (var key in _current) {
+                if (_current[key] === d.parent) return true;
+            }
         });
 
         // Join the filtered data for markers in the current map extent
@@ -140,8 +143,10 @@ cwm.layers.MarkerLayer = function() {
         return markerLayer;
     }
 
-    function highlight(d) {
-
+    function current(x) {
+        if (!arguments.length) return _current;
+        _current = x;
+        return markerLayer;
     }
 
     function data(collection) {
@@ -176,7 +181,7 @@ cwm.layers.MarkerLayer = function() {
 
         addTo: addTo,
 
-        highlight: highlight
+        current: current
     };
 
     return d3.rebind(markerLayer, event, "on");

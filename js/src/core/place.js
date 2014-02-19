@@ -28,6 +28,11 @@ cwm.util.extend(cwm.Place.prototype, {
 		return this;
 	},
 
+    // Check if a place has a certain parent (accepts either a cwm.place or a string id)
+    hasParent: function(place) {
+        return this.parent && (this.parent === place || this.parent.id() === place || this.parent.hasParent(place));
+    },
+
 	/**
 	 * Gets or sets attributes for a place
 	 * @param  {string} key   Property to get or set

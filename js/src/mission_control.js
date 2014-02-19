@@ -14,7 +14,6 @@ cwm.MissionControl = function() {
         scrolling,
         adjusting,
         easeOverride,
-        current = {},
         ease = d3.ease("linear"),
         event = d3.dispatch("scroll");
 
@@ -105,7 +104,6 @@ cwm.MissionControl = function() {
         if (!arguments.length) return map;
         _map = x;
         setEasings();
-        _map.on("click", go);
         return missionControl;
     }
 
@@ -201,7 +199,10 @@ cwm.MissionControl = function() {
             (_places[i - 1] || _places[i]).ease.t(t + 1e-9);
         }
 
-        scrolled();
+        _map.layers.forEach(function(layer) {
+            if (layer.current) layer.current(current());
+        });
+
         _stories.render(timeline);
 
         pendingRedraw = false;
@@ -225,29 +226,31 @@ cwm.MissionControl = function() {
         return place;
     }
 
-    function scrolled() {
-        var section, layer;
-        var d = nearest();
+    function current() {
+        var section,
+            _current = {},
+            d = nearest();
 
-        _map.layers.forEach(function(layer) {
-            if (layer.highlight) layer.highlight(d);
-        });
+        _current.place = d;
+        _current.section = d.collection.id();
 
         while (d) {
-            current.place = d;
             section = d.collection.id();
-            current[section] = d.id();
+            _current[section] = d;
             d = d.parent;
         }
 
+        return _current;
     }
 
     missionControl = {
         stories: stories,
         map: map,
+        draw: draw,
         go: go,
         time: time,
-        setEasings: setEasings
+        setEasings: setEasings,
+        current: current
     };
 
     return d3.rebind(missionControl, event, "on");

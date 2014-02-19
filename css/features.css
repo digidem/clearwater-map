@@ -4,9 +4,11 @@
   fill: #f1c21c;
   fill-opacity: .6;
   stroke: #f1c21c;
-  stroke-width: 0;
+  stroke-width: 3;
+  stroke-opacity: 0;
   stroke-linejoin: round;
-  cursor: pointer;
+  -webkit-transition: stroke-opacity, fill-opacity, fill;
+  transition: stroke-opacity, fill-opacity;
 }
 
 #mapstory .communities path:hover {
@@ -15,10 +17,7 @@
 }
 
 #mapstory .communities path.parentActive {
-  stroke-width: 3;
-  stroke-color: #f1c21c;
-  -webkit-transition: stroke-color 500ms;
-  transition: stroke-color 500ms;
+  stroke-opacity: 0.8;
 }
 
 #mapstory .feature-label {
@@ -48,29 +47,32 @@
   top: 100%;
 }
 
-#mapstory .communities path.outline {
+#mapstory .communities path.inside
+, #mapstory .communities path.active {
   stroke-width: 4px;
+  stroke-opacity: 1;
   opacity: 0.5;
+  fill-opacity: 0;
   cursor: auto;
   pointer-events: none;
 }
 
-#mapstory .communities path.outline:hover {
+#mapstory .communities path.inside:hover {
   cursor: auto;
   fill: inherit;
 }
 
-#mapstory .ecuador path {
+#mapstory .country path {
   stroke: #f1c21c;
   stroke-width: 2px;
   fill-opacity: 0 !important;
 }
 
-#mapstory .ecuador path:hover {
+#mapstory .country path:hover {
   stroke: #ab8b1e;
   cursor: pointer;
 }
 
-#mapstory .ecuador path.outline {
+#mapstory .country path.inside {
   display: none;
 }

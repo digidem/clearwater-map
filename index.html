@@ -79,7 +79,16 @@
 
 </div>
 
-<script type="text/html" id="template-other">
+<script type="text/html" id="template-overview">
+  {{ renderMedia() }}
+  <h1>{{ attr("story_title") }}</h1>
+  <div class="text">
+    {{ attr("story_excerpt") }}
+    {{ attr("story_url") ? '<a href="' + attr("story_url") + '" target="_blank">Read more&hellip;</a>' : '' }}
+  </div>
+</script>
+
+<script type="text/html" id="template-country">
   {{ renderMedia() }}
   <h1>{{ attr("story_title") }}</h1>
   <div class="text">

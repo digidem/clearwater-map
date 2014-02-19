@@ -12,6 +12,7 @@ cwm.layers.FeatureLayer = function() {
         featureCollectionCount = 0,
         featureData =[],
         zoom,
+        _current = {},
         event = d3.dispatch("click");
 
     var projectionStream = d3.geo.transform({
@@ -91,6 +92,10 @@ cwm.layers.FeatureLayer = function() {
         zoom = map.getZoom();
         var extent = map.getExtent();
 
+        var data = featureData.filter(function(d) {
+            return extent.coversBounds(d.bounds()) && (d.id() !== "Ecuador" || zoom < (d._maxZoom + 1));
+        });
+
         // update the features to their new positions
         // If beyond their max zoom, fade them out
         // Do not display features outside the map
@@ -105,20 +110,18 @@ cwm.layers.FeatureLayer = function() {
             .on("mouseout", hideLabel)
             .on("click", event.click);
 
-        features.attr("display", "none")
-            .filter(function(d) {
-                // Only draw features that either overlap with the map view, or, if it is
-                // Ecuador, do not draw if beyond the max zoom.
-                return extent.coversBounds(d.bounds()) && (d.id() !== "Ecuador" || zoom < (d._maxZoom + 1));
-            })
-            .attr("display", null)
-            .attr("d", pathGenerator)
-            .style("fill-opacity", function(d) {
-                return Math.min(Math.max(d._maxZoom + 1 - zoom, 0), 1) * 0.6;
-            })
-            .classed("outline", function(d) {
-                return zoom > d._maxZoom;
-            });
+        features.attr("d", pathGenerator)
+            .classed("active", function(d) {
+                    return _current.place === d;
+                })
+                .classed("parentActive", function(d) {
+                    return d.parent && _current.place === d.parent;
+                })
+                .classed("inside", function(d) {
+                    for (var key in _current) {
+                        if (_current[key] === d && key !== "place") return true;
+                    }
+                });
 
         features.exit().remove();
 
@@ -138,8 +141,8 @@ cwm.layers.FeatureLayer = function() {
         return featureLayer;
     }
 
-    function addTo(_) {
-        map = _;
+    function addTo(x) {
+        map = x;
         map.addLayer(featureLayer);
         mapContainer = d3.select(map.parent);
         g = cwm.render.SvgContainer(mapContainer)
@@ -149,14 +152,9 @@ cwm.layers.FeatureLayer = function() {
         return featureLayer;
     }
 
-    function highlight(place) {
-        g.selectAll("path")
-            .classed("active", function(d) {
-                return place === d;
-            })
-            .classed("parentActive", function(d) {
-                return d.parent && place === d.parent;
-            });
+    function current(x) {
+        if (!arguments.length) return _current;
+        _current = x;
     }
 
     var featureLayer = {
@@ -167,7 +165,7 @@ cwm.layers.FeatureLayer = function() {
 
         addTo: addTo,
 
-        highlight: highlight
+        current: current
     };
 
     return d3.rebind(featureLayer, event, "on");
