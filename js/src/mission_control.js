@@ -42,7 +42,9 @@ cwm.MissionControl = function() {
             .on("arrow-down", onArrowKey("down"))
             .on("arrow-up", onArrowKey("up")))
         .on(d3_behavior_zoom_wheel, onMouseWheel)
-        .on('keyup', scrollToNearest);
+        .on('keyup', function() {
+            adjusting = window.setTimeout(scrollToNearest, 50);
+        });
 
     function onArrowKey(direction) {
         return function() {
@@ -109,7 +111,7 @@ cwm.MissionControl = function() {
 
     function setEasings() {
         if (!_places || !_map) return;
-
+        console.log(_map.dimensions);
         _places[0]._time = 0;
 
         _places.forEach(function(place, i) {
@@ -125,6 +127,7 @@ cwm.MissionControl = function() {
                 ease.to(place._extentCoordinate).setOptimalPath();
                 _maxTime = place._time;
             }
+            place.ease.setOptimalPath();
         });
     }
 
