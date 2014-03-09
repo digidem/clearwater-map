@@ -41,13 +41,6 @@ cwm.layers.MarkerLayer = function() {
         };
     }
 
-    function setMinZooms() {
-        markerData.forEach(function(d) {
-            if (!d.parent) return;
-            d._minZoom = map.extentCoordinate(d.parent.extent(), true).zoom + 0.5;
-        });
-    }
-
     function showMarkers(selection) {
         selection.sort(sortFromLocation(map.getCenter()))
             .transition()
@@ -152,7 +145,6 @@ cwm.layers.MarkerLayer = function() {
     function data(collection) {
         markerData = collection;
         markerLayer.name = collection.id();
-        d3.select(window).on("resize." + markerLayer.name, setMinZooms);
         g.classed(markerLayer.name, true);
         draw();
         return markerLayer;
@@ -172,8 +164,6 @@ cwm.layers.MarkerLayer = function() {
     }
 
     markerLayer = {
-
-        setMinZooms: setMinZooms,
 
         draw: draw,
 

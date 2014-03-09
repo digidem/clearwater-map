@@ -101,7 +101,6 @@ window.cwm = {
 
             // Once everything is loaded, set the map extent for each place
             if (loaded.length++ == 3) {
-                installationsLayer.setMinZooms();
                 setExtents();
                 missionControl.stories(stories);
             }
