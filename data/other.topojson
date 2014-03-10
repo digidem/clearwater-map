@@ -32,6 +32,21 @@
               1
             ]
           ]
+        },
+        {
+          "type": "Polygon",
+          "properties": {
+            "featured": true,
+            "id": "Bookend",
+            "parent": "Intro",
+            "story_title": "Test",
+            "story_excerpt": "Here we go"
+          },
+          "arcs": [
+            [
+              0
+            ]
+          ]
         }
       ]
     }
