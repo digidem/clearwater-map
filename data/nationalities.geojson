@@ -43,6 +43,7 @@
       "properties": {
         "featured": true,
         "nationality": "Siona",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/73d1dfce70317f578e4831ec1d5083373b52d004.jpg",
         "story_title": "Siona",
         "story_excerpt": "Like the Secoya, the Siona currently suffer from oil contamination, African palm production, deforestation, and expanding colonist settlement in their territory."
       }
