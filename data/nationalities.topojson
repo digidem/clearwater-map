@@ -19,6 +19,7 @@
           "properties": {
             "featured": true,
             "nationality": "Secoya",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/f9fe22c351fef9ce77eed548284af9e0927cfc39.jpg",
             "story_title": "Secoya",
             "story_excerpt": "The Secoya suffer heavily from oil-related contamination. Rivers have been contaminated, making much of the water unsafe to drink or bathe in; traditional subsistence activities like hunting, fishing, and growing edible crops are at risk."
           }
