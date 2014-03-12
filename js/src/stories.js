@@ -11,6 +11,7 @@ cwm.Stories = function(container) {
         _missionControl,
         ease = d3.ease("quad-in-out"),
         containerHeight = d3.select(container.node().parentNode).dimensions()[1],
+        dimensionsCache = {},
         _duration = containerHeight * 2,
         event = d3.dispatch('click', 'moved');
 
@@ -21,8 +22,7 @@ cwm.Stories = function(container) {
 
     d3.select(window).on("resize.stories", function onResize() {
         containerHeight = d3.select(container.node().parentNode).dimensions()[1];
-        container.select("article")
-            .each(cacheDimensions);
+        dimensionsCache = {};
     });
 
     function go() {
@@ -98,23 +98,26 @@ cwm.Stories = function(container) {
         places.from._offset = -t * direction * _duration + containerHeight;
         places.to._offset = (1 - t) * direction * _duration + containerHeight;
 
+        renderNextHeading();
         renderArticles();
         renderTopHeading();
-        //renderNextHeadings(t);
+        //
 
 
 
         return stories;
     }
 
-    function cacheDimensions(d) {
-        var selection = d3.select(this);
-        d._height = {
-            total: selection.dimensions()[1],
-            image: selection.select("div.image-wrapper").dimensions()[1],
-            heading: selection.select("h1, h2").dimensions()[1],
-            text: selection.dimensions()[1] - selection.select("div.image-wrapper").dimensions()[1]
-        };
+    function renderArticle(selection) {
+        selection.attr("id", function(d) {
+                return d.id();
+            })
+            .attr("class", function(d) {
+                return d.collection.id();
+            })
+            .style("position", "absolute")
+            .style("bottom", "100%")
+            .html(templates);
     }
 
     function renderArticles() {
@@ -125,16 +128,7 @@ cwm.Stories = function(container) {
         
         articles.enter()
             .append("article")
-            .attr("id", function(d) {
-                return d.id();
-            })
-            .attr("class", function(d) {
-                return d.collection.id();
-            })
-            .style("position", "absolute")
-            .style("bottom", "100%")
-            .html(templates)
-            .each(cacheDimensions);
+            .call(renderArticle);
 
         articles.style(cwm.util.transformProperty, function(d) { 
             return translate(0, d._offset);
@@ -150,7 +144,7 @@ cwm.Stories = function(container) {
         var upperStory = direction === 1 ? places.from : places.to;
         var lowerStory = direction === 1 ? places.to : places.from;
 
-        var storyOffsetTop = upperStory._offset - upperStory._height.total;
+        var storyOffsetTop = upperStory._offset - height(upperStory);
 
         // If the lowerStory is not a child of upperStory...
         if (!upperStory.children || !~upperStory.children.indexOf(lowerStory)) {
@@ -162,7 +156,7 @@ cwm.Stories = function(container) {
             }
         } else {
             // Whilst topStory is on the screen, topHeading is always from upperStory.parent.
-            if (upperStory._offset > upperStory._height.total - upperStory._height.image) {
+            if (upperStory._offset > height(upperStory) - height(upperStory, "div.image-wrapper")) {
                 heading = upperStory.parent;
             } else {
                 heading = upperStory;
@@ -181,7 +175,7 @@ cwm.Stories = function(container) {
                     var height = this.__height__ || (this.__height__ = d3.select(this).dimensions()[1]);
                     return Math.min(0, - upperStory._offset - height);
                 };
-            } else if (upperStory.children && ~upperStory.children.indexOf(lowerStory) && upperStory._offset <= upperStory._height.total - upperStory._height.image) {
+            } else if (upperStory.children && ~upperStory.children.indexOf(lowerStory) && upperStory._offset <= height(upperStory) - height(upperStory, "div.image-wrapper")) {
                 offset = d3.functor(0);
             }
         } else {
@@ -213,9 +207,28 @@ cwm.Stories = function(container) {
         topHeadings.exit().remove();
     }
 
-    function renderNextHeadings(time) {
+    function renderNextHeading(time) {
+        var heading, offset = 0;
+
+        // Identify which story will be rendered above the other
+        var upperStory = direction === 1 ? places.from : places.to;
+        var lowerStory = direction === 1 ? places.to : places.from;
+
+        var storyOffsetBottom = upperStory._offset + containerHeight;
+
+        if (lowerStory._offset > containerHeight + height(lowerStory)) {
+            heading = upperStory._next;
+        } else if (lowerStory._offset > containerHeight + height(lowerStory, "div.image-wrapper") - height(lowerStory._next, "h1,h2") * 2 && upperStory._next === lowerStory) {
+            heading = upperStory._next;
+        } else {
+            heading = lowerStory._next;
+            offset = lowerStory._offset - containerHeight;
+        }
+
+        var data = (heading) ? [heading] : [];
+
         var nextHeadings = nextDiv.selectAll("div")
-            .data(storyData,function(d) {
+            .data(data,function(d) {
                 return d.id();
             });
 
@@ -227,12 +240,49 @@ cwm.Stories = function(container) {
             });
 
         nextHeadings.style(cwm.util.transformProperty, function(d) {
-                var offset = Math.max(0, d._prev._duration - time);
-                if (d._duration - d._height.text <= time ) offset += 1000;
                 return translate(0, offset);
             });
 
         nextHeadings.exit().remove();
+
+        if (heading) {
+            var h = height(heading, "h1, h2");
+            lowerStory._offset -= h;
+            if (upperStory !== lowerStory) {
+                upperStory._offset -= h;
+            }
+        }
+    }
+
+    function height(d, selector) {
+        var h,
+            created,
+            cacheId = selector ? d.id() + "~" + selector : d.id();
+
+        if (dimensionsCache[cacheId]) return dimensionsCache[cacheId];
+        
+        renderedArticle = d3.select("#" + d.id());
+
+        if (!renderedArticle.node()) {
+            renderedArticle = container.append("article")
+                .datum(d)
+                .call(renderArticle);
+            created = true;
+        }
+
+        if (typeof selector === "string") {
+            h = renderedArticle.select(selector).dimensions()[1];
+        } else {
+            h = renderedArticle.dimensions()[1];
+        }
+
+        dimensionsCache[cacheId] = h;
+
+        if (created) {
+            renderedArticle.remove();
+        }
+
+        return h;
     }
 
     function onClick(d) {
