@@ -218,7 +218,7 @@ cwm.Stories = function(container) {
 
         if (lowerStory._offset > containerHeight + height(lowerStory)) {
             heading = upperStory._next;
-        } else if (lowerStory._offset > containerHeight + height(lowerStory, "div.image-wrapper") - height(lowerStory._next, "h1,h2") * 2 && upperStory._next === lowerStory) {
+        } else if (lowerStory._offset > containerHeight + height(lowerStory) - height(lowerStory, "div.image-wrapper") && upperStory._next === lowerStory) {
             heading = upperStory._next;
         } else {
             heading = lowerStory._next;
@@ -245,12 +245,9 @@ cwm.Stories = function(container) {
 
         nextHeadings.exit().remove();
 
-        if (heading) {
-            var h = height(heading, "h1, h2");
-            lowerStory._offset -= h;
-            if (upperStory !== lowerStory) {
-                upperStory._offset -= h;
-            }
+        lowerStory._offset -= (lowerStory._next) ? height(lowerStory._next, "h1, h2") : 0;
+        if (upperStory !== lowerStory) {
+            upperStory._offset -= (upperStory._next) ? height(upperStory._next, "h1, h2") : 0;
         }
     }
 
