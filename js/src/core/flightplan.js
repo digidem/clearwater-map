@@ -105,7 +105,10 @@ cwm.util.extend(cwm.Flightplan.prototype, {
 
         this._addFamily();
 
-        inserted.forEach(this.event.add);
+        inserted.forEach(function(d) {
+            if (!d.children) d.children = cwm.Collection();
+            this.event.add(d);
+        }, this);
 
         return this;
     },

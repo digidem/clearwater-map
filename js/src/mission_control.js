@@ -139,7 +139,7 @@ cwm.MissionControl = function(container) {
             if (d.collection.id() === "installations") navigation.data(_places.filter(function(d) {
                 return d.collection.id() !== "installations";
             }));
-            if (!initialized && _places[0] && _places[1] && _places[1].children && _places[1].children[0].children) {
+            if (!initialized && _places[0] && _places[1] && _places[1].children.length && _places[1].children[0].children.length) {
                 // Check we have enough loaded to identify the second map view
                 // and set up map movement and event listeners
                 // children.children is a hack for now until I figure out a more generic way of 

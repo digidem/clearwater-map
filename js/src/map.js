@@ -93,7 +93,7 @@ cwm.Map = function(container) {
     map.placeExtentCoordinate = function(d) {
         if (extentCache[d.id()]) return extentCache[d.id()];
         var extent;
-        if (d.children && (!d.geometry.coordinates || d.collection.extentFromChildren())) {
+        if (d.children.length && (!d.geometry.coordinates || d.collection.extentFromChildren())) {
             extent = d.children.extent() || d.children[0].children[0].collection.extent();
         } else {
             extent = d.extent();

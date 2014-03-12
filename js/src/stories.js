@@ -147,7 +147,7 @@ cwm.Stories = function(container) {
         var storyOffsetTop = upperStory._offset - height(upperStory);
 
         // If the lowerStory is not a child of upperStory...
-        if (!upperStory.children || !~upperStory.children.indexOf(lowerStory)) {
+        if (!upperStory.children.length || !~upperStory.children.indexOf(lowerStory)) {
             // the top heading is the upperStory's parent
             heading = upperStory.parent;
             // Except if lower story has a different parent, and topStory is scrolled up
@@ -165,17 +165,17 @@ cwm.Stories = function(container) {
 
         // This gets funky. It moves the top header in and out depending on the destination
         // Would be great to simplify this, but this is the best I can do for now.
-        if (upperStory.parent !== lowerStory.parent || upperStory.children && ~upperStory.children.indexOf(lowerStory)) {
+        if (upperStory.parent !== lowerStory.parent || upperStory.children.length && ~upperStory.children.indexOf(lowerStory)) {
             offset = function() {
                 var height = this.__height__ || (this.__height__ = d3.select(this).dimensions()[1]);
                 return Math.min(0,  storyOffsetTop - height);
             };
-            if ((!upperStory.children || !~upperStory.children.indexOf(lowerStory)) && upperStory.parent !== lowerStory.parent && upperStory._offset <= 0) {
+            if ((!upperStory.children.length || !~upperStory.children.indexOf(lowerStory)) && upperStory.parent !== lowerStory.parent && upperStory._offset <= 0) {
                 offset = function() {
                     var height = this.__height__ || (this.__height__ = d3.select(this).dimensions()[1]);
                     return Math.min(0, - upperStory._offset - height);
                 };
-            } else if (upperStory.children && ~upperStory.children.indexOf(lowerStory) && upperStory._offset <= height(upperStory) - height(upperStory, "div.image-wrapper")) {
+            } else if (upperStory.children.length && ~upperStory.children.indexOf(lowerStory) && upperStory._offset <= height(upperStory) - height(upperStory, "div.image-wrapper")) {
                 offset = d3.functor(0);
             }
         } else {
