@@ -14,20 +14,17 @@ window.cwm = {
 
         };
 
-        var container = d3.select(selector);
+        var container = d3.select(selector).append("div").classed("wrapper", true);
         var storiesDiv = container.insert("div", ":first-child").attr("id", "stories");
         var mapDiv = container.insert("div", ":first-child").attr("id", "map");
 
-        // used to keep track of map data as it loads.
-        var loaded = { length: 0 };
-
         var flightplan = cwm.flightplan = cwm.Flightplan().show("featured");
 
-        var stories = cwm.stories = cwm.Stories(storiesDiv).data(flightplan);
+        var stories = cwm.stories = cwm.Stories(storiesDiv);
 
         var map = cwm.map = cwm.Map(mapDiv).paddingLeft(580);
 
-        var missionControl = cwm.mc = cwm.MissionControl().map(map);
+        var missionControl = cwm.mc = cwm.MissionControl(d3.select(selector)).map(map).flightplan(flightplan).stories(stories);
 
         var bingLayer = cwm.layers.BingLayer(options).addTo(map);
         var mapboxLayer = cwm.layers.MapboxLayer().id(options.mapboxId).addTo(map);
@@ -48,7 +45,7 @@ window.cwm = {
                 }
             });
 
-        var ecuadorLayer = cwm.layers.FeatureLayer()
+        var countryLayer = cwm.layers.FeatureLayer()
             .addTo(map)
             .on("click", function(d) {
                 if (missionControl.current().place === d.parent) {
@@ -68,6 +65,7 @@ window.cwm = {
         var communities = cwm.Collection("communities")
             .placeId(function(d) { return "c-" + d.attr("community"); })
             .placeParentId(function(d) { return d.attr("nationality"); })
+            .extentFromChildren(true)
             .url("data/communities.topojson")
             .on("load", communitiesLayer.data)
             .fetch(onLoad);
@@ -75,6 +73,7 @@ window.cwm = {
         var nationalities = cwm.Collection("nationalities")
             .placeId(function(d) { return d.attr("nationality"); })
             .placeParentId("Ecuador")
+            .zoomOffset(-0.5)
             .url("data/nationalities.geojson")
             .fetch(onLoad);
 
@@ -83,56 +82,17 @@ window.cwm = {
             .placeParentId(function(d) { return d.attr("parent"); })
             .url("data/other.topojson")
             .on("load", function(d) {
-                ecuadorLayer.data(cwm.Collection("country").add(d.get("Ecuador")));
+                var countries = cwm.Collection("country")
+                    .add(d.get("Ecuador"))
+                    .extentFromChildren(true);
+                countryLayer.data(countries);
             })
             .fetch(onLoad);
 
         // When each dataset loads, add it to the flightplan
         function onLoad() {
-            var loadedId = this.id();
             flightplan.add(this);
-            loaded[loadedId] = true;
-
-            // As soon as we can, set the map extents for the first view
-            if (loadedId === "other") {
-                setExtentCoords([this.get("Intro")]);
-                map.setCoordinate(this.get("Intro")._extentCoordinate);
-            }
-
-            // Once everything is loaded, set the map extent for each place
-            if (loaded.length++ == 3) {
-                setExtents();
-                missionControl.stories(stories);
-            }
         }
-
-        function setExtents() {
-            setExtentCoords(other);
-            setExtentCoords([other.get("Ecuador")], 0, true);
-            setExtentCoords(nationalities, -0.5);
-            setExtentCoords(communities, 0, true);
-            setExtentCoords(installations);
-            missionControl.setEasings();
-        }
-
-        function setExtentCoords(places, offset, fromChildren) {
-            offset = offset || 0;
-
-            places.forEach(function(place) {
-                var extent;
-                if (place.children && !place.geometry.coordinates || fromChildren) {
-                    extent = place.children.extent() || place.children[0].children[0].collection.extent();
-                } else {
-                    extent = place.extent();
-                }
-                place._extentCoordinate = map.extentCoordinate(extent, true).zoomBy(offset);
-            });
-        }
-
-        d3.select(window).on("resize.extents", setExtents);
-
-        // cwm.scrollHandler = cwm.handlers.ScrollHandler(cwm.map);
-        // cwm.stories = cwm.Stories(storiesDiv).map(cwm.map);
 
     }
   

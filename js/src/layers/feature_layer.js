@@ -12,7 +12,6 @@ cwm.layers.FeatureLayer = function() {
         featureCollectionCount = 0,
         featureData =[],
         zoom,
-        _current = {},
         event = d3.dispatch("click");
 
     var projectionStream = d3.geo.transform({
@@ -112,14 +111,15 @@ cwm.layers.FeatureLayer = function() {
 
         features.attr("d", pathGenerator)
             .classed("active", function(d) {
-                    return _current.place === d;
+                    return map.current().place === d;
                 })
                 .classed("parentActive", function(d) {
-                    return d.parent && _current.place === d.parent;
+                    return d.parent && map.current().place === d.parent;
                 })
                 .classed("inside", function(d) {
-                    for (var key in _current) {
-                        if (_current[key] === d && key !== "place") return true;
+                    var current = map.current();
+                    for (var key in current) {
+                        if (current[key] === d && key !== "place") return true;
                     }
                 });
 
@@ -152,20 +152,13 @@ cwm.layers.FeatureLayer = function() {
         return featureLayer;
     }
 
-    function current(x) {
-        if (!arguments.length) return _current;
-        _current = x;
-    }
-
     var featureLayer = {
 
         draw: draw,
 
         data: data,
 
-        addTo: addTo,
-
-        current: current
+        addTo: addTo
     };
 
     return d3.rebind(featureLayer, event, "on");

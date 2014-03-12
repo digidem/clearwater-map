@@ -161,6 +161,18 @@ cwm.util.extend(cwm.Collection.prototype, {
         return nearestPlace;
     },
 
+    extentFromChildren: function(x) {
+        if (!arguments.length) return this._extentFromChildren;
+        this._extentFromChildren = x;
+        return this;
+    },
+
+    zoomOffset: function(x) {
+        if (!arguments.length) return this._zoomOffset || 0;
+        this._zoomOffset = x;
+        return this;
+    },
+
     bounds: function() {
         if (typeof this._bounds !== "undefined") return this._bounds;
         this._bounds = d3.geo.bounds(this.asGeoJSON());

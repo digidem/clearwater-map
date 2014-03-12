@@ -84,7 +84,8 @@
         }
 
         var paths = {},
-            static_coord = new MM.Coordinate(0, 0, 0);
+            static_coord = new MM.Coordinate(0, 0, 0),
+            static_coord2 = new MM.Coordinate(0, 0, 0);
 
         // The screen path simply moves between
         // coordinates in a non-geographical way
@@ -202,7 +203,7 @@
                     if (callback) return callback(map);
                 } else {
                     path(from, to, easing(delta / time), static_coord);
-                    map.coordinate = static_coord;
+                    map.coordinate = static_coord.copy();
                     map.draw();
                     MM.getFrame(tick);
                 }
@@ -251,8 +252,10 @@
           function cosh(n) { return (Math.exp(n) + Math.exp(-n)) / 2; }
           function tanh(n) { return sinh(n) / cosh(n); }
 
-          if (!from) //map.coordinate = from; // For when `from` not current coordinate
-            from = map.coordinate.copy();
+          var originalCoord = map.coordinate;
+
+          if (from) map.coordinate = from.copy(); // For when `from` not current coordinate
+          else from = map.coordinate.copy();
 
           // Width is measured in coordinate units at zoom 0
           var TL = map.pointCoordinate(new MM.Point(0, 0)).zoomTo(0),
@@ -331,6 +334,8 @@
                   return new MM.Coordinate(y * power, x * power, z);
               }
           }
+
+          map.coordinate = originalCoord;
           
           return easey;
         }

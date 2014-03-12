@@ -7,3 +7,4 @@
 - Add indexOf polyfill
 - add setTImeout polyfill for ie < 9
 - array.foreach
+- Date.now polyfill for ie < 9

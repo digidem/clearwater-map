@@ -1,10 +1,13 @@
-cwm.MissionControl = function() {
+cwm.MissionControl = function(container) {
     var missionControl,
+        initialized,
         _stories,
         _places,
         _map,
         _maxTime,
-        timeline = 0,
+        time = 0,
+        _from,
+        _to,
         start,
         end,
         timelineStart,
@@ -14,10 +17,9 @@ cwm.MissionControl = function() {
         scrolling,
         adjusting,
         easeOverride,
-        ease = d3.ease("linear"),
+        ease = d3.ease("cubic-in-out"),
         event = d3.dispatch("scroll");
 
-    d3.select(window).on("resize.mc", setEasings);
 
     // from https://github.com/mbostock/d3/pull/1050/files
     if ('onwheel' in document) {
@@ -37,14 +39,23 @@ cwm.MissionControl = function() {
         };
     }
 
-    d3.select("body")
-        .call(d3.keybinding()
-            .on("arrow-down", onArrowKey("down"))
-            .on("arrow-up", onArrowKey("up")))
-        .on(d3_behavior_zoom_wheel, onMouseWheel)
-        .on('keyup', function() {
-            adjusting = window.setTimeout(scrollToNearest, 50);
-        });
+    function initialize() {
+        console.log(_places[0], _places[1], _places);
+        to(_places[1]);
+        from(_places[0]);
+        _map.t(0);
+        _stories.t(0);
+        container.selectAll("#map,#stories")
+            .call(d3.keybinding()
+                .on("arrow-down", onArrowKey("down"))
+                .on("arrow-up", onArrowKey("up")))
+            .on(d3_behavior_zoom_wheel, onMouseWheel)
+            .on('keyup', function() {
+                //adjusting = window.setTimeout(scrollToNearest, 50);
+            });
+        initialized = true;
+    }
+
 
     function onArrowKey(direction) {
         return function() {
@@ -62,9 +73,14 @@ cwm.MissionControl = function() {
     function onMouseWheel() {
         d3.event.preventDefault();
         stopOtherThingsHappening();
-        time(timeline - d3_behavior_zoom_delta());
+        move(-d3_behavior_zoom_delta());
         // If we stop scrolling for 500ms, move to the next place if it is close.
-        adjusting = window.setTimeout(scrollToNearest, 200);
+        //adjusting = window.setTimeout(scrollToNearest, 200);
+    }
+
+    function stop() {
+        _stories.stop();
+        _map.stop();
     }
 
     function stopOtherThingsHappening() {
@@ -94,93 +110,120 @@ cwm.MissionControl = function() {
     }
 
     function stories(x) {
-        if (!arguments.length) return _places;
         _stories = x;
-        _places = _stories.data();
-        setEasings();
-        _stories.on("click", go);
+        _stories.on("click", function(d) {
+            if (d3.event.srcElement.tagName === "BUTTON") {
+            } else {
+                go(d);
+            }
+        });
         return missionControl;
     }
 
     function map(x) {
-        if (!arguments.length) return map;
         _map = x;
-        setEasings();
+        _map.on("click", go);
         return missionControl;
     }
 
-    function setEasings() {
-        if (!_places || !_map) return;
-        console.log(_map.dimensions);
-        _places[0]._time = 0;
+    function flightplan(x) {
+        if (!arguments.length) return _places;
+        _places = x;
 
-        _places.forEach(function(place, i) {
-            var ease = place.ease || (place.ease = mapbox.ease().map(_map));
-            ease.from(place._extentCoordinate);
-
-            var nextPlace = _places[i + 1];
-
-            if (nextPlace) {
-                ease.to(nextPlace._extentCoordinate).setOptimalPath();
-                nextPlace._time = place._time + Math.max(ease.getOptimalTime(), 2000);
-            } else {
-                ease.to(place._extentCoordinate).setOptimalPath();
-                _maxTime = place._time;
+        // Initial map set up as the data is loaded
+        _places.on("add", function(d) {
+            // As soon as the top level place is loaded, set up initial map view.
+            if (!initialized && _places[0] && _places[1] && _places[1].children && _places[1].children[0].children) {
+                // Check we have enough loaded to identify the second map view
+                // and set up map movement and event listeners
+                // children.children is a hack for now until I figure out a more generic way of 
+                // identifying whether the second place is ready and loaded.
+                initialize();
             }
-            place.ease.setOptimalPath();
         });
+        return missionControl;
     }
 
-    function go(place, override) {
-        if (typeof place === "string") place = _places.get(place);
-        if (scrolling) window.cancelAnimationFrame(scrolling);
-        var destination;
-
-        ease = d3.ease("quad-in-out");
-        start = Date.now();
-        timelineStart = timeline;
-        timelineEnd = (typeof place._time !== "undefined") ? place._time : timeline;
-
-        if (override === false) {
-            end = start + Math.max(Math.abs(timelineEnd - timelineStart), 500);
-        } else {
-            destination = place._extentCoordinate;
-            easeOverride = _map.ease.from(_map.coordinate.copy()).to(destination).setOptimalPath();
-            end = start + Math.max(easeOverride.getOptimalTime(), 2000);
+    function move(delta) {
+        var i;
+        time = time + delta;
+        if (time < 0) {
+            if (_places[_from._index - 1]) {
+                to(_from);
+                from(_places[_from._index - 1]);
+                time = time + duration;
+            } else {
+                time = 0;
+            }
+        } else if (time > duration) {
+            if (_places[_to._index + 1]) {
+                time = time - duration;
+                from(_to);
+                to(_places[_to._index + 1]);
+            } else {
+                time = 0;
+            }
         }
+        if (time < 200 || duration - time < 200) _map.current(current());
+        _map.t(ease(time / duration));
+        _stories.t(time / duration);
 
-        scrolling = window.requestAnimationFrame(scroll);
+        return missionControl;
     }
 
+    function from(d) {
+        if (!arguments.length) return _from;
+        if (d === _from) return missionControl;
+        _stories.from(d);
+        _map.from(d);
+        _from = d;
+        if (_to) {
+            duration = Math.max(_map.getOptimalTime(), _stories.getOptimalTime());
+            _stories.duration(duration);
+        } 
+        return missionControl;
+    }
+
+    function to(d) {
+        if (!arguments.length) return _to;
+        if (d === _to) return missionControl;
+        _stories.to(d);
+        _map.to(d);
+        _to = d;
+        duration = Math.max(_map.getOptimalTime(), _stories.getOptimalTime());
+        _stories.duration(duration);
+        return missionControl;
+    }
+
+    function go(d) {
+        _map.to(d).from(_map.coordinate);
+        _stories.to(d);
+
+        duration = Math.max(_map.getOptimalTime(), _stories.getOptimalTime());
+
+        queue()
+            .defer(_map.duration(duration).go)
+            .defer(_stories.duration(duration).go)
+            .await(function(err) {
+                _stories.from(d);
+                _map.current(current());
+            });
+
+        return missionControl;
+    }
+
+    // returns the previous place on the flightplan
+    function prev() {
+        var i = 0;
+        while (_places[i] && _places[i]._time < timeline) i++;
+        return _places[i - 1];
+    }
+
+        // returns the next place on the flightplan
     function next() {
         var i = 0;
         while (_places[i] && _places[i]._time < timeline) i++;
-        go(_places[i]);
-    }
-
-    function scroll() {
-        var now = Date.now();
-        if (now > end) {
-            stopOtherThingsHappening(); 
-            time(timelineEnd);
-        } else {
-            var t = (now - start) / (end - start);
-            var delta = ease(t) * (timelineEnd - timelineStart);
-
-            if (easeOverride) easeOverride.t(t);
-            time(timelineStart + delta);
-            scrolling = window.requestAnimationFrame(scroll);
-        }
-    }
-
-    function time(x) {
-        if (!arguments.length) return _;
-        timeline = Math.min(_maxTime, Math.max(0, x));
-        if (!pendingRedraw) {
-            draw();
-            pendingRedraw = false;
-        }
-        return missionControl;
+        return _places[i];
     }
 
     function draw() {
@@ -211,18 +254,7 @@ cwm.MissionControl = function() {
 
     // Returns the nearest place 
     function nearest(distance) {
-        var place;
-        
-        distance = (arguments.length) ? distance : Infinity;
-
-        for (var i = 0; i < _places.length; i++) {
-            if (Math.abs(_places[i]._time - timeline) < distance) {
-                place = _places[i];
-                distance = Math.abs(_places[i]._time - timeline);
-            }
-        }
-
-        return place;
+        return time / duration < 0.5 ? _from || _to : _to || _from;
     }
 
     function current() {
@@ -243,12 +275,14 @@ cwm.MissionControl = function() {
     }
 
     missionControl = {
+        flightplan: flightplan,
         stories: stories,
         map: map,
         draw: draw,
         go: go,
+        prev: prev,
+        next: next,
         time: time,
-        setEasings: setEasings,
         current: current
     };
 

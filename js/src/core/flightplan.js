@@ -12,13 +12,14 @@ cwm.Flightplan = function() {
         _orphans: {},
         _filterFn: function() {
             return true;
-        }
+        },
+        event: d3.dispatch('add')
     });
 
     return arr;
 };
 
-cwm.Flightplan.prototype = Object.create(Array.prototype);
+cwm.Flightplan.prototype = Object.create(cwm.util.extend(Object.create(Array.prototype), cwm.Base.prototype));
 
 cwm.util.extend(cwm.Flightplan.prototype, {
 
@@ -46,7 +47,7 @@ cwm.util.extend(cwm.Flightplan.prototype, {
         var parent,
             parentId,
             children,
-            inserted,
+            inserted = [],
             self = this;
 
         // Used to keep track of what we have and haven't added to the flightplan
@@ -58,7 +59,7 @@ cwm.util.extend(cwm.Flightplan.prototype, {
 
             byParent[undefined].filter(this._filterFn).forEach(function(place) {
                 this.push(place);
-                inserted = true;
+                inserted.push(place);
             }, this);
 
             // ok, added those, we can delete them from `byParent` (this is a shallow clone)
@@ -77,7 +78,7 @@ cwm.util.extend(cwm.Flightplan.prototype, {
                 featuredChildren = children.filter(this._filterFn);
                 // See http://stackoverflow.com/questions/1348178/a-better-way-to-splice-an-array-into-an-array-in-javascript
                 Array.prototype.splice.apply(this, [i + 1, 0].concat(featuredChildren));
-                inserted = true;
+                inserted = inserted.concat(featuredChildren);
                 // splicing new arguments changes the length of storyData, 
                 // which we need to remember the next time we loop and 
                 // append children to the next element
@@ -100,15 +101,18 @@ cwm.util.extend(cwm.Flightplan.prototype, {
 
         // We need to run this again if anything was inserted and there are any orphans left
         // in order to check whether anything else needs inserted.
-        if (inserted && Object.keys(byParent).length > 0) this.add();
+        if (inserted.length && Object.keys(byParent).length > 0) this.add();
 
         this._addFamily();
+
+        inserted.forEach(this.event.add);
 
         return this;
     },
 
     _addFamily: function() {
         for (var i = 0; i < this.length; i++) {
+            this[i]._index = i;
             this[i]._prev = this[i - 1] || this[i];
             this[i]._next = this[i + 1] || this[i];
             this[i]._lastDescendant = this[i].lastDescendant(this._filterFn);

@@ -1,35 +1,113 @@
 cwm.Stories = function(container) {
 
-    var stories,
-        storyData,
+    var PIXELS_PER_MS = 1,
+        stories,
+        start,
+        running,
+        abort,
+        abortCallback,
+        direction,
+        places = {},
+        _missionControl,
+        ease = d3.ease("quad-in-out"),
         containerHeight = d3.select(container.node().parentNode).dimensions()[1],
-        event = d3.dispatch('click');
+        _duration = containerHeight * 2,
+        event = d3.dispatch('click', 'moved');
 
     var templates = cwm.Templates();
 
-    var topDiv = container.append("div").attr("class", "top-headings");
+    var topDiv = container.append("div").attr("class", "top-headings").on("click", onClick);
     var nextDiv = container.append("div").attr("class", "next-headings");
 
-    d3.select(window).on("resize.stories", onResize);
-
-    function onResize() {
+    d3.select(window).on("resize.stories", function onResize() {
         containerHeight = d3.select(container.node().parentNode).dimensions()[1];
         container.select("article")
-            .each(setupDimensions)
-            .each(setupHeadings);
+            .each(cacheDimensions);
+    });
+
+    function go() {
+        if (!to()) return stories;
+        start = Date.now();
+
+        if (!_duration) duration(getOptimalTime());
+
+        if (running) {
+            stop(function() {
+                go();
+            });
+        } else {
+            d3.timer(loop);
+        }
+
+        return stories;
     }
 
-    function render(time) {
-        renderArticles(time);
-        renderTopHeadings(time);
-        renderNextHeadings(time);
+    function stop(callback) {
+        abort = true;
+        abortCallback = callback;
     }
 
-    function headingsFilter(d) {
-        return d.collection.id() !== "communities" && d.collection.id() !== "installations";
+    function from(x) {
+        if (!arguments.length) return places.from;
+        places.from = x;
+        setDirection();
+        return stories;
     }
 
-    function setupDimensions(d) {
+    function to(x) {
+        if (!arguments.length) return places.to;
+        places.to = x;
+        setDirection();
+        return stories;
+    }
+
+    function duration(x) {
+        if (!arguments.length) return _duration;
+        _duration = Math.max(containerHeight + 200, x);
+        return stories;
+    }
+
+    function getOptimalTime() {
+        return 2 * containerHeight / PIXELS_PER_MS;
+    }
+
+    function setDirection() {
+        if (places.from instanceof cwm.Place && places.to instanceof cwm.Place) {
+            direction = places.from._index <= places.to._index ? 1 : -1;
+        }
+    }
+
+    function loop() {
+        var now = Date.now();
+        if (abort) {
+            abort = false;
+            if (abortCallback) abortCallback();
+            abortCallback = undefined;
+            return true;
+        } else {
+            var t = ease(Math.min(1, (now - start) / _duration));
+            render(t);
+            return t >= 1;
+        }
+    }
+
+    function render(t) {
+        if (!places.to) return;
+        if (!places.from) from(places.to);
+
+        places.from._offset = -t * direction * _duration + containerHeight;
+        places.to._offset = (1 - t) * direction * _duration + containerHeight;
+
+        renderArticles();
+        renderTopHeading();
+        //renderNextHeadings(t);
+
+
+
+        return stories;
+    }
+
+    function cacheDimensions(d) {
         var selection = d3.select(this);
         d._height = {
             total: selection.dimensions()[1],
@@ -39,55 +117,9 @@ cwm.Stories = function(container) {
         };
     }
 
-    function setupHeadings(d) {
-        var selection = d3.select(this);
-
-        d._heading = {
-            html: selection.select("h1, h2").html(),
-            tagName: selection.select("h1, h2").node().tagName.toLowerCase()
-        };
-
-        if (headingsFilter(d)) {
-            var scrollOut,
-                headings = storyData.filter(headingsFilter),
-                nextHeading = headings[headings.indexOf(d) + 1],
-                featuredFilter = storyData.show();
-
-            // If the children are also headings...
-            if (d._next === nextHeading) {
-                scrollOut = function(time) {
-                    var enter = 0, exit;
-                    // Push it up when the child pushes against it...
-                    // But reappear when the child's last descendant scrolls out of view
-                    for (var i = 0; i < d.children.length; i++) {
-                        enter = d.children[i]._lastDescendant._time + containerHeight - d._next._height.heading;
-                        exit = d.children[i]._time + containerHeight - d.children[i]._height.total - d._height.heading - d._next._height.heading;
-                        if (time >= exit && time < enter) return exit;
-                    }
-                    return Infinity;
-                    // (I know this is a headfuck. Have been trying to think of a simpler way, but this is the best I could do)
-                };
-            } else if (nextHeading) {
-                scrollOut = d._lastDescendant._time + containerHeight - d._next._height.heading;
-            } else {
-                scrollOut = Infinity;
-            }
-
-            d._topHeading = {
-                appear: d._time + containerHeight - d._height.text - d._next._height.heading,
-                scrollOut: d3.functor(scrollOut)
-            };
-        }
-
-        d._nextHeading = {
-            appear: d._prev._time
-
-        };
-    }
-
-    function renderArticles(time) {
+    function renderArticles() {
         var articles = container.selectAll("article")
-            .data(storyData,function(d) {
+            .data([places.from, places.to], function(d) {
                 return d.id();
             });
         
@@ -102,20 +134,64 @@ cwm.Stories = function(container) {
             .style("position", "absolute")
             .style("bottom", "100%")
             .html(templates)
-            .each(setupDimensions)
-            .each(setupHeadings);
+            .each(cacheDimensions);
 
         articles.style(cwm.util.transformProperty, function(d) { 
-            var offset = parseInt(d._time - time);
-            offset = Math.min(Math.max(offset + containerHeight, 0), 3000) - d._next._height.heading;
-            return MM._browser.webkit3d ?
-                "translate3d(0," + offset + "px, 0)" :
-                "translate(0," + offset + "px)"; 
+            return translate(0, d._offset);
         });
+
+        articles.exit().remove();
     }
 
-    function renderTopHeadings(time) {
-        var data = storyData.filter(headingsFilter);
+    function renderTopHeading() {
+        var heading, offset;
+
+        // Identify which story will be rendered above the other
+        var upperStory = direction === 1 ? places.from : places.to;
+        var lowerStory = direction === 1 ? places.to : places.from;
+
+        var storyOffsetTop = upperStory._offset - upperStory._height.total;
+
+        // If the lowerStory is not a child of upperStory...
+        if (!upperStory.children || !~upperStory.children.indexOf(lowerStory)) {
+            // the top heading is the upperStory's parent
+            heading = upperStory.parent;
+            // Except if lower story has a different parent, and topStory is scrolled up
+            if (upperStory.parent !== lowerStory.parent && upperStory._offset <= 0) {
+                heading = lowerStory.parent;
+            }
+        } else {
+            // Whilst topStory is on the screen, topHeading is always from upperStory.parent.
+            if (upperStory._offset > upperStory._height.total - upperStory._height.image) {
+                heading = upperStory.parent;
+            } else {
+                heading = upperStory;
+            }
+        }
+
+        // This gets funky. It moves the top header in and out depending on the destination
+        // Would be great to simplify this, but this is the best I can do for now.
+        if (upperStory.parent !== lowerStory.parent || upperStory.children && ~upperStory.children.indexOf(lowerStory)) {
+            offset = function() {
+                var height = this.__height__ || (this.__height__ = d3.select(this).dimensions()[1]);
+                return Math.min(0,  storyOffsetTop - height);
+            };
+            if ((!upperStory.children || !~upperStory.children.indexOf(lowerStory)) && upperStory.parent !== lowerStory.parent && upperStory._offset <= 0) {
+                offset = function() {
+                    var height = this.__height__ || (this.__height__ = d3.select(this).dimensions()[1]);
+                    return Math.min(0, - upperStory._offset - height);
+                };
+            } else if (upperStory.children && ~upperStory.children.indexOf(lowerStory) && upperStory._offset <= upperStory._height.total - upperStory._height.image) {
+                offset = d3.functor(0);
+            }
+        } else {
+            offset = d3.functor(0);
+        }
+
+        var data = (heading) ? [heading] : [];
+
+        // This part actually deals with rendering the top heading once 
+        // we have decided what it should be and calculated its offset on the screen
 
         var topHeadings = topDiv.selectAll("div")
             .data(data, function(d) {
@@ -124,13 +200,14 @@ cwm.Stories = function(container) {
 
         topHeadings.enter()
             .append("div")
-            .on("click", onClick)
-            .each(appendHeadings);
+            .html(function(d) {
+                return templates(d).match(/<h\d.*<\/h\d>/)[0];
+            })
+            .classed("active", true)
+            .append("button");
 
         topHeadings.style(cwm.util.transformProperty, function(d) {
-                var offset = Math.min(0, d._topHeading.scrollOut(time) - time);
-                if (d._topHeading.appear > time) offset -= 1000;
-                return translate(0, offset);
+                return translate(0, offset.call(this));
             });
 
         topHeadings.exit().remove();
@@ -145,20 +222,17 @@ cwm.Stories = function(container) {
         nextHeadings.enter()
             .append("div")
             .on("click", onClick)
-            .each(appendHeadings);
+            .html(function(d) {
+                return templates(d).match(/<h\d.*<\/h\d>/)[0];
+            });
 
         nextHeadings.style(cwm.util.transformProperty, function(d) {
-                var offset = Math.max(0, d._prev._time - time);
-                if (d._time - d._height.text <= time ) offset += 1000;
+                var offset = Math.max(0, d._prev._duration - time);
+                if (d._duration - d._height.text <= time ) offset += 1000;
                 return translate(0, offset);
             });
 
         nextHeadings.exit().remove();
-    }
-
-    function appendHeadings(d) {
-        d3.select(this).append(d._heading.tagName)
-            .html(d._heading.html);
     }
 
     function onClick(d) {
@@ -172,15 +246,14 @@ cwm.Stories = function(container) {
                     "translate(" + x + "px," + y + "px)";
     }
 
-    function data(_) {
-        if (!arguments.length) return storyData;
-        storyData = _;
-        return stories;
-    }
-
     stories = {
-        render: render,
-        data: data
+        t: render,
+        go: go,
+        stop: stop,
+        from: from,
+        to: to,
+        duration: duration,
+        getOptimalTime: getOptimalTime
     };
 
     return d3.rebind(stories, event, "on");
