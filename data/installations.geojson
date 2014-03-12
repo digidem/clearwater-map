@@ -143,72 +143,6 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669654640467505,
-        "lon": -76.69654645,
-        "lat": 0.04675054,
-        "community": "Cofan Dureno",
-        "name": "Romel Mendua",
-        "users": 3,
-        "settlement": "Cofan Dureno",
-        "families": 1,
-        "project": "No system",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7322427704/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.69654645,
-          0.04675054
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669665460468491,
-        "lon": -76.69665465,
-        "lat": 0.04684914,
-        "community": "Cofan Dureno",
-        "name": "Freddy Criollo",
-        "users": 6,
-        "settlement": "Cofan Dureno",
-        "families": 1,
-        "project": "No system",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7186783845/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.69665465,
-          0.04684914
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669671350464388,
-        "lon": -76.69671351,
-        "lat": 0.04643883,
-        "community": "Cofan Dureno",
-        "name": "Filomon Chapal",
-        "users": 2,
-        "settlement": "Cofan Dureno",
-        "families": 1,
-        "project": "No system",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7322421692/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.69671351,
-          0.04643883
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "_id": 7668443040387451,
         "lon": -76.6844304,
         "lat": 0.03874507,
@@ -225,28 +159,6 @@
         "coordinates": [
           -76.6844304,
           0.03874507
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "_id": 7669970760479077,
-        "lon": -76.69970757,
-        "lat": 0.04790773,
-        "community": "Cofan Dureno",
-        "name": "Ermilo/ Javier Criollo",
-        "users": 2,
-        "settlement": "Cofan Dureno",
-        "families": 1,
-        "project": "No system",
-        "gallery": "http://www.flickr.com/photos/78467630@N04/7322431618/"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.69970757,
-          0.04790773
         ]
       }
     },
@@ -1615,14 +1527,14 @@
         "_id": 7676473992331200,
         "lon": -76.76474,
         "lat": -0.76688,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Venancio Nihua and Epanai Nenquimo",
         "users": 11,
         "date": "Sun Mar 17 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/a0f64c6c5018fcd2972d6bc52a830648747dc47e.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1639,14 +1551,14 @@
         "_id": 7676520992326000,
         "lon": -76.76521,
         "lat": -0.7674,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Wilson Nenquimo and Tepa Quemontare",
         "users": 10,
         "date": "Mon Mar 18 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/63c02dea7703d09606d19a2f78e561399d32b5a0.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1663,14 +1575,14 @@
         "_id": 7676545992323400,
         "lon": -76.76546,
         "lat": -0.76766,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Nelson Neguimo and Carlota Toca",
         "users": 15,
         "date": "Fri Mar 22 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/c9b32b723e1dd1bd4f73b5baf50ac0348df98a01.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1687,14 +1599,14 @@
         "_id": 7676574992329100,
         "lon": -76.76575,
         "lat": -0.76709,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Yawepare Schoolhouse",
         "users": 18,
         "date": "Wed Mar 20 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/aa489f6678c7ca80584a7a34cc34388720e89428.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1712,7 +1624,7 @@
         "featured": true,
         "lon": -76.7652,
         "lat": -0.76924,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Ocata Nihua",
         "users": 5,
         "date": "Sun Mar 17 2013",
@@ -1722,7 +1634,7 @@
         "story_excerpt": "Accompanying Mitch Anderson, former Amazon Watch corporate accountability director and the current international director for the ClearWater project, on a trip to Yawepare to install 13 rain catchment systems in the community, three of which would be installed in the neighboring community of Nampa Eno.",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1739,14 +1651,14 @@
         "_id": 7676610992307500,
         "lon": -76.76611,
         "lat": -0.76925,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Rafael Nenquimo and Ines Yeti",
         "users": 10,
         "date": "Tue Mar 19 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/4830e3acbdfb941d3714d79e859709143449dc42.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1763,14 +1675,14 @@
         "_id": 7676672992303600,
         "lon": -76.76673,
         "lat": -0.76964,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Nixon Licui and Clara Niquita",
         "users": 11,
         "date": "Thu Mar 21 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/89acc70e416c0c96e15f097773a0a5038f9c1f2d.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1787,14 +1699,14 @@
         "_id": 7676627992288899,
         "lon": -76.76628,
         "lat": -0.77111,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Ginkawe Nenquimo and Mintape Niquita",
         "users": 11,
         "date": "Thu Mar 21 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/b1f84d0dde53c7610a75daf190ede8740698f0d7.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1811,14 +1723,14 @@
         "_id": 7676565992282000,
         "lon": -76.76566,
         "lat": -0.7718,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Gaba Nenquimo Ganke and Omenequeri Guiquita Nenquimo",
         "users": 7,
         "date": "Wed Mar 20 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/eb003e599f7fcfb28e93d84e10702838f320489b.jpg",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1835,14 +1747,14 @@
         "_id": 7674793992615200,
         "lon": -76.74794,
         "lat": -0.73848,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Namo Nihua and Dayo Boyotai",
         "users": 13,
         "date": "Fri Mar 22 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/d4428ce4ce7f7457d026a0248b402e4d377467e4.jpg",
         "settlement": "Nampo Eno",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1859,14 +1771,14 @@
         "_id": 7674972992631700,
         "lon": -76.74973,
         "lat": -0.73683,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Elsa Nihua",
         "users": 12,
         "date": "Sun Mar 24 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/d4428ce4ce7f7457d026a0248b402e4d377467e4.jpg",
         "settlement": "Nampo Eno",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -1883,14 +1795,14 @@
         "_id": 7674988992634699,
         "lon": -76.74989,
         "lat": -0.73653,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Fran Nihua Nenquimo and Zenaida Pauchi",
         "users": 12,
         "date": "Sun Mar 24 2013",
         "photo": "http://s3.amazonaws.com/clearwater-photos/d4428ce4ce7f7457d026a0248b402e4d377467e4.jpg",
         "settlement": "Nampo Eno",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -5020,7 +4932,7 @@
         "featured": true,
         "lon": -76.76534,
         "lat": -0.76935,
-        "community": "Waorani",
+        "community": "Yawepare",
         "name": "Moipa Nihua and Guillermina Ana Gaba Caiga",
         "users": 11,
         "date": "Sun Mar 17 2013",
@@ -5030,7 +4942,7 @@
         "story_excerpt": "Ocata and Moipa are father and son, members of the Waorani Nationality. In many ways they embody the contemporary story of the Waorani: a strong and proud hunting culture that controlled the largest territory of Ecuador’s Amazonian peoples.",
         "settlement": "Yawepare",
         "families": 1,
-        "project": "Waorani",
+        "project": "Yawepare",
         "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
       },
       "geometry": {
@@ -5932,7 +5844,28 @@
         ]
       }
     },
-
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7641001993166340,
+        "lon": -76.41002,
+        "lat": -0.683366,
+        "community": "Cofan Dureno",
+        "name": "Ejidio Quenama and Otilia Criollo",
+        "users": 4,
+        "date": "Thu Jan 23 2014",
+        "settlement": "Ukavati",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.41002,
+          -0.683366
+        ]
+      }
+    },
     {
       "type": "Feature",
       "properties": {
@@ -6576,7 +6509,28 @@
         ]
       }
     },
-
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7599999998095000,
+        "lon": -76,
+        "lat": -0.1905,
+        "community": "Siona",
+        "name": "Juventino Juampushir and Antonia Yiyocuro",
+        "users": 4,
+        "date": "Wed Feb 05 2014",
+        "settlement": "Orahuëaya",
+        "families": 1,
+        "project": "Siona Second Installation"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76,
+          -0.1905
+        ]
+      }
+    },
     {
       "type": "Feature",
       "properties": {
@@ -6919,7 +6873,7 @@
         "name": "Vicente Lucitante and Saida Yumbo",
         "users": 3,
         "date": "Thu Jan 30 2014",
-        "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRQmxOWE9SdHpvRlU/edit?usp=sharing",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/db7ce0cf49d05ad514d479397545abed4685a2be.jpg",
         "settlement": "Pisorie Canqque",
         "families": 1,
         "project": "Cofán Second Installation"
