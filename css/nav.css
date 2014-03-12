@@ -1,0 +1,57 @@
+#mapstory nav {
+    position: absolute;
+    right: 100%;
+    width: 20em;
+    height: 100%;
+    overflow: scroll;
+    background-color: #333;
+}
+
+#mapstory nav ul {
+    padding: 0;
+    margin: 0;
+}
+
+#mapstory nav li {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #555;
+}
+
+
+#mapstory nav li:hover {
+    cursor: pointer;
+    background-color: #444;
+}
+
+#mapstory nav li h1, #mapstory nav li h2 {
+    font-weight: normal;
+    font-family: "Yanone Kaffeesatz", sans-serif;
+    margin: 0;
+}
+
+#mapstory nav li h1 {
+    font-size: 1.8em;
+    line-height: 1em;
+    padding: 0.4em 0.5em;
+    color: #eee;
+}
+
+#mapstory nav li h2 {
+    font-size: 1.6em;
+    line-height: 1em;
+    padding: 0.4em 1em;
+    color: #bbb;
+}
+#mapstory {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-transition: -webkit-transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out;
+}
+
+#mapstory.nav-open {
+    -webkit-transform: translate3d(20em,0,0);
+    transform: translate3d(20em,0,0);
+}

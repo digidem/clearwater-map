@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 #mapstory {
@@ -17,13 +18,16 @@ body {
   left:0;
 }
   
-#mapstory, #mapstory #map  {
-  overflow: hidden;
+#mapstory, #mapstory #map, #mapstory .wrapper {
   position:absolute;
   top:0;
   bottom:0;
   left: 0;
   right: 0;
+}
+
+#mapstory #map {
+    overflow: hidden;
 }
 
 #mapstory #map.markers-shown {

@@ -64,7 +64,10 @@
 
 }
 
-#mapstory #stories h1.fixedTop:hover:before {
+
+/* Top Headings hover animation */
+
+/*#mapstory #stories .top-headings div.active:hover h1 {
   -webkit-animation: animationFrames2 ease-in-out 400ms;
   -webkit-animation-iteration-count: 2;
 
@@ -76,7 +79,7 @@
 
   animation: animationFrames2 ease-in-out 400ms;
   animation-iteration-count: 2;
-}
+}*/
 
 @-webkit-keyframes animationFrames2 {
   0% {
@@ -120,6 +123,73 @@
 @keyframes animationFrames2 {
   0% {
     background-size: 1em;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+
+/*#mapstory #stories .top-headings div.active h1 {
+  -webkit-animation: animationFrames3 ease-in-out 400ms;
+
+  -moz-animation: animationFrames3 ease-in-out 400ms;
+
+  -o-animation: animationFrames3 ease-in-out 400ms;
+
+  animation: animationFrames3 ease-in-out 400ms;
+
+  background-size: 1em;
+  -webkit-transition: background-size 400ms ease-in-out;
+  transition: background-size 400ms ease-in-out;
+}*/
+
+@-webkit-keyframes animationFrames3 {
+  0% {
+    background-size: 0;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@-moz-keyframes animationFrames3 {
+  0% {
+    background-size: 0;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@-o-keyframes animationFrames3 {
+  0% {
+    background-size: 0;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@keyframes animationFrames3 {
+  0% {
+    background-size: 0;
   }
   50% {
     background-size: 1.15em;

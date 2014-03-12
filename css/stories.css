@@ -9,8 +9,8 @@
   margin-left: 2em;
 }
 
-#mapstory .top-headings div
-, #mapstory .next-headings div {
+#mapstory #stories .top-headings div
+, #mapstory #stories .next-headings div {
   cursor: pointer;
   position: absolute;
   width: 100%;
@@ -19,6 +19,96 @@
 
 #mapstory .top-headings div {
   top: 0;
+}
+
+#mapstory #stories .top-headings h1
+, #mapstory #stories .top-headings h2 {
+  background-position: 98% 50%;
+  background-repeat: no-repeat;
+  /* background image back arrow from data uri */
+  background-size: 0.2em;
+}
+
+#mapstory #stories .top-headings h1::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 1.3em;
+  left: -1em;
+  top: 0;
+  background: #f2c21c;
+}
+
+#mapstory #stories .top-headings button:before {
+  content: "";
+  position: absolute;
+  left: 0.45em;
+  width: 0.7em;
+  z-index: 1;
+}
+
+#mapstory #stories .top-headings h1 + button:before {
+  top: 0.45em;
+  height: 0.11em;
+  background: black;
+  box-shadow: 0 0.24em 0 0 black, 0 0.46em 0 0 black;
+}
+
+#mapstory #stories .top-headings h2 + button:before {
+  top: 0.42em;
+  height: 0.09em;
+  background: #f2c21c;
+  box-shadow: 0 0.24em 0 0 #f2c21c, 0 0.46em 0 0 #f2c21c;
+}
+
+#mapstory #stories .top-headings button {
+  outline: none;
+  position: absolute;
+  left: -1em;
+  height: 100%;
+  top: 0;
+  width: 1.3em;
+    border: none;
+  padding: 0;
+  display: block;
+  font-size: 2.25em;
+    cursor: pointer;
+  background-color: transparent;
+}
+
+#mapstory #stories .top-headings h1 + button:hover {
+  background-color: #ab8b1e;
+}
+
+#mapstory #stories .top-headings h2 + button:hover:before {
+  background: #ab8b1e;
+  box-shadow: 0 0.24em 0 0 #ab8b1e, 0 0.46em 0 0 #ab8b1e;
+}
+
+#mapstory #stories .top-headings div.active h1
+, #mapstory #stories .top-headings div.active h2 {
+  background-size: 1em;
+  -webkit-transition: background-size 200ms cubic-bezier(0.360, 0.055, 0.865, 1.620);
+  transition: background-size 100ms cubic-bezier(0.360, 0.055, 0.865, 1.620);
+
+}
+
+#mapstory #stories .top-headings div.active h1:hover {
+  background-color: #ab8b1e;
+}
+
+
+#mapstory #stories .top-headings div.active h1:hover
+, #mapstory #stories .top-headings div.active h2:hover {
+  background-size: 1.15em;
+    -webkit-transition: background-size 200ms cubic-bezier(0.235, 5, 0.1, 1.005);
+  transition: background-size 200ms cubic-bezier(0.235, 5, 0.1, 1.005);
+
+}
+
+#mapstory #stories .top-headings h2 {
+  margin-left: -1.125em;
+  padding-left: 1.625em;
 }
 
 #mapstory .next-headings, #mapstory .next-headings div {
@@ -49,21 +139,6 @@
   -ms-transition: background-position 100ms linear, padding, margin;
 }
 
-
-#mapstory #stories h1:before {
-  background-position: 0 50%;
-  background-repeat: no-repeat;
-  /* background image back arrow from data uri */
-  background-size: 1em;
-  opacity: 0;
-  width: 1.2em;
-  height: 1em;
-  position: fixed;
-  margin: 0.2em;
-  left: 0;
-  top: 0;
-  content: "";
-}
 
 
 #mapstory #stories .next-headings {

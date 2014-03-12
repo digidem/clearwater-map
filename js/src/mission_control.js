@@ -20,6 +20,7 @@ cwm.MissionControl = function(container) {
         ease = d3.ease("cubic-in-out"),
         event = d3.dispatch("scroll");
 
+    var navigation = cwm.Navigation(container);
 
     // from https://github.com/mbostock/d3/pull/1050/files
     if ('onwheel' in document) {
@@ -113,6 +114,7 @@ cwm.MissionControl = function(container) {
         _stories = x;
         _stories.on("click", function(d) {
             if (d3.event.srcElement.tagName === "BUTTON") {
+                navigation.toggle();
             } else {
                 go(d);
             }
@@ -133,6 +135,9 @@ cwm.MissionControl = function(container) {
         // Initial map set up as the data is loaded
         _places.on("add", function(d) {
             // As soon as the top level place is loaded, set up initial map view.
+            if (d.collection.id() === "installations") navigation.data(_places.filter(function(d) {
+                return d.collection.id() !== "installations";
+            }));
             if (!initialized && _places[0] && _places[1] && _places[1].children && _places[1].children[0].children) {
                 // Check we have enough loaded to identify the second map view
                 // and set up map movement and event listeners
