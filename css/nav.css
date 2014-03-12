@@ -1,15 +1,19 @@
 #mapstory nav {
+    display: none;
     position: absolute;
     right: 100%;
     width: 20em;
     height: 100%;
     overflow: scroll;
-    background-color: #333;
+    background-color: #000;
 }
 
 #mapstory nav ul {
     padding: 0;
     margin: 0;
+    background: #333;
+    opacity: 0;
+    height: 100%;
 }
 
 #mapstory nav li {
@@ -44,14 +48,13 @@
     padding: 0.4em 1em;
     color: #bbb;
 }
+
 #mapstory {
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
     -webkit-transition: -webkit-transform 500ms ease-in-out;
     transition: transform 500ms ease-in-out;
 }
 
 #mapstory.nav-open {
-    -webkit-transform: translate3d(20em,0,0);
-    transform: translate3d(20em,0,0);
+    -webkit-transform: translate(20em,0);
+    transform: translate(20em,0);
 }

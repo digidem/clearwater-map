@@ -1,9 +1,10 @@
 cwm.Navigation = function(container) {
-    var data, navigation = {};
+    var data, open, navigation = {};
 
-    var navContainer = container.append("nav");
+    var navContainer = container.append("nav")
+        .style("display", "none");
 
-    var navUl = navContainer.append("ul");
+    var navUl = navContainer.append("ul").style("opacity", 0);
 
     var templates = cwm.Templates();
 
@@ -30,7 +31,43 @@ cwm.Navigation = function(container) {
     };
 
     navigation.toggle = function() {
-        container.classed("nav-open", !container.classed("nav-open"));
+        if (open) {
+            navigation.close();
+        } else {
+            navigation.open();
+        }
+    };
+
+    navigation.close = function() {
+        container.on("click.nav", null);
+
+        navUl
+            .transition()
+            .duration(500)
+            .style("opacity", 0)
+            .each("end", function() {
+                navContainer.style("display", "none");
+            });
+
+        container.classed("nav-open", false);
+
+        open = false;
+    };
+
+    navigation.open = function() {
+        container.on("click.nav", navigation.close);
+
+        navContainer
+            .style("display", "block");
+
+        navUl
+            .transition()
+            .duration(500)
+            .style("opacity", 1);
+
+        container.classed("nav-open", true);
+
+        open = true;
     };
 
     return navigation;
