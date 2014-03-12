@@ -74,7 +74,7 @@ window.cwm = {
             .placeId(function(d) { return d.attr("nationality"); })
             .placeParentId("Ecuador")
             .zoomOffset(-0.5)
-            .url("data/nationalities.geojson")
+            .url("data/nationalities.topojson")
             .fetch(onLoad);
 
         var other = cwm.Collection("overview")
