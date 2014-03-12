@@ -21,7 +21,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6258,
+            5269,
             8754
           ]
         },
@@ -43,7 +43,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6315,
+            5317,
             8700
           ]
         },
@@ -65,7 +65,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6249,
+            5261,
             8763
           ]
         },
@@ -85,7 +85,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4669,
+            3931,
             132
           ]
         },
@@ -106,7 +106,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9553,
+            8043,
             5443
           ]
         },
@@ -127,68 +127,8 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8459,
+            7123,
             5352
-          ]
-        },
-        {
-          "type": "Point",
-          "properties": {
-            "_id": 7669654640467505,
-            "lon": -76.69654645,
-            "lat": 0.04675054,
-            "community": "Cofan Dureno",
-            "name": "Romel Mendua",
-            "users": 3,
-            "settlement": "Cofan Dureno",
-            "families": 1,
-            "project": "No system",
-            "gallery": "http://www.flickr.com/photos/78467630@N04/7322427704/"
-          },
-          "id": "Cofan Dureno",
-          "coordinates": [
-            6258,
-            8763
-          ]
-        },
-        {
-          "type": "Point",
-          "properties": {
-            "_id": 7669665460468491,
-            "lon": -76.69665465,
-            "lat": 0.04684914,
-            "community": "Cofan Dureno",
-            "name": "Freddy Criollo",
-            "users": 6,
-            "settlement": "Cofan Dureno",
-            "families": 1,
-            "project": "No system",
-            "gallery": "http://www.flickr.com/photos/78467630@N04/7186783845/"
-          },
-          "id": "Cofan Dureno",
-          "coordinates": [
-            6258,
-            8764
-          ]
-        },
-        {
-          "type": "Point",
-          "properties": {
-            "_id": 7669671350464388,
-            "lon": -76.69671351,
-            "lat": 0.04643883,
-            "community": "Cofan Dureno",
-            "name": "Filomon Chapal",
-            "users": 2,
-            "settlement": "Cofan Dureno",
-            "families": 1,
-            "project": "No system",
-            "gallery": "http://www.flickr.com/photos/78467630@N04/7322421692/"
-          },
-          "id": "Cofan Dureno",
-          "coordinates": [
-            6257,
-            8760
           ]
         },
         {
@@ -207,28 +147,8 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6356,
+            5352,
             8684
-          ]
-        },
-        {
-          "type": "Point",
-          "properties": {
-            "_id": 7669970760479077,
-            "lon": -76.69970757,
-            "lat": 0.04790773,
-            "community": "Cofan Dureno",
-            "name": "Ermilo/ Javier Criollo",
-            "users": 2,
-            "settlement": "Cofan Dureno",
-            "families": 1,
-            "project": "No system",
-            "gallery": "http://www.flickr.com/photos/78467630@N04/7322431618/"
-          },
-          "id": "Cofan Dureno",
-          "coordinates": [
-            6233,
-            8775
           ]
         },
         {
@@ -247,7 +167,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6343,
+            5341,
             8665
           ]
         },
@@ -267,7 +187,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6343,
+            5341,
             8664
           ]
         },
@@ -287,7 +207,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6362,
+            5357,
             8678
           ]
         },
@@ -307,7 +227,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6371,
+            5364,
             8657
           ]
         },
@@ -327,7 +247,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6385,
+            5376,
             8593
           ]
         },
@@ -353,7 +273,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6205,
+            5224,
             8761
           ]
         },
@@ -375,7 +295,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6250,
+            5262,
             8764
           ]
         },
@@ -397,7 +317,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8513,
+            7168,
             5330
           ]
         },
@@ -418,7 +338,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6252,
+            5264,
             8759
           ]
         },
@@ -440,7 +360,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8493,
+            7151,
             5335
           ]
         },
@@ -462,7 +382,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6257,
+            5269,
             8761
           ]
         },
@@ -484,7 +404,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6260,
+            5271,
             8763
           ]
         },
@@ -506,7 +426,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6256,
+            5268,
             8761
           ]
         },
@@ -528,7 +448,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6253,
+            5265,
             8757
           ]
         },
@@ -550,7 +470,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6260,
+            5271,
             8753
           ]
         },
@@ -572,7 +492,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6262,
+            5273,
             8752
           ]
         },
@@ -594,7 +514,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6270,
+            5279,
             8747
           ]
         },
@@ -616,7 +536,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6269,
+            5278,
             8744
           ]
         },
@@ -638,7 +558,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6266,
+            5276,
             8748
           ]
         },
@@ -660,7 +580,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6263,
+            5273,
             8747
           ]
         },
@@ -682,7 +602,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6260,
+            5271,
             8748
           ]
         },
@@ -704,7 +624,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6220,
+            5237,
             8759
           ]
         },
@@ -726,7 +646,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6260,
+            5271,
             8740
           ]
         },
@@ -748,7 +668,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6259,
+            5270,
             8848
           ]
         },
@@ -770,7 +690,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6277,
+            5286,
             8725
           ]
         },
@@ -792,7 +712,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6297,
+            5302,
             8701
           ]
         },
@@ -814,7 +734,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6220,
+            5237,
             8757
           ]
         },
@@ -836,7 +756,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6266,
+            5276,
             8752
           ]
         },
@@ -858,7 +778,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6262,
+            5272,
             8757
           ]
         },
@@ -880,7 +800,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6249,
+            5262,
             8750
           ]
         },
@@ -902,7 +822,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6268,
+            5278,
             8750
           ]
         },
@@ -924,7 +844,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6259,
+            5270,
             8759
           ]
         },
@@ -946,7 +866,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6257,
+            5268,
             8755
           ]
         },
@@ -967,7 +887,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4679,
+            3940,
             166
           ]
         },
@@ -989,7 +909,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6261,
+            5271,
             8745
           ]
         },
@@ -1011,7 +931,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6319,
+            5320,
             8697
           ]
         },
@@ -1033,7 +953,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6342,
+            5340,
             8666
           ]
         },
@@ -1055,7 +975,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6345,
+            5342,
             8663
           ]
         },
@@ -1077,7 +997,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8430,
+            7098,
             5759
           ]
         },
@@ -1099,7 +1019,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6223,
+            5239,
             8762
           ]
         },
@@ -1121,7 +1041,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6364,
+            5359,
             8673
           ]
         },
@@ -1143,7 +1063,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6371,
+            5365,
             8669
           ]
         },
@@ -1165,7 +1085,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6371,
+            5364,
             8663
           ]
         },
@@ -1187,7 +1107,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6374,
+            5367,
             8657
           ]
         },
@@ -1209,7 +1129,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6230,
+            5246,
             8769
           ]
         },
@@ -1231,7 +1151,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6395,
+            5385,
             8557
           ]
         },
@@ -1253,7 +1173,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6409,
+            5396,
             8542
           ]
         },
@@ -1275,7 +1195,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8064,
+            6790,
             5507
           ]
         },
@@ -1297,7 +1217,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6238,
+            5253,
             8773
           ]
         },
@@ -1318,7 +1238,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6246,
+            5259,
             8765
           ]
         },
@@ -1340,7 +1260,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8473,
+            7134,
             5527
           ]
         },
@@ -1362,7 +1282,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6353,
+            5349,
             8683
           ]
         },
@@ -1384,7 +1304,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6355,
+            5351,
             8673
           ]
         },
@@ -1406,7 +1326,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6378,
+            5370,
             8567
           ]
         },
@@ -1428,7 +1348,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6345,
+            5343,
             8636
           ]
         },
@@ -1450,7 +1370,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6387,
+            5378,
             8587
           ]
         },
@@ -1472,7 +1392,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6249,
+            5261,
             8766
           ]
         },
@@ -1482,19 +1402,19 @@
             "_id": 7676473992331200,
             "lon": -76.76474,
             "lat": -0.76688,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Venancio Nihua and Epanai Nenquimo",
             "users": 11,
             "date": "Sun Mar 17 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/a0f64c6c5018fcd2972d6bc52a830648747dc47e.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5709,
+            4807,
             710
           ]
         },
@@ -1504,19 +1424,19 @@
             "_id": 7676520992326000,
             "lon": -76.76521,
             "lat": -0.7674,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Wilson Nenquimo and Tepa Quemontare",
             "users": 10,
             "date": "Mon Mar 18 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/63c02dea7703d09606d19a2f78e561399d32b5a0.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5705,
+            4803,
             705
           ]
         },
@@ -1526,19 +1446,19 @@
             "_id": 7676545992323400,
             "lon": -76.76546,
             "lat": -0.76766,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Nelson Neguimo and Carlota Toca",
             "users": 15,
             "date": "Fri Mar 22 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/c9b32b723e1dd1bd4f73b5baf50ac0348df98a01.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5703,
+            4802,
             703
           ]
         },
@@ -1548,19 +1468,19 @@
             "_id": 7676574992329100,
             "lon": -76.76575,
             "lat": -0.76709,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Yawepare Schoolhouse",
             "users": 18,
             "date": "Wed Mar 20 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/aa489f6678c7ca80584a7a34cc34388720e89428.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5700,
+            4800,
             708
           ]
         },
@@ -1571,7 +1491,7 @@
             "featured": true,
             "lon": -76.7652,
             "lat": -0.76924,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Ocata Nihua",
             "users": 5,
             "date": "Sun Mar 17 2013",
@@ -1581,12 +1501,12 @@
             "story_excerpt": "Accompanying Mitch Anderson, former Amazon Watch corporate accountability director and the current international director for the ClearWater project, on a trip to Yawepare to install 13 rain catchment systems in the community, three of which would be installed in the neighboring community of Nampa Eno.",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5705,
+            4803,
             687
           ]
         },
@@ -1596,19 +1516,19 @@
             "_id": 7676610992307500,
             "lon": -76.76611,
             "lat": -0.76925,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Rafael Nenquimo and Ines Yeti",
             "users": 10,
             "date": "Tue Mar 19 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/4830e3acbdfb941d3714d79e859709143449dc42.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5698,
+            4797,
             687
           ]
         },
@@ -1618,19 +1538,19 @@
             "_id": 7676672992303600,
             "lon": -76.76673,
             "lat": -0.76964,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Nixon Licui and Clara Niquita",
             "users": 11,
             "date": "Thu Mar 21 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/89acc70e416c0c96e15f097773a0a5038f9c1f2d.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5693,
+            4793,
             683
           ]
         },
@@ -1640,19 +1560,19 @@
             "_id": 7676627992288899,
             "lon": -76.76628,
             "lat": -0.77111,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Ginkawe Nenquimo and Mintape Niquita",
             "users": 11,
             "date": "Thu Mar 21 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/b1f84d0dde53c7610a75daf190ede8740698f0d7.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5696,
+            4796,
             668
           ]
         },
@@ -1662,19 +1582,19 @@
             "_id": 7676565992282000,
             "lon": -76.76566,
             "lat": -0.7718,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Gaba Nenquimo Ganke and Omenequeri Guiquita Nenquimo",
             "users": 7,
             "date": "Wed Mar 20 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/eb003e599f7fcfb28e93d84e10702838f320489b.jpg",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5701,
+            4800,
             662
           ]
         },
@@ -1684,19 +1604,19 @@
             "_id": 7674793992615200,
             "lon": -76.74794,
             "lat": -0.73848,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Namo Nihua and Dayo Boyotai",
             "users": 13,
             "date": "Fri Mar 22 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/d4428ce4ce7f7457d026a0248b402e4d377467e4.jpg",
             "settlement": "Nampo Eno",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5844,
+            4921,
             991
           ]
         },
@@ -1706,19 +1626,19 @@
             "_id": 7674972992631700,
             "lon": -76.74973,
             "lat": -0.73683,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Elsa Nihua",
             "users": 12,
             "date": "Sun Mar 24 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/d4428ce4ce7f7457d026a0248b402e4d377467e4.jpg",
             "settlement": "Nampo Eno",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5830,
+            4908,
             1008
           ]
         },
@@ -1728,19 +1648,19 @@
             "_id": 7674988992634699,
             "lon": -76.74989,
             "lat": -0.73653,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Fran Nihua Nenquimo and Zenaida Pauchi",
             "users": 12,
             "date": "Sun Mar 24 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/d4428ce4ce7f7457d026a0248b402e4d377467e4.jpg",
             "settlement": "Nampo Eno",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5828,
+            4907,
             1011
           ]
         },
@@ -1762,7 +1682,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8345,
+            7027,
             5924
           ]
         },
@@ -1784,7 +1704,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8346,
+            7028,
             5922
           ]
         },
@@ -1806,7 +1726,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8345,
+            7027,
             5922
           ]
         },
@@ -1828,7 +1748,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8345,
+            7027,
             5922
           ]
         },
@@ -1850,7 +1770,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8341,
+            7023,
             5920
           ]
         },
@@ -1872,7 +1792,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8345,
+            7027,
             5916
           ]
         },
@@ -1894,7 +1814,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8344,
+            7026,
             5916
           ]
         },
@@ -1916,7 +1836,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8345,
+            7027,
             5915
           ]
         },
@@ -1938,7 +1858,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8342,
+            7024,
             5914
           ]
         },
@@ -1960,7 +1880,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8343,
+            7024,
             5913
           ]
         },
@@ -1982,7 +1902,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8343,
+            7025,
             5912
           ]
         },
@@ -2004,7 +1924,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8344,
+            7026,
             5908
           ]
         },
@@ -2026,7 +1946,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8346,
+            7027,
             5907
           ]
         },
@@ -2052,7 +1972,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8345,
+            7027,
             5922
           ]
         },
@@ -2074,7 +1994,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8353,
+            7033,
             5913
           ]
         },
@@ -2096,7 +2016,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8350,
+            7030,
             5917
           ]
         },
@@ -2118,7 +2038,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8350,
+            7030,
             5919
           ]
         },
@@ -2137,7 +2057,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4702,
+            3959,
             301
           ]
         },
@@ -2159,7 +2079,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8348,
+            7029,
             5917
           ]
         },
@@ -2181,7 +2101,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8367,
+            7045,
             5887
           ]
         },
@@ -2206,7 +2126,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4720,
+            3974,
             426
           ]
         },
@@ -2226,7 +2146,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4672,
+            3934,
             222
           ]
         },
@@ -2246,7 +2166,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4677,
+            3938,
             220
           ]
         },
@@ -2266,7 +2186,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4680,
+            3940,
             218
           ]
         },
@@ -2286,7 +2206,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4682,
+            3942,
             219
           ]
         },
@@ -2306,7 +2226,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4682,
+            3942,
             219
           ]
         },
@@ -2326,7 +2246,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4683,
+            3943,
             201
           ]
         },
@@ -2346,7 +2266,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4685,
+            3945,
             209
           ]
         },
@@ -2366,7 +2286,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4677,
+            3938,
             208
           ]
         },
@@ -2386,7 +2306,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4678,
+            3939,
             204
           ]
         },
@@ -2406,7 +2326,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4675,
+            3937,
             177
           ]
         },
@@ -2426,7 +2346,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4682,
+            3942,
             89
           ]
         },
@@ -2446,7 +2366,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4673,
+            3935,
             64
           ]
         },
@@ -2466,7 +2386,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4646,
+            3912,
             23
           ]
         },
@@ -2486,7 +2406,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4633,
+            3901,
             0
           ]
         },
@@ -2506,7 +2426,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4636,
+            3903,
             8
           ]
         },
@@ -2526,7 +2446,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4715,
+            3970,
             379
           ]
         },
@@ -2546,7 +2466,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4708,
+            3964,
             350
           ]
         },
@@ -2566,7 +2486,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4715,
+            3970,
             352
           ]
         },
@@ -2586,7 +2506,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4714,
+            3970,
             354
           ]
         },
@@ -2606,7 +2526,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4716,
+            3971,
             336
           ]
         },
@@ -2626,7 +2546,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4714,
+            3969,
             328
           ]
         },
@@ -2646,7 +2566,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4711,
+            3967,
             322
           ]
         },
@@ -2666,7 +2586,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4709,
+            3965,
             327
           ]
         },
@@ -2686,7 +2606,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4706,
+            3962,
             313
           ]
         },
@@ -2706,7 +2626,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4694,
+            3953,
             286
           ]
         },
@@ -2726,7 +2646,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4694,
+            3952,
             290
           ]
         },
@@ -2746,7 +2666,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4686,
+            3945,
             258
           ]
         },
@@ -2766,7 +2686,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4684,
+            3944,
             256
           ]
         },
@@ -2786,7 +2706,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4688,
+            3947,
             255
           ]
         },
@@ -2806,7 +2726,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4696,
+            3954,
             242
           ]
         },
@@ -2826,7 +2746,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4697,
+            3955,
             241
           ]
         },
@@ -2846,7 +2766,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4696,
+            3954,
             236
           ]
         },
@@ -2866,7 +2786,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4689,
+            3948,
             242
           ]
         },
@@ -2886,7 +2806,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4687,
+            3947,
             240
           ]
         },
@@ -2906,7 +2826,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4690,
+            3949,
             229
           ]
         },
@@ -2926,7 +2846,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4689,
+            3948,
             227
           ]
         },
@@ -2946,7 +2866,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4684,
+            3944,
             229
           ]
         },
@@ -2966,7 +2886,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4683,
+            3943,
             224
           ]
         },
@@ -2986,7 +2906,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4679,
+            3940,
             231
           ]
         },
@@ -3006,7 +2926,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4672,
+            3933,
             150
           ]
         },
@@ -3026,7 +2946,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4672,
+            3934,
             148
           ]
         },
@@ -3045,7 +2965,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4693,
+            3952,
             259
           ]
         },
@@ -3065,7 +2985,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4681,
+            3942,
             235
           ]
         },
@@ -3085,7 +3005,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4721,
+            3975,
             419
           ]
         },
@@ -3105,7 +3025,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4687,
+            3946,
             233
           ]
         },
@@ -3125,7 +3045,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4684,
+            3944,
             224
           ]
         },
@@ -3146,7 +3066,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9999,
+            8419,
             5494
           ]
         },
@@ -3167,7 +3087,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9996,
+            8416,
             5469
           ]
         },
@@ -3188,7 +3108,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9981,
+            8404,
             5466
           ]
         },
@@ -3209,7 +3129,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9945,
+            8374,
             5459
           ]
         },
@@ -3230,7 +3150,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9950,
+            8378,
             5392
           ]
         },
@@ -3251,7 +3171,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9951,
+            8379,
             5390
           ]
         },
@@ -3272,7 +3192,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9951,
+            8379,
             5390
           ]
         },
@@ -3293,7 +3213,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9844,
+            8289,
             5306
           ]
         },
@@ -3314,7 +3234,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9842,
+            8287,
             5311
           ]
         },
@@ -3335,7 +3255,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9582,
+            8068,
             5398
           ]
         },
@@ -3356,7 +3276,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9578,
+            8064,
             5394
           ]
         },
@@ -3377,7 +3297,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9578,
+            8064,
             5394
           ]
         },
@@ -3398,7 +3318,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9575,
+            8062,
             5391
           ]
         },
@@ -3419,7 +3339,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9578,
+            8065,
             5391
           ]
         },
@@ -3440,7 +3360,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9588,
+            8073,
             5392
           ]
         },
@@ -3461,7 +3381,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9590,
+            8074,
             5398
           ]
         },
@@ -3482,7 +3402,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9592,
+            8076,
             5399
           ]
         },
@@ -3503,7 +3423,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9599,
+            8083,
             5397
           ]
         },
@@ -3524,7 +3444,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9560,
+            8050,
             5438
           ]
         },
@@ -3545,7 +3465,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9557,
+            8047,
             5440
           ]
         },
@@ -3566,7 +3486,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9547,
+            8038,
             5443
           ]
         },
@@ -3587,7 +3507,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9515,
+            8012,
             5457
           ]
         },
@@ -3608,7 +3528,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9420,
+            7932,
             5397
           ]
         },
@@ -3629,7 +3549,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9419,
+            7931,
             5391
           ]
         },
@@ -3650,7 +3570,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9388,
+            7905,
             5366
           ]
         },
@@ -3671,7 +3591,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9385,
+            7902,
             5366
           ]
         },
@@ -3692,7 +3612,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9378,
+            7896,
             5368
           ]
         },
@@ -3713,7 +3633,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9373,
+            7892,
             5397
           ]
         },
@@ -3734,7 +3654,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9349,
+            7872,
             5336
           ]
         },
@@ -3755,7 +3675,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9337,
+            7862,
             5294
           ]
         },
@@ -3776,7 +3696,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9292,
+            7824,
             5286
           ]
         },
@@ -3797,7 +3717,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9810,
+            8260,
             5335
           ]
         },
@@ -3818,7 +3738,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9300,
+            7831,
             5399
           ]
         },
@@ -3839,7 +3759,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9556,
+            8046,
             5392
           ]
         },
@@ -3860,7 +3780,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9587,
+            8073,
             5399
           ]
         },
@@ -3881,7 +3801,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8457,
+            7121,
             5557
           ]
         },
@@ -3902,7 +3822,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8455,
+            7119,
             5559
           ]
         },
@@ -3923,7 +3843,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8537,
+            7188,
             5435
           ]
         },
@@ -3944,7 +3864,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8447,
+            7112,
             5584
           ]
         },
@@ -3965,7 +3885,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8433,
+            7100,
             5786
           ]
         },
@@ -3986,7 +3906,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8428,
+            7096,
             5781
           ]
         },
@@ -4007,7 +3927,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8425,
+            7094,
             5782
           ]
         },
@@ -4028,7 +3948,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8433,
+            7101,
             5780
           ]
         },
@@ -4049,7 +3969,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8432,
+            7099,
             5777
           ]
         },
@@ -4070,7 +3990,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8433,
+            7100,
             5774
           ]
         },
@@ -4091,7 +4011,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8428,
+            7096,
             5774
           ]
         },
@@ -4112,7 +4032,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8422,
+            7091,
             5761
           ]
         },
@@ -4133,7 +4053,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8428,
+            7097,
             5765
           ]
         },
@@ -4154,7 +4074,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8432,
+            7099,
             5764
           ]
         },
@@ -4175,7 +4095,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8432,
+            7100,
             5771
           ]
         },
@@ -4196,7 +4116,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8437,
+            7103,
             5770
           ]
         },
@@ -4217,7 +4137,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8436,
+            7103,
             5769
           ]
         },
@@ -4238,7 +4158,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8434,
+            7101,
             5764
           ]
         },
@@ -4259,7 +4179,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8431,
+            7099,
             5762
           ]
         },
@@ -4280,7 +4200,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8431,
+            7099,
             5761
           ]
         },
@@ -4301,7 +4221,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8434,
+            7101,
             5755
           ]
         },
@@ -4322,7 +4242,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8430,
+            7098,
             5754
           ]
         },
@@ -4343,7 +4263,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8431,
+            7099,
             5755
           ]
         },
@@ -4364,7 +4284,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8460,
+            7124,
             5796
           ]
         },
@@ -4385,7 +4305,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8466,
+            7128,
             5796
           ]
         },
@@ -4406,7 +4326,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8544,
+            7194,
             5322
           ]
         },
@@ -4427,7 +4347,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8529,
+            7181,
             5324
           ]
         },
@@ -4449,7 +4369,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8418,
+            7088,
             5331
           ]
         },
@@ -4470,7 +4390,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8413,
+            7083,
             5321
           ]
         },
@@ -4491,7 +4411,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8400,
+            7072,
             5317
           ]
         },
@@ -4512,7 +4432,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8342,
+            7024,
             5270
           ]
         },
@@ -4534,7 +4454,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6367,
+            5361,
             8677
           ]
         },
@@ -4556,7 +4476,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6184,
+            5207,
             8809
           ]
         },
@@ -4580,7 +4500,7 @@
           },
           "id": "Rumipamba",
           "coordinates": [
-            4695,
+            3953,
             261
           ]
         },
@@ -4591,7 +4511,7 @@
             "featured": true,
             "lon": -76.76534,
             "lat": -0.76935,
-            "community": "Waorani",
+            "community": "Yawepare",
             "name": "Moipa Nihua and Guillermina Ana Gaba Caiga",
             "users": 11,
             "date": "Sun Mar 17 2013",
@@ -4601,12 +4521,12 @@
             "story_excerpt": "Ocata and Moipa are father and son, members of the Waorani Nationality. In many ways they embody the contemporary story of the Waorani: a strong and proud hunting culture that controlled the largest territory of Ecuador’s Amazonian peoples.",
             "settlement": "Yawepare",
             "families": 1,
-            "project": "Waorani",
+            "project": "Yawepare",
             "gallery": "https://plus.google.com/photos/100914784620980908991/albums/5877562378716529617?"
           },
-          "id": "Waorani",
+          "id": "Yawepare",
           "coordinates": [
-            5704,
+            4802,
             686
           ]
         },
@@ -4632,7 +4552,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            9491,
+            7991,
             5410
           ]
         },
@@ -4658,7 +4578,7 @@
           },
           "id": "Secoya",
           "coordinates": [
-            8025,
+            6757,
             5428
           ]
         },
@@ -4679,7 +4599,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            351,
+            295,
             9514
           ]
         },
@@ -4700,7 +4620,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            345,
+            290,
             9523
           ]
         },
@@ -4721,7 +4641,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            342,
+            288,
             9527
           ]
         },
@@ -4747,7 +4667,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            340,
+            286,
             9524
           ]
         },
@@ -4768,7 +4688,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            338,
+            284,
             9528
           ]
         },
@@ -4789,7 +4709,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            337,
+            283,
             9527
           ]
         },
@@ -4810,7 +4730,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            331,
+            279,
             9527
           ]
         },
@@ -4831,7 +4751,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            330,
+            277,
             9514
           ]
         },
@@ -4852,7 +4772,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            329,
+            277,
             9518
           ]
         },
@@ -4873,7 +4793,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            329,
+            277,
             9525
           ]
         },
@@ -4894,7 +4814,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            324,
+            273,
             9526
           ]
         },
@@ -4920,7 +4840,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            483,
+            407,
             9332
           ]
         },
@@ -4941,7 +4861,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            330,
+            277,
             9514
           ]
         },
@@ -4962,7 +4882,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            324,
+            273,
             9534
           ]
         },
@@ -5004,7 +4924,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            3,
+            2,
             9992
           ]
         },
@@ -5025,7 +4945,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            249,
+            210,
             9588
           ]
         },
@@ -5045,7 +4965,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            3,
+            2,
             9992
           ]
         },
@@ -5066,7 +4986,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            245,
+            207,
             9590
           ]
         },
@@ -5087,7 +5007,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            237,
+            200,
             9590
           ]
         },
@@ -5108,7 +5028,7 @@
           },
           "id": "Sinangue",
           "coordinates": [
-            330,
+            278,
             9518
           ]
         },
@@ -5129,7 +5049,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5999,
+            5051,
             8816
           ]
         },
@@ -5150,7 +5070,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5997,
+            5049,
             8829
           ]
         },
@@ -5171,7 +5091,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6004,
+            5055,
             8823
           ]
         },
@@ -5192,7 +5112,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6010,
+            5060,
             8828
           ]
         },
@@ -5213,7 +5133,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6012,
+            5062,
             8828
           ]
         },
@@ -5234,7 +5154,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6012,
+            5062,
             8826
           ]
         },
@@ -5255,7 +5175,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6015,
+            5065,
             8825
           ]
         },
@@ -5276,7 +5196,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6008,
+            5058,
             8825
           ]
         },
@@ -5296,7 +5216,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6531,
+            5499,
             8235
           ]
         },
@@ -5316,7 +5236,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6441,
+            5423,
             8136
           ]
         },
@@ -5336,7 +5256,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6428,
+            5413,
             8168
           ]
         },
@@ -5356,7 +5276,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6427,
+            5412,
             8172
           ]
         },
@@ -5376,7 +5296,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6425,
+            5410,
             8169
           ]
         },
@@ -5396,7 +5316,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6425,
+            5410,
             8178
           ]
         },
@@ -5421,8 +5341,28 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            6402,
+            5391,
             8141
+          ]
+        },
+        {
+          "type": "Point",
+          "properties": {
+            "_id": 7641001993166340,
+            "lon": -76.41002,
+            "lat": -0.683366,
+            "community": "Cofan Dureno",
+            "name": "Ejidio Quenama and Otilia Criollo",
+            "users": 4,
+            "date": "Thu Jan 23 2014",
+            "settlement": "Ukavati",
+            "families": 1,
+            "project": "Cofán Second Installation"
+          },
+          "id": "Cofan Dureno",
+          "coordinates": [
+            7215,
+            1537
           ]
         },
         {
@@ -5441,7 +5381,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7993,
+            6730,
             6262
           ]
         },
@@ -5461,7 +5401,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7995,
+            6732,
             6263
           ]
         },
@@ -5481,7 +5421,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7996,
+            6733,
             6259
           ]
         },
@@ -5501,7 +5441,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7995,
+            6731,
             6268
           ]
         },
@@ -5521,7 +5461,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7991,
+            6729,
             6274
           ]
         },
@@ -5541,7 +5481,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7984,
+            6722,
             6274
           ]
         },
@@ -5566,7 +5506,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7990,
+            6728,
             6260
           ]
         },
@@ -5586,7 +5526,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8118,
+            6836,
             5859
           ]
         },
@@ -5606,7 +5546,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8078,
+            6802,
             6045
           ]
         },
@@ -5626,7 +5566,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            8073,
+            6797,
             6049
           ]
         },
@@ -5646,7 +5586,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7987,
+            6725,
             6065
           ]
         },
@@ -5666,7 +5606,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7956,
+            6699,
             6196
           ]
         },
@@ -5686,7 +5626,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7938,
+            6684,
             6179
           ]
         },
@@ -5706,7 +5646,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7724,
+            6504,
             6020
           ]
         },
@@ -5726,7 +5666,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7732,
+            6510,
             5992
           ]
         },
@@ -5746,7 +5686,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7748,
+            6524,
             5989
           ]
         },
@@ -5766,7 +5706,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7498,
+            6313,
             6227
           ]
         },
@@ -5786,7 +5726,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7496,
+            6312,
             6238
           ]
         },
@@ -5806,7 +5746,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7502,
+            6316,
             6237
           ]
         },
@@ -5826,7 +5766,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7500,
+            6315,
             6239
           ]
         },
@@ -5846,7 +5786,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7505,
+            6319,
             6236
           ]
         },
@@ -5866,7 +5806,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7493,
+            6309,
             6385
           ]
         },
@@ -5886,7 +5826,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7492,
+            6308,
             6369
           ]
         },
@@ -5906,7 +5846,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7522,
+            6333,
             6327
           ]
         },
@@ -5926,7 +5866,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7504,
+            6319,
             6370
           ]
         },
@@ -5946,7 +5886,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7485,
+            6302,
             6378
           ]
         },
@@ -5966,7 +5906,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7505,
+            6319,
             6390
           ]
         },
@@ -5986,7 +5926,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7516,
+            6329,
             6412
           ]
         },
@@ -6006,8 +5946,28 @@
           },
           "id": "Siona",
           "coordinates": [
-            7536,
+            6345,
             6427
+          ]
+        },
+        {
+          "type": "Point",
+          "properties": {
+            "_id": 7599999998095000,
+            "lon": -76,
+            "lat": -0.1905,
+            "community": "Siona",
+            "name": "Juventino Juampushir and Antonia Yiyocuro",
+            "users": 4,
+            "date": "Wed Feb 05 2014",
+            "settlement": "Orahuëaya",
+            "families": 1,
+            "project": "Siona Second Installation"
+          },
+          "id": "Siona",
+          "coordinates": [
+            9999,
+            6415
           ]
         },
         {
@@ -6026,7 +5986,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7541,
+            6349,
             6404
           ]
         },
@@ -6046,7 +6006,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7559,
+            6365,
             6403
           ]
         },
@@ -6066,7 +6026,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7566,
+            6371,
             6391
           ]
         },
@@ -6086,7 +6046,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7572,
+            6376,
             6382
           ]
         },
@@ -6106,7 +6066,7 @@
           },
           "id": "Siona",
           "coordinates": [
-            7570,
+            6374,
             6382
           ]
         },
@@ -6126,7 +6086,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5812,
+            4894,
             8375
           ]
         },
@@ -6146,7 +6106,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5760,
+            4850,
             8431
           ]
         },
@@ -6166,7 +6126,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5753,
+            4844,
             8444
           ]
         },
@@ -6186,7 +6146,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5749,
+            4841,
             8439
           ]
         },
@@ -6206,7 +6166,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5757,
+            4848,
             8448
           ]
         },
@@ -6226,7 +6186,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5748,
+            4840,
             8438
           ]
         },
@@ -6246,7 +6206,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5726,
+            4821,
             8418
           ]
         },
@@ -6266,7 +6226,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5721,
+            4817,
             8434
           ]
         },
@@ -6287,7 +6247,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5769,
+            4858,
             8886
           ]
         },
@@ -6308,7 +6268,7 @@
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5818,
+            4899,
             8890
           ]
         },
@@ -6322,14 +6282,14 @@
             "name": "Vicente Lucitante and Saida Yumbo",
             "users": 3,
             "date": "Thu Jan 30 2014",
-            "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRQmxOWE9SdHpvRlU/edit?usp=sharing",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/db7ce0cf49d05ad514d479397545abed4685a2be.jpg",
             "settlement": "Pisorie Canqque",
             "families": 1,
             "project": "Cofán Second Installation"
           },
           "id": "Cofan Dureno",
           "coordinates": [
-            5863,
+            4936,
             8871
           ]
         }
@@ -6340,12 +6300,12 @@
   "bbox": [
     -77.47265,
     -0.83865,
-    -76.23269,
+    -76,
     0.17162
   ],
   "transform": {
     "scale": [
-      0.00012400840084008364,
+      0.00014727972797279744,
       0.00010103710371037104
     ],
     "translate": [
