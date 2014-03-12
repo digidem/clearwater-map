@@ -124,7 +124,7 @@ cwm.util.extend(cwm.Collection.prototype, {
 
     count: function(attr) {
         if (!attr) {
-            return this.length + 1;
+            return this.length;
         } else {
             return this.reduce(function(previousValue, place) {
                 //console.log(place.collection.id(), place.attr(attr));
