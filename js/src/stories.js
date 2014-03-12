@@ -110,7 +110,7 @@ cwm.Stories = function(container) {
 
     function renderArticle(selection) {
         selection.attr("id", function(d) {
-                return d.id();
+                return cwm.util.sanitize(d.id());
             })
             .attr("class", function(d) {
                 return d.collection.id();
@@ -261,7 +261,7 @@ cwm.Stories = function(container) {
 
         if (dimensionsCache[cacheId]) return dimensionsCache[cacheId];
         
-        renderedArticle = d3.select("#" + d.id());
+        renderedArticle = d3.select("#" + cwm.util.sanitize(d.id()));
 
         if (!renderedArticle.node()) {
             renderedArticle = container.append("article")

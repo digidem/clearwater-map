@@ -5,9 +5,7 @@ cwm.util = {
     // Helper to _sanitize a string, replacing spaces with "-" and lowercasing
     sanitize: function(string) {
         if (typeof string != "undefined" && string !== null)
-            return string.toLowerCase()
-                .replace('http://www.giveclearwater.org/', 'a-')
-                .replace('http://beta.giveclearwater.org/', 'b-')
+            return "id-" + string.toString().toLowerCase()
                 .split(" ").join("-").split("/").join("-");
     },
 
