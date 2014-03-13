@@ -9,7 +9,6 @@ cwm.layers.MarkerLayer = function() {
         markersHiding,
         mapContainer,
         markerInteraction,
-        _current,
         event = d3.dispatch("click");
 
     // Project markers from map coordinates to screen coordinates
@@ -95,11 +94,12 @@ cwm.layers.MarkerLayer = function() {
 
         var extent = map.getExtent();
         var zoom = map.getZoom();
+        var current = map.current();
 
         // filter markers that are within the current extent of the map
         var data = markerData.filter(function(d) {
-            for (var key in _current) {
-                if (_current[key] === d.parent) return true;
+            for (var key in current) {
+                if (current[key] === d.parent) return true;
             }
         });
 
@@ -136,12 +136,6 @@ cwm.layers.MarkerLayer = function() {
         return markerLayer;
     }
 
-    function current(x) {
-        if (!arguments.length) return _current;
-        _current = x;
-        return markerLayer;
-    }
-
     function data(collection) {
         markerData = collection;
         markerLayer.name = collection.id();
@@ -169,9 +163,7 @@ cwm.layers.MarkerLayer = function() {
 
         data: data,
 
-        addTo: addTo,
-
-        current: current
+        addTo: addTo
     };
 
     return d3.rebind(markerLayer, event, "on");

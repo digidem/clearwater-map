@@ -1,8 +1,9 @@
 cwm.Map = function(container) {
 
     var lastResize = 0,
-        _duration,
-        _current = {},
+        to,
+        from,
+        current = {},
         extentCache = {},
         event = d3.dispatch("click");
 
@@ -26,52 +27,29 @@ cwm.Map = function(container) {
 
     var ease = map.ease = mapbox.ease().map(map);
 
-    map.from = function(d) {
-        if (!arguments.length) return ease.from();
-        var from;
-        if (d instanceof MM.Coordinate) from = d;
-        if (d instanceof cwm.Place) from = map.placeExtentCoordinate(d);
-        ease.from(from).setOptimalPath();
+    map.to = function(d) {
+        if (!arguments.length) return to;
+        to = d;
+        if (d instanceof cwm.Place) d = map.placeExtentCoordinate(d);
+        if (!ease.from) ease.from(map.coordinate);
+        ease.to(d).setOptimalPath();
         return map;
     };
 
-    map.to = function(d) {
-        if (!arguments.length) return ease.to();
-        var to;
-        if (d instanceof MM.Coordinate) to = d;
-        if (d instanceof cwm.Place) to = map.placeExtentCoordinate(d);
-        ease.to(to).setOptimalPath();
+    map.from = function(d) {
+        if (!arguments.length) return from;
+        from = d;
+        if (d instanceof cwm.Place) d = map.placeExtentCoordinate(d);
+        ease.from(d);
+        if (ease.to()) ease.setOptimalPath();
         return map;
     };
 
     map.t = function(t) {
+        if (!ease.to()) return map;
         // little hack, to avoid strange jumping when t == 0
         if (t === 0) t += 0.00001;
         ease.t(t);
-        return map;
-    };
-
-    map.go = function(callback) {
-        if (ease.to()) {
-            if (ease.running()) {
-                ease.stop(map.go);
-            } else {
-                ease.from(map.coordinate).setOptimalPath();
-                var duration = _duration || ease.getOptimalTime();
-                if (ease.getOptimalTime()) {
-                    ease.run(duration, callback);
-                } else {
-                    ease.t(1);
-                    if (callback) callback();
-                }
-            }
-        }
-        return map;
-    };
-
-    map.duration = function(x) {
-        if (!arguments.length) return _duration;
-        _duration = x;
         return map;
     };
 
@@ -85,9 +63,9 @@ cwm.Map = function(container) {
         return map;
     };
 
-    map.current = function current(x) {
-        if (!arguments.length) return _current;
-        _current = x;
+    map.current = function(x) {
+        if (!arguments.length) return current;
+        current = x;
     };
 
     map.placeExtentCoordinate = function(d) {

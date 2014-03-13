@@ -4,29 +4,25 @@ cwm.MissionControl = function(container) {
         _stories,
         _places,
         _map,
-        _maxTime,
         time = 0,
-        _from,
-        _to,
-        start,
-        end,
-        timelineStart,
-        timelineEnd,
-        speed = 1,
+        duration = 0,
+        from,
+        to,
         pendingRedraw,
+        storyOverride,
         scrolling,
+        direction, 
         adjusting,
-        easeOverride,
-        ease = d3.ease("cubic-in-out"),
+        ease = d3.ease("quad-in-out"),
         event = d3.dispatch("scroll");
 
-    var navigation = cwm.Navigation(container);
+    var navigation = cwm.Navigation(container).on("click", go);
 
     // from https://github.com/mbostock/d3/pull/1050/files
     if ('onwheel' in document) {
         d3_behavior_zoom_wheel = 'wheel';
         d3_behavior_zoom_delta = function() {
-            return -d3.event.deltaY * (d3.event.deltaMode ? 30 : 1);
+            return -d3.event.deltaY * (d3.event.deltaMode ? 20 : 1);
         };
     } else if ('onmousewheel' in document) {
         d3_behavior_zoom_wheel = 'mousewheel';
@@ -41,11 +37,15 @@ cwm.MissionControl = function(container) {
     }
 
     function initialize() {
-        console.log(_places[0], _places[1], _places);
-        to(_places[1]);
-        from(_places[0]);
-        _map.t(0);
-        _stories.t(0);
+        setTo(_places[1]);
+        setFrom(_places[0]);
+        _map.current(_stories.getCurrent(0));
+        move(0);
+
+        navigation.data(_places.filter(function(d) {
+            return d.children.length;
+        }));
+
         container.selectAll("#map,#stories")
             .call(d3.keybinding()
                 .on("arrow-down", onArrowKey("down"))
@@ -54,9 +54,7 @@ cwm.MissionControl = function(container) {
             .on('keyup', function() {
                 //adjusting = window.setTimeout(scrollToNearest, 50);
             });
-        initialized = true;
     }
-
 
     function onArrowKey(direction) {
         return function() {
@@ -73,15 +71,13 @@ cwm.MissionControl = function(container) {
 
     function onMouseWheel() {
         d3.event.preventDefault();
-        stopOtherThingsHappening();
         move(-d3_behavior_zoom_delta());
         // If we stop scrolling for 500ms, move to the next place if it is close.
         //adjusting = window.setTimeout(scrollToNearest, 200);
     }
 
     function stop() {
-        _stories.stop();
-        _map.stop();
+
     }
 
     function stopOtherThingsHappening() {
@@ -117,7 +113,7 @@ cwm.MissionControl = function(container) {
                 d3.event.stopPropagation();
                 navigation.toggle();
             } else {
-                go(d);
+                if (d) go(d);
             }
         });
         return missionControl;
@@ -132,88 +128,142 @@ cwm.MissionControl = function(container) {
     function flightplan(x) {
         if (!arguments.length) return _places;
         _places = x;
-
-        // Initial map set up as the data is loaded
-        _places.on("add", function(d) {
-            // As soon as the top level place is loaded, set up initial map view.
-            if (d.collection.id() === "installations") navigation.data(_places.filter(function(d) {
-                return d.collection.id() !== "installations";
-            }));
-            if (!initialized && _places[0] && _places[1] && _places[1].children.length && _places[1].children[0].children.length) {
-                // Check we have enough loaded to identify the second map view
-                // and set up map movement and event listeners
-                // children.children is a hack for now until I figure out a more generic way of 
-                // identifying whether the second place is ready and loaded.
-                initialize();
-            }
-        });
         return missionControl;
     }
 
     function move(delta) {
-        var i;
+        if (scrolling) return;
+        // Limit how much the map moves on each tick
+        delta = Math.max(-100, Math.min(100, delta));
+
         time = time + delta;
         if (time < 0) {
-            if (_places[_from._index - 1]) {
-                to(_from);
-                from(_places[_from._index - 1]);
+            if (_places[_places.indexOf(from) - 1]) {
+                setTo(from);
+                setFrom(from._prev);
                 time = time + duration;
             } else {
                 time = 0;
             }
-        } else if (time > duration) {
-            if (_places[_to._index + 1]) {
+        } else if (time >= duration) {
+            if (_places[_places.indexOf(to) + 1]) {
                 time = time - duration;
-                from(_to);
-                to(_places[_to._index + 1]);
+                setFrom(to);
+                setTo(to._next);
             } else {
-                time = 0;
+                time = duration;
             }
         }
-        if (time < 200 || duration - time < 200) _map.current(current());
-        _map.t(ease(time / duration));
-        _stories.t(time / duration);
+
+        requestRedraw();
 
         return missionControl;
     }
 
-    function from(d) {
-        if (!arguments.length) return _from;
-        if (d === _from) return missionControl;
+    function requestRedraw(cb) {
+        if (!pendingRedraw) pendingRedraw = window.requestAnimationFrame(redraw);
+
+        function redraw() {
+            var t = time / duration;
+            if (!storyOverride) _map.t(t);
+            _stories.t(t);
+            _map.current(_stories.getCurrent(t));
+            pendingRedraw = false;
+            if (cb) cb();
+            cb = void 0;
+        }
+    }
+
+    function setFrom(d) {
         _stories.from(d);
         _map.from(d);
-        _from = d;
-        if (_to) {
-            duration = Math.max(_map.getOptimalTime(), _stories.getOptimalTime());
-            _stories.duration(duration);
-        } 
+        from = d;
+        setDuration();
         return missionControl;
     }
 
-    function to(d) {
-        if (!arguments.length) return _to;
-        if (d === _to) return missionControl;
+    function setTo(d) {
+        if (!arguments.length) return to;
+        to = d;
         _stories.to(d);
         _map.to(d);
-        _to = d;
-        duration = Math.max(_map.getOptimalTime(), _stories.getOptimalTime());
-        _stories.duration(duration);
+        setDuration();
         return missionControl;
     }
 
-    function go(d) {
-        _map.to(d).from(_map.coordinate);
-        _stories.to(d);
+    function setDuration() {
+        if (to) duration = Math.max(_map.getOptimalTime(), _stories.getOptimalTime());
+        _stories.duration(duration);
+    }
 
-        duration = Math.max(_map.getOptimalTime(), _stories.getOptimalTime());
+    function go(d, callback) {
+        if (typeof callback !== "function") callback = null;
+        var start = +new Date();
+        var offset = time;
+        scrolling = true;
 
-        queue()
-            .defer(_map.duration(duration).go)
-            .defer(_stories.duration(duration).go)
-            .await(function(err) {
-                _stories.from(d);
-                _map.current(current());
-            });
+        if (d === from) {
+            direction = -1;
+            scroll();
+        } else if (d === to) {
+            direction = 1;
+            scroll();
+        } else {
+            var i = _places.indexOf(d);
+            if (i === -1) {
+                _map.to(d).ease.optimal(void 0, void 0, function() {
+                    scrolling = false;
+                    map.to(_stories.to());
+                });
+            } else if (i < _places.indexOf(from)) {
+                if (time === 0) {
+                    setTo(from);
+                    setFrom(d);
+                    time = duration;
+                    go(d);
+                } else if (time === duration) {
+                    setFrom(d);
+                    time = duration;
+                    go(d);
+                } else {
+                    go(from, function() { 
+                        go(d); 
+                    });
+                }
+            } else { // if (_places.indexOf(d) > _places.indexOf(to))
+                if (time === duration) {
+                    setFrom(to);
+                    setTo(d);
+                    time = 0;
+                    go(d);
+                } else if (time === 0) {
+                    setTo(d);
+                    go(d);
+                } else {
+                    go(to, function() { 
+                        go(d); 
+                    });
+                }
+            }
+        }
+
+        function scroll() {
+            var delta = (+new Date()) - start;
+            time = offset + (delta * direction);
+            if (time >= 0 && time <= duration) {
+                requestRedraw(scroll);
+            } else {
+                time = direction === 1 ? duration : 0;
+                requestRedraw(function() {
+                    setFrom(d);
+                    setTo(_places[_places.indexOf(d) + 1] || d);
+                    time = 0;
+                    scrolling = false;
+                    if (callback) callback();
+                    callback = void 0;
+                });
+            }
+        }
 
         return missionControl;
     }
@@ -232,64 +282,12 @@ cwm.MissionControl = function(container) {
         return _places[i];
     }
 
-    function draw() {
-        var t, i = 0;
-        // move things
-        if (!easeOverride) {
-            while (_places[i] && _places[i]._time < timeline) i++;
-
-            if (_places[i] && _places[i - 1]) {
-                t = (timeline - _places[i - 1]._time) / (_places[i]._time - _places[i - 1]._time);
-            } else {
-                t = 0;
-            }
-
-            (_places[i - 1] || _places[i]).ease.t(t + 1e-9);
-        }
-
-        _map.layers.forEach(function(layer) {
-            if (layer.current) layer.current(current());
-        });
-
-        _stories.render(timeline);
-
-        pendingRedraw = false;
-
-        return missionControl;
-    }
-
-    // Returns the nearest place 
-    function nearest(distance) {
-        return time / duration < 0.5 ? _from || _to : _to || _from;
-    }
-
-    function current() {
-        var section,
-            _current = {},
-            d = nearest();
-
-        _current.place = d;
-        _current.section = d.collection.id();
-
-        while (d) {
-            section = d.collection.id();
-            _current[section] = d;
-            d = d.parent;
-        }
-
-        return _current;
-    }
-
     missionControl = {
         flightplan: flightplan,
         stories: stories,
         map: map,
-        draw: draw,
         go: go,
-        prev: prev,
-        next: next,
-        time: time,
-        current: current
+        initialize: initialize
     };
 
     return d3.rebind(missionControl, event, "on");

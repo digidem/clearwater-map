@@ -14,6 +14,8 @@ window.cwm = {
 
         };
 
+        var loaded = 0;
+
         var container = d3.select(selector).append("div").classed("wrapper", true);
         var storiesDiv = container.insert("div", ":first-child").attr("id", "stories");
         var mapDiv = container.insert("div", ":first-child").attr("id", "map");
@@ -38,7 +40,7 @@ window.cwm = {
         var communitiesLayer = cwm.layers.FeatureLayer()
             .addTo(map)
             .on("click", function(d) {
-                if (missionControl.current().place === d.parent) {
+                if (cwm.map.current().place === d.parent) {
                     missionControl.go(d);
                 } else {
                     missionControl.go(d.parent);
@@ -48,7 +50,7 @@ window.cwm = {
         var countryLayer = cwm.layers.FeatureLayer()
             .addTo(map)
             .on("click", function(d) {
-                if (missionControl.current().place === d.parent) {
+                if (cwm.map.current().place === d.parent) {
                     missionControl.go(d);
                 }
             });
@@ -91,7 +93,9 @@ window.cwm = {
 
         // When each dataset loads, add it to the flightplan
         function onLoad() {
+            loaded++
             flightplan.add(this);
+            if (loaded === 4) missionControl.initialize();
         }
 
     }

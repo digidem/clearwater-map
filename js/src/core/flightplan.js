@@ -84,7 +84,7 @@ cwm.util.extend(cwm.Flightplan.prototype, {
                 // append children to the next element
                 i += featuredChildren.length;
 
-                parent.children = cwm.Collection().add(children, false);
+                parent.children.add(children, false);
                 
                 children.forEach(function(place) {
                     place.parent = parent;
@@ -106,7 +106,6 @@ cwm.util.extend(cwm.Flightplan.prototype, {
         this._addFamily();
 
         inserted.forEach(function(d) {
-            if (!d.children) d.children = cwm.Collection();
             this.event.add(d);
         }, this);
 

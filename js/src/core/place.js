@@ -9,6 +9,7 @@ cwm.Place = function(feature) {
 	this.properties = feature.properties || {};
 	this.geometry = feature.geometry || {};
 	this.type = feature.type;
+    this.children = cwm.Collection();
 
 	// Add any custom events as arguments to d3.dispatch
 	this.event = d3.dispatch('changed');

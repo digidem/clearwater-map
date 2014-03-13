@@ -1,5 +1,8 @@
 cwm.Navigation = function(container) {
-    var data, open, navigation = {};
+    var data, 
+        open,
+        navigation = {},
+        event = d3.dispatch('click');
 
     var navContainer = container.append("nav")
         .style("display", "none");
@@ -16,6 +19,7 @@ cwm.Navigation = function(container) {
         
         menuItems.enter()
             .append("li")
+            .on("click", event.click)
             .html(function(d) {
                 return templates(d).match(/<h\d.*<\/h\d>/)[0];
             });
@@ -70,5 +74,5 @@ cwm.Navigation = function(container) {
         open = true;
     };
 
-    return navigation;
+    return d3.rebind(navigation, event, "on");;
 };

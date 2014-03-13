@@ -1,51 +1,23 @@
 cwm.Stories = function(container) {
 
     var PIXELS_PER_MS = 1,
-        stories,
-        start,
-        running,
-        abort,
-        abortCallback,
-        direction,
+        direction = 1,
         places = {},
-        _missionControl,
-        ease = d3.ease("quad-in-out"),
+        ease = d3.ease("cubic-in-out"),
+        _duration,
         containerHeight = d3.select(container.node().parentNode).dimensions()[1],
         dimensionsCache = {},
-        _duration = containerHeight * 2,
         event = d3.dispatch('click', 'moved');
 
     var templates = cwm.Templates();
 
-    var topDiv = container.append("div").attr("class", "top-headings").on("click", onClick);
+    var topDiv = container.append("div").attr("class", "top-headings");
     var nextDiv = container.append("div").attr("class", "next-headings");
 
     d3.select(window).on("resize.stories", function onResize() {
         containerHeight = d3.select(container.node().parentNode).dimensions()[1];
         dimensionsCache = {};
     });
-
-    function go() {
-        if (!to()) return stories;
-        start = Date.now();
-
-        if (!_duration) duration(getOptimalTime());
-
-        if (running) {
-            stop(function() {
-                go();
-            });
-        } else {
-            d3.timer(loop);
-        }
-
-        return stories;
-    }
-
-    function stop(callback) {
-        abort = true;
-        abortCallback = callback;
-    }
 
     function from(x) {
         if (!arguments.length) return places.from;
@@ -62,8 +34,8 @@ cwm.Stories = function(container) {
     }
 
     function duration(x) {
-        if (!arguments.length) return _duration;
-        _duration = Math.max(containerHeight + 200, x);
+        if (!arguments.length) return _duration || getOptimalTime();
+        _duration = Math.max(x, getOptimalTime());
         return stories;
     }
 
@@ -77,35 +49,38 @@ cwm.Stories = function(container) {
         }
     }
 
-    function loop() {
-        var now = Date.now();
-        if (abort) {
-            abort = false;
-            if (abortCallback) abortCallback();
-            abortCallback = undefined;
-            return true;
-        } else {
-            var t = ease(Math.min(1, (now - start) / _duration));
-            render(t);
-            return t >= 1;
-        }
-    }
-
     function render(t) {
         if (!places.to) return;
-        if (!places.from) from(places.to);
 
-        places.from._offset = -t * direction * _duration + containerHeight;
-        places.to._offset = (1 - t) * direction * _duration + containerHeight;
+        if (places.from) places.from._offset = -t * direction * duration() + containerHeight;
+        places.to._offset = (1 - t) * direction * duration() + containerHeight;
 
         renderNextHeading();
         renderArticles();
         renderTopHeading();
-        //
 
-
+        event.moved(getCurrent(t));
 
         return stories;
+    }
+
+    function getCurrent(t) {
+        if (!arguments.length) t = 1;
+
+        var c = {};
+        var d = t < 0.5 ? places.from : places.to;
+
+        c.place = d;
+        c.distance = t < 0.5 ? t * duration() : (1 - t) * duration();
+        c.section = (d) ? d.collection.id() : void 0;
+        c.parent = (d) ? d.parent : void 0;
+
+        while (d) {
+            c[d.collection.id()] = d;
+            d = d.parent;
+        }
+
+        return c;
     }
 
     function renderArticle(selection) {
@@ -121,8 +96,12 @@ cwm.Stories = function(container) {
     }
 
     function renderArticles() {
+        var data = [places.to];
+
+        if (places.from) data.unshift(places.from);
+
         var articles = container.selectAll("article")
-            .data([places.from, places.to], function(d) {
+            .data(data, function(d) {
                 return d.id();
             });
         
@@ -138,6 +117,8 @@ cwm.Stories = function(container) {
     }
 
     function renderTopHeading() {
+        if (!places.from) return;
+
         var heading, offset;
 
         // Identify which story will be rendered above the other
@@ -194,6 +175,7 @@ cwm.Stories = function(container) {
 
         topHeadings.enter()
             .append("div")
+            .on("click", onClick)
             .html(function(d) {
                 return templates(d).match(/<h\d.*<\/h\d>/)[0];
             })
@@ -207,11 +189,11 @@ cwm.Stories = function(container) {
         topHeadings.exit().remove();
     }
 
-    function renderNextHeading(time) {
+    function renderNextHeading() {
         var heading, offset = 0;
 
         // Identify which story will be rendered above the other
-        var upperStory = direction === 1 ? places.from : places.to;
+        var upperStory = direction === 1 ? places.from ? places.from : {} : places.to;
         var lowerStory = direction === 1 ? places.to : places.from;
 
         var storyOffsetBottom = upperStory._offset + containerHeight;
@@ -241,7 +223,8 @@ cwm.Stories = function(container) {
 
         nextHeadings.style(cwm.util.transformProperty, function(d) {
                 return translate(0, offset);
-            });
+            })
+            .classed("active", offset === 0);
 
         nextHeadings.exit().remove();
 
@@ -295,11 +278,10 @@ cwm.Stories = function(container) {
 
     stories = {
         t: render,
-        go: go,
-        stop: stop,
         from: from,
         to: to,
         duration: duration,
+        getCurrent: getCurrent,
         getOptimalTime: getOptimalTime
     };
 

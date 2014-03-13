@@ -38,19 +38,19 @@ background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF
 
 /* Black down arrow */
 /* http://digidem.github.io/clearwater-map/images/down-arrow.png */
-#mapstory #stories h1 {
+#mapstory #stories .next-headings h1 {
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAiCAYAAADcbsCGAAABOElEQVRYw83XPShGURjA8R9eKUlkMVgMb73KaDAZlJTNZrMYRLKaTDYiZTdZLCSF2WZRFJtSFpJBicjHcgcJ79e5955fnfX0X87TeeAInxGeQ+jHW2RhbyhJbEQWt+6bLjxEEnaPTj/MRxI36xfNuMw57BwFfxjLOW5EGQc5he2qQF8Oo+UFRRVazzhuWRW6kiedRdgt2lVpLqO4KTUo4CLlsFM0qtFoynFD6rSfUti2AEp4DRz2jF6BrAWOWxJQR8DRcoM2gc0EipuUgkLya6gn7AQNUjJSR9gHBqVsr8a4LRko1jBantAjIytVxi3KUAfuKgy7RquMTVcYNyEHTTgrE3ac5ugoZ/ifsHcMyNnOH3GbIlBMFpTvYY/oFonlH3ELItKeLCqfuEKLyEwlceMi1ITVkBd+AcsvlMYt4/hqAAAAAElFTkSuQmCC');
 }
 
 /* Yellow down arrow */
 /* http://digidem.github.io/clearwater-map/images/down-arrow-yellow.png */
-#mapstory #stories h2 {
+#mapstory #stories .next-headings h2 {
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAiCAYAAADcbsCGAAABhklEQVRYhc3XLUgDcRjH8fmGICITi2HFIEwwGkwGYQg2m82yIIpYTSbbRBnYTRaLIoJatVkEB9oGgmUyDAfiUHz5/WCD47iX/8tzd//wvfg8n3IPdwXvtnSD/hzsuoDHLPp2AOOPnjJx7MgBkL86XT3cBHp3AMXaaNyPY9sOwNhmz+THDaHnnGENNBiGY8s54yp+TxDHrnKCnQctYbgZL/vT0kHTKjhWzxhXC3NE4Xha2hnBWmhMB8e2MsJVowxxOL7STynDHlC/CY4tpYxbiNufhGOXKcFOk3ar4MroSxj2iaYkcOxQGLenslcVV/TkTssrGpXEsQ0h3JrqTh0cT0vDEnaP+tLAsYoF7BfN6+zTxbELQ9yJ7i4THL8edE/LByplgWP7mrhdkz2muCJ6U4S9oJEscWxdEbdqusMGN4AeE2B3nsbpkMSxxRjYD5qzmW+LY2cRuGPb2RI4npZOAOahSRdwrBbA7UjMlcLxB6XVhTXRsEs4Vu3iVqRmSuJ4Wg4E5xX+AZ5D+K39E5ghAAAAAElFTkSuQmCC');
 }
 
 /* Orange down arrow */
 /* http://digidem.github.io/clearwater-map/images/down-arrow-orange.png */
-#mapstory #stories h2.fixedBottom:hover {
+#mapstory #stories .next-headings h2:hover {
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAiCAYAAADcbsCGAAABhklEQVRYw83XPyhGURjH8YNXSnqjdzFIGW69ymgwGZSUzWazGESymky2V6TsJgsDSWG2WRTFppSFZFAi8uf3q/PW7e3+Oefc5957hu8dz/NZztM96qAxeI7+POxM4TOCvj2D0VMnju14htumq4mroVdPYC+oL4xjK57glpqmMK4T3ZUMu0GVKBybLhk3Gfa04thpSbCjVksUbriE1fKJAhOc0le5SFwjyhGHq+krXQTsCVVtcGy5INx8nCEJxyt9mzPsCrW74NhUzrjxpPlpOHaSE2w/bbYJro6+hGEfaEgCx7aEcesmc01xvYKr5RH1SOLYohBuznSmDa6i/xqywC5RWx44pf8aXGG/aMxmni2OHTvi9mxnueACh9XyjgaKwLENS9yayxxXHFfLsyHsAXUXiWMLhrhZ1xlZcB3oOgV2YbM6JHFsIgH2g0aznJ8Vxw5jcLtZz5bABfqBEoa9oX4fcEo/UMK4VYlzpXBV/VAh7B51+YRT+qFC3IzUmZI4rpZNwfPUPxHFdkc4acybAAAAAElFTkSuQmCC');
 }
 
