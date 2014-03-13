@@ -1003,6 +1003,7 @@
       "properties": {
         "featured": true,
         "id": "Intro",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/f5271e6e13e9f9ee80964531e37ad6a6c0a1748e.jpg",
         "story_title": "ClearWater in Ecuador",
         "story_excerpt": "ClearWater is bringing clean drinking water to indigenous communities in the Ecuadorian Amazon. By building rainwater catchment systems, ClearWater works with communities to provide viable clean water solutions."
       },
