@@ -221,7 +221,7 @@ cwm.MissionControl = function(container) {
             if (i === -1) {
                 _map.to(d).ease.optimal(void 0, void 0, function() {
                     scrolling = false;
-                    map.to(_stories.to());
+                    _map.to(_stories.to());
                 });
             } else if (i < _places.indexOf(from)) {
                 if (time === 0) {
