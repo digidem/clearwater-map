@@ -79,6 +79,11 @@
   height: 0.09em;
   left: 0.34em;
   width: 0.7em;
-  background: #eee;
-  box-shadow: 0 0.24em 0 0 #eee, 0 0.46em 0 0 #eee;
+  background: #ccc;
+  box-shadow: 0 0.24em 0 0 #ccc, 0 0.46em 0 0 #ccc;
+}
+
+#mapstory button.nav:hover:before {
+    background: #fff;
+    box-shadow: 0 0.24em 0 0 #fff, 0 0.46em 0 0 #fff;
 }
