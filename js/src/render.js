@@ -40,7 +40,7 @@ cwm.render = {
         .append("div")
         .attr("class", "feature-label")
         .style("pointer-events", "auto")
-        .text(d.attr("community") || d.id());
+        .text(d.attr("nationality") || d.id());
         
     return label;
   },
