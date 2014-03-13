@@ -18,6 +18,14 @@ cwm.MissionControl = function(container) {
 
     var navigation = cwm.Navigation(container).on("click", go);
 
+    container.call(cwm.render.NavButton)
+        .on("click", function(d) {
+            if (d3.event.target.tagName === "BUTTON") {
+                d3.event.stopPropagation();
+                navigation.toggle();
+            }
+        });
+
     // from https://github.com/mbostock/d3/pull/1050/files
     if ('onwheel' in document) {
         d3_behavior_zoom_wheel = 'wheel';

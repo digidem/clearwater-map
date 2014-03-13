@@ -58,3 +58,27 @@
     -webkit-transform: translate(20em,0);
     transform: translate(20em,0);
 }
+
+#mapstory button.nav {
+    font-size: 2.25em;
+    width: 1.3em;
+    height: 1.3em;
+    outline: none;
+    position: absolute;
+    border: none;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+#mapstory button.nav:before {
+  content: "";
+  position: absolute;
+  top: 0.45em;
+  height: 0.09em;
+  left: 0.34em;
+  width: 0.7em;
+  background: #eee;
+  box-shadow: 0 0.24em 0 0 #eee, 0 0.46em 0 0 #eee;
+}

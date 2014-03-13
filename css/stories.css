@@ -39,7 +39,7 @@
   background: #f2c21c;
 }
 
-#mapstory #stories .top-headings button:before {
+#mapstory #stories .top-headings button.nav:before {
   content: "";
   position: absolute;
   left: 0.45em;
@@ -47,21 +47,21 @@
   z-index: 1;
 }
 
-#mapstory #stories .top-headings h1 + button:before {
+#mapstory #stories .top-headings h1 + button.nav:before {
   top: 0.45em;
   height: 0.11em;
   background: black;
   box-shadow: 0 0.24em 0 0 black, 0 0.46em 0 0 black;
 }
 
-#mapstory #stories .top-headings h2 + button:before {
+#mapstory #stories .top-headings h2 + button.nav:before {
   top: 0.42em;
   height: 0.09em;
   background: #f2c21c;
   box-shadow: 0 0.24em 0 0 #f2c21c, 0 0.46em 0 0 #f2c21c;
 }
 
-#mapstory #stories .top-headings button {
+#mapstory #stories .top-headings button.nav {
   outline: none;
   position: absolute;
   left: -1em;
@@ -76,11 +76,11 @@
   background-color: transparent;
 }
 
-#mapstory #stories .top-headings h1 + button:hover {
+#mapstory #stories .top-headings h1 + button.nav:hover {
   background-color: #ab8b1e;
 }
 
-#mapstory #stories .top-headings h2 + button:hover:before {
+#mapstory #stories .top-headings h2 + button.nav:hover:before {
   background: #ab8b1e;
   box-shadow: 0 0.24em 0 0 #ab8b1e, 0 0.46em 0 0 #ab8b1e;
 }

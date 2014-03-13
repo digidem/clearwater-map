@@ -180,7 +180,7 @@ cwm.Stories = function(container) {
                 return templates(d).match(/<h\d.*<\/h\d>/)[0];
             })
             .classed("active", true)
-            .append("button");
+            .call(cwm.render.NavButton);
 
         topHeadings.style(cwm.util.transformProperty, function(d) {
                 return translate(0, offset.call(this));

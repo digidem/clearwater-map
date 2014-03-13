@@ -13,6 +13,11 @@ cwm.render = {
 
     return svg;
   },
+
+  NavButton: function(container) {
+    return container.append("button")
+        .classed("nav", true);
+  },
   
   Markers: function (data, context) {
     return context.selectAll("circle")
