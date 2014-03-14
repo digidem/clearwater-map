@@ -119,7 +119,7 @@ cwm.MissionControl = function(container) {
     function stories(x) {
         _stories = x;
         _stories.on("click", function(d) {
-            if (d3.event.srcElement.tagName === "BUTTON") {
+            if (d3.event.target.tagName === "BUTTON") {
                 d3.event.stopPropagation();
                 navigation.toggle();
             } else {
