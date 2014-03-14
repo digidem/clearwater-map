@@ -16,6 +16,8 @@ cwm.MissionControl = function(container) {
         ease = d3.ease("quad-in-out"),
         event = d3.dispatch("scroll");
 
+    d3.select(window).on("resize", requestRedraw);
+
     var navigation = cwm.Navigation(container).on("click", go);
 
     container.call(cwm.render.NavButton)
