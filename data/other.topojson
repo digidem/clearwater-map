@@ -11,7 +11,7 @@
             "id": "Ecuador",
             "parent": "Intro",
             "photo": "http://s3.amazonaws.com/clearwater-photos/e511db9c2dadcbc5fd5d21ebea48d7b3636ee8cd.jpg",
-            "story_title": "The Northern Ecuadorian Amazon",
+            "story_title": "Ecuador's Northern Amazon",
             "story_excerpt": "The Amazon rainforest produces 20% of the world’s freshwater. But in the Ecuadorian Amazon, the water is contaminated by decades of reckless oil operations resulting in a horrific health crisis affecting tens of thousands of local people. ClearWater partners with five indigenous tribes to directly address this crisis."
           },
           "arcs": [
@@ -27,7 +27,7 @@
             "id": "Intro",
             "photo": "http://s3.amazonaws.com/clearwater-photos/f5271e6e13e9f9ee80964531e37ad6a6c0a1748e.jpg",
             "story_title": "ClearWater in Ecuador",
-            "story_excerpt": "ClearWater is providing clean water solutions for indigenous communities in the Ecuadorian Amazon whose ancestral waterways have been contaminated for decades. And that’s just the beginning."
+            "story_excerpt": "ClearWater is providing clean water solutions for indigenous communities in the Ecuadorian Amazon whose ancestral waterways have been contaminated for decades. Together we are building a movement for clean water & cultural survival."
           },
           "arcs": [
             [
@@ -41,6 +41,7 @@
             "featured": true,
             "id": "Bookend",
             "parent": "Intro",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/30ba0301d1928a7f47bdd6eb1224bd3fc77ed181.jpg",
             "story_title": "Please Join Us",
             "story_excerpt": "ClearWater's supporters enable our efforts to build a movement for clean water & cultural survival. Every penny donated by individuals goes to providing safe access to clean water for additional families."
           },
