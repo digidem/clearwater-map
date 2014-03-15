@@ -10,7 +10,7 @@ window.cwm = {
             bingApiKey: 'Ajt-JIuGs7jVKkk4yeC5HWByvuHQ4OEISvzK2-77yRcz_EOCAGfooD4eDeZ-aY4l',
 
             // Mapbox ID for overlay map (this actually composites two Mapbox maps)
-            mapboxId: 'gmaclennan.gts2a9k9,gmaclennan.clearwater,gmaclennan.map-y7pgvo15',
+            mapboxId: 'gmaclennan.p7hqia4i,gmaclennan.clearwater,gmaclennan.map-y7pgvo15',
 
         };
 
