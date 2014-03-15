@@ -278,20 +278,6 @@ cwm.MissionControl = function(container) {
         return missionControl;
     }
 
-    // returns the previous place on the flightplan
-    function prev() {
-        var i = 0;
-        while (_places[i] && _places[i]._time < timeline) i++;
-        return _places[i - 1];
-    }
-
-        // returns the next place on the flightplan
-    function next() {
-        var i = 0;
-        while (_places[i] && _places[i]._time < timeline) i++;
-        return _places[i];
-    }
-
     missionControl = {
         flightplan: flightplan,
         stories: stories,
