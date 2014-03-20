@@ -57,12 +57,14 @@ cwm.MissionControl = function(container) {
         }));
 
         container.selectAll("#map,#stories")
+            .on(d3_behavior_zoom_wheel, onMouseWheel);
+
+        d3.select(document)
             .call(d3.keybinding()
                 .on("arrow-down", onArrowKey("down"))
                 .on("arrow-up", onArrowKey("up")))
-            .on(d3_behavior_zoom_wheel, onMouseWheel)
             .on('keyup', function() {
-                //adjusting = window.setTimeout(scrollToNearest, 50);
+                adjusting = window.setTimeout(go2Nearest, 200);
             });
     }
 
@@ -70,11 +72,7 @@ cwm.MissionControl = function(container) {
         return function() {
             if (adjusting) window.clearTimeout(adjusting);
             if (!scrolling) {
-                start = Date.now();
-                timelineStart = timeline;
-                timelineEnd = direction === "up" ? 0 : 99999;
-                end = start + Math.abs(timelineEnd - timelineStart);
-                scroll();
+                move(direction === "down" ? 50 : -50);
             }
         };
     }
@@ -84,7 +82,7 @@ cwm.MissionControl = function(container) {
         move(-d3_behavior_zoom_delta());
         // If we stop scrolling for 200ms, move to the next place if it is close.
         window.clearTimeout(adjusting);
-        adjusting = window.setTimeout(go2Nearest, 200, 200);
+        adjusting = window.setTimeout(go2Nearest, 200);
     }
 
     function stop() {
