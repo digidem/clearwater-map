@@ -64,20 +64,6 @@ cwm.layers.MarkerLayer = function() {
             });
     }
 
-    function zoomToMarker() {
-        var maxzoom = map.coordLimits[1].zoom;
-        var x = this.getAttribute("cx");
-        var y = this.getAttribute("cy");
-        if (d3.event.defaultPrevented) return;
-        if (map.getZoom() >= maxzoom) return;
-
-        var point = new MM.Point(x, y);
-        var to = map.pointCoordinate(point).zoomTo(maxzoom);
-        map.ease.to(to).path('about').run(1000, function() {
-            map.flightHandler.setOverride();
-        });
-    }
-
     function moveMarkers(selection) {
         selection.attr("cx", function(d) {
                 return project(d)[0];
