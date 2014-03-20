@@ -62,7 +62,8 @@ cwm.MissionControl = function(container) {
         d3.select(document)
             .call(d3.keybinding()
                 .on("arrow-down", onArrowKey("down"))
-                .on("arrow-up", onArrowKey("up")))
+                .on("arrow-up", onArrowKey("up"))
+                .on("space", go))
             .on('keyup', function() {
                 adjusting = window.setTimeout(go2Nearest, 200);
             });
@@ -205,6 +206,7 @@ cwm.MissionControl = function(container) {
     }
 
     function go(d, callback) {
+        if (!arguments.length) d = to;
         if (typeof callback !== "function") callback = null;
         var start = +new Date();
         var offset = time;
