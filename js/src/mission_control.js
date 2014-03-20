@@ -82,8 +82,9 @@ cwm.MissionControl = function(container) {
     function onMouseWheel() {
         d3.event.preventDefault();
         move(-d3_behavior_zoom_delta());
-        // If we stop scrolling for 500ms, move to the next place if it is close.
-        //adjusting = window.setTimeout(scrollToNearest, 200);
+        // If we stop scrolling for 200ms, move to the next place if it is close.
+        window.clearTimeout(adjusting);
+        adjusting = window.setTimeout(go2Nearest, 200, 200);
     }
 
     function stop() {
@@ -99,18 +100,17 @@ cwm.MissionControl = function(container) {
 
     // Moves the map / scroll to the nearest story
 
-    function scrollToNearest(offset) {
+    function go2Nearest(offset) {
         var adjusted;
-        offset = offset || 100;
+        offset = offset || 200;
 
-        stopOtherThingsHappening();
+        var current = _stories.getCurrent(time/duration);
 
-        _places.forEach(function(place) {
-            if (Math.abs(place._time - timeline) < offset) {
-                go(place, false);
-                adjusted = true;
-            }
-        });
+        if (current.distance < offset ) {
+            go(current.place, function() {
+                adjusting = void 0;
+            });
+        }
 
         // If we haven't adjusted the scroll, try again, this time searching a bit further.
         //if (!adjusted) adjusting = window.setTimeout(scrollToNearest, offset + 100, offset + 100);
