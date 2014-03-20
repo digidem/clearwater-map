@@ -6,7 +6,6 @@ cwm.layers.MarkerLayer = function() {
         markerData,
         markerSize = d3.functor(8),
         markerLayer,
-        markersHiding,
         mapContainer,
         markerInteraction,
         event = d3.dispatch("click");
@@ -54,13 +53,10 @@ cwm.layers.MarkerLayer = function() {
     }
 
     function hideMarkers(selection) {
-        markersHiding = selection.property("__exiting__", true);
-
         selection.transition()
             .attr("r", 0)
-            .remove()
             .each("end", function() {
-                this.__exiting__ = false;
+                d3.select(this).remove();
             });
     }
 
@@ -103,19 +99,15 @@ cwm.layers.MarkerLayer = function() {
             .call(showMarkers)
             .call(markerInteraction.add);
 
-        // For markers leaving the current extent, remove them from the DOM.
-        update.exit().call(hideMarkers);
-
         // After appending the circles to the enter() selection,
         // it is merged with the update selection.
         // Move all displayed markers to the correct location on the map
         update.call(moveMarkers);
 
-        if (markersHiding && markersHiding.node() && markersHiding.node().parentNode) {
-            markersHiding.call(moveMarkers);
-        } else {
-            markersHiding = null;
-        }
+        // For markers leaving the current extent, remove them from the DOM.
+        update.exit()
+            .call(moveMarkers)
+            .call(hideMarkers);
         
         markerInteraction.drawPopup(project, zoom);
 
