@@ -61,12 +61,14 @@ body {
 }
 
 #mapstory #legend {
+  z-index: 999;
   position: absolute;
   bottom: 0;
   right: 0;
 }
 
 #mapstory #attribution {
+  z-index: 999;
 position: absolute;
 padding: 0 0.5em;
 font-size: 0.8em;
