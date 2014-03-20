@@ -97,9 +97,6 @@ left: 50%;
   -webkit-transition: top 500ms ease;
 }
 
-#mapstory #legend:hover dl {
-  top: 10.5em;
-}
 
 #mapstory #legend dt {
   display: block;
