@@ -82,22 +82,30 @@ cwm.Map = function(container) {
         return extentCache[d.id()];
     };
 
-    map.pathGenerator = function() {
-        return d3.geo.path()
-        .projection(d3.geo.transform({
-            point: function(x, y, z) {
-                // We used topojson to presimplify the feature, which adds the z value, the effective area of each point
-                // This formula was from http://wiki.openstreetmap.org/wiki/Zoom_levels and tweaked until it looked right.
-                if (z < 63.728 / Math.pow(2, map.coordinate.zoom + 12)) return;
-                var point = map.locationPoint({
-                    lon: x,
-                    lat: y
-                });
+    map.pointProject = function() {
+        return function(x, y, z) {
+            // We used topojson to presimplify the feature, which adds the z value, the effective area of each point
+            // This formula was from http://wiki.openstreetmap.org/wiki/Zoom_levels and tweaked until it looked right.
+            if (z < 63.728 / Math.pow(2, map.coordinate.zoom + 12)) return;
+            var point = map.locationPoint({
+                lon: x,
+                lat: y
+            });
+            if (this.stream) {
                 // Rounding hack from http://jsperf.com/math-round-vs-hack/3
                 // Performance increase: http://www.mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
                 this.stream.point(~~(0.5 + point.x), ~~ (0.5 + point.y));
+            } else {
+                return [point.x, point.y];
             }
-        }));
+        };
+    };
+
+    map.pathGenerator = function() {
+        return d3.geo.path()
+            .projection(d3.geo.transform({
+                point: map.pointProject()
+            }));
     };
 
     return d3.rebind(map, event, "on");
