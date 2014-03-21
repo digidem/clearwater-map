@@ -1,11 +1,11 @@
-#mapstory .markers circle {
+#mapstory .installations circle {
   stroke-width: 0;
   fill: #17aae4;
   opacity: 0.6;
   cursor: pointer;
 }
 
-#mapstory .markers circle.featured {
+#mapstory .installations circle.featured {
   stroke-width: 3;
   fill: #ffffff;
   stroke: #17aae4;
