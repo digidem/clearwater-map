@@ -10,6 +10,8 @@ cwm.layers.MarkerLayer = function() {
         markerInteraction,
         event = d3.dispatch("click");
 
+    markers = cwm.views.Markers();
+
     // Project markers from map coordinates to screen coordinates
     function project(d) {
         var point = map.locationPoint({
@@ -18,46 +20,6 @@ cwm.layers.MarkerLayer = function() {
         });
         //return [~~(0.5 + point.x), ~~ (0.5 + point.y)];
         return [point.x, point.y];
-    }
-
-    // Used to sort featured places so they appear above others on the map
-    // if the markers overlap
-    function sortFeaturedLast(a, b) {
-        return (a.attr("featured") === true) ? 1 : 0;
-    }
-
-    // Sorts points according to distance from center point of map
-    // used for animating `show` making markers appear from center
-    function sortFromLocation(location) {
-        var loc = location || new MM.Location(0, 0);
-        return function(a, b) {
-            var ac = a.geometry.coordinates;
-            var bc = b.geometry.coordinates;
-            var ad = Math.pow(ac[0] - loc.lon, 2) + Math.pow(ac[1] - loc.lat, 2);
-            var bd = Math.pow(bc[0] - loc.lon, 2) + Math.pow(bc[1] - loc.lat, 2);
-            return d3.ascending(ad, bd);
-        };
-    }
-
-    function showMarkers(selection) {
-        selection.sort(sortFromLocation(map.getCenter()))
-            .transition()
-            .duration(1000)
-            .delay(function(d, i) {
-                return i * 20;
-            })
-            .ease("elastic", 2)
-            .attr("r", markerSize);
-
-        selection.sort(sortFeaturedLast);
-    }
-
-    function hideMarkers(selection) {
-        selection.transition()
-            .attr("r", 0)
-            .each("end", function() {
-                d3.select(this).remove();
-            });
     }
 
     function moveMarkers(selection) {
@@ -96,7 +58,7 @@ cwm.layers.MarkerLayer = function() {
             .append("circle")
             .attr("r", 0)
             .on("click.marker", event.click)
-            .call(showMarkers)
+            .call(markers.show)
             .call(markerInteraction.add);
 
         // After appending the circles to the enter() selection,
@@ -107,7 +69,7 @@ cwm.layers.MarkerLayer = function() {
         // For markers leaving the current extent, remove them from the DOM.
         update.exit()
             .call(moveMarkers)
-            .call(hideMarkers);
+            .call(markers.hide);
         
         markerInteraction.drawPopup(project, zoom);
 
@@ -125,6 +87,7 @@ cwm.layers.MarkerLayer = function() {
     function addTo(_) {
         map = _;
         map.addLayer(markerLayer);
+        markers.map(map);
         mapContainer = d3.select(map.parent);
         markerInteraction = cwm.handlers.MarkerInteraction(mapContainer);
         markerInteraction.on("click", event.click);
