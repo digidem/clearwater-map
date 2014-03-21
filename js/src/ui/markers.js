@@ -1,5 +1,7 @@
 cwm.views.Markers = function() {
     var map,
+        pointProject,
+        tagName = "circle",
         markerSize = 8;
 
     // Used to sort featured places so they appear above others on the map
@@ -24,9 +26,15 @@ cwm.views.Markers = function() {
     }
 
     return {
+        tagName: function(x) {
+            if (!arguments.length) return tagName;
+            tagName = x;
+        },
+
         show: function(selection) {
             selection
                 .sort(sortFromLocation(map.getCenter()))
+                .attr("r", 0)
                 .transition()
                 .duration(1000)
                 .delay(function(d, i) {
@@ -39,6 +47,13 @@ cwm.views.Markers = function() {
                 .sort(sortFeaturedLast);
         },
 
+        move: function(selection) {
+            selection.attr("transform", function(d) {
+                var coord = pointProject(d.geometry.coordinates);
+                return "translate(" + coord[0] + "," + coord[1] + ")";
+            });
+        },
+
         hide: function(selection) {
             selection.transition()
                 .attr("r", 0)
@@ -47,8 +62,9 @@ cwm.views.Markers = function() {
                 });
         },
 
-        map: function(_) {
-            map = _;
+        map: function(x) {
+            map = x;
+            pointProject = map.pointProject();
         }
     };
 };
