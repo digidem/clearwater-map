@@ -33,19 +33,9 @@ window.cwm = {
 
         var installationsLayer = cwm.layers.MarkerLayer()
             .addTo(map);
-            // .on("click", function(d) {
-            //     missionControl.go(d);
-            // });
 
         var communitiesLayer = cwm.layers.FeatureLayer()
             .addTo(map);
-            // .on("click", function(d) {
-            //     if (cwm.map.current().place === d.parent) {
-            //         missionControl.go(d);
-            //     } else {
-            //         missionControl.go(d.parent);
-            //     }
-            // });
 
         var countryLayer = cwm.layers.FeatureLayer()
             .addTo(map);
