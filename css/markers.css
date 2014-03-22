@@ -58,6 +58,21 @@ pointer-events: all;
 
 }
 
+#mapstory .marker-popup.bottom-right {
+  bottom: auto;
+}
+
+#mapstory .marker-popup.bottom-left {
+  bottom: auto;
+  right: 0;
+  left: auto;
+}
+
+#mapstory .marker-popup.top-left {
+  right: 0;
+  left: auto;
+}
+
 #mapstory .marker-popup {
   cursor: pointer;
   position:absolute;
