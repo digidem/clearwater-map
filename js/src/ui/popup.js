@@ -26,6 +26,7 @@ cwm.views.Popup = function() {
             if (currentDatum !== d) {
                 currentDatum = d;
                 event.changed(d);
+                popupInner.classed("scaled", false);
             }
 
             popup.move();
@@ -39,7 +40,8 @@ cwm.views.Popup = function() {
                 .classed("top-right", mapWidth - coord[0] > w && coord[1] > h)
                 .classed("bottom-right", mapWidth - coord[0] > w && coord[1] <= h)
                 .classed("top-left", mapWidth - coord[0] <= w && coord[1] > h)
-                .classed("bottom-left", mapWidth - coord[0] <= w && coord[1] <= h);
+                .classed("bottom-left", mapWidth - coord[0] <= w && coord[1] <= h)
+                .classed("scaled", true);
         },
 
         active: function() {
