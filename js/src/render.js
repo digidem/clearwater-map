@@ -49,7 +49,7 @@ cwm.render = {
         .append("div")
         .attr("class", "marker-tooltip")
         .style("position", "absolute")
-        .style("z-index", 999)
+        .style("z-index", 1)
         .append("div")
         .style("position", "absolute")
         .style("pointer-events", "none")
