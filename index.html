@@ -135,6 +135,22 @@
   </div>
 </script>
 
+<script type="text/html" id="template-popup-small">
+  {{ renderMedia(attr("photo"), 150) }}
+  <p>{{ attr("name") ? attr("name").split(" and")[0] : "" }}</p>
+</script>
+
+<script type="text/html" id="template-popup-large">
+  {{ renderMedia(attr("photo"), 480) }}
+  <p><em>{{ attr("name") }}’s</em> rainwater collection system, in the village of <em>{{ attr("community") }}</em>,
+  was installed on <em>{{ d3.time.format("%b %e %Y")(new Date(attr("date"))) }}</em>, 
+  and provides clean drinking water to <strong>{{ attr("users") }} people</strong>.</p>
+  <% if (attr("featured")) { %>
+  <p><a href="{{ attr("story_url") }}" target="_blank">Read more</a> about {{ attr("name") }}.</p>
+  <% } %>
+</script>
+
+
 <script type="text/html" id="template-image">
   <div class="image-wrapper"><img src="{{ mediaUrl }}"></div>
 </script>
