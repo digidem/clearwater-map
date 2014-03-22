@@ -238,11 +238,18 @@ cwm.MissionControl = function(container) {
             scroll();
         } else {
             var i = _places.indexOf(d);
+            // If the place is not a featured story...
             if (i === -1) {
-                _map.to(d).ease.optimal(void 0, void 0, function() {
-                    scrolling = false;
-                    _map.to(_stories.to());
-                });
+                // and we are not just heading to the same point
+                if (_map.coordinate.toKey() !== _map.placeExtentCoordinate(d).toKey()) {
+                    offpiste = true;
+                    _map.to(d).ease
+                        .setOptimalPath()
+                        .run(Math.max(1000, _map.getOptimalTime()), function() {
+                            scrolling = false;
+                            _map.to(_stories.to());
+                        });
+                }
             } else if (i < _places.indexOf(from)) {
                 if (time === 0) {
                     setTo(from);
