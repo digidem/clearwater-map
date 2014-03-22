@@ -14,6 +14,16 @@ cwm.render = {
     return svg;
   },
 
+  DivContainer: function(selection) {
+     return selection
+        .append("div")
+        .attr("position", "absolute")
+        .attr("top", 0)
+        .attr("bottom", 0)
+        .attr("left", 0)
+        .attr("right", 0);
+  },
+
   NavButton: function(container) {
     return container.append("button")
         .classed("nav", true);
@@ -45,21 +55,18 @@ cwm.render = {
     return label;
   },
   
-  Popup: function (d, context) {
-    var popup = context.append("div")
+  PopupContainer: function(selection) {
+    return selection
+        .append("div")
         .attr("class", "marker-tooltip")
-        .style("width", "100%")
-        .datum(d);
-      
-    popup.append("div")
+        .style("position", "absolute")
+        .style("z-index", 999)
+        .append("div")
         .style("position", "absolute")
         .style("pointer-events", "none")
         .append("div")
         .attr("class", "marker-popup")
-        .style("pointer-events", "auto")
-        .classed("featured", function () { return d.attr("featured") === true; });
-        
-    return popup;
+        .style("pointer-events", "auto");
   },
   
   PopupSmall: function (d, context) {

@@ -32,7 +32,7 @@ cwm.layers.MarkerLayer = function() {
         update.enter()
             .append(markers.tagName())
             .call(markers.show)
-            .call(markerInteraction.add);
+            .call(markers.addInteraction);
 
         // After appending the circles to the enter() selection,
         // it is merged with the update selection.
@@ -43,8 +43,6 @@ cwm.layers.MarkerLayer = function() {
         update.exit()
             .call(markers.move)
             .call(markers.hide);
-        
-        markerInteraction.drawPopup(project, zoom);
 
         return markerLayer;
     }
@@ -62,8 +60,6 @@ cwm.layers.MarkerLayer = function() {
         map.addLayer(markerLayer);
         markers.map(map);
         var mapContainer = d3.select(map.parent);
-        markerInteraction = cwm.handlers.MarkerInteraction(mapContainer);
-        markerInteraction.on("click", event.click);
         g = cwm.render.SvgContainer(mapContainer)
             .append('g')
             .attr("class", markerLayer.name);
