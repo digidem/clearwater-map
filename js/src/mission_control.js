@@ -100,6 +100,7 @@ cwm.MissionControl = function(container) {
     // Moves the map / scroll to the nearest story
 
     function go2Nearest(offset) {
+        if (scrolling) return;
         var adjusted;
         offset = offset || 200;
 
@@ -122,6 +123,7 @@ cwm.MissionControl = function(container) {
                 d3.event.stopPropagation();
                 navigation.toggle();
             } else {
+                if (scrolling) return;
                 if (d) go(d);
             }
         });
@@ -131,6 +133,7 @@ cwm.MissionControl = function(container) {
     function map(x) {
         _map = x;
         _map.on("click", function(d) {
+            if (scrolling) return;
             if (d) {
                 if (d.parent && !d.parent.geometry.coordinates && _map.current().place !== d.parent) {
                     go(d.parent);
