@@ -1,7 +1,7 @@
 cwm.views.Markers = function() {
     var map,
         pointProject,
-        isBouncing,
+        stopBouncing,
         tagName = "circle",
         markerSize = 8;
 
@@ -31,7 +31,7 @@ cwm.views.Markers = function() {
     }
 
     function grow(d) {
-        if (d.attr("featured") === true) window.clearTimeout(isBouncing);
+        if (d.attr("featured") === true) stopBouncing = true;
         d3.select(this)
             .classed("grown", true)
             .transition()
@@ -68,7 +68,11 @@ cwm.views.Markers = function() {
                     .ease("elastic", 1, 0.2)
                     .attr("r", markerSize)
                     .style("stroke-width", 3);
-                bounceFeatured(selection);
+                if (!stopBouncing) {
+                    bounceFeatured(selection);
+                } else {
+                    stopBouncing = false;
+                }
             });
         
     }
