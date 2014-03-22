@@ -4,6 +4,7 @@ cwm.views.Popup = function() {
         popup,
         popupInner,
         popupOuter,
+        currentDatum,
         event = d3.dispatch("hide", "changed");
 
     var templates = cwm.Templates();
@@ -11,7 +12,7 @@ cwm.views.Popup = function() {
     popup = {
         show: function(d) {
             var size = d3.event.type === "click" ? "large" : "small";
-            if (d !== popupInner.datum()) event.changed(popupInner.datum());
+
             if (popupInner.classed("large") && d === popupInner.datum()) size = "large";
             popupInner
                 .datum(d)
@@ -22,6 +23,10 @@ cwm.views.Popup = function() {
                 .duration(20)
                 .style("opacity", 1);
 
+            if (currentDatum !== d) {
+                currentDatum = d;
+                event.changed(d);
+            }
 
             popup.move();
 
@@ -38,7 +43,7 @@ cwm.views.Popup = function() {
         },
 
         active: function() {
-            return popupInner.style("opacity") > 0 && popupInner.datum();
+            return popupInner.style("opacity") > 0 && currentDatum;
         },
 
         move: function() {
@@ -46,7 +51,7 @@ cwm.views.Popup = function() {
             var d = popupInner.datum();
 
             if (current.section === "installations" || (current.section === "communities" && current.communities === d.parent)) {
-                var coord = pointProject.apply(this, popupInner.datum().geometry.coordinates);
+                var coord = pointProject.apply(this, currentDatum.geometry.coordinates);
                 MM.moveElement(popupOuter.node(), new MM.Point(coord[0], coord[1]));
             } else {
                 popup.hide(d);

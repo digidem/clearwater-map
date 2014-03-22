@@ -40,11 +40,12 @@ cwm.views.Markers = function() {
             .attr("r", markerSize * 1.8);
     }
 
-    function shrink(data) {
+    function shrink() {
         d3.select(".grown")
-            .classed("grown", function(d) {
-                return data === d;
+            .filter(function(d) {
+                return d !== popup.active();
             })
+            .classed("grown", false)
             .transition()
             .attr("r", markerSize);
     }
