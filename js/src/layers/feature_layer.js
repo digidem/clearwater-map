@@ -39,7 +39,7 @@ cwm.layers.FeatureLayer = function() {
                 d3.event.stopPropagation();
                 mouseoverLabel = false;
                 label.remove();
-                d3.select(label._feature).on("click").call(label._feature, d);
+                map.on("click").call(label._feature, d);
             });
         drawLabel();
     }
@@ -50,6 +50,11 @@ cwm.layers.FeatureLayer = function() {
             var point = map.locationPoint(new MM.Location(d.centroid()[1], d.centroid()[0]));
             MM.moveElement(label.node(), point);
         }
+    }
+
+    function featureClick(d, i) {
+        d3.event.stopPropagation();
+        map.on("click").call(this, d, i);
     }
 
     function hideLabel() {
@@ -92,7 +97,7 @@ cwm.layers.FeatureLayer = function() {
             .append("path")
             .on("mouseover", showLabel)
             .on("mouseout", hideLabel)
-            .on("click", event.click);
+            .on("click", featureClick);
 
         features.attr("d", pathGenerator)
             .classed("active", function(d) {

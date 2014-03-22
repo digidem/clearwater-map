@@ -11,6 +11,11 @@ cwm.Map = function(container) {
         extentCache = {};
     });
 
+    container.on("click", function() {
+        var d = d3.select(d3.event.target || d3.event.srcElement).datum();
+        event.click(d);
+    });
+
     var map = new MM.Map(
         container.node(),
         null,
@@ -19,8 +24,6 @@ cwm.Map = function(container) {
 
     map.addLayer = function(layer) {
         map.layers.push(layer);
-        // pass through layer events
-        layer.on("click", event.click);
         if (map.coordinate) {
             MM.getFrame(map.getRedraw());
         }

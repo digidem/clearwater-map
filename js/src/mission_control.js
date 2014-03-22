@@ -130,8 +130,26 @@ cwm.MissionControl = function(container) {
 
     function map(x) {
         _map = x;
-        _map.on("click", go);
+        _map.on("click", function(d) {
+            if (d) {
+                if (d.parent && !d.parent.geometry.coordinates && _map.current().place !== d.parent) {
+                    go(d.parent);
+                } else {
+                    go(d);
+                }
+            } else {
+                //mapZoom(d3.mouse(container.node()));
+            }
+        });
         return missionControl;
+    }
+
+    function mapZoom(point) {
+        var maxZoom = _map.coordLimits[1].zoom;
+        var coord = _map.pointCoordinate(new MM.Point(point[0], point[1])).zoomTo(maxZoom);
+        _map.to(coord).ease
+            .path("about")
+            .run(500);
     }
 
     function flightplan(x) {

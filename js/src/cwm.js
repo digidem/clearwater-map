@@ -32,28 +32,23 @@ window.cwm = {
         var mapboxLayer = cwm.layers.MapboxLayer().id(options.mapboxId).addTo(map);
 
         var installationsLayer = cwm.layers.MarkerLayer()
-            .addTo(map)
-            .on("click", function(d) {
-                missionControl.go(d);
-            });
+            .addTo(map);
+            // .on("click", function(d) {
+            //     missionControl.go(d);
+            // });
 
         var communitiesLayer = cwm.layers.FeatureLayer()
-            .addTo(map)
-            .on("click", function(d) {
-                if (cwm.map.current().place === d.parent) {
-                    missionControl.go(d);
-                } else {
-                    missionControl.go(d.parent);
-                }
-            });
+            .addTo(map);
+            // .on("click", function(d) {
+            //     if (cwm.map.current().place === d.parent) {
+            //         missionControl.go(d);
+            //     } else {
+            //         missionControl.go(d.parent);
+            //     }
+            // });
 
         var countryLayer = cwm.layers.FeatureLayer()
-            .addTo(map)
-            .on("click", function(d) {
-                if (cwm.map.current().place === d.parent) {
-                    missionControl.go(d);
-                }
-            });
+            .addTo(map);
 
         // We augment the community field to use it as an id, since it can potentially
         // clash with the nationality id (e.g. nationality = Secoya && community = Secoya)
