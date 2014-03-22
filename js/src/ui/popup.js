@@ -4,8 +4,6 @@ cwm.views.Popup = function() {
         popup,
         popupInner,
         popupOuter,
-        w,
-        h,
         event = d3.dispatch("hide", "changed");
 
     var templates = cwm.Templates();
@@ -24,10 +22,19 @@ cwm.views.Popup = function() {
                 .duration(20)
                 .style("opacity", 1);
 
-            w = popupInner.dimensions()[0];
-            h = popupInner.dimensions()[1];
 
             popup.move();
+
+            var w = popupInner.dimensions()[0];
+            var h = popupInner.dimensions()[1];
+            var mapWidth = map.dimensions.x;
+            var coord = pointProject.apply(this, currentDatum.geometry.coordinates);
+
+            popupInner
+                .classed("top-right", mapWidth - coord[0] > w && coord[1] > h)
+                .classed("bottom-right", mapWidth - coord[0] > w && coord[1] <= h)
+                .classed("top-left", mapWidth - coord[0] <= w && coord[1] > h)
+                .classed("bottom-left", mapWidth - coord[0] <= w && coord[1] <= h);
         },
 
         active: function() {
@@ -41,14 +48,6 @@ cwm.views.Popup = function() {
             if (current.section === "installations" || (current.section === "communities" && current.communities === d.parent)) {
                 var coord = pointProject.apply(this, popupInner.datum().geometry.coordinates);
                 MM.moveElement(popupOuter.node(), new MM.Point(coord[0], coord[1]));
-
-                var mapWidth = map.dimensions.x;
-
-                popupInner
-                    .classed("top-right", mapWidth - coord[0] > w && coord[1] > h)
-                    .classed("bottom-right", mapWidth - coord[0] > w && coord[1] <= h)
-                    .classed("top-left", mapWidth - coord[0] <= w && coord[1] > h)
-                    .classed("bottom-left", mapWidth - coord[0] <= w && coord[1] <= h);
             } else {
                 popup.hide(d);
             }
