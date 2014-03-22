@@ -28,16 +28,7 @@ cwm.render = {
     return container.append("button")
         .classed("nav", true);
   },
-  
-  Markers: function (data, context) {
-    return context.selectAll("circle")
-        .data(data)
-        .enter()
-        .append("circle")
-        .attr("r", 0)
-        .style("cursor", "pointer");
-  },
-  
+
   Label: function (d, context) {
     var label = context.append("div")
         .attr("class", "marker-tooltip")
