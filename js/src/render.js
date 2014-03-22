@@ -2,9 +2,7 @@ cwm.render = {
   
   // Container for the interactive layer
   SvgContainer: function (selection) {
-    var svg;
-
-    svg = selection.select('svg');
+    var svg = selection.select('svg');
 
     if (!svg.node()) {
       svg = selection.append('svg')
