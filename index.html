@@ -142,7 +142,7 @@
 
 <script type="text/html" id="template-popup-large">
   {{ renderMedia(attr("photo"), 480) }}
-  <p><em>{{ attr("name") }}’s</em> rainwater collection system, in the village of <em>{{ attr("community") }}</em>,
+  <p><em>{{ attr("name") }}’s</em> rainwater collection system, in the {{ parent.attr("nationality") }} village of <em>{{ attr("settlement") }}</em>,
   was installed on <em>{{ d3.time.format("%b %e %Y")(new Date(attr("date"))) }}</em>, 
   and provides clean drinking water to <strong>{{ attr("users") }} people</strong>.</p>
   <% if (attr("featured")) { %>
