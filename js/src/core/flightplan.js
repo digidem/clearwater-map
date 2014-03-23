@@ -116,7 +116,7 @@ cwm.util.extend(cwm.Flightplan.prototype, {
         for (var i = 0; i < this.length; i++) {
             this[i]._index = i;
             this[i]._prev = this[i - 1] || this[i];
-            this[i]._next = this[i + 1] || this[i];
+            this[i]._next = this[i + 1];
             this[i]._lastDescendant = this[i].lastDescendant(this._filterFn);
         }
     }
