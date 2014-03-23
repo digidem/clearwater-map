@@ -89,10 +89,6 @@ cwm.MissionControl = function(container) {
         adjusting = window.setTimeout(go2Nearest, 400);
     }
 
-    function stop() {
-
-    }
-
     // Moves the map / scroll to the nearest story
 
     function go2Nearest(offset) {
