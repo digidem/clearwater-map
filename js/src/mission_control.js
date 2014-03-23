@@ -136,7 +136,7 @@ cwm.MissionControl = function(container) {
                     go(d);
                 }
             } else {
-                //mapZoom(d3.mouse(container.node()));
+                if (!d3.event.defaultPrevented) mapZoom(d3.mouse(container.node()));
             }
         });
 
@@ -164,11 +164,16 @@ cwm.MissionControl = function(container) {
     }
 
     function mapZoom(point) {
+        var installations = _map.getLayer("installations").data();
+
+        var nearest = installations.nearest(_map.coordinateLocation(_map.coordinate));
+
         var maxZoom = _map.coordLimits[1].zoom;
-        var coord = _map.pointCoordinate(new MM.Point(point[0], point[1])).zoomTo(maxZoom);
-        _map.to(coord).ease
-            .path("about")
-            .run(500);
+        var zoom = _map.coordinate.zoom;
+
+        if (zoom > _map.placeExtentCoordinate(nearest.parent).zoom) {
+            go(nearest.parent);
+        }
     }
 
     function flightplan(x) {

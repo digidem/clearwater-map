@@ -48,6 +48,7 @@ cwm.layers.MarkerLayer = function() {
     }
 
     function data(collection) {
+        if (!arguments.length) return markerData;
         markerData = collection;
         markerLayer.name = collection.id();
         g.classed(markerLayer.name, true);
