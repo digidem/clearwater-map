@@ -23,6 +23,12 @@
         var from, to, map;
         var oldpath, S;
 
+        easey.reset = function() {
+          from = undefined;
+          to = undefined;
+          return easey;
+        };
+
         easey.stop = function(callback) {
             abort = true;
             from = undefined;
