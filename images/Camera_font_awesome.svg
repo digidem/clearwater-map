@@ -1,59 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   viewBox="0 -256 1950 1950"
-   id="svg3037"
-   version="1.1"
-   inkscape:version="0.48.3.1 r9886"
-   width="100%"
-   height="100%"
-   sodipodi:docname="camera_font_awesome.svg">
-  <metadata
-     id="metadata3047">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs3045" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="640"
-     inkscape:window-height="480"
-     id="namedview3043"
-     showgrid="false"
-     inkscape:zoom="0.13169643"
-     inkscape:cx="960"
-     inkscape:cy="896"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg3037" />
-  <g
-     transform="matrix(1,0,0,-1,15.186441,1413.0508)"
-     id="g3039">
-    <path
-       d="m 960,864 q 119,0 203.5,-84.5 Q 1248,695 1248,576 1248,457 1163.5,372.5 1079,288 960,288 841,288 756.5,372.5 672,457 672,576 672,695 756.5,779.5 841,864 960,864 z m 704,416 q 106,0 181,-75 75,-75 75,-181 V 128 q 0,-106 -75,-181 -75,-75 -181,-75 H 256 Q 150,-128 75,-53 0,22 0,128 v 896 q 0,106 75,181 75,75 181,75 h 224 l 51,136 q 19,49 69.5,84.5 Q 651,1536 704,1536 h 512 q 53,0 103.5,-35.5 50.5,-35.5 69.5,-84.5 l 51,-136 h 224 z M 960,128 q 185,0 316.5,131.5 Q 1408,391 1408,576 1408,761 1276.5,892.5 1145,1024 960,1024 775,1024 643.5,892.5 512,761 512,576 512,391 643.5,259.5 775,128 960,128 z"
-       id="path3041"
-       inkscape:connector-curvature="0"
-       style="fill:currentColor" />
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg3037" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="camera_font_awesome.svg" inkscape:version="0.48.3.1 r9886"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px" height="200px"
+	 viewBox="12.5 161.5 300 200" enable-background="new 12.5 161.5 300 200" xml:space="preserve">
+<rect x="12.5" y="161.5" fill="#D6D6D6" width="300" height="200"/>
+<sodipodi:namedview  inkscape:cy="896" inkscape:cx="960" inkscape:zoom="0.13169643" showgrid="false" guidetolerance="10" gridtolerance="10" objecttolerance="10" bordercolor="#666666" pagecolor="#ffffff" borderopacity="1" id="namedview3043" inkscape:current-layer="svg3037" inkscape:window-maximized="0" inkscape:window-y="25" inkscape:window-x="0" inkscape:window-height="480" inkscape:window-width="640" inkscape:pageopacity="0" inkscape:pageshadow="2">
+	</sodipodi:namedview>
+<g>
+	<g id="g3039" transform="matrix(1,0,0,-1,15.186441,1413.0508)">
+		<path id="path3041" inkscape:connector-curvature="0" fill="#C4C4C4" d="M147.637,1161.639c2.902,0,5.384-1.03,7.445-3.091
+			c2.061-2.061,3.091-4.542,3.091-7.444s-1.031-5.384-3.091-7.444c-2.061-2.061-4.542-3.091-7.445-3.091
+			c-2.902,0-5.383,1.03-7.444,3.091c-2.061,2.061-3.091,4.542-3.091,7.444s1.031,5.384,3.091,7.444
+			C142.253,1160.608,144.735,1161.639,147.637,1161.639z M173.391,1176.857c2.585,0,4.792-0.915,6.621-2.744
+			s2.744-4.036,2.744-6.621v-32.778c0-2.585-0.915-4.792-2.744-6.621s-4.036-2.744-6.621-2.744h-51.508
+			c-2.585,0-4.792,0.915-6.621,2.744s-2.744,4.036-2.744,6.621v32.778c0,2.585,0.915,4.792,2.744,6.621s4.036,2.744,6.621,2.744
+			h8.195l1.866,4.975c0.463,1.195,1.311,2.226,2.542,3.091c1.232,0.866,2.494,1.299,3.787,1.299h18.73
+			c1.292,0,2.555-0.433,3.786-1.299c1.232-0.866,2.079-1.896,2.542-3.091l1.866-4.975H173.391z M147.637,1134.714
+			c4.512,0,8.372,1.604,11.579,4.811s4.811,7.066,4.811,11.578s-1.604,8.372-4.811,11.578c-3.207,3.207-7.066,4.811-11.579,4.811
+			c-4.512,0-8.371-1.604-11.578-4.811c-3.207-3.207-4.811-7.066-4.811-11.578s1.604-8.371,4.811-11.578
+			S143.125,1134.714,147.637,1134.714z"/>
+	</g>
+	<g opacity="0.5">
+		<circle fill="none" stroke="#9C9C9C" stroke-width="12.268" stroke-miterlimit="10" cx="162.5" cy="261.5" r="68"/>
+		
+			<line fill="none" stroke="#9C9C9C" stroke-width="12.268" stroke-miterlimit="10" x1="115.18" y1="308.469" x2="211.397" y2="212.252"/>
+	</g>
+</g>
 </svg>
