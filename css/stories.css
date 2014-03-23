@@ -5,9 +5,12 @@
   position: absolute;
   margin: 0;
   color: #eee;
-  background-color: #333;
   margin-left: 2em;
   z-index: 1;
+}
+
+#mapstory #stories article {
+    background-color: #333;
 }
 
 #mapstory #stories .top-headings
