@@ -133,6 +133,8 @@ cwm.views.Markers = function() {
                 });
         },
 
+        showPopup: popup.show,
+
         map: function(x) {
             map = x;
             popup.map(map);

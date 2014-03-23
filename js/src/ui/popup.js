@@ -11,7 +11,7 @@ cwm.views.Popup = function() {
 
     popup = {
         show: function(d) {
-            var size = d3.event.type === "click" ? "large" : "small";
+            var size = !d3.event || d3.event.type === "click" ? "large" : "small";
 
             if (popupInner.classed("large") && d === popupInner.datum()) size = "large";
             popupInner

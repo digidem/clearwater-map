@@ -73,6 +73,13 @@ cwm.Map = function(container) {
         current = x;
     };
 
+    map.showPopup = function(d) {
+        map.layers.forEach(function(layer) {
+            if (layer.showPopup && ~layer.data().indexOf(d)) layer.showPopup(d);
+        });
+        return map;
+    };
+
     map.placeExtentCoordinate = function(d) {
         if (extentCache[d.id()]) return extentCache[d.id()];
         var extent;

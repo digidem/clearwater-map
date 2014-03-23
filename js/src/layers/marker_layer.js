@@ -73,7 +73,9 @@ cwm.layers.MarkerLayer = function() {
 
         data: data,
 
-        addTo: addTo
+        addTo: addTo,
+
+        showPopup: markers.showPopup
     };
 
     return markerLayer;

@@ -120,7 +120,7 @@ cwm.MissionControl = function(container) {
                 }
             })
             .on("arrived", function(d) {
-                console.log(d.attr("story_title"));
+                _map.showPopup(d);
             });
         return missionControl;
     }
