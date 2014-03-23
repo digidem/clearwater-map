@@ -1040,7 +1040,7 @@
         "parent": "Intro",
         "photo": "http://s3.amazonaws.com/clearwater-photos/30ba0301d1928a7f47bdd6eb1224bd3fc77ed181.jpg",
         "story_title": "Please Join Us",
-        "story_excerpt": "ClearWater's supporters enable our efforts to build a movement for clean water & cultural survival. Every penny donated by individuals goes to providing safe access to clean water for additional families."
+        "story_excerpt": "ClearWater's supporters enable our efforts to build a movement for clean water & cultural survival. Every penny donated by individuals goes to providing safe access to clean water for additional families. <br><strong><a href=\"https://www.giveclearwater.org/donate/\" target=\"blank\">Donate Now</a></strong>"
       },
       "geometry": {
         "type": "Polygon",
