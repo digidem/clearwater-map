@@ -10,6 +10,12 @@
   z-index: 1;
 }
 
+#mapstory #stories .top-headings
+, #mapstory #stories .next-headings {
+  z-index: 2;
+}
+
+
 #mapstory #stories .top-headings div
 , #mapstory #stories .next-headings div {
   cursor: pointer;
