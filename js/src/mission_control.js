@@ -8,10 +8,11 @@ cwm.MissionControl = function(container) {
         duration = 0,
         from,
         to,
+        offpiste = {},
+        direction = 1,
         pendingRedraw,
         storyOverride,
         scrolling,
-        direction, 
         adjusting,
         ease = d3.ease("quad-in-out"),
         event = d3.dispatch("scroll");
@@ -65,6 +66,7 @@ cwm.MissionControl = function(container) {
                 .on("arrow-up", onArrowKey("up"))
                 .on("space", go))
             .on('keyup', function() {
+                if (adjusting) window.clearTimeout(adjusting);
                 adjusting = window.setTimeout(go2Nearest, 200);
             });
     }
@@ -80,27 +82,21 @@ cwm.MissionControl = function(container) {
 
     function onMouseWheel() {
         d3.event.preventDefault();
+        d3.event.stopPropagation();
+        if (adjusting) window.clearTimeout(adjusting);
         move(-d3_behavior_zoom_delta());
         // If we stop scrolling for 200ms, move to the next place if it is close.
-        window.clearTimeout(adjusting);
-        adjusting = window.setTimeout(go2Nearest, 200);
+        adjusting = window.setTimeout(go2Nearest, 400);
     }
 
     function stop() {
 
     }
 
-    function stopOtherThingsHappening() {
-        if (adjusting) window.clearTimeout(adjusting);
-        if (scrolling) window.cancelAnimationFrame(scrolling);
-        scrolling = adjunsting = easeOverride = null;
-        ease = d3.ease("linear");
-    }
-
     // Moves the map / scroll to the nearest story
 
     function go2Nearest(offset) {
-        if (scrolling) return;
+        if (scrolling || offpiste.duration) return;
         var adjusted;
         offset = offset || 200;
 
@@ -108,7 +104,7 @@ cwm.MissionControl = function(container) {
 
         if (current.distance < offset ) {
             go(current.place, function() {
-                adjusting = void 0;
+                adjusting = scrolling = void 0;
             });
         }
 
@@ -123,7 +119,6 @@ cwm.MissionControl = function(container) {
                 d3.event.stopPropagation();
                 navigation.toggle();
             } else {
-                if (scrolling) return;
                 if (d) go(d);
             }
         });
@@ -144,7 +139,28 @@ cwm.MissionControl = function(container) {
                 //mapZoom(d3.mouse(container.node()));
             }
         });
+
+        _map.addCallback("panned", function() {
+            if (scrolling) return;
+            direction = 1;
+            goOffpiste(to);
+        });
+        _map.addCallback("zoomed", function() {
+            if (scrolling) return;
+            direction = 1;
+            goOffpiste(to);
+        });
         return missionControl;
+    }
+
+    function goOffpiste(dest) {
+        if (adjusting) window.clearTimeout(adjusting);
+        scrolling = adjusting = null;
+        _map.ease.reset();
+        _map.to(dest);
+        offpiste.time = 0;
+        var storyDuration = direction === 1 ? duration - time : time;
+        offpiste.duration = Math.max(_map.getOptimalTime(), storyDuration);
     }
 
     function mapZoom(point) {
@@ -165,25 +181,44 @@ cwm.MissionControl = function(container) {
         if (scrolling) return;
         // Limit how much the map moves on each tick
         delta = Math.max(-100, Math.min(100, delta));
-
         time = time + delta;
-        if (time < 0) {
+
+        if (time < 0 && (!offpiste.duration || offpiste.time === 0)) {
             if (_places[_places.indexOf(from) - 1]) {
+                direction = -1;
+                if (offpiste.duration) goOffpiste(from._prev);
                 setTo(from);
                 setFrom(from._prev);
                 time = time + duration;
             } else {
                 time = 0;
             }
-        } else if (time >= duration) {
+        } else if (time >= duration && (!offpiste.duration || offpiste.time === 0)) {
             if (_places[_places.indexOf(to) + 1]) {
+                direction = 1;
+                if (offpiste.duration) goOffpiste(to._next);
                 time = time - duration;
                 setFrom(to);
                 setTo(to._next);
             } else {
                 time = duration;
             }
-        }
+        } else if (offpiste.duration) {
+            var directionChange = (delta > 0 && direction === -1) || (delta < 0 && direction === 1);
+            if (!directionChange) {
+                offpiste.time += Math.abs(delta);
+            } else if (delta > 0) {
+                direction = 1;
+                goOffpiste(to);
+            } else if (delta < 0) {
+                direction = -1;
+                goOffpiste(from);
+            }
+            if (time < 0) time = 0;
+            if (time >= duration) time = duration;
+        } 
+
+        lastDelta = delta;
 
         requestRedraw();
 
@@ -194,8 +229,18 @@ cwm.MissionControl = function(container) {
         if (!pendingRedraw) pendingRedraw = window.requestAnimationFrame(redraw);
 
         function redraw() {
-            var t = time / duration;
-            if (!storyOverride) _map.t(t);
+            var t = Math.max(0, Math.min(1, time / duration));
+            if (!offpiste.duration) {
+                _map.t(t);
+            } else {
+                var mt = Math.max(0, Math.min(1, offpiste.time / offpiste.duration));
+                _map.t(mt);
+                if (offpiste.time < 0 || offpiste.time > offpiste.duration) {
+                    offpiste = {};
+                    _map.from(from);
+                    _map.to(to);
+                }
+            }
             _stories.t(t);
             _map.current(_stories.getCurrent(t));
             pendingRedraw = false;
@@ -205,18 +250,17 @@ cwm.MissionControl = function(container) {
     }
 
     function setFrom(d) {
-        _stories.from(d);
-        _map.from(d);
         from = d;
+        _stories.from(d);
+        if (!offpiste.duration) _map.from(d);
         setDuration();
         return missionControl;
     }
 
     function setTo(d) {
-        if (!arguments.length) return to;
         to = d;
         _stories.to(d);
-        _map.to(d);
+        if (!offpiste.duration) _map.to(d);
         setDuration();
         return missionControl;
     }
@@ -235,9 +279,11 @@ cwm.MissionControl = function(container) {
 
         if (d === from) {
             direction = -1;
+            if (offpiste.duration) goOffpiste(d);
             scroll();
         } else if (d === to) {
             direction = 1;
+            if (offpiste.duration) goOffpiste(d);
             scroll();
         } else {
             var i = _places.indexOf(d);
@@ -245,15 +291,16 @@ cwm.MissionControl = function(container) {
             if (i === -1) {
                 // and we are not just heading to the same point
                 if (_map.coordinate.toKey() !== _map.placeExtentCoordinate(d).toKey()) {
-                    offpiste = true;
                     _map.to(d).ease
                         .setOptimalPath()
                         .run(Math.max(1000, _map.getOptimalTime()), function() {
-                            scrolling = false;
-                            _map.to(_stories.to());
+                            direction = 1;
+                            goOffpiste(_stories.to());
                         });
                 }
             } else if (i < _places.indexOf(from)) {
+                direction = -1;
+                if (offpiste.duration) goOffpiste(d);
                 if (time === 0) {
                     setTo(from);
                     setFrom(d);
@@ -269,6 +316,8 @@ cwm.MissionControl = function(container) {
                     });
                 }
             } else { // if (_places.indexOf(d) > _places.indexOf(to))
+                direction = 1;
+                if (offpiste.duration) goOffpiste(d);
                 if (time === duration) {
                     setFrom(to);
                     setTo(d);
@@ -287,8 +336,9 @@ cwm.MissionControl = function(container) {
 
         function scroll() {
             var delta = (+new Date()) - start;
+            if (offpiste.duration) offpiste.time = delta;
             time = offset + (delta * direction);
-            if (time >= 0 && time <= duration) {
+            if ((time >= 0 && time <= duration) || (offpiste.duration && offpiste.time <= offpiste.duration)) {
                 requestRedraw(scroll);
             } else {
                 time = direction === 1 ? duration : 0;
