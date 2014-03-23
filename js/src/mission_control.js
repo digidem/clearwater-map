@@ -110,14 +110,18 @@ cwm.MissionControl = function(container) {
 
     function stories(x) {
         _stories = x;
-        _stories.on("click", function(d) {
-            if (d3.event.target.tagName === "BUTTON") {
-                d3.event.stopPropagation();
-                navigation.toggle();
-            } else {
-                if (d) go(d);
-            }
-        });
+        _stories
+            .on("click", function(d) {
+                if (d3.event.target.tagName === "BUTTON") {
+                    d3.event.stopPropagation();
+                    navigation.toggle();
+                } else {
+                    if (d) go(d);
+                }
+            })
+            .on("arrived", function(d) {
+                console.log(d.attr("story_title"));
+            });
         return missionControl;
     }
 

@@ -7,7 +7,7 @@ cwm.Stories = function(container) {
         _duration,
         containerHeight = d3.select(container.node().parentNode).dimensions()[1],
         dimensionsCache = {},
-        event = d3.dispatch('click', 'moved');
+        event = d3.dispatch('click', 'moved', 'arrived');
 
     var templates = cwm.Templates();
 
@@ -59,7 +59,9 @@ cwm.Stories = function(container) {
         renderArticles();
         renderTopHeading();
 
-        event.moved(getCurrent(t));
+        var current = getCurrent(t);
+        event.moved(current);
+        if (current.distance === 0) event.arrived(current.place);
 
         return stories;
     }
