@@ -18,7 +18,7 @@ cwm.util = {
         });
     },
 
-    emptyGIF: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+    emptyGIF: 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=',
 
     // Inspired by LeafletJS
     transformProperty: (function(props) {
