@@ -1,6 +1,6 @@
 cwm.Templates = function() {
-    var imagesRegex = /\.(?:jpg|gif|png)$/;
-    var videoRegex = /\.(?:mp4|m4v|mov)$/;
+    var imagesRegex = /\.(?:jpg|gif|png)(\?|\#|$)/;
+    var videoRegex = /\.(?:mp4|m4v|mov)(\?|\#|$)/;
     var _templates = {};
 
 	// using a custom template delimiters
