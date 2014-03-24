@@ -58,6 +58,11 @@ pointer-events: all;
 
 }
 
+#mapstory .marker-tooltip {
+  z-index: 2;
+  position: absolute;
+}
+
 #mapstory .marker-popup.bottom-right {
   bottom: auto;
   -webkit-transform-origin: top left;
