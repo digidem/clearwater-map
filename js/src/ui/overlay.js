@@ -4,17 +4,17 @@ cwm.views.Overlay = function(container) {
 
     return {
         show: function(id) {
+            id = cwm.util.sanitize(id).replace(/^id-/, "overlay-");
             if (!shown[id]) {
-                overlayDiv.selectAll(".overlay")
-                    .filter(function() {
-                        return d3.select(this).attr("id") === id.toLowerCase();
-                    })
+                overlayDiv.selectAll("#" + id + ".overlay")
                     .style("display", "block")
                     .transition()
-                    .style("opacity", 1);
-                container.selectAll("svg, button.nav").style("z-index", 2);
-                shown[id] = true;
-            }
+                    .style("opacity", 1)
+                    .each(function() {
+                        container.selectAll("svg, button.nav").style("z-index", 2);
+                        shown[id] = true;
+                    });
+                }
         },
 
         hide: function() {
