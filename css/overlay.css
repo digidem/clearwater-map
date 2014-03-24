@@ -9,7 +9,6 @@
     font-size: 1.7em;
     letter-spacing: 0.02em;
     line-height: 1.2em;
-
     opacity: 0;
     -webkit-transition: opacity 250ms ease-in-out;
     transition: opacity 500ms ease-in-out;
@@ -23,24 +22,37 @@
     position: absolute;
 }
 .hint.nav {
-    left: 4.7rem;
-    top: 4rem;
+    left: 1.4rem;
+    top: 2.9rem;
+    padding: 0.6rem 0 0rem 3rem;
+    background: url(../images/arrow-nav.png) no-repeat top left;
 }
-.hint.map {
+.hint.communities, .hint.ecuador {
     left: 50%;
     top: 50%;
     width: 30rem;
     text-align: center;
 }
+.hint.communities {
+    background: url(../images/arrow-communities.png) no-repeat;
+    top: 40%;
+    background-size: contain;
+    padding: 8rem 5rem 7rem 0;
+}
 .hint.next {
-    bottom: 3rem;
-    left: 35rem;
+    bottom: 1.2rem;
+    left: 33rem;
+    padding: 0 0 1.9rem 1.3rem;
+    background: url(../images/arrow-next.png) no-repeat bottom left;
 }
 .hint.legend {
     right: 13rem;
     bottom: 12rem;
+    background: url(../images/arrow-legend.png) no-repeat bottom righ;
 }
 .hint.prev {
-    top: 3rem;
-    left: 35rem;
+    top: 1.2rem;
+    left: 33rem;
+    padding: 1.7rem 0 0 1.7rem;
+    background: url(../images/arrow-prev.png) no-repeat top left;
 }
