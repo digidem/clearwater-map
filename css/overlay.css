@@ -18,7 +18,7 @@
 #mapstory #overlay .hint {
     position: absolute;
 }
-#mapstory #overlay-communities {
+#mapstory #overlay-communities, #mapstory #overlay-installations {
     z-index: 3 !important;
 }
 .hint.nav {
@@ -68,5 +68,5 @@
     top: 1rem;
     right: 3rem;
     background: url(../images/arrow-donate.png) no-repeat top right;
-    padding: 1rem 1rem 0 0;
+    padding: 0.7rem 3rem 0 0;
 }
