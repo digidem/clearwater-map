@@ -5773,6 +5773,19 @@
     {
       "type": "Feature",
       "properties": {
+        "_id": 7641001993166340
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.41002,
+          -0.683366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "_id": 7648149997940700,
         "lon": -76.4815,
         "lat": -0.20593,
