@@ -3,6 +3,8 @@ cwm.views.Overlay = function(container) {
     var shown = {};
     var count = 0;
 
+    shown["overlay-installations"] = true;
+
     overlayDiv.on("click", function() {
         hide();
     });
@@ -31,7 +33,7 @@ cwm.views.Overlay = function(container) {
                     });
                 }
             if (id === "overlay-installations") count += 1;
-            if (count % 4 === 0 && count <= 8) shown["overlay-installations"] = false;
+            if (count % 5 === 3 && count <= 15) shown["overlay-installations"] = false;
         },
 
         hide: hide
