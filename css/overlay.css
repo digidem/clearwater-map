@@ -24,12 +24,13 @@
 }
 .hint.nav {
     left: 4.7rem;
-    top: 2.9rem;
+    top: 4rem;
 }
 .hint.map {
     left: 50%;
     top: 50%;
-    width: 25rem;
+    width: 30rem;
+    text-align: center;
 }
 .hint.next {
     bottom: 3rem;
