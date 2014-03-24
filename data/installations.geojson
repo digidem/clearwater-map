@@ -1905,6 +1905,7 @@
         "name": "Hugo Payaguaje and Flor Tanguy",
         "users": 10,
         "date": "Mon Jan 20 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/f7a1d21d117812efba70dc185188e0392bdbab0e.jpg",
         "story_photo": "http://s3.amazonaws.com/clearwater-photos/3f886a54542a95159156ccab3eb78816de84223a.jpg",
         "story_url": "http://www.giveclearwater.org/2014/01/meet-hugo-payaguaje-clearwater-coordinator-siona-nationality/",
         "story_title": "Meet Hugo Payaguaje",
@@ -6010,6 +6011,7 @@
         "name": "Claudio Yiyoguaje",
         "users": 5,
         "date": "Tue Jan 28 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/82c5ccab7991e589978d784fe863f77a42df653f.jpg",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6032,6 +6034,7 @@
         "name": "Gilberto Yiyocuro",
         "users": 4,
         "date": "Thu Jan 23 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/55c6a9b0b0c53bcda27b13ce0ae31a47eefe5743.jpg",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6054,6 +6057,7 @@
         "name": "Telmo Yiycuro and Edemira Payaguaje",
         "users": 8,
         "date": "Tue Jan 21 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/8b190676c14009b72bd722cdaf31e0a69d0ac59d.jpg",
         "settlement": "Aboquehuira",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6076,6 +6080,7 @@
         "name": "Carlos Chiriap and Dalna Payaguaje",
         "users": 8,
         "date": "Tue Jan 28 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/0914e236379dd0a02172eb2b84c38f094c1711d8.jpg",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6098,6 +6103,7 @@
         "name": "Susana Payaguaje and Camilo Payaguaje",
         "users": 7,
         "date": "Tue Jan 28 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/a21c375674ae5668ef31a314a8dea399fbd8ef42.jpg",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6120,6 +6126,7 @@
         "name": "Flavio Chambuiquin and Flavia Payaguaje",
         "users": 8,
         "date": "Thu Jan 30 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/6e21b17fc9e38a3d304d8f6f178527532bf7697e.jpg",
         "settlement": "Bi'aña",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6142,6 +6149,7 @@
         "name": "Marcelo Payaguaje and Flora Maniguaje",
         "users": 7,
         "date": "Thu Jan 30 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/6be5f41a8d676098f0dfb8874cdc485c1f56bae7.jpg",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
@@ -6164,6 +6172,7 @@
         "name": "Mariel Maniguaje",
         "users": 5,
         "date": "Sat Feb 01 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/3c7433dc9ff78d0f965a574fe44ba66adff13ee3.jpg",
         "settlement": "Orahuëaya",
         "families": 1,
         "project": "Siona Second Installation"
