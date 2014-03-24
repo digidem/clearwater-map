@@ -22,3 +22,10 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Covered by your Grace';
+    src: url('grace-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

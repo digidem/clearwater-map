@@ -1,0 +1,45 @@
+#mapstory #overlay .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #eee;
+    font-family:'Covered by your Grace', Arial, sans-serif;
+    font-size: 1.7em;
+    letter-spacing: 0.02em;
+    line-height: 1.2em;
+
+    opacity: 0;
+    -webkit-transition: opacity 250ms ease-in-out;
+    transition: opacity 500ms ease-in-out;
+    z-index: 2;
+}
+#mapstory #overlay .active {
+    display: block;
+    opacity: 1;
+}
+#mapstory #overlay .hint {
+    position: absolute;
+}
+.hint.nav {
+    left: 4.7rem;
+    top: 2.9rem;
+}
+.hint.map {
+    left: 50%;
+    top: 50%;
+    width: 25rem;
+}
+.hint.next {
+    bottom: 3rem;
+    left: 35rem;
+}
+.hint.legend {
+    right: 13rem;
+    bottom: 12rem;
+}
+.hint.prev {
+    top: 3rem;
+    left: 35rem;
+}

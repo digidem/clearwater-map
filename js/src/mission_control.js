@@ -21,6 +21,8 @@ cwm.MissionControl = function(container) {
 
     var navigation = cwm.Navigation(container).on("click", go);
 
+    var overlay = cwm.views.Overlay(container);
+
     container.call(cwm.render.NavButton)
         .on("click", function(d) {
             if (d3.event.target.tagName === "BUTTON") {
@@ -57,14 +59,17 @@ cwm.MissionControl = function(container) {
             return d.children.length;
         }));
 
-        container.selectAll("#map,#stories")
+        container.selectAll("#map,#stories,#overlay")
             .on(d3_behavior_zoom_wheel, onMouseWheel);
 
         d3.select(document)
             .call(d3.keybinding()
                 .on("arrow-down", onArrowKey("down"))
                 .on("arrow-up", onArrowKey("up"))
-                .on("space", go))
+                .on("space", function(d) {
+                    overlay.hide();
+                    go(d);
+                }))
             .on('keyup', function() {
                 if (adjusting) window.clearTimeout(adjusting);
                 adjusting = window.setTimeout(go2Nearest, 200);
@@ -73,6 +78,7 @@ cwm.MissionControl = function(container) {
 
     function onArrowKey(direction) {
         return function() {
+            overlay.hide();
             if (adjusting) window.clearTimeout(adjusting);
             if (!scrolling) {
                 move(direction === "down" ? 50 : -50);
@@ -81,6 +87,7 @@ cwm.MissionControl = function(container) {
     }
 
     function onMouseWheel() {
+        overlay.hide();
         d3.event.preventDefault();
         d3.event.stopPropagation();
         if (adjusting) window.clearTimeout(adjusting);
@@ -96,9 +103,9 @@ cwm.MissionControl = function(container) {
         var adjusted;
         offset = offset || 200;
 
-        var current = _stories.getCurrent(time/duration);
+        var current = _stories.getCurrent(time / duration);
 
-        if (current.distance < offset ) {
+        if (current.distance < offset) {
             go(current.place, function() {
                 adjusting = scrolling = void 0;
             });
@@ -112,6 +119,8 @@ cwm.MissionControl = function(container) {
         _stories = x;
         _stories
             .on("click", function(d) {
+                overlay.hide();
+
                 if (d3.event.target.tagName === "BUTTON") {
                     d3.event.stopPropagation();
                     navigation.toggle();
@@ -121,6 +130,7 @@ cwm.MissionControl = function(container) {
             })
             .on("arrived", function(d) {
                 _map.showPopup(d);
+                overlay.show(d.id());
             });
         return missionControl;
     }
@@ -129,6 +139,8 @@ cwm.MissionControl = function(container) {
         _map = x;
         _map.on("click", function(d) {
             if (scrolling) return;
+            overlay.hide();
+
             if (d) {
                 if (d.parent && !d.parent.geometry.coordinates && _map.current().place !== d.parent) {
                     go(d.parent);
@@ -221,7 +233,7 @@ cwm.MissionControl = function(container) {
             }
             if (time < 0) time = 0;
             if (time >= duration) time = duration;
-        } 
+        }
 
         lastDelta = delta;
 
@@ -316,8 +328,8 @@ cwm.MissionControl = function(container) {
                     time = duration;
                     go(d);
                 } else {
-                    go(from, function() { 
-                        go(d); 
+                    go(from, function() {
+                        go(d);
                     });
                 }
             } else { // if (_places.indexOf(d) > _places.indexOf(to))
@@ -332,8 +344,8 @@ cwm.MissionControl = function(container) {
                     setTo(d);
                     go(d);
                 } else {
-                    go(to, function() { 
-                        go(d); 
+                    go(to, function() {
+                        go(d);
                     });
                 }
             }

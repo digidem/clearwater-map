@@ -42,6 +42,7 @@
   <script src='js/src/views.js'></script>
   <script src='js/src/ui/markers.js'></script>
   <script src='js/src/ui/popup.js'></script>
+  <script src='js/src/ui/overlay.js'></script>
 
   <script src='js/src/layers.js'></script>
   <script src='js/src/layers/bing_layer.js'></script>
@@ -54,6 +55,7 @@
 
   <script src='js/src/data.js'></script>
   
+  <link href='http://fonts.googleapis.com/css?family=Covered+By+Your+Grace' rel='stylesheet' type='text/css'>
   <link href='css/data_uris.css' rel='stylesheet' />
   <link href='css/map.css' rel='stylesheet' />
   <link href='css/nav.css' rel='stylesheet' />
@@ -62,12 +64,38 @@
   <link href='css/markers.css' rel='stylesheet' />
   <link href='css/features.css' rel='stylesheet' />
   <link href='css/animation.css' rel='stylesheet' />
+  <link href='css/overlay.css' rel='stylesheet' />
   <style type="text/css">
   </style>
 </head>
 <body>
 
 <div id="mapstory">
+
+  <div id='overlay'>
+    <div id='intro' class='overlay'>
+      <div class="nav hint">
+        Navigation menu
+      </div>
+      <div class="next hint">
+        Click or scroll to travel through the map
+      </div>
+      <div class="legend hint">
+        Legend
+      </div>
+    </div>
+    <div id='ecuador' class='overlay'>
+      <div class="prev hint">
+        Click to return to the overview
+      </div>
+      <div class="map hint">
+        These are the communities where we work. Click on a community to visit it.
+      </div>
+      <div class="next hint">
+        Click or scroll to visit places one by one.
+      </div>
+    </div>
+  </div>
 
   <div id='legend'>
     <dl>
