@@ -47,6 +47,11 @@ cwm.util.extend(cwm.Place.prototype, {
 		return this;
 	},
 
+    firstNames: function() {
+        var names = this.attr("name").split(" and ");
+        return names[0].split(" ")[0] + ((names[1]) ? " & " + names[1].split(" ")[0] : "");
+    },
+
     next: function() {
         var collection = this.collection;
         if (collection) {
