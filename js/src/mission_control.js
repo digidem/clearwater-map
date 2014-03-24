@@ -110,6 +110,7 @@ cwm.MissionControl = function(container) {
 
         if (current.distance < offset) {
             go(current.place, function() {
+                if (scrolling) window.clearTimeout(scrolling);
                 adjusting = scrolling = void 0;
             });
         }
@@ -170,6 +171,7 @@ cwm.MissionControl = function(container) {
 
     function goOffpiste(dest) {
         if (adjusting) window.clearTimeout(adjusting);
+        if (scrolling) window.clearTimeout(scrolling);
         scrolling = adjusting = null;
         _map.ease.reset();
         _map.to(dest);
@@ -290,12 +292,17 @@ cwm.MissionControl = function(container) {
         _stories.duration(duration);
     }
 
+    function unlockScroll() {
+        scrolling = false;
+    }
+
     function go(d, callback) {
         if (!arguments.length) d = to;
         if (typeof callback !== "function") callback = null;
         var start = +new Date();
         var offset = time;
-        scrolling = true;
+        if (scrolling) window.clearTimeout(scrolling);
+        scrolling = window.setTimeout(unlockScroll, 5000);
 
         if (d === from) {
             direction = -1;
@@ -366,6 +373,7 @@ cwm.MissionControl = function(container) {
                     setFrom(d);
                     setTo(_places[_places.indexOf(d) + 1] || d);
                     time = 0;
+                    window.clearTimeout(scrolling);
                     scrolling = false;
                     if (callback) callback();
                     callback = void 0;
