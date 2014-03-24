@@ -36,8 +36,17 @@ cwm.Map = function(container) {
         if (!arguments.length) return to;
         to = d;
         if (d instanceof cwm.Place) d = map.placeExtentCoordinate(d);
-        if (!ease.from) ease.from(map.coordinate);
-        ease.to(d).setOptimalPath();
+        if (!ease.from()) ease.from(map.coordinate);
+        ease.to(d);
+        var fromLoc = map.coordinateLocation(ease.from());
+        var toLoc = map.coordinateLocation(ease.to());
+        var distance = cwm.util.distance([fromLoc.lat, fromLoc.lon], [toLoc.lat, toLoc.lon]);
+        console.log(distance);
+        if (distance > 0.0007) {
+            ease.setOptimalPath();
+        } else {
+            ease.path("screen");
+        }
         return map;
     };
 
