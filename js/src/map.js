@@ -41,7 +41,6 @@ cwm.Map = function(container) {
         var fromLoc = map.coordinateLocation(ease.from());
         var toLoc = map.coordinateLocation(ease.to());
         var distance = cwm.util.distance([fromLoc.lat, fromLoc.lon], [toLoc.lat, toLoc.lon]);
-        console.log(distance);
         if (distance > 0.0007) {
             ease.setOptimalPath();
         } else {
