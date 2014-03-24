@@ -5282,6 +5282,16 @@
         {
           "type": "Point",
           "properties": {
+            "_id": 7641001993166340
+          },
+          "coordinates": [
+            8569,
+            1537
+          ]
+        },
+        {
+          "type": "Point",
+          "properties": {
             "_id": 7648149997940700,
             "lon": -76.4815,
             "lat": -0.20593,
