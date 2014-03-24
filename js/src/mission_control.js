@@ -19,7 +19,10 @@ cwm.MissionControl = function(container) {
 
     d3.select(window).on("resize", requestRedraw);
 
-    var navigation = cwm.Navigation(container).on("click", go);
+    var navigation = cwm.Navigation(container).on("click", function(d) {
+        overlay.hide();
+        go(d);
+    });
 
     var overlay = cwm.views.Overlay(container);
 
@@ -130,7 +133,7 @@ cwm.MissionControl = function(container) {
             })
             .on("arrived", function(d) {
                 _map.showPopup(d);
-                overlay.show(d.id());
+                overlay.show(d);
             });
         return missionControl;
     }

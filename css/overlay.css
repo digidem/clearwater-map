@@ -6,6 +6,7 @@
     bottom: 0;
     color: #eee;
     font-family:'Covered by your Grace', Arial, sans-serif;
+    display: none;
     font-size: 1.7em;
     letter-spacing: 0.02em;
     line-height: 1.2em;
@@ -14,12 +15,11 @@
     transition: opacity 500ms ease-in-out;
     z-index: 2;
 }
-#mapstory #overlay .active {
-    display: block;
-    opacity: 1;
-}
 #mapstory #overlay .hint {
     position: absolute;
+}
+#mapstory #overlay-communities {
+    z-index: 3 !important;
 }
 .hint.nav {
     left: 1.4rem;
@@ -27,17 +27,24 @@
     padding: 0.6rem 0 0rem 3rem;
     background: url(../images/arrow-nav.png) no-repeat top left;
 }
-.hint.communities, .hint.ecuador {
+.hint.communities, .hint.ecuador, .hint.installations {
     left: 50%;
-    top: 50%;
+    top: 40%;
     width: 30rem;
     text-align: center;
 }
 .hint.communities {
     background: url(../images/arrow-communities.png) no-repeat;
-    top: 40%;
     background-size: contain;
+    top: 50%;
     padding: 8rem 5rem 7rem 0;
+    margin: -8rem -5rem -7rem 0;
+}
+.hint.ecuador {
+    background: url(../images/arrow-ecuador.png) no-repeat top center;
+    left: 45%;
+    padding: 6rem 0 0 4rem;
+    margin: -6rem 0 0 2rem;
 }
 .hint.next {
     bottom: 1.2rem;
@@ -46,13 +53,20 @@
     background: url(../images/arrow-next.png) no-repeat bottom left;
 }
 .hint.legend {
-    right: 13rem;
-    bottom: 12rem;
-    background: url(../images/arrow-legend.png) no-repeat bottom righ;
+    right: 9rem;
+    bottom: 11rem;
+    background: url(../images/arrow-legend.png) no-repeat bottom right;
+    padding: 0 5rem 1.7rem 0;
 }
 .hint.prev {
     top: 1.2rem;
     left: 33rem;
     padding: 1.7rem 0 0 1.7rem;
     background: url(../images/arrow-prev.png) no-repeat top left;
+}
+.hint.donate {
+    top: 1rem;
+    right: 3rem;
+    background: url(../images/arrow-donate.png) no-repeat top right;
+    padding: 1rem 1rem 0 0;
 }

@@ -1,10 +1,25 @@
 cwm.views.Overlay = function(container) {
     var overlayDiv = container.select("#overlay");
     var shown = {};
+    var count = 0;
+
+    overlayDiv.on("click", function() {
+        hide();
+    });
+
+    function hide() {
+        overlayDiv.selectAll(".overlay")
+                .transition()
+                .style("opacity", 0)
+                .each("end", function() {
+                    d3.select(this).style("display", "none");
+                });
+            container.selectAll("svg, button.nav").style("z-index", 0);
+    }
 
     return {
-        show: function(id) {
-            id = cwm.util.sanitize(id).replace(/^id-/, "overlay-");
+        show: function(d) {
+            var id = cwm.util.sanitize(d.collection.id()).replace(/^id-/, "overlay-");
             if (!shown[id]) {
                 overlayDiv.selectAll("#" + id + ".overlay")
                     .style("display", "block")
@@ -15,16 +30,10 @@ cwm.views.Overlay = function(container) {
                         shown[id] = true;
                     });
                 }
+            if (id === "overlay-installations") count += 1;
+            if (count % 4 === 0 && count <= 8) shown["overlay-installations"] = false;
         },
 
-        hide: function() {
-            overlayDiv.selectAll(".overlay")
-                .transition()
-                .style("opacity", 0)
-                .each("end", function() {
-                    d3.select(this).style("display", "none");
-                });
-            container.selectAll("svg, button.nav").style("z-index", 0);
-        }
+        hide: hide
     };
 };
