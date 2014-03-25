@@ -38,37 +38,62 @@ background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF
 
 /* Black down arrow */
 /* http://digidem.github.io/clearwater-map/images/down-arrow.png */
-#mapstory #stories h1 {
+#mapstory #stories .next-headings h1 {
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAiCAYAAADcbsCGAAABOElEQVRYw83XPShGURjA8R9eKUlkMVgMb73KaDAZlJTNZrMYRLKaTDYiZTdZLCSF2WZRFJtSFpJBicjHcgcJ79e5955fnfX0X87TeeAInxGeQ+jHW2RhbyhJbEQWt+6bLjxEEnaPTj/MRxI36xfNuMw57BwFfxjLOW5EGQc5he2qQF8Oo+UFRRVazzhuWRW6kiedRdgt2lVpLqO4KTUo4CLlsFM0qtFoynFD6rSfUti2AEp4DRz2jF6BrAWOWxJQR8DRcoM2gc0EipuUgkLya6gn7AQNUjJSR9gHBqVsr8a4LRko1jBantAjIytVxi3KUAfuKgy7RquMTVcYNyEHTTgrE3ac5ugoZ/ifsHcMyNnOH3GbIlBMFpTvYY/oFonlH3ELItKeLCqfuEKLyEwlceMi1ITVkBd+AcsvlMYt4/hqAAAAAElFTkSuQmCC');
 }
 
 /* Yellow down arrow */
 /* http://digidem.github.io/clearwater-map/images/down-arrow-yellow.png */
-#mapstory #stories h2 {
+#mapstory #stories .next-headings h2 {
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAiCAYAAADcbsCGAAABhklEQVRYhc3XLUgDcRjH8fmGICITi2HFIEwwGkwGYQg2m82yIIpYTSbbRBnYTRaLIoJatVkEB9oGgmUyDAfiUHz5/WCD47iX/8tzd//wvfg8n3IPdwXvtnSD/hzsuoDHLPp2AOOPnjJx7MgBkL86XT3cBHp3AMXaaNyPY9sOwNhmz+THDaHnnGENNBiGY8s54yp+TxDHrnKCnQctYbgZL/vT0kHTKjhWzxhXC3NE4Xha2hnBWmhMB8e2MsJVowxxOL7STynDHlC/CY4tpYxbiNufhGOXKcFOk3ar4MroSxj2iaYkcOxQGLenslcVV/TkTssrGpXEsQ0h3JrqTh0cT0vDEnaP+tLAsYoF7BfN6+zTxbELQ9yJ7i4THL8edE/LByplgWP7mrhdkz2muCJ6U4S9oJEscWxdEbdqusMGN4AeE2B3nsbpkMSxxRjYD5qzmW+LY2cRuGPb2RI4npZOAOahSRdwrBbA7UjMlcLxB6XVhTXRsEs4Vu3iVqRmSuJ4Wg4E5xX+AZ5D+K39E5ghAAAAAElFTkSuQmCC');
 }
 
 /* Orange down arrow */
 /* http://digidem.github.io/clearwater-map/images/down-arrow-orange.png */
-#mapstory #stories h2.fixedBottom:hover {
+#mapstory #stories .next-headings h2:hover {
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAiCAYAAADcbsCGAAABhklEQVRYw83XPyhGURjH8YNXSnqjdzFIGW69ymgwGZSUzWazGESymky2V6TsJgsDSWG2WRTFppSFZFAi8uf3q/PW7e3+Oefc5957hu8dz/NZztM96qAxeI7+POxM4TOCvj2D0VMnju14htumq4mroVdPYC+oL4xjK57glpqmMK4T3ZUMu0GVKBybLhk3Gfa04thpSbCjVksUbriE1fKJAhOc0le5SFwjyhGHq+krXQTsCVVtcGy5INx8nCEJxyt9mzPsCrW74NhUzrjxpPlpOHaSE2w/bbYJro6+hGEfaEgCx7aEcesmc01xvYKr5RH1SOLYohBuznSmDa6i/xqywC5RWx44pf8aXGG/aMxmni2OHTvi9mxnueACh9XyjgaKwLENS9yayxxXHFfLsyHsAXUXiWMLhrhZ1xlZcB3oOgV2YbM6JHFsIgH2g0aznJ8Vxw5jcLtZz5bABfqBEoa9oX4fcEo/UMK4VYlzpXBV/VAh7B51+YRT+qFC3IzUmZI4rpZNwfPUPxHFdkc4acybAAAAAElFTkSuQmCC');
 }
 
 /* Back arrow */
 /* http://digidem.github.io/clearwater-map/images/back-arrow.png */
-#mapstory #stories h1:before {
+#mapstory #stories .top-headings h1 {
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAADJ0lEQVR42u3cz4tNYRzH8fdNmUy6LChTQpnyo9iJmuQPsGFKYkl+FGUhmcWEslBjIxaoS5mFGCUrG6XYUGzkZ0yZ8uMuJImRwdxj8dyp2+neuec8P855zvc8n/qun3p1zvN8z3Oec4iiiFD6FRACYMEBTRMAA2C+gMDJAGiApy7CAKiNFwAN8QKgIV4ANMQLgIZ4AdAQLwAa4gVAQ7wAaIgXAA3xmlXcOABMixcADfEiYAJ4CtwFasAJYDewAZhfFkBdvG41DYwD14EjwDqgIg3QFV6nqgPXmlfpgqIDZo0Xr1/ALWAb0FMoQA/w4vUFOA30eQ/oIV5rTQGjwGovAT3Hiy9Ao8AybwALhBefJ4eBubkCFhSvtV4BG3MBFIA3U3+B49jqJUuG11q3gapzQKF4M/UaWOEa8JRgwAj4DKxxfQtLR6wD/a4XEemI74DFrtsY6YgPU/eKGo20dMSzTgFLgPgP2OwUsASI44lvZcPtLMmIh50DCkesA71ZAEpG3JMVoFTEB1kCSkRsAMuzBNRFHAPuAU+A98BvjxD3Zw2og9guS4AtwEHgCmoztJED4NU8ANMiJs1S4EBzbsoK83FegGkQdbISuABMZtBU5waYFNEkfahjH64Av+UNmATRRnYA3x0ATvkA2A3RVtYCnywDfvUFcDZEm1lveV586RNgJ0Tb2WsR8I5vgO0QbaeCaj9sAA77CBhHdJGdlgAHfAVsRXSRHuCnIV4dmOMz4Ayiq9w3BDzXdQQPAF2mZoA3jWqL3AJ6jj5iADiWaAThgOc18f4AqwIg3NQEPJN4BOGAzzXwnpHmtL9gwCrqJXkavEnUoyABMH0j3UDt6BAAVW6kBBzSGkUo4CLUyfykeCPaIwkFHHKy4pYEcB7wMeGcd9R4NIGAxxLg/QAGrYwmDHAhagt+Nry3JHnGLSngpS54NWx/AS8IcIDOL9vrwHYnowoB7EUd/Wi3UFxu3toEwM652AbvEbDJ9YolAXAwBjcB7CKrH1MUHLAfdfQiAj4Ah3DxTbBQwCrwAngD7MscruCAFdQp+q3k/Q8Z4RuqMgElVUAIgPnWf+lh+8QK2UoRAAAAAElFTkSuQmCC');
 }
+
+/* Back arrow colored */
+/* http://digidem.github.io/clearwater-map/images/back-arrow-color.png */
+#mapstory #stories .top-headings h2:hover {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAADVklEQVR42u3cz4tNYRzH8XtTZNJcC8qUUKYwxU7UJH+ADVMSS/KjKFOSWUzcsqCZjVjMqEuxEKNkZaMUG4qN/Iwpyq+FJDHy816fk+fW6XTvPef5/Tzf+128d9OcenXvOc99zvecUqPRKHHqMQIDBgx4criiFQMyYPiA+LtjDKgImOChBgMqADbxGFABMI3HgJKAWTwGlABshceABQHb4TFgAcBOeAyYA5iHx4Cdy8VjQE08BtTESwMa+MQ7zwagFB4DauKJXqMH6AaqoaNoB1qL5nULoCpeXn/RNLqEDqLVqEwN0BZeuz6gC+JTWokd0DVetu/oKtqM5sQG6Bsv20d0HPXFABgaXrqf6CJaGSpgyHjZC1ACuSQkwFjwsufJUTTbN2CMeOmeonW+AGPHa/YbHTG1liwKSAUv3TXU6wKQIl6zZ2iZbcAqYcCk92iV7a8wdcTkp2G/7YsIdcSXaKHtZQx1xDuya0WVhTR1xHEXP+UoI/5BG1xsJlBGnC76VdbdzqKMeMDVhmqV8NKmx9WWPlXEnS5vKlFEvO36tiY1xDpa6vrGugriFLqJ7qNX6EdAiHtcA0ojtjneIrQR7UPnxGZo3QPgeR+AUogSx1uM9opzkyvMe74ACyMqHm85OoNmHCyq/QCK/1G1BNisT4x92AL87BWwCKKh421FXyzdY/YLmIdo8JQxgN4ZBvwUBGAnRMPzgWsMnxefBAPYDtHCgOUug4DXgwJshWgBsCyWHyYAR4MDzCJaGvHdZghwMEjANKIlwGRW8JuBLa1ZwQI2ES0Omd/SBDzlY0pf+ZF/C4A1zdG4AS1AF1kegBzTAJzS3tInAHhaEe8XWsGAw5UrioAnjNzWJAD4SAHvocy0P2XAXnGTXAZvRvwULDGg/EK6LnZ0Sgz4v8uSgCPGx9siBlwgJvOL4o1ZGbCMGHDExhW3WwDnorcFz3mHrA6ZRwp4uADeVzRk/TGHCAHniy34TngvivzG7VbAyRy8mukn4CkBDna42Z7s621x/rBhRIA9YvSj1YXirPhqlxiwfRMt8O6i9V6fF44EcKjFG0C2u3oxReyA/WL0IoF7g/bbeCaYKmCy2/IYPUe7XcPFDlgWU/SbfL9DhvqGKn1Afpc+AzKCTv8AA8c9dwg3fMIAAAAASUVORK5CYII=');
+}
+
+/* Back arrow yellow */
+/* http://digidem.github.io/clearwater-map/images/back-arrow-yellow.png */
+#mapstory #stories .top-headings h2 {
+    background-image: url('../images/back-arrow-yellow.png');
+}
+
 
 /* Animated loading icon on black background */
 /* http://digidem.github.io/clearwater-map/images/loader.gif */
 
 #mapstory .marker-popup .image-wrapper {  
 background-image: url('data:image/gif;base64,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');
-}#mapstory {
+}
+
+#mapstory #overlay .overlay {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiqAcAAIgAgoGu+rEAAAAASUVORK5CYII=');
+}body {
+  margin: 0;
+  overflow: hidden;
+}
+
+html {
+  font: 400 14px/21px "PT Sans",Arial,sans-serif;
+}
+
+#mapstory {
   margin:0px;
   padding:0px;
-  font: 400 14px/21px "PT Sans",Arial,sans-serif;
   background: #222;
 }
 
@@ -80,12 +105,16 @@ background-image: url('data:image/gif;base64,R0lGODlhGAAYAPcCAAUFBb28lfr6xxERDwY
   left:0;
 }
   
-#mapstory #map  {
+#mapstory, #mapstory #map, #mapstory .wrapper {
   position:absolute;
-  top:0px;
-  bottom:0px;
-  width:100%;
-  height:100%;
+  top:0;
+  bottom:0;
+  left: 0;
+  right: 0;
+}
+
+#mapstory #map {
+    overflow: hidden;
 }
 
 #mapstory #map.markers-shown {
@@ -119,12 +148,14 @@ background-image: url('data:image/gif;base64,R0lGODlhGAAYAPcCAAUFBb28lfr6xxERDwY
 }
 
 #mapstory #legend {
+  z-index: 999;
   position: absolute;
   bottom: 0;
   right: 0;
 }
 
 #mapstory #attribution {
+  z-index: 999;
 position: absolute;
 padding: 0 0.5em;
 font-size: 0.8em;
@@ -153,9 +184,6 @@ left: 50%;
   -webkit-transition: top 500ms ease;
 }
 
-#mapstory #legend:hover dl {
-  top: 10.5em;
-}
 
 #mapstory #legend dt {
   display: block;
@@ -208,7 +236,7 @@ left: 50%;
 }
 
 @media (max-width:768px) {
-  #mapstory {
+  html {
     font-size:12px;
     line-height:18px;
     }
@@ -244,7 +272,7 @@ left: 50%;
 
 @media (min-width:1280px) {
 
-#mapstory {
+html {
   font-size:16px;
   line-height:24px;
   }
@@ -252,12 +280,100 @@ left: 50%;
   
   
 
+#mapstory nav {
+    display: none;
+    position: absolute;
+    right: 100%;
+    width: 20em;
+    height: 100%;
+    overflow: scroll;
+    background-color: #000;
+}
 
+#mapstory nav ul {
+    padding: 0;
+    margin: 0;
+    background: #333;
+    opacity: 0;
+    height: 100%;
+}
+
+#mapstory nav li {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #555;
+}
+
+
+#mapstory nav li:hover {
+    cursor: pointer;
+    background-color: #444;
+}
+
+#mapstory nav li h1, #mapstory nav li h2 {
+    font-weight: normal;
+    font-family: "Yanone Kaffeesatz", sans-serif;
+    margin: 0;
+}
+
+#mapstory nav li h1 {
+    font-size: 1.8em;
+    line-height: 1em;
+    padding: 0.4em 0.5em;
+    color: #eee;
+}
+
+#mapstory nav li h2 {
+    font-size: 1.6em;
+    line-height: 1em;
+    padding: 0.4em 1em;
+    color: #bbb;
+}
+
+#mapstory {
+    -webkit-transition: -webkit-transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out;
+}
+
+#mapstory.nav-open {
+    -webkit-transform: translate(20em,0);
+    transform: translate(20em,0);
+}
+
+#mapstory button.nav {
+    font-size: 2.25em;
+    width: 1.3em;
+    height: 1.3em;
+    outline: none;
+    position: absolute;
+    border: none;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+#mapstory button.nav:before {
+  content: "";
+  position: absolute;
+  top: 0.45em;
+  height: 0.09em;
+  left: 0.34em;
+  width: 0.7em;
+  background: #ccc;
+  box-shadow: 0 0.24em 0 0 #ccc, 0 0.46em 0 0 #ccc;
+}
+
+#mapstory button.nav:hover:before {
+    background: #fff;
+    box-shadow: 0 0.24em 0 0 #fff, 0 0.46em 0 0 #fff;
+}
 #mapstory .image-wrapper {
   background-color: #000;
   position: relative;
   height: 0;
-  z-index: -1;
+  /*z-index: -1;*/
   padding-bottom: 66.67%;
   overflow: hidden;
   background-position: 50% 50%;
@@ -297,60 +413,145 @@ left: 50%;
   background-position: 0.5em 50%;
   background-size: 1.1em;
   /* Background image set with data uri */
-}#mapstory #stories {
-  pointer-events: none;
+}#mapstory #stories article
+, #mapstory .top-headings
+, #mapstory .next-headings {
   width: 30em;
   position: absolute;
-  top: 100%;
-  margin: 0 0 0 2.25em;
+  margin: 0;
   color: #eee;
-  transition: opacity 0.4s linear;
-  -moz-transition: opacity 0.4s linear;
-  -webkit-transition: opacity 0.4s linear;
-}
-
-#mapstory #stories article:first-child section:first-child {
-  position: absolute;
-  bottom: 100%;
-  margin-bottom: 3.15em;
-  margin-top: 0;
-  transform: translate3d(0,-1px,0);
-  -moz-transform: translate3d(0,-1px,0);
-  -webkit-transform: translate3d(0,-1px,0);
+  margin-left: 2em;
+  z-index: 1;
 }
 
 #mapstory #stories article {
-/*  margin-bottom: 1000px;*/
+    background-color: #333;
 }
 
-#mapstory #stories section {
-  pointer-events: auto;
-    margin-bottom: 3.15em;
-  margin-top: 20em;
-  position: relative;
+#mapstory #stories .top-headings
+, #mapstory #stories .next-headings {
+  z-index: 3;
+}
+
+
+#mapstory #stories .top-headings div
+, #mapstory #stories .next-headings div {
+  cursor: pointer;
   width: 100%;
+}
+
+#mapstory .top-headings div {
+  top: 0;
+}
+
+#mapstory #stories .top-headings h1
+, #mapstory #stories .top-headings h2 {
+  background-position: 98% 50%;
+  background-repeat: no-repeat;
+  /* background image back arrow from data uri */
+  background-size: 0.2em;
+}
+
+#mapstory #stories .top-headings h1::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 1.3em;
+  left: -1em;
+  top: 0;
+  background: #f2c21c;
+}
+
+#mapstory #stories .top-headings button.nav:before {
+  content: "";
+  position: absolute;
+  left: 0.45em;
+  width: 0.7em;
+  z-index: 1;
+}
+
+#mapstory #stories .top-headings h1 + button.nav:before {
+  top: 0.45em;
+  height: 0.11em;
+  background: black;
+  box-shadow: 0 0.24em 0 0 black, 0 0.46em 0 0 black;
+}
+
+#mapstory #stories .top-headings h2 + button.nav:before {
+  top: 0.42em;
+  height: 0.09em;
+  background: #f2c21c;
+  box-shadow: 0 0.24em 0 0 #f2c21c, 0 0.46em 0 0 #f2c21c;
+}
+
+#mapstory #stories .top-headings button.nav {
+  outline: none;
+  position: absolute;
+  left: -1em;
+  height: 100%;
+  top: 0;
+  width: 1.3em;
+    border: none;
+  padding: 0;
+  display: block;
+  font-size: 2.25em;
+    cursor: pointer;
+  background-color: transparent;
+}
+
+#mapstory #stories .top-headings h1 + button.nav:hover {
+  background-color: #ab8b1e;
+}
+
+#mapstory #stories .top-headings h2 + button.nav:hover:before {
+  background: #ab8b1e;
+  box-shadow: 0 0.24em 0 0 #ab8b1e, 0 0.46em 0 0 #ab8b1e;
+}
+
+#mapstory #stories .top-headings div.active h1
+, #mapstory #stories .top-headings div.active h2 {
+  background-size: 1em;
+  -webkit-transition: background-size 200ms cubic-bezier(0.360, 0.055, 0.865, 1.620);
+  transition: background-size 200ms cubic-bezier(0.360, 0.055, 0.865, 1.620);
+}
+
+#mapstory #stories .top-headings div.active h1:hover 
+, #mapstory #stories .next-headings div.active h1:hover {
+  background-color: #ab8b1e;
+}
+
+
+#mapstory #stories .top-headings div.active h1:hover
+, #mapstory #stories .top-headings div.active h2:hover {
+  background-size: 1.15em;
+    -webkit-transition: background-size 200ms cubic-bezier(0.235, 5, 0.1, 1.005);
+  transition: background-size 200ms cubic-bezier(0.235, 5, 0.1, 1.005);
+
+}
+
+#mapstory #stories .top-headings h2 {
+  margin-left: -1.125em;
+  padding-left: 1.625em;
+}
+
+#mapstory .next-headings, #mapstory .next-headings div {
+  bottom: 0;
 }
 
 #mapstory #stories h1, #mapstory #stories h2 {
   line-height: 1em;
-  padding: 0.25em 1em;
   margin: 0;
   font-weight: normal;
   font-family: "Yanone Kaffeesatz", sans-serif;
-  background-position: 97.5% 200%;
   background-size: 0.7em;
   background-repeat: no-repeat;
 
 }
 
 #mapstory #stories h1 {
-  position: relative;
-  padding: 0.2em 0.88889em;
-  margin-left: -0.88889em;
-  width: 11.55556em;
+  padding: 0.2em 0.444444em;
   font-size: 2.25em;
   font-weight: 700;
-  z-index: 3;
   color: black;
   background-color: #f2c21c;
 	/* background image black down arrow from data uri */
@@ -360,39 +561,9 @@ left: 50%;
   -ms-transition: background-position 100ms linear, padding, margin;
 }
 
-#mapstory #stories h1.fixedTop {
-  margin-left: -1.88889em;
-  padding-left: 1.88889em;
-}
 
-#mapstory #stories h1.fixedTop:hover, #mapstory #stories h1.fixedBottom:hover {
-  background-color: #ab8b1e;
-}
 
-#mapstory #stories h1:before {
-  background-position: 0 50%;
-  background-repeat: no-repeat;
-  /* background image back arrow from data uri */
-  background-size: 1em;
-  opacity: 0;
-  width: 1.2em;
-  height: 1em;
-  position: fixed;
-  margin: 0.2em;
-  left: 0;
-  top: 0;
-  content: "";
-}
-
-#mapstory #stories h1.fixedTop:before {
-  opacity: 1;
-}
-
-#mapstory #stories .fixedBottom, #mapstory #stories .fixedTop {
-	cursor: pointer;
-}
-
-#mapstory #stories .fixedBottom {
+#mapstory #stories .next-headings {
 	-webkit-transition-duration: 250ms;
 	-moz-transition-duration: 250ms;
 	-o-transition-duration: 250ms;
@@ -407,35 +578,34 @@ left: 50%;
 }
 
 
-#mapstory #stories h2.fixedBottom:hover {
+#mapstory #stories .top-headings h2:hover
+, #mapstory #stories .next-headings h2:hover {
   color: #ab8b1e;
 	/* background image orange down arrow from data uri */
 }
 
-#mapstory #stories h1.fixedBottom {
+#mapstory #stories .next-headings h1
+, #mapstory #stories .next-headings h2 {
+  background-position: 97.5% 200%;
+  transition: background-position 200ms ease-in-out;
+  -webkit-transition: background-position 200ms ease-in-out;
+}
+
+
+#mapstory #stories .next-headings .active h2, #mapstory #stories .next-headings .active h1 {
   background-position: 97.5% 50%;
 }
 
-#mapstory #stories h2.fixedBottom {
-  background-position: 97.5% 50%;
+#mapstory #stories .text {
+  padding: 1em;
 }
 
 #mapstory #stories h2 {
-  margin-left: -1em;
-  width: 13em;
+  padding: 0.25em 0.5em;
   font-size: 2em;
   color: #f2c21c;
   background-color: black;
 	/* background image yellow down arrow from data uri */
-  transition: background-position 100ms linear;
-  -moz-transition: background-position 100ms linear;
-  -webkit-transition: background-position 100ms linear;
-}
-
-#mapstory #stories .text {
-  background-color: #333;
-  padding: 0 2em 0.5em;
-  position: relative;
 }
 
 #mapstory .button {
@@ -468,10 +638,12 @@ left: 50%;
 #mapstory #stories ul {
   font-size: 1.1em;
   list-style-type: none;
+  margin: 0;
+  padding-left: 0.5em;
 }
 
 #mapstory #stories ul li {
-margin-bottom: 0.5em;
+margin-bottom: 0.6em;
 }
 
 #mapstory #stories img {
@@ -489,14 +661,14 @@ margin-bottom: 0.5em;
 #mapstory a {
 	color: #f2c21c;
 	text-decoration: none;	
-}#mapstory .markers circle {
+}#mapstory .installations circle {
   stroke-width: 0;
   fill: #17aae4;
   opacity: 0.6;
   cursor: pointer;
 }
 
-#mapstory .markers circle.featured {
+#mapstory .installations circle.featured {
   stroke-width: 3;
   fill: #ffffff;
   stroke: #17aae4;
@@ -549,7 +721,49 @@ pointer-events: all;
 
 }
 
+#mapstory .marker-tooltip {
+  z-index: 2;
+  position: absolute;
+}
+
+#mapstory .marker-popup.bottom-right {
+  bottom: auto;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+}
+
+#mapstory .marker-popup.bottom-left {
+  bottom: auto;
+  right: 0;
+  left: auto;
+  -webkit-transform-origin: top right;
+  transform-origin: top right;
+}
+
+#mapstory .marker-popup.top-left {
+  right: 0;
+  left: auto;
+  -webkit-transform-origin: bottom right;
+  transform-origin: bottom right;
+}
+
+#mapstory .marker-popup.top-right {
+  -webkit-transform-origin: bottom left;
+  transform-origin: bottom left;
+}
+
+#mapstory .marker-popup.scaled {
+  -webkit-transform: scale(1,1);
+  transform: scale(1,1);
+  -webkit-transition: -webkit-transform 150ms cubic-bezier(0.565, 0.210, 0.695, 1.650);
+  transition: transform 150ms cubic-bezier(0.565, 0.210, 0.695, 1.650);
+}
+
 #mapstory .marker-popup {
+  -webkit-transform-origin: bottom left;
+  transform-origin: bottom left;
+  -webkit-transform: scale(0.1,0.1);
+  transform: scale(0.1,0.1);
   cursor: pointer;
   position:absolute;
   left:0;
@@ -559,8 +773,6 @@ pointer-events: all;
   color:#000;
   padding:0;
   margin:0;
-  z-index: 9999;
-  overflow: hidden;
   pointer-events: none;
   -webkit-box-shadow: 0px 0px 10px 0px #222;
           box-shadow: 0px 0px 10px 0px #222;
@@ -616,21 +828,24 @@ pointer-events: all;
 margin: 3px 10px;
 }/* Map elements */
 
-#mapstory path.communities {
+#mapstory .communities path {
   fill: #f1c21c;
   fill-opacity: .6;
   stroke: #f1c21c;
-  stroke-width: 0;
+  stroke-width: 3;
+  stroke-opacity: 0;
   stroke-linejoin: round;
-  cursor: pointer;
-  transition: opacity 500ms;
-  -moz-transition: opacity 500ms;
-  -webkit-transition: opacity 500ms;
+  -webkit-transition: stroke-opacity, fill-opacity, fill;
+  transition: stroke-opacity, fill-opacity;
 }
 
-#mapstory path.communities:hover {
+#mapstory .communities path:hover {
   fill: #ab8b1e;
   cursor: pointer;
+}
+
+#mapstory .communities path.parentActive {
+  stroke-opacity: 0.8;
 }
 
 #mapstory .feature-label {
@@ -660,44 +875,41 @@ margin: 3px 10px;
   top: 100%;
 }
 
-#mapstory path.communities.outline {
+#mapstory .communities path.inside
+, #mapstory .communities path.active {
   stroke-width: 4px;
+  stroke-opacity: 1;
   opacity: 0.5;
+  fill-opacity: 0;
   cursor: auto;
   pointer-events: none;
 }
 
-#mapstory path.communities.outline:hover {
+#mapstory .communities path.inside:hover {
   cursor: auto;
   fill: inherit;
 }
 
-#mapstory path.ecuador {
+#mapstory .country path {
   stroke: #f1c21c;
   stroke-width: 2px;
   fill-opacity: 0 !important;
 }
 
-#mapstory path.ecuador:hover {
+#mapstory .country path:hover {
   stroke: #ab8b1e;
   cursor: pointer;
 }
 
-#mapstory path.ecuador.outline {
+#mapstory .country path.inside {
   display: none;
-}#mapstory #stories h2.fixedBottom:hover, #mapstory #stories h1.fixedBottom:hover {
+}#mapstory #stories .next-headings .active h2:hover, #mapstory #stories .next-headings .active h1:hover {
   -webkit-animation: animationFrames ease-in-out 400ms;
-  -webkit-animation-iteration-count: 2;
-
-  -moz-animation: animationFrames ease-in-out 400ms;
-  -moz-animation-iteration-count: 2;
-
-  -o-animation: animationFrames ease-in-out 400ms;
-  -o-animation-iteration-count: 2;
-
   animation: animationFrames ease-in-out 400ms;
+  -webkit-animation-iteration-count: 2;
   animation-iteration-count: 2;
 }
+
 
 @-webkit-keyframes animationFrames {
   0% {
@@ -751,7 +963,10 @@ margin: 3px 10px;
 
 }
 
-#mapstory #stories h1.fixedTop:hover:before {
+
+/* Top Headings hover animation */
+
+/*#mapstory #stories .top-headings div.active:hover h1 {
   -webkit-animation: animationFrames2 ease-in-out 400ms;
   -webkit-animation-iteration-count: 2;
 
@@ -763,7 +978,7 @@ margin: 3px 10px;
 
   animation: animationFrames2 ease-in-out 400ms;
   animation-iteration-count: 2;
-}
+}*/
 
 @-webkit-keyframes animationFrames2 {
   0% {
@@ -815,4 +1030,142 @@ margin: 3px 10px;
     background-size: 1em;
   }
 
+}
+
+
+/*#mapstory #stories .top-headings div.active h1 {
+  -webkit-animation: animationFrames3 ease-in-out 400ms;
+
+  -moz-animation: animationFrames3 ease-in-out 400ms;
+
+  -o-animation: animationFrames3 ease-in-out 400ms;
+
+  animation: animationFrames3 ease-in-out 400ms;
+
+  background-size: 1em;
+  -webkit-transition: background-size 400ms ease-in-out;
+  transition: background-size 400ms ease-in-out;
+}*/
+
+@-webkit-keyframes animationFrames3 {
+  0% {
+    background-size: 0;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@-moz-keyframes animationFrames3 {
+  0% {
+    background-size: 0;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@-o-keyframes animationFrames3 {
+  0% {
+    background-size: 0;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}
+
+@keyframes animationFrames3 {
+  0% {
+    background-size: 0;
+  }
+  50% {
+    background-size: 1.15em;
+  }
+  100% {
+    background-size: 1em;
+  }
+
+}#mapstory #overlay .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #eee;
+    font-family:'Covered by your Grace', Arial, sans-serif;
+    display: none;
+    font-size: 1.7em;
+    letter-spacing: 0.02em;
+    line-height: 1.2em;
+    opacity: 0;
+    -webkit-transition: opacity 250ms ease-in-out;
+    transition: opacity 500ms ease-in-out;
+    z-index: 2;
+}
+#mapstory #overlay .hint {
+    position: absolute;
+}
+#mapstory #overlay-communities, #mapstory #overlay-installations {
+    z-index: 3 !important;
+}
+.hint.nav {
+    left: 1.4rem;
+    top: 2.9rem;
+    padding: 0.6rem 0 0rem 3rem;
+    background: url(../images/arrow-nav.png) no-repeat top left;
+}
+.hint.communities, .hint.ecuador, .hint.installations {
+    left: 50%;
+    top: 40%;
+    width: 30rem;
+    text-align: center;
+}
+.hint.communities {
+    background: url(../images/arrow-communities.png) no-repeat;
+    background-size: contain;
+    top: 50%;
+    padding: 8rem 5rem 7rem 0;
+    margin: -8rem -5rem -7rem 0;
+}
+.hint.ecuador {
+    background: url(../images/arrow-ecuador.png) no-repeat top center;
+    left: 45%;
+    padding: 6rem 0 0 4rem;
+    margin: -6rem 0 0 2rem;
+}
+.hint.next {
+    bottom: 1.2rem;
+    left: 33rem;
+    padding: 0 0 1.9rem 1.3rem;
+    background: url(../images/arrow-next.png) no-repeat bottom left;
+}
+.hint.legend {
+    right: 9rem;
+    bottom: 11rem;
+    background: url(../images/arrow-legend.png) no-repeat bottom right;
+    padding: 0 5rem 1.7rem 0;
+}
+.hint.prev {
+    top: 1.2rem;
+    left: 33rem;
+    padding: 1.7rem 0 0 1.7rem;
+    background: url(../images/arrow-prev.png) no-repeat top left;
+}
+.hint.donate {
+    top: 1rem;
+    right: 3rem;
+    background: url(../images/arrow-donate.png) no-repeat top right;
+    padding: 0.7rem 3rem 0 0;
 }
