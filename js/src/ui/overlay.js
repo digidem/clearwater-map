@@ -9,7 +9,6 @@ cwm.views.Overlay = function(container) {
     container.on("mousemove", function() {
         var coord = d3.mouse(container.node());
         if (lastMouse) distance += cwm.util.distance(coord, lastMouse);
-        console.log(distance);
         if (distance > 400) hide();
         lastMouse = coord;
     });
