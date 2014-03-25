@@ -5,31 +5,39 @@ all: \
 	dist/cwm.min.js
   
 dist/cwm.js: \
-    js/lib/d3.v3.js \
-    js/lib/requestAnimationFrame.js \
-    js/lib/modestmaps.js \
-    js/lib/waxconnector.js \
-    js/lib/easey.js \
-    js/src/cwm.js \
-    js/src/map.js \
-    js/src/stories.js \
-    js/src/render.js \
-    js/src/util.js \
-    js/src/util/MM.overrides.js \
-    js/src/util/domhelpers.js \
-    js/src/layers.js \
-    js/src/layers/bing_layer.js \
-    js/src/layers/mapbox_layer.js \
-    js/src/layers/feature_layer.js \
-    js/src/layers/marker_layer.js \
-    js/src/handlers.js \
-    js/src/handlers/scroll_handler.js \
-    js/src/handlers/drag_handler.js \
-    js/src/handlers/flight_handler.js \
-    js/src/handlers/story_handler.js \
-    js/src/handlers/marker_interaction.js \
-    js/src/data.js \
-    data/ecuador.js
+  js/lib/d3.v3.js \
+  js/lib/lodash.modern-2.4.1.js \
+  js/lib/requestAnimationFrame.js \
+  js/lib/modestmaps.js \
+  js/lib/waxconnector.js \
+  js/lib/easey.js \
+  js/lib/d3.dimensions.js \
+  js/lib/d3.keybinding.js \
+  js/lib/topojson.js \
+  js/src/cwm.js \
+  js/src/map.js \
+  js/src/stories.js \
+  js/src/mission_control.js \
+  js/src/render.js \
+  js/src/templates.js \
+  js/src/util.js \
+  js/src/util/MM.overrides.js \
+  js/src/core/base.js \
+  js/src/core/place.js \
+  js/src/core/collection.js \
+  js/src/core/flightplan.js \
+  js/src/ui/navigation.js \
+  js/src/views.js \
+  js/src/ui/markers.js \
+  js/src/ui/popup.js \
+  js/src/ui/overlay.js \
+  js/src/layers.js \
+  js/src/layers/bing_layer.js \
+  js/src/layers/mapbox_layer.js \
+  js/src/layers/feature_layer.js \
+  js/src/layers/marker_layer.js \
+  js/src/handlers.js \
+  js/src/handlers/drag_handler.js \
 
 
 dist/cwm.js: node_modules/.install Makefile
@@ -43,11 +51,13 @@ dist/cwm.min.js: dist/cwm.js Makefile
 dist/cwm.css: \
 	css/data_uris.css \
 	css/map.css \
+	css/nav.css \
 	css/images.css \
 	css/stories.css \
 	css/markers.css \
 	css/features.css \
-	css/animation.css
+	css/animation.css \
+	css/overlay.css
 
 dist/cwm.css: Makefile
 	@rm -f $@
@@ -69,8 +79,7 @@ lib: \
 	js/lib/waxconnector.js \
 	js/lib/easey.js \
 	js/lib/lodash.modern-2.4.1.js \
-	js/lib/jquery-1.8.3.js \
-	js/lib/queue.js
+	js/lib/jquery-1.8.3.js 
 
 js/lib/lodash.modern-2.4.1.js:
 	curl https://raw.github.com/lodash/lodash/2.4.1/dist/lodash.js -o $@
@@ -90,9 +99,6 @@ js/lib/easey.js: node_modules/.install
 	@rm -f $@
 	cp node_modules/easey/src/easey.js $@
 
-js/lib/queue.js: node_modules/.install
-	@rm -f $@
-	cp node_modules/queue-async/queue.js $@
 
 D3_FILES = \
 	node_modules/d3/src/start.js \
