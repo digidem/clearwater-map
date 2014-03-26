@@ -59,7 +59,7 @@ cwm.Map = function(container) {
     };
 
     map.t = function(t) {
-        if (!ease.to()) return map;
+        if (!to) return map;
         // little hack, to avoid strange jumping when t == 0
         if (t === 0) t += 0.00001;
         ease.t(t);
