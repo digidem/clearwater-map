@@ -1726,7 +1726,7 @@
             "story_photo": "http://s3.amazonaws.com/clearwater-photos/52d532896ccf20292e5c0454ea38da3dd170c108.jpg",
             "story_url": "http://www.giveclearwater.org/2014/01/trip-pisorie-river/",
             "story_title": "A Trip Up the Pisorie River",
-            "story_excerpt": "A journey up the Pissorie River with the Cofán of Ukavati.",
+            "story_excerpt": "Accompanying the Cofán of Ukavati on a journey up the Pissorie River, ClearWater international field director Alex Goff experiences both struggle and beauty, frenetic energy and deep calm. ",
             "settlement": "Ukavati",
             "families": 1,
             "project": "Cofán Second Installation"
@@ -1752,7 +1752,7 @@
             "story_photo": "http://s3.amazonaws.com/clearwater-photos/3f886a54542a95159156ccab3eb78816de84223a.jpg",
             "story_url": "http://www.giveclearwater.org/2014/01/meet-hugo-payaguaje-clearwater-coordinator-siona-nationality/",
             "story_title": "Meet Hugo Payaguaje",
-            "story_excerpt": "Hugo, from the community of Aboquehuira, is president of the Siona federation, a teacher, and ClearWater coordinator for the Siona nationality.",
+            "story_excerpt": "From the community of Aboquehuira, Hugo stays busy working for the betterment of his people. In addition to being ClearWater coordinator for the Siona nationality, he is president of the Siona federation, a school teacher, and is pursuing a degree from Cuenca University through its distance learning program.",
             "settlement": "Aboquehuira",
             "families": 1,
             "project": "Siona Second Installation"
@@ -5283,6 +5283,27 @@
         {
           "type": "Point",
           "properties": {
+            "_id": 7641001993166340,
+            "lon": -76.78337,
+            "lat": -0.008033,
+            "community": "Cofan Dureno",
+            "name": "Ejidio Quenama and Otilia Criollo",
+            "users": 6,
+            "date": "Thu Jan 23 2014",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/8e6e85f186d46f5905c0569181664bd9e1726768.jpg",
+            "settlement": "Ukavati",
+            "families": 1,
+            "project": "Cofán Second Installation"
+          },
+          "id": "Cofan Dureno",
+          "coordinates": [
+            8569,
+            1537
+          ]
+        },
+        {
+          "type": "Point",
+          "properties": {
             "_id": 7648149997940700,
             "lon": -76.4815,
             "lat": -0.20593,
@@ -5290,7 +5311,7 @@
             "name": "Miguel Angel Yiyocuro and Liliana Payaguaje",
             "users": 8,
             "date": "Thu Jan 23 2014",
-            "photo": "http://s3.amazonaws.com/clearwater-photos/cec3828a52e902fe8d342657fac120285bd4d046.jpg",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/c462a26e77ec9e32e569bfd367d50b52f8d18127.jpg",
             "settlement": "Aboquehuira",
             "families": 1,
             "project": "Siona Second Installation"
