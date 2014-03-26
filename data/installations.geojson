@@ -5774,29 +5774,6 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7641001993166340,
-        "lon": -76.78337,
-        "lat": -0.008033,
-        "community": "Cofan Dureno",
-        "name": "Ejidio Quenama and Otilia Criollo",
-        "users": 6,
-        "date": "Thu Jan 23 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/8e6e85f186d46f5905c0569181664bd9e1726768.jpg",
-        "settlement": "Ukavati",
-        "families": 1,
-        "project": "Cofán Second Installation"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.41002,
-          -0.683366
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "_id": 7648149997940700,
         "lon": -76.4815,
         "lat": -0.20593,
