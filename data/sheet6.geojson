@@ -1,0 +1,17 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Do not use this anymore for editing data": "Instead use:"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Do not use this anymore for editing data": "https://docs.google.com/a/digital-democracy.org/spreadsheets/d/1Qq5JtQJKJ-7-nTzM2bkQStA2tAykr2iVOVVC7OZg2Tg/edit?usp=sharing"
+      }
+    }
+  ]
+}
