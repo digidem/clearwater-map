@@ -10,7 +10,7 @@
         "story_title": "Cofan",
         "story_excerpt": "Centuries ago, the Cofan people migrated from the foothills of the Andes to inhabit a large territory in the northern Ecuadorian Amazon. The Cofan have been inspiring protagonists in efforts to hold oil companies accountable for devastating contamination in their communities. While they fight for their culture and territory, they continue to suffer from lack of clean water."
       },
-      "geometry": {}
+      "geometry": null
     },
     {
       "type": "Feature",
@@ -21,7 +21,7 @@
         "story_title": "Secoya",
         "story_excerpt": "The Secoya live along the Aguarico River. Though the name means “rich water” oil contamination has taken a heavy toll on the river as well as the streams, marshes, and groundwater in the area. Traditional subsistence activities such as hunting, fishing, and growing edible crops have also been harmed."
       },
-      "geometry": {}
+      "geometry": null
     },
     {
       "type": "Feature",
@@ -32,7 +32,7 @@
         "story_title": "Waorani",
         "story_excerpt": "The Waorani are the most recently contacted of all Ecuadorian indigenous peoples. Since first contact in 1956, the Waorani have experienced a rapid and difficult assimilation into broader Ecuadorian society. Their territories have been greatly reduced, with remaining lands despoiled by industrial activities and settlement by colonists. Logging, oil drilling and related road-building have severely scarred Waorani lands. "
       },
-      "geometry": {}
+      "geometry": null
     },
     {
       "type": "Feature",
@@ -43,7 +43,7 @@
         "story_title": "Kichwa",
         "story_excerpt": "The Kichwa of the Amazon are the most numerous of Ecuador’s indigenous Amazonian peoples. With a remediation ever on the horizon, they have taken up the painstaking process of cleaning up the mess that the oil companies have left behind."
       },
-      "geometry": {}
+      "geometry": null
     },
     {
       "type": "Feature",
@@ -54,7 +54,7 @@
         "story_title": "Siona",
         "story_excerpt": "Like the neighboring Secoya, the Siona currently suffer from the health and economic impacts of oil contamination, the industrial cultivation of African oil palm, deforestation, and expanding colonist settlement in their territory."
       },
-      "geometry": {}
+      "geometry": null
     }
   ]
 }
