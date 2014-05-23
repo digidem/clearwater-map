@@ -157,10 +157,12 @@ html {
 #mapstory #attribution {
   z-index: 999;
 position: absolute;
-padding: 0 0.5em;
+padding: 0.4em 0.5em 0.1em;
 font-size: 0.8em;
 bottom: 0;
 left: 50%;
+text-align: center;
+line-height: 1.3em;
 }
 
 #mapstory #attribution a {
