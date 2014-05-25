@@ -89,7 +89,7 @@ cwm.layers.FeatureLayer = function() {
         // If beyond their max zoom, fade them out
         // Do not display features outside the map
         features = g.selectAll("path")
-            .data(featureData, function(d) {
+            .data(data, function(d) {
                 return d.id();
             });
 
