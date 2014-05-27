@@ -2,7 +2,7 @@ cwm.views.Markers = function() {
     var map,
         pointProject,
         stopBouncing,
-        tagName = "circle",
+        tagName = "div",
         markerSize = 8;
 
     var popup = cwm.views.Popup()
@@ -37,7 +37,7 @@ cwm.views.Markers = function() {
             .transition()
             .duration(500)
             .ease("elastic", 1.5)
-            .attr("r", markerSize * 1.8);
+            .style(cwm.util.transformProperty, "scale(1.8)");
     }
 
     function shrink() {
@@ -47,35 +47,48 @@ cwm.views.Markers = function() {
             })
             .classed("grown", false)
             .transition()
-            .attr("r", markerSize);
+            .duration(150)
+            .style(cwm.util.transformProperty, "scale(1)");
     }
 
-    function bounceFeatured(selection) {
-        selection
+    function bounceFeatured() {
+        d3.select(this)
             .filter(function(d) {
                 return d.attr("featured") === true;
             })
             .transition()
-            .delay(function(d,i) {
+            .delay(function(d, i) {
                 return 3000 + (i * 200);
             })
             .duration(180)
-            .attr("r", markerSize * 2)
-            .style("stroke-width", 6)
+            .style(cwm.util.transformProperty, "scale(2)")
             .each("end", function() {
+                console.log(this);
                 d3.select(this)
                     .transition()
                     .duration(1800)
                     .ease("elastic", 1, 0.2)
-                    .attr("r", markerSize)
-                    .style("stroke-width", 3);
+                    .style(cwm.util.transformProperty, "scale(1)");
                 if (!stopBouncing) {
-                    bounceFeatured(selection);
+                    bounceFeatured.call(this);
                 } else {
                     stopBouncing = false;
                 }
             });
-        
+
+    }
+
+    function addInteraction(selection) {
+        selection
+            .on("mouseover.animation", grow)
+            .on("mouseout.animation", shrink)
+            .on("mouseenter.popup", popup.show)
+            .on("mouseleave.popup", popup.hide)
+            .on("click.popup", function(d) {
+                d3.event.stopPropagation();
+                popup.show(d);
+                map.on("click").call(this, d);
+            });
     }
 
     return {
@@ -85,49 +98,43 @@ cwm.views.Markers = function() {
         },
 
         show: function(selection) {
+            if (selection.empty()) return;
             selection
                 .classed("featured", function(d) {
                     return d.attr("featured");
                 })
+                .classed("marker", true)
                 .sort(sortFromLocation(map.getCenter()))
-                .attr("r", 0)
+                .append("div")
+                .classed("icon", true)
+                .style(cwm.util.transformProperty, "scale(0)")
+                .call(addInteraction)
                 .transition()
                 .duration(1000)
                 .delay(function(d, i) {
                     return i * 20;
                 })
                 .ease("elastic", 2)
-                .attr("r", markerSize);
+                .style(cwm.util.transformProperty, "scale(1)")
+                .each("end", bounceFeatured);
 
             selection
                 .sort(sortFeaturedLast);
         },
 
-        addInteraction: function(selection) {
-            selection
-                .on("mouseover.animation", grow)
-                .on("mouseout.animation", shrink)
-                .on("mouseenter.popup", popup.show)
-                .on("mouseleave.popup", popup.hide)
-                .on("click.popup", function(d) {
-                    d3.event.stopPropagation();
-                    popup.show(d);
-                    map.on("click").call(this, d);
-                })
-                .call(bounceFeatured);
-        },
+        addInteraction: addInteraction,
 
         move: function(selection) {
-            selection.attr("transform", function(d) {
+            selection.style(cwm.util.transformProperty, function(d) {
                 var coord = pointProject.apply(this, d.geometry.coordinates);
-                return "translate(" + coord[0] + "," + coord[1] + ")";
+                return "translate3d(" + coord[0] + "px," + coord[1] + "px,0)";
             });
             if (popup.active()) popup.move();
         },
 
         hide: function(selection) {
             selection.transition()
-                .attr("r", 0)
+                .style(cwm.util.transformProperty, "scale(0)")
                 .each("end", function() {
                     d3.select(this).remove();
                 });

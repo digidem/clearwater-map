@@ -13,49 +13,18 @@
 }
 
 #mapstory .marker {
-margin-left: -8px;
-margin-top: -8px;
-width: 16px;
-height: 16px;
 display: block;
 position: absolute;
 cursor: pointer;
 pointer-events: all;
--webkit-transition-timing-function: cubic-bezier(0.680, 0, 0.265, 1); /* older webkit */
--webkit-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-   -moz-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-    -ms-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-     -o-transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-        transition-timing-function: cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
--webkit-transition-property: width,height,margin;
-  	-moz-transition-property: width,height,margin;
-	    -o-transition-property: width,height,margin;
-	   -ms-transition-property: width,height,margin;
-	       transition-property: width,height,margin;
--webkit-transition-duration: 0.1s;
-	 -moz-transition-duration: 0.1s;
-	   -o-transition-duration: 0.1s;
-	  -ms-transition-duration: 0.1s;
-	      transition-duration: 0.1s;
-        z-index: -1;
 }
-
-#mapstory .marker.featured {
-margin-left: -12px;
-margin-top: -12px;
-width: 24px;
-height: 24px;
-z-index: 0;
-}
-
-#mapstory .marker:hover {
-margin-left: -17px;
-margin-top: -17px;
-width: 33px;
-height: 33px;
-z-index:1;
-pointer-events: all;
-
+#mapstory .marker div {
+  margin-left: -8px;
+  margin-top: -8px;
+  width: 16px;
+  height: 16px;
+  background-size: 100% 100%;
+  position: absolute;
 }
 
 #mapstory .marker-tooltip {

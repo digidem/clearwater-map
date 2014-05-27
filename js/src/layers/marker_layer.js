@@ -23,7 +23,7 @@ cwm.layers.MarkerLayer = function() {
         });
 
         // Join the filtered data for markers in the current map extent
-        var update = g.selectAll(markers.tagName()).data(data, function(d) {
+        var update = g.selectAll(markers.tagName() + ".marker").data(data, function(d) {
             return d.id();
         });
 
@@ -31,8 +31,7 @@ cwm.layers.MarkerLayer = function() {
         // and add the interaction.
         update.enter()
             .append(markers.tagName())
-            .call(markers.show)
-            .call(markers.addInteraction);
+            .call(markers.show);
 
         // After appending the circles to the enter() selection,
         // it is merged with the update selection.
@@ -61,8 +60,7 @@ cwm.layers.MarkerLayer = function() {
         map.addLayer(markerLayer);
         markers.map(map);
         var mapContainer = d3.select(map.parent);
-        g = cwm.render.SvgContainer(mapContainer)
-            .append('g')
+        g = cwm.render.DivContainer(mapContainer)
             .attr("class", markerLayer.name);
 
         return markerLayer;
