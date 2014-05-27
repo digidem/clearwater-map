@@ -2,7 +2,7 @@ cwm.views.Markers = function() {
     var map,
         pointProject,
         stopBouncing,
-        tagName = "circle",
+        tagName = "g",
         markerSize = 8;
 
     var popup = cwm.views.Popup()
@@ -37,7 +37,7 @@ cwm.views.Markers = function() {
             .transition()
             .duration(500)
             .ease("elastic", 1.5)
-            .attr("r", markerSize * 1.8);
+            .attr("transform", "scale(1.8)");
     }
 
     function shrink() {
@@ -47,7 +47,7 @@ cwm.views.Markers = function() {
             })
             .classed("grown", false)
             .transition()
-            .attr("r", markerSize);
+            .attr("transform", "scale(1)");
     }
 
     function bounceFeatured(selection) {
@@ -60,15 +60,13 @@ cwm.views.Markers = function() {
                 return 3000 + (i * 200);
             })
             .duration(180)
-            .attr("r", markerSize * 2)
-            .style("stroke-width", 6)
+            .attr("transform", "scale(2)")
             .each("end", function() {
                 d3.select(this)
                     .transition()
                     .duration(1800)
                     .ease("elastic", 1, 0.2)
-                    .attr("r", markerSize)
-                    .style("stroke-width", 3);
+                    .attr("transform", "scale(1)");
                 if (!stopBouncing) {
                     bounceFeatured(selection);
                 } else {
@@ -86,18 +84,20 @@ cwm.views.Markers = function() {
 
         show: function(selection) {
             selection
+                .sort(sortFromLocation(map.getCenter()))
+                .append("circle")
                 .classed("featured", function(d) {
                     return d.attr("featured");
                 })
-                .sort(sortFromLocation(map.getCenter()))
-                .attr("r", 0)
+                .attr("r", markerSize)
+                .attr("transform", "scale(0)")
                 .transition()
                 .duration(1000)
                 .delay(function(d, i) {
                     return i * 20;
                 })
                 .ease("elastic", 2)
-                .attr("r", markerSize);
+                .attr("transform", "scale(1)");
 
             selection
                 .sort(sortFeaturedLast);
@@ -105,6 +105,7 @@ cwm.views.Markers = function() {
 
         addInteraction: function(selection) {
             selection
+                .selectAll("circle")
                 .on("mouseover.animation", grow)
                 .on("mouseout.animation", shrink)
                 .on("mouseenter.popup", popup.show)
@@ -126,8 +127,10 @@ cwm.views.Markers = function() {
         },
 
         hide: function(selection) {
-            selection.transition()
-                .attr("r", 0)
+            selection
+                .selectAll("circle")
+                .transition()
+                .attr("transform", "scale(0)")
                 .each("end", function() {
                     d3.select(this).remove();
                 });
