@@ -124,7 +124,9 @@ cwm.layers.FeatureLayer = function() {
         featureLayer.name = collection.id().toLowerCase();
         if (!(collection instanceof Array)) collection = [collection];
         // add these features to the features already in the layer
-        featureData = collection;
+        featureData = collection.filter(function(d) {
+            return d.geometry.coordinates;
+        });
         d3.select(window).on("resize." + featureLayer.name, setMaxZooms);
         g.classed(featureLayer.name, true);
         setMaxZooms();
