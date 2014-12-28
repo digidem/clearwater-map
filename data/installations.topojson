@@ -1722,7 +1722,7 @@
             "name": "Fredy Queta and Tsenene Criollo",
             "users": 4,
             "date": "Thu Jan 23 2014",
-            "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRSDU1dVlWRkdWaU0/edit?usp=sharing",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/1952e0ea5a204c62a6b55697c6460c16bb69225e.jpg",
             "story_photo": "http://s3.amazonaws.com/clearwater-photos/52d532896ccf20292e5c0454ea38da3dd170c108.jpg",
             "story_url": "http://www.giveclearwater.org/2014/01/trip-pisorie-river/",
             "story_title": "A Trip Up the Pisorie River",
@@ -5165,7 +5165,7 @@
             "name": "Rene Ruiz and Sara Quenama",
             "users": 11,
             "date": "Wed Jan 15 2014",
-            "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBROC1DU3lIVWZrLUE/edit?usp=sharing",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/6413bc6f45fe32b4d77bfb502ee6a7d4b566015b.jpg",
             "settlement": "Ukavati",
             "families": 1,
             "project": "Cofán Second Installation"
@@ -5186,7 +5186,7 @@
             "name": "Edmundo Ruiz and Lila Quenama",
             "users": 8,
             "date": "Thu Jan 16 2014",
-            "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRMXFTZHFmZksyVnc/edit?usp=sharing",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/2f466876027c5a69d77d76ca3d2bd040bd537f61.jpg",
             "settlement": "Ukavati",
             "families": 1,
             "project": "Cofán Second Installation"
@@ -5207,7 +5207,7 @@
             "name": "Aurelio Quenama and Rosalina Mendua",
             "users": 10,
             "date": "Sat Jan 18 2014",
-            "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBReXhHVFlMU1hPZ2s/edit?usp=sharing",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/50a8c8ae18af8b7200a157e6acc40584aa7ea705.jpg",
             "settlement": "Ukavati",
             "families": 2,
             "project": "Cofán Second Installation"
@@ -5228,7 +5228,7 @@
             "name": "Francisca Quenama",
             "users": 3,
             "date": "Thu Jan 16 2014",
-            "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRZHNnOXJmNnl2Um8/edit?usp=sharing",
+            "photo": "http://s3.amazonaws.com/clearwater-photos/a7dfe410152a170b4027172a0e90c82c8939a677.jpg",
             "settlement": "Ukavati",
             "families": 1,
             "project": "Cofán Second Installation"
@@ -7297,8 +7297,9 @@
           ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7567245003642800,
             "lon": -75.67245,
             "lat": 0.36428,
             "community": "Sábalo",
@@ -7310,11 +7311,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9901,
+            7659
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7567276003607400,
             "lon": -75.67276,
             "lat": 0.36074,
             "community": "Sábalo",
@@ -7326,11 +7332,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9899,
+            7636
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7570623003510901,
             "lon": -75.70623,
             "lat": 0.35109,
             "community": "Sábalo",
@@ -7342,11 +7353,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9715,
+            7575
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7573435003438501,
             "lon": -75.73435,
             "lat": 0.34385,
             "community": "Sábalo",
@@ -7358,11 +7374,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9560,
+            7529
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7566933003577200,
             "lon": -75.66933,
             "lat": 0.35772,
             "community": "Sábalo",
@@ -7374,11 +7395,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9918,
+            7617
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7566845003574101,
             "lon": -75.66845,
             "lat": 0.35741,
             "community": "Sábalo",
@@ -7390,11 +7416,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9922,
+            7615
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7566782003574401,
             "lon": -75.66782,
             "lat": 0.35744,
             "community": "Sábalo",
@@ -7406,11 +7437,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9926,
+            7615
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7566702003572999,
             "lon": -75.66702,
             "lat": 0.3573,
             "community": "Sábalo",
@@ -7422,11 +7458,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9930,
+            7615
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7576409003173500,
             "lon": -75.76409,
             "lat": 0.31735,
             "community": "Sábalo",
@@ -7438,11 +7479,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9397,
+            7360
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7576396003186100,
             "lon": -75.76396,
             "lat": 0.31861,
             "community": "Sábalo",
@@ -7454,11 +7500,16 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9397,
+            7368
+          ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7576270003187500,
             "lon": -75.7627,
             "lat": 0.31875,
             "community": "Sábalo",
@@ -7470,7 +7521,11 @@
             "families": 1,
             "project": "Cofán Installation Sábalo"
           },
-          "id": "Sábalo"
+          "id": "Sábalo",
+          "coordinates": [
+            9404,
+            7369
+          ]
         }
       ]
     }
