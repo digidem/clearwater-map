@@ -11,16 +11,16 @@
     "url": "git://github.com/digidem/clearwater-map.git"
   },
   "dependencies": {
-    "modestmaps": "3.3.6",
+    "modestmaps": "modestmaps/modestmaps-js",
     "wax": "7.0.0dev13",
     "easey": "2.0.7",
     "queue-async": "1"
   },
   "devDependencies": {
-    "uglify-js": "~2.2.5",
+    "clean-css": "2",
     "d3": "3",
     "smash": "0.0",
-    "clean-css": "2"
+    "uglify-js": "^2.4.16"
   },
   "author": "Gregor MacLennan (Digital Democracy)",
   "license": "MIT",

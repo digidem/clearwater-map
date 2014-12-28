@@ -19182,7 +19182,7 @@ cwm.views = {};cwm.views.Markers = function() {
     var map,
         pointProject,
         stopBouncing,
-        tagName = "circle",
+        tagName = "g",
         markerSize = 8;
 
     var popup = cwm.views.Popup()
@@ -19204,6 +19204,8 @@ cwm.views = {};cwm.views.Markers = function() {
         return function(a, b) {
             var ac = a.geometry.coordinates;
             var bc = b.geometry.coordinates;
+            if (!ac) return -1;
+            if (!bc) return 1;
             var ad = Math.pow(ac[0] - loc.lon, 2) + Math.pow(ac[1] - loc.lat, 2);
             var bd = Math.pow(bc[0] - loc.lon, 2) + Math.pow(bc[1] - loc.lat, 2);
             return d3.ascending(ad, bd);
@@ -19217,7 +19219,7 @@ cwm.views = {};cwm.views.Markers = function() {
             .transition()
             .duration(500)
             .ease("elastic", 1.5)
-            .attr("r", markerSize * 1.8);
+            .attr("transform", "scale(1.8)");
     }
 
     function shrink() {
@@ -19227,7 +19229,7 @@ cwm.views = {};cwm.views.Markers = function() {
             })
             .classed("grown", false)
             .transition()
-            .attr("r", markerSize);
+            .attr("transform", "scale(1)");
     }
 
     function bounceFeatured(selection) {
@@ -19240,15 +19242,13 @@ cwm.views = {};cwm.views.Markers = function() {
                 return 3000 + (i * 200);
             })
             .duration(180)
-            .attr("r", markerSize * 2)
-            .style("stroke-width", 6)
+            .attr("transform", "scale(2)")
             .each("end", function() {
                 d3.select(this)
                     .transition()
                     .duration(1800)
                     .ease("elastic", 1, 0.2)
-                    .attr("r", markerSize)
-                    .style("stroke-width", 3);
+                    .attr("transform", "scale(1)");
                 if (!stopBouncing) {
                     bounceFeatured(selection);
                 } else {
@@ -19266,18 +19266,20 @@ cwm.views = {};cwm.views.Markers = function() {
 
         show: function(selection) {
             selection
+                .sort(sortFromLocation(map.getCenter()))
+                .append("circle")
                 .classed("featured", function(d) {
                     return d.attr("featured");
                 })
-                .sort(sortFromLocation(map.getCenter()))
-                .attr("r", 0)
+                .attr("r", markerSize)
+                .attr("transform", "scale(0)")
                 .transition()
                 .duration(1000)
                 .delay(function(d, i) {
                     return i * 20;
                 })
                 .ease("elastic", 2)
-                .attr("r", markerSize);
+                .attr("transform", "scale(1)");
 
             selection
                 .sort(sortFeaturedLast);
@@ -19285,6 +19287,7 @@ cwm.views = {};cwm.views.Markers = function() {
 
         addInteraction: function(selection) {
             selection
+                .selectAll("circle")
                 .on("mouseover.animation", grow)
                 .on("mouseout.animation", shrink)
                 .on("mouseenter.popup", popup.show)
@@ -19306,8 +19309,10 @@ cwm.views = {};cwm.views.Markers = function() {
         },
 
         hide: function(selection) {
-            selection.transition()
-                .attr("r", 0)
+            selection
+                .selectAll("circle")
+                .transition()
+                .attr("transform", "scale(0)")
                 .each("end", function() {
                     d3.select(this).remove();
                 });
@@ -19875,7 +19880,7 @@ cwm.layers.FeatureLayer = function() {
         // If beyond their max zoom, fade them out
         // Do not display features outside the map
         features = g.selectAll("path")
-            .data(featureData, function(d) {
+            .data(data, function(d) {
                 return d.id();
             });
 
@@ -19910,7 +19915,9 @@ cwm.layers.FeatureLayer = function() {
         featureLayer.name = collection.id().toLowerCase();
         if (!(collection instanceof Array)) collection = [collection];
         // add these features to the features already in the layer
-        featureData = collection;
+        featureData = collection.filter(function(d) {
+            return d.geometry.coordinates;
+        });
         d3.select(window).on("resize." + featureLayer.name, setMaxZooms);
         g.classed(featureLayer.name, true);
         setMaxZooms();
@@ -19992,7 +19999,9 @@ cwm.layers.MarkerLayer = function() {
 
     function data(collection) {
         if (!arguments.length) return markerData;
-        markerData = collection;
+        markerData = collection.filter(function(d) {
+            return d.geometry.coordinates;
+        });
         markerLayer.name = collection.id();
         g.classed(markerLayer.name, true);
         draw();
