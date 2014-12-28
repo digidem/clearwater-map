@@ -1877,7 +1877,7 @@
         "name": "Fredy Queta and Tsenene Criollo",
         "users": 4,
         "date": "Thu Jan 23 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/1952e0ea5a204c62a6b55697c6460c16bb69225e.jpg",
+        "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRSDU1dVlWRkdWaU0/edit?usp=sharing",
         "story_photo": "http://s3.amazonaws.com/clearwater-photos/52d532896ccf20292e5c0454ea38da3dd170c108.jpg",
         "story_url": "http://www.giveclearwater.org/2014/01/trip-pisorie-river/",
         "story_title": "A Trip Up the Pisorie River",
@@ -2074,6 +2074,7 @@
         "users": 6,
         "date": "Tue Nov 01 2011",
         "photo": "http://s3.amazonaws.com/clearwater-photos/0d21d99a20a147547cf95fee0e5be69ad47eec77.jpg",
+        "settlement": "Cofan Dureno",
         "families": 1,
         "project": "ClearWater Dureno pilot project",
         "gallery": "http://www.flickr.com/photos/78467630@N04/6884101990/"
@@ -2433,7 +2434,7 @@
         "users": 9,
         "date": "Tue Nov 01 2011",
         "photo": "http://s3.amazonaws.com/clearwater-photos/b0758b3036b1246dd469f402c1c8e6bccd71f412.jpg",
-        "settlement": "Dureno (opposite shore)",
+        "settlement": "Cofan Dureno",
         "families": 1,
         "project": "ClearWater Dureno pilot project",
         "gallery": "http://www.flickr.com/photos/78467630@N04/7033983855/"
@@ -5643,7 +5644,7 @@
         "name": "Rene Ruiz and Sara Quenama",
         "users": 11,
         "date": "Wed Jan 15 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/6413bc6f45fe32b4d77bfb502ee6a7d4b566015b.jpg",
+        "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBROC1DU3lIVWZrLUE/edit?usp=sharing",
         "settlement": "Ukavati",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5666,7 +5667,7 @@
         "name": "Edmundo Ruiz and Lila Quenama",
         "users": 8,
         "date": "Thu Jan 16 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/2f466876027c5a69d77d76ca3d2bd040bd537f61.jpg",
+        "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRMXFTZHFmZksyVnc/edit?usp=sharing",
         "settlement": "Ukavati",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5689,7 +5690,7 @@
         "name": "Aurelio Quenama and Rosalina Mendua",
         "users": 10,
         "date": "Sat Jan 18 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/50a8c8ae18af8b7200a157e6acc40584aa7ea705.jpg",
+        "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBReXhHVFlMU1hPZ2s/edit?usp=sharing",
         "settlement": "Ukavati",
         "families": 2,
         "project": "Cofán Second Installation"
@@ -5712,7 +5713,7 @@
         "name": "Francisca Quenama",
         "users": 3,
         "date": "Thu Jan 16 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/a7dfe410152a170b4027172a0e90c82c8939a677.jpg",
+        "photo": "https://drive.google.com/file/d/0B6o_oZfO7KBRZHNnOXJmNnl2Um8/edit?usp=sharing",
         "settlement": "Ukavati",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5735,7 +5736,7 @@
         "name": "Nely Quenama",
         "users": 2,
         "date": "Fri Jan 17 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/a076ac127804f200fb1bb0eb0791afa59c58943f.jpg",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/eabcecd830c4b020d757f2b06c21816704d14b5b.jpg",
         "settlement": "Ukavati",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5758,7 +5759,7 @@
         "name": "Angela Quenama and Guillermo Quenama",
         "users": 4,
         "date": "Sat Jan 18 2014",
-        "photo": "http://s3.amazonaws.com/clearwater-photos/b167d0637bbe0498ca5f4a8ed7f16ffdafe8e212.jpg",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/104aa1fc4b3fcd4814c2bf81c4d97ce0db1f3b26.jpg",
         "settlement": "Ukavati",
         "families": 1,
         "project": "Cofán Second Installation"
@@ -5770,6 +5771,22 @@
           -0.0123333
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -76.683366,
+        "lat": -0.008033,
+        "community": "Cofan Dureno",
+        "name": "Ejidio Quenama and Otilia Criollo",
+        "users": 4,
+        "date": "Sat Jan 18 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/afbd10e40e9cf358431f5c9237f45a107a6bde9a.jpg",
+        "settlement": "Ukavati",
+        "families": 1,
+        "project": "Cofán Second Installation"
+      },
+      "geometry": null
     },
     {
       "type": "Feature",
@@ -5870,7 +5887,7 @@
         "lon": -76.48167,
         "lat": -0.20473,
         "community": "Siona",
-        "name": "Linber Payaguaje and Marili Biaguaje",
+        "name": "Limber Payaguaje and Marili Biaguaje",
         "users": 6,
         "date": "Mon Jan 20 2014",
         "photo": "http://s3.amazonaws.com/clearwater-photos/9451de62fc54411bbdd1c903ad254d5842ccf698.jpg",
@@ -6759,6 +6776,1382 @@
           0.05765
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7688156000863799,
+        "lon": -76.88156,
+        "lat": 0.08638,
+        "community": "Miwaguno and Tobeta",
+        "name": "Bay Enomenga",
+        "users": 6,
+        "date": "Sat Apr 12 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/0600848f44d860c658874470639386839ff31955.jpg",
+        "settlement": "Miwaguno",
+        "families": 2,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.88156,
+          0.08638
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672621007286099,
+        "lon": -76.72621,
+        "lat": 0.72861,
+        "community": "Miwaguno and Tobeta",
+        "name": "Salvador Nihua",
+        "users": 4,
+        "date": "Sat Apr 12 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/0bbb0f7cff04b021b9437d2c6c33d27914cad508.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72621,
+          0.72861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672603007295899,
+        "lon": -76.72603,
+        "lat": 0.72959,
+        "community": "Miwaguno and Tobeta",
+        "name": "Jacobo Nenquimo",
+        "users": 7,
+        "date": "Sun Apr 13 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/ebccfba5b0c81a521135611f179a4067dfacb9f4.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72603,
+          0.72959
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672707007289600,
+        "lon": -76.72707,
+        "lat": 0.72896,
+        "community": "Miwaguno and Tobeta",
+        "name": "Menkai Enomenga",
+        "users": 6,
+        "date": "Sun Apr 13 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/5ebecf52d5e73d24e3d9f7792f550ee335758ebd.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72707,
+          0.72896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672737007289699,
+        "lon": -76.72737,
+        "lat": 0.72897,
+        "community": "Miwaguno and Tobeta",
+        "name": "Alex Nonge",
+        "users": 5,
+        "date": "Mon Apr 14 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/1c2eabf73c75cdc1c9e3e5757d5f23e93a1da0d4.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72737,
+          0.72897
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672739007285700,
+        "lon": -76.72739,
+        "lat": 0.72857,
+        "community": "Miwaguno and Tobeta",
+        "name": "Salamon Nihua and Gloria Nenquimo",
+        "users": 5,
+        "date": "Mon Apr 14 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/244b3b3b8cd7e84444489fa057e231cb2bd33ce1.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72739,
+          0.72857
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672896007307400,
+        "lon": -76.72896,
+        "lat": 0.73074,
+        "community": "Miwaguno and Tobeta",
+        "name": "Samuel Ima",
+        "users": 6,
+        "date": "Tue Apr 15 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/2b4839d9f725c2e8b6dc924ebaf94313e202d1ec.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72896,
+          0.73074
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672901007277600,
+        "lon": -76.72901,
+        "lat": 0.72776,
+        "community": "Miwaguno and Tobeta",
+        "name": "Yato Enomenga",
+        "users": 10,
+        "date": "Tue Apr 15 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/9ded102c9f2d07259f945a2d9dd06aa8bf7bcdb2.jpg",
+        "settlement": "Miwaguno",
+        "families": 2,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72901,
+          0.72776
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672877007280000,
+        "lon": -76.72877,
+        "lat": 0.728,
+        "community": "Miwaguno and Tobeta",
+        "name": "Roque Ima",
+        "users": 5,
+        "date": "Wed Apr 16 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/0bbb0f7cff04b021b9437d2c6c33d27914cad508.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72877,
+          0.728
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672823007280400,
+        "lon": -76.72823,
+        "lat": 0.72804,
+        "community": "Miwaguno and Tobeta",
+        "name": "Angel Omaka",
+        "users": 6,
+        "date": "Wed Apr 16 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/975a691987fdaef2d1a705a68d382e6d484eaa69.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72823,
+          0.72804
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672909007287200,
+        "lon": -76.72909,
+        "lat": 0.72872,
+        "community": "Miwaguno and Tobeta",
+        "name": "Namo Enomenga",
+        "users": 11,
+        "date": "Thu Apr 17 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/547c0e0d5b9a8e32520fe40dc2a838d7bc815d03.jpg",
+        "settlement": "Miwaguno",
+        "families": 2,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72909,
+          0.72872
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672947007292701,
+        "lon": -76.72947,
+        "lat": 0.72927,
+        "community": "Miwaguno and Tobeta",
+        "name": "Marcelo Nihua",
+        "users": 10,
+        "date": "Thu Apr 17 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/192aae347b590c90c482b518ad0dbb64e47730ab.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72947,
+          0.72927
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672948007293800,
+        "lon": -76.72948,
+        "lat": 0.72938,
+        "community": "Miwaguno and Tobeta",
+        "name": "Juan Pablo Enomenga",
+        "users": 6,
+        "date": "Fri Apr 18 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/fcb51f45b1ee1f8e044a365b290a0da3ae0eea77.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72948,
+          0.72938
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7673064007299499,
+        "lon": -76.73064,
+        "lat": 0.72995,
+        "community": "Miwaguno and Tobeta",
+        "name": "Camilo Shiwango",
+        "users": 14,
+        "date": "Fri Apr 18 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/7106f5dddf064cf201623520abadc9d6425091cb.jpg",
+        "settlement": "Miwaguno",
+        "families": 3,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.73064,
+          0.72995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7673193007305001,
+        "lon": -76.73193,
+        "lat": 0.7305,
+        "community": "Miwaguno and Tobeta",
+        "name": "Wini Ima",
+        "users": 7,
+        "date": "Sat Apr 19 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/0cd65c9a53abfed4b19f5f552638aaf61894a055.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.73193,
+          0.7305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672987007309901,
+        "lon": -76.72987,
+        "lat": 0.73099,
+        "community": "Miwaguno and Tobeta",
+        "name": "Alfonso Irumenga",
+        "users": 5,
+        "date": "Sat Apr 19 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/f68cc6a27452e53165942408883ae25c8e3ac07d.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72987,
+          0.73099
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672952007312699,
+        "lon": -76.72952,
+        "lat": 0.73127,
+        "community": "Miwaguno and Tobeta",
+        "name": "Pablo Ima",
+        "users": 5,
+        "date": "Sun Apr 20 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/3b919699377bb27139b4464e10f5c90f543583e5.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72952,
+          0.73127
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672958007313400,
+        "lon": -76.72958,
+        "lat": 0.73134,
+        "community": "Miwaguno and Tobeta",
+        "name": "Marcelo Caiga",
+        "users": 5,
+        "date": "Sun Apr 20 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/5188e483ce3001dbdbd91e8011816ac6fef21a3d.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72958,
+          0.73134
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672982007313100,
+        "lon": -76.72982,
+        "lat": 0.73131,
+        "community": "Miwaguno and Tobeta",
+        "name": "Juane Ima",
+        "users": 8,
+        "date": "Mon Apr 21 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/080a8bc9646f3e836fc7867018e50d6d525f1765.jpg",
+        "settlement": "Miwaguno",
+        "families": 2,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72982,
+          0.73131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672964007315000,
+        "lon": -76.72964,
+        "lat": 0.7315,
+        "community": "Miwaguno and Tobeta",
+        "name": "Carlos Caiga",
+        "users": 5,
+        "date": "Mon Apr 21 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/93fbcc8fdedda39b8f0d7e42691a5b997a85b44d.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72964,
+          0.7315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672990007318100,
+        "lon": -76.7299,
+        "lat": 0.73181,
+        "community": "Miwaguno and Tobeta",
+        "name": "Fidel Alvarado",
+        "users": 7,
+        "date": "Tue Apr 22 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/24d1e628b225c42abc81be7afc9ce1192424e8a2.jpg",
+        "settlement": "Miwaguno",
+        "families": 2,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7299,
+          0.73181
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7672926007292300,
+        "lon": -76.72926,
+        "lat": 0.72923,
+        "community": "Miwaguno and Tobeta",
+        "name": "Vicente Boya",
+        "users": 5,
+        "date": "Tue Apr 22 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/29f7a47fd06fe627a307eea446dfbfd77457fc79.jpg",
+        "story_photo": "http://s3.amazonaws.com/clearwater-photos/8f2c06b77801dd291bc62d7856200a44073b2fe8.jpg",
+        "story_url": "http://www.giveclearwater.org/2014/02/miwaguno-tobeta-water/",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.72926,
+          0.72923
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7673061007299800,
+        "lon": -76.73061,
+        "lat": 0.72998,
+        "community": "Miwaguno and Tobeta",
+        "name": "Fausto Ima",
+        "users": 7,
+        "date": "Wed Apr 23 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/903ac0a2d4e38743c1c92aaf5d0934f319f6cbe8.jpg",
+        "settlement": "Miwaguno",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.73061,
+          0.72998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669038007051900,
+        "lon": -76.69038,
+        "lat": 0.70519,
+        "community": "Miwaguno and Tobeta",
+        "name": "Dabo Enomenga",
+        "users": 6,
+        "date": "Thu Apr 24 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/4ad19bfcd80ba6ed6fc6466037239c76dda49941.jpg",
+        "settlement": "Tobeta",
+        "families": 2,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.69038,
+          0.70519
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669057007057999,
+        "lon": -76.69057,
+        "lat": 0.7058,
+        "community": "Miwaguno and Tobeta",
+        "name": "Angel Aguinda",
+        "users": 6,
+        "date": "Thu Apr 24 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/d069a0f995f8163bf6884a5a634e687840fc910c.jpg",
+        "settlement": "Tobeta",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.69057,
+          0.7058
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669133007061999,
+        "lon": -76.69133,
+        "lat": 0.7062,
+        "community": "Miwaguno and Tobeta",
+        "name": "Miriam Enomenga",
+        "users": 8,
+        "date": "Thu Apr 24 2104",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/abba2883675529fa0a6734af0303752c88345198.jpg",
+        "settlement": "Tobeta",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.69133,
+          0.7062
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669170007062400,
+        "lon": -76.6917,
+        "lat": 0.70624,
+        "community": "Miwaguno and Tobeta",
+        "name": "Telmo Enomenga",
+        "users": 3,
+        "date": "Thu Apr 24 2104",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/d35d8e04fd70a54d7c5b5790a2ebd1ee9c339130.jpg",
+        "settlement": "Tobeta",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.6917,
+          0.70624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669134007062900,
+        "lon": -76.69134,
+        "lat": 0.70629,
+        "community": "Miwaguno and Tobeta",
+        "name": "Margarita Enomenga",
+        "users": 9,
+        "date": "Sat Apr 26 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/ae67c3372ddf09011db3f966f03eb2c160209ec5.jpg",
+        "settlement": "Tobeta",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.69134,
+          0.70629
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669003007054599,
+        "lon": -76.69003,
+        "lat": 0.70546,
+        "community": "Miwaguno and Tobeta",
+        "name": "Gladys Enomenga",
+        "users": 5,
+        "date": "Sat Apr 26 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/e7f5ca76ca81503e856897b15be9fd0694235173.jpg",
+        "settlement": "Tobeta",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.69003,
+          0.70546
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669030007053399,
+        "lon": -76.6903,
+        "lat": 0.70534,
+        "community": "Miwaguno and Tobeta",
+        "name": "Larry Bacuy",
+        "users": 3,
+        "date": "Sun Apr 27 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/56bc886383ff6bfd974c86933f102b814179e9ba.jpg",
+        "settlement": "Tobeta",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.6903,
+          0.70534
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7669084007047499,
+        "lon": -76.69084,
+        "lat": 0.70475,
+        "community": "Miwaguno and Tobeta",
+        "name": "Carlos Alvarado",
+        "users": 8,
+        "date": "Sun Apr 27 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/159a1e9d3d02a284afe1ab5850aa002cada6ab22.jpg",
+        "settlement": "Tobeta",
+        "families": 1,
+        "project": "Waorani Installation Via Pindo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.69084,
+          0.70475
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7566822003567101,
+        "lon": -75.66822,
+        "lat": 0.35671,
+        "community": "Sábalo",
+        "name": "Andrés Mendua and Gladis Quenamá",
+        "users": 6,
+        "date": "Wed Oct 01 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/a7b14c34dd8dc015cb6c2339850576beea109968.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.66822,
+          0.35671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7566821003567000,
+        "lon": -75.66821,
+        "lat": 0.3567,
+        "community": "Sábalo",
+        "name": "Fausto Criollo and Monica Mendua",
+        "users": 6,
+        "date": "Wed Oct 01 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/14f286371da3abfb2ec71d40ea968c55f5afa379.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.66821,
+          0.3567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7565456003778500,
+        "lon": -75.65456,
+        "lat": 0.37785,
+        "community": "Sábalo",
+        "name": "Juan Aguinda and Carmesa Lucitante",
+        "users": 7,
+        "date": "Fri Oct 03 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/b70ef05a3945fa9d1feb5149208a13e08c033cbf.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.65456,
+          0.37785
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7565454003778300,
+        "lon": -75.65454,
+        "lat": 0.37783,
+        "community": "Sábalo",
+        "name": "Carlos Yiyoguaje",
+        "users": 5,
+        "date": "Fri Oct 03 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/af4da34096da01f1a87c8650c8d2405f512aa156.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.65454,
+          0.37783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7569910003559200,
+        "lon": -75.6991,
+        "lat": 0.35592,
+        "community": "Sábalo",
+        "name": "Saura Mashacuri",
+        "users": 2,
+        "date": "Mon Oct 06 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/bd60a0048031bd44673bb73e34cf64e765c266ca.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.6991,
+          0.35592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7566809003571201,
+        "lon": -75.66809,
+        "lat": 0.35712,
+        "community": "Sábalo",
+        "name": "Luis Mendua and Juankina Quenamá",
+        "users": 5,
+        "date": "Mon Oct 06 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/db8e6258c1bbb61c911aabd3954adc9a75604a74.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.66809,
+          0.35712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7566825003575900,
+        "lon": -75.66825,
+        "lat": 0.35759,
+        "community": "Sábalo",
+        "name": "Mauricio Mendua",
+        "users": 2,
+        "date": "Tue Oct 07 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/d2bd7e45f4c22352060939e18a0f2e99b838ccec.jpg",
+        "story_photo": "http://s3.amazonaws.com/clearwater-photos/4cbf91f128caf973ac4a9f7afa4cbbf1a3fb6d55.jpg",
+        "story_url": "http://www.giveclearwater.org/2014/10/community-profile-mauricio-mendua/",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.66825,
+          0.35759
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7566824003576000,
+        "lon": -75.66824,
+        "lat": 0.3576,
+        "community": "Sábalo",
+        "name": "Carlos Yiyoguaje and Epifania Quenamá",
+        "users": 5,
+        "date": "Tue Oct 07 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/105a3cae961fcb8d1e8f1aee6013d065c15b5223.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.66824,
+          0.3576
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7566900003574800,
+        "lon": -75.669,
+        "lat": 0.35748,
+        "community": "Sábalo",
+        "name": "Alfonso Yiyoguaje and Carmela Mendua",
+        "users": 8,
+        "date": "Fri Oct 09 2015",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/601bab5db916abdd975953e789248529395fb0b3.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.669,
+          0.35748
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7569897003563600,
+        "lon": -75.69897,
+        "lat": 0.35636,
+        "community": "Sábalo",
+        "name": "Maura Criollo",
+        "users": 7,
+        "date": "Fri Oct 09 2015",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/bbc8eaa24a94e35493a367f66fa6a170b8769080.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.69897,
+          0.35636
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7569906003559700,
+        "lon": -75.69906,
+        "lat": 0.35597,
+        "community": "Sábalo",
+        "name": "Braulio Criollo and Dina Mendua",
+        "users": 6,
+        "date": "Fri Oct 10 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/1c6bbc3ff13ba220245969eb02e3133ad796bbc5.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.69906,
+          0.35597
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7570155003536900,
+        "lon": -75.70155,
+        "lat": 0.35369,
+        "community": "Sábalo",
+        "name": "Ines Yiyoguaje and Reinel Criollo",
+        "users": 4,
+        "date": "Fri Oct 10 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/4ed805cd50e2e99735550cc16bfd588d49083506.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.70155,
+          0.35369
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7576279003185900,
+        "lon": -75.76279,
+        "lat": 0.31859,
+        "community": "Sábalo",
+        "name": "Floresto Criollo and Juana Chapal",
+        "users": 7,
+        "date": "Fri Oct 10 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/17bacf9a3a47219b84ced073f91ea54dbeed3be3.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.76279,
+          0.31859
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7576279003186500,
+        "lon": -75.76279,
+        "lat": 0.31865,
+        "community": "Sábalo",
+        "name": "Ana Lucitante",
+        "users": 8,
+        "date": "Sat Oct 11 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/2fc718ef25e42c283c1f558b077e9eabc298b28a.jpg",
+        "settlement": "Paccoya",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.76279,
+          0.31865
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7576517003183100,
+        "lon": -75.76517,
+        "lat": 0.31831,
+        "community": "Sábalo",
+        "name": "Anibal Criollo and Mirian Lucitante",
+        "users": 8,
+        "date": "Sat Oct 11 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/a5ef0c006e7b2c78900d5f9be95714ebaa65664e.jpg",
+        "settlement": "Paccoya",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.76517,
+          0.31831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7576593003177800,
+        "lon": -75.76593,
+        "lat": 0.31778,
+        "community": "Sábalo",
+        "name": "Betty Criollo",
+        "users": 4,
+        "date": "Sat Oct 11 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/21efbb0a38073d7a8d52399ce17e0eef3ec24d42.jpg",
+        "settlement": "Paccoya",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.76593,
+          0.31778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7576390003176001,
+        "lon": -75.7639,
+        "lat": 0.3176,
+        "community": "Sábalo",
+        "name": "Tirza Criollo",
+        "users": 4,
+        "date": "Sun Oct 12 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/42e44b260487a04a49bc5f7094043506ac720f29.jpg",
+        "settlement": "Paccoya",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.7639,
+          0.3176
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7569935003557800,
+        "lon": -75.69935,
+        "lat": 0.35578,
+        "community": "Sábalo",
+        "name": "Lorenzo Criollo y Lucia Quenamá",
+        "users": 3,
+        "date": "Tue Oct 14 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/bb73f287387ec4d6a0723cb7f33a1e884d0fd3ff.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.69935,
+          0.35578
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7569813003511501,
+        "lon": -75.69813,
+        "lat": 0.35115,
+        "community": "Sábalo",
+        "name": "Lionel Yiyoguaje",
+        "users": 2,
+        "date": "Tue Oct 14 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/c1024ea33caaae7c2a4095439dd5285544be48b2.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.69813,
+          0.35115
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7567521003655401,
+        "lon": -75.67521,
+        "lat": 0.36554,
+        "community": "Sábalo",
+        "name": "José Yiyoguaje",
+        "users": 5,
+        "date": "Sat Oct 18 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/3836fda696803875523082b7abf364eefeffbc18.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.67521,
+          0.36554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7567314003641600,
+        "lon": -75.67314,
+        "lat": 0.36416,
+        "community": "Sábalo",
+        "name": "José Quenamá",
+        "users": 4,
+        "date": "Fri Oct 17 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/790c68fa9948dbb987e54a145e40e3a52f7b1800.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.67314,
+          0.36416
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.67245,
+        "lat": 0.36428,
+        "community": "Sábalo",
+        "name": "Juan Mendua",
+        "users": 8,
+        "date": "Fri Oct 17 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/9b29bf66cece5a26b112699703daf5096731224b.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.67276,
+        "lat": 0.36074,
+        "community": "Sábalo",
+        "name": "Iter Yiyoguaje and Irene Criollo",
+        "users": 10,
+        "date": "Sat Oct 18 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/c73920c76280d7129b383848056e90acc7019615.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.70623,
+        "lat": 0.35109,
+        "community": "Sábalo",
+        "name": "Balerio Machoa",
+        "users": 4,
+        "date": "Thu Oct 23 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/c2ce779bf3473786d0a5c4ef6cbc5bf27196492f.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.73435,
+        "lat": 0.34385,
+        "community": "Sábalo",
+        "name": "Alex Machoa",
+        "users": 4,
+        "date": "Thu Oct 23 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/f8d43db301880e738045640784e4a62d013c8ed7.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.66933,
+        "lat": 0.35772,
+        "community": "Sábalo",
+        "name": "Felipe Borman",
+        "users": 3,
+        "date": "Tue Nov 18 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/e35f4e98950b111f9a61b90b3ed6ff66e43f8c60.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.66845,
+        "lat": 0.35741,
+        "community": "Sábalo",
+        "name": "Angel Criollo",
+        "users": 8,
+        "date": "Sun Nov 09 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/7e5eab01413313888637bf97eddc04cb676d7394.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.66782,
+        "lat": 0.35744,
+        "community": "Sábalo",
+        "name": "Bolivar Lucitante",
+        "users": 6,
+        "date": "Sun Nov 09 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/3e3cf59657a5603d2a81732b27542c41a788ab08.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.66702,
+        "lat": 0.3573,
+        "community": "Sábalo",
+        "name": "Elio Lucitante",
+        "users": 3,
+        "date": "Wed Nov 12 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/091c2abad337365a32ab06d3b12af46aec09e5b6.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.76409,
+        "lat": 0.31735,
+        "community": "Sábalo",
+        "name": "Oswaldo Criollo",
+        "users": 4,
+        "date": "Wed Nov 12 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/c0af262051060c1bd0f083e390278f0093a872ed.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.76396,
+        "lat": 0.31861,
+        "community": "Sábalo",
+        "name": "Fredy Criollo",
+        "users": 6,
+        "date": "Sun Nov 16 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/e242799e0de345acd096df5ce08bd6d38db989dc.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "lon": -75.7627,
+        "lat": 0.31875,
+        "community": "Sábalo",
+        "name": "Dora Criollo",
+        "users": 8,
+        "date": "Sun Nov 16 2014",
+        "photo": "http://s3.amazonaws.com/clearwater-photos/eb278f075e98e7359c11efd8cdcb3ac8ec02e01e.jpg",
+        "settlement": "Sábalo",
+        "families": 1,
+        "project": "Cofán Installation Sábalo"
+      },
+      "geometry": null
     }
   ]
 }
