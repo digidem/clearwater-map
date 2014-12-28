@@ -7495,9 +7495,9 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566822003567101,
+        "_id": 7566821996432901,
         "lon": -75.66822,
-        "lat": 0.35671,
+        "lat": -0.35671,
         "community": "Sábalo",
         "name": "Andrés Mendua and Gladis Quenamá",
         "users": 6,
@@ -7511,16 +7511,16 @@
         "type": "Point",
         "coordinates": [
           -75.66822,
-          0.35671
+          -0.35671
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566821003567000,
+        "_id": 7566820996433000,
         "lon": -75.66821,
-        "lat": 0.3567,
+        "lat": -0.3567,
         "community": "Sábalo",
         "name": "Fausto Criollo and Monica Mendua",
         "users": 6,
@@ -7534,16 +7534,16 @@
         "type": "Point",
         "coordinates": [
           -75.66821,
-          0.3567
+          -0.3567
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7565456003778500,
+        "_id": 7565455996221500,
         "lon": -75.65456,
-        "lat": 0.37785,
+        "lat": -0.37785,
         "community": "Sábalo",
         "name": "Juan Aguinda and Carmesa Lucitante",
         "users": 7,
@@ -7557,16 +7557,16 @@
         "type": "Point",
         "coordinates": [
           -75.65456,
-          0.37785
+          -0.37785
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7565454003778300,
+        "_id": 7565453996221700,
         "lon": -75.65454,
-        "lat": 0.37783,
+        "lat": -0.37783,
         "community": "Sábalo",
         "name": "Carlos Yiyoguaje",
         "users": 5,
@@ -7580,16 +7580,16 @@
         "type": "Point",
         "coordinates": [
           -75.65454,
-          0.37783
+          -0.37783
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7569910003559200,
+        "_id": 7569909996440800,
         "lon": -75.6991,
-        "lat": 0.35592,
+        "lat": -0.35592,
         "community": "Sábalo",
         "name": "Saura Mashacuri",
         "users": 2,
@@ -7603,16 +7603,16 @@
         "type": "Point",
         "coordinates": [
           -75.6991,
-          0.35592
+          -0.35592
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566809003571201,
+        "_id": 7566808996428801,
         "lon": -75.66809,
-        "lat": 0.35712,
+        "lat": -0.35712,
         "community": "Sábalo",
         "name": "Luis Mendua and Juankina Quenamá",
         "users": 5,
@@ -7626,16 +7626,16 @@
         "type": "Point",
         "coordinates": [
           -75.66809,
-          0.35712
+          -0.35712
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566825003575900,
+        "_id": 7566824996424100,
         "lon": -75.66825,
-        "lat": 0.35759,
+        "lat": -0.35759,
         "community": "Sábalo",
         "name": "Mauricio Mendua",
         "users": 2,
@@ -7651,16 +7651,16 @@
         "type": "Point",
         "coordinates": [
           -75.66825,
-          0.35759
+          -0.35759
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566824003576000,
+        "_id": 7566823996424000,
         "lon": -75.66824,
-        "lat": 0.3576,
+        "lat": -0.3576,
         "community": "Sábalo",
         "name": "Carlos Yiyoguaje and Epifania Quenamá",
         "users": 5,
@@ -7674,16 +7674,16 @@
         "type": "Point",
         "coordinates": [
           -75.66824,
-          0.3576
+          -0.3576
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566900003574800,
+        "_id": 7566899996425200,
         "lon": -75.669,
-        "lat": 0.35748,
+        "lat": -0.35748,
         "community": "Sábalo",
         "name": "Alfonso Yiyoguaje and Carmela Mendua",
         "users": 8,
@@ -7697,16 +7697,16 @@
         "type": "Point",
         "coordinates": [
           -75.669,
-          0.35748
+          -0.35748
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7569897003563600,
+        "_id": 7569896996436400,
         "lon": -75.69897,
-        "lat": 0.35636,
+        "lat": -0.35636,
         "community": "Sábalo",
         "name": "Maura Criollo",
         "users": 7,
@@ -7720,16 +7720,16 @@
         "type": "Point",
         "coordinates": [
           -75.69897,
-          0.35636
+          -0.35636
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7569906003559700,
+        "_id": 7569905996440300,
         "lon": -75.69906,
-        "lat": 0.35597,
+        "lat": -0.35597,
         "community": "Sábalo",
         "name": "Braulio Criollo and Dina Mendua",
         "users": 6,
@@ -7743,16 +7743,16 @@
         "type": "Point",
         "coordinates": [
           -75.69906,
-          0.35597
+          -0.35597
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7570155003536900,
+        "_id": 7570154996463100,
         "lon": -75.70155,
-        "lat": 0.35369,
+        "lat": -0.35369,
         "community": "Sábalo",
         "name": "Ines Yiyoguaje and Reinel Criollo",
         "users": 4,
@@ -7766,16 +7766,16 @@
         "type": "Point",
         "coordinates": [
           -75.70155,
-          0.35369
+          -0.35369
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576279003185900,
+        "_id": 7576278996814100,
         "lon": -75.76279,
-        "lat": 0.31859,
+        "lat": -0.31859,
         "community": "Sábalo",
         "name": "Floresto Criollo and Juana Chapal",
         "users": 7,
@@ -7789,16 +7789,16 @@
         "type": "Point",
         "coordinates": [
           -75.76279,
-          0.31859
+          -0.31859
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576279003186500,
+        "_id": 7576278996813500,
         "lon": -75.76279,
-        "lat": 0.31865,
+        "lat": -0.31865,
         "community": "Sábalo",
         "name": "Ana Lucitante",
         "users": 8,
@@ -7812,16 +7812,16 @@
         "type": "Point",
         "coordinates": [
           -75.76279,
-          0.31865
+          -0.31865
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576517003183100,
+        "_id": 7576516996816900,
         "lon": -75.76517,
-        "lat": 0.31831,
+        "lat": -0.31831,
         "community": "Sábalo",
         "name": "Anibal Criollo and Mirian Lucitante",
         "users": 8,
@@ -7835,16 +7835,16 @@
         "type": "Point",
         "coordinates": [
           -75.76517,
-          0.31831
+          -0.31831
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576593003177800,
+        "_id": 7576592996822200,
         "lon": -75.76593,
-        "lat": 0.31778,
+        "lat": -0.31778,
         "community": "Sábalo",
         "name": "Betty Criollo",
         "users": 4,
@@ -7858,16 +7858,16 @@
         "type": "Point",
         "coordinates": [
           -75.76593,
-          0.31778
+          -0.31778
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576390003176001,
+        "_id": 7576389996824001,
         "lon": -75.7639,
-        "lat": 0.3176,
+        "lat": -0.3176,
         "community": "Sábalo",
         "name": "Tirza Criollo",
         "users": 4,
@@ -7881,16 +7881,16 @@
         "type": "Point",
         "coordinates": [
           -75.7639,
-          0.3176
+          -0.3176
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7569935003557800,
+        "_id": 7569934996442200,
         "lon": -75.69935,
-        "lat": 0.35578,
+        "lat": -0.35578,
         "community": "Sábalo",
         "name": "Lorenzo Criollo y Lucia Quenamá",
         "users": 3,
@@ -7904,16 +7904,16 @@
         "type": "Point",
         "coordinates": [
           -75.69935,
-          0.35578
+          -0.35578
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7569813003511501,
+        "_id": 7569812996488501,
         "lon": -75.69813,
-        "lat": 0.35115,
+        "lat": -0.35115,
         "community": "Sábalo",
         "name": "Lionel Yiyoguaje",
         "users": 2,
@@ -7927,16 +7927,16 @@
         "type": "Point",
         "coordinates": [
           -75.69813,
-          0.35115
+          -0.35115
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7567521003655401,
+        "_id": 7567520996344601,
         "lon": -75.67521,
-        "lat": 0.36554,
+        "lat": -0.36554,
         "community": "Sábalo",
         "name": "José Yiyoguaje",
         "users": 5,
@@ -7950,16 +7950,16 @@
         "type": "Point",
         "coordinates": [
           -75.67521,
-          0.36554
+          -0.36554
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7567314003641600,
+        "_id": 7567313996358400,
         "lon": -75.67314,
-        "lat": 0.36416,
+        "lat": -0.36416,
         "community": "Sábalo",
         "name": "José Quenamá",
         "users": 4,
@@ -7973,16 +7973,16 @@
         "type": "Point",
         "coordinates": [
           -75.67314,
-          0.36416
+          -0.36416
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7567245003642800,
+        "_id": 7567244996357200,
         "lon": -75.67245,
-        "lat": 0.36428,
+        "lat": -0.36428,
         "community": "Sábalo",
         "name": "Juan Mendua",
         "users": 8,
@@ -7996,16 +7996,16 @@
         "type": "Point",
         "coordinates": [
           -75.67245,
-          0.36428
+          -0.36428
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7567276003607400,
+        "_id": 7567275996392600,
         "lon": -75.67276,
-        "lat": 0.36074,
+        "lat": -0.36074,
         "community": "Sábalo",
         "name": "Iter Yiyoguaje and Irene Criollo",
         "users": 10,
@@ -8019,16 +8019,16 @@
         "type": "Point",
         "coordinates": [
           -75.67276,
-          0.36074
+          -0.36074
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7570623003510901,
+        "_id": 7570622996489101,
         "lon": -75.70623,
-        "lat": 0.35109,
+        "lat": -0.35109,
         "community": "Sábalo",
         "name": "Balerio Machoa",
         "users": 4,
@@ -8042,16 +8042,16 @@
         "type": "Point",
         "coordinates": [
           -75.70623,
-          0.35109
+          -0.35109
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7573435003438501,
+        "_id": 7573434996561501,
         "lon": -75.73435,
-        "lat": 0.34385,
+        "lat": -0.34385,
         "community": "Sábalo",
         "name": "Alex Machoa",
         "users": 4,
@@ -8065,16 +8065,16 @@
         "type": "Point",
         "coordinates": [
           -75.73435,
-          0.34385
+          -0.34385
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566933003577200,
+        "_id": 7566932996422800,
         "lon": -75.66933,
-        "lat": 0.35772,
+        "lat": -0.35772,
         "community": "Sábalo",
         "name": "Felipe Borman",
         "users": 3,
@@ -8088,16 +8088,16 @@
         "type": "Point",
         "coordinates": [
           -75.66933,
-          0.35772
+          -0.35772
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566845003574101,
+        "_id": 7566844996425901,
         "lon": -75.66845,
-        "lat": 0.35741,
+        "lat": -0.35741,
         "community": "Sábalo",
         "name": "Angel Criollo",
         "users": 8,
@@ -8111,16 +8111,16 @@
         "type": "Point",
         "coordinates": [
           -75.66845,
-          0.35741
+          -0.35741
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566782003574401,
+        "_id": 7566781996425601,
         "lon": -75.66782,
-        "lat": 0.35744,
+        "lat": -0.35744,
         "community": "Sábalo",
         "name": "Bolivar Lucitante",
         "users": 6,
@@ -8134,16 +8134,16 @@
         "type": "Point",
         "coordinates": [
           -75.66782,
-          0.35744
+          -0.35744
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7566702003572999,
+        "_id": 7566701996426999,
         "lon": -75.66702,
-        "lat": 0.3573,
+        "lat": -0.3573,
         "community": "Sábalo",
         "name": "Elio Lucitante",
         "users": 3,
@@ -8157,16 +8157,16 @@
         "type": "Point",
         "coordinates": [
           -75.66702,
-          0.3573
+          -0.3573
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576409003173500,
+        "_id": 7576408996826500,
         "lon": -75.76409,
-        "lat": 0.31735,
+        "lat": -0.31735,
         "community": "Sábalo",
         "name": "Oswaldo Criollo",
         "users": 4,
@@ -8180,16 +8180,16 @@
         "type": "Point",
         "coordinates": [
           -75.76409,
-          0.31735
+          -0.31735
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576396003186100,
+        "_id": 7576395996813900,
         "lon": -75.76396,
-        "lat": 0.31861,
+        "lat": -0.31861,
         "community": "Sábalo",
         "name": "Fredy Criollo",
         "users": 6,
@@ -8203,16 +8203,16 @@
         "type": "Point",
         "coordinates": [
           -75.76396,
-          0.31861
+          -0.31861
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7576270003187500,
+        "_id": 7576269996812500,
         "lon": -75.7627,
-        "lat": 0.31875,
+        "lat": -0.31875,
         "community": "Sábalo",
         "name": "Dora Criollo",
         "users": 8,
@@ -8226,7 +8226,7 @@
         "type": "Point",
         "coordinates": [
           -75.7627,
-          0.31875
+          -0.31875
         ]
       }
     }
