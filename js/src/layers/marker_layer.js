@@ -49,7 +49,9 @@ cwm.layers.MarkerLayer = function() {
 
     function data(collection) {
         if (!arguments.length) return markerData;
-        markerData = collection;
+        markerData = collection.filter(function(d) {
+            return d.geometry.coordinates;
+        });
         markerLayer.name = collection.id();
         g.classed(markerLayer.name, true);
         draw();

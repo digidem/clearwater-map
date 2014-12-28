@@ -24,6 +24,8 @@ cwm.views.Markers = function() {
         return function(a, b) {
             var ac = a.geometry.coordinates;
             var bc = b.geometry.coordinates;
+            if (!ac) return -1;
+            if (!bc) return 1;
             var ad = Math.pow(ac[0] - loc.lon, 2) + Math.pow(ac[1] - loc.lat, 2);
             var bd = Math.pow(bc[0] - loc.lon, 2) + Math.pow(bc[1] - loc.lat, 2);
             return d3.ascending(ad, bd);
