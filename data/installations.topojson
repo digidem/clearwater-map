@@ -6201,11 +6201,8 @@
           ]
         },
         {
-          "type": "Point",
+          "type": null,
           "properties": {
-            "_id": 7688155999136199,
-            "lon": -76.88156,
-            "lat": -0.08638,
             "community": "Miwaguno and Tobeta",
             "name": "Bay Enomenga",
             "users": 6,
@@ -6215,11 +6212,7 @@
             "families": 2,
             "project": "Waorani Installation Via Pindo"
           },
-          "id": "Miwaguno and Tobeta",
-          "coordinates": [
-            3251,
-            7445
-          ]
+          "id": "Miwaguno and Tobeta"
         },
         {
           "type": "Point",
