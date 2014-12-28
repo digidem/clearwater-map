@@ -6780,9 +6780,9 @@
     {
       "type": "Feature",
       "properties": {
-        "_id": 7688156000863799,
+        "_id": 7688155999136199,
         "lon": -76.88156,
-        "lat": 0.08638,
+        "lat": -0.08638,
         "community": "Miwaguno and Tobeta",
         "name": "Bay Enomenga",
         "users": 6,
@@ -6796,16 +6796,16 @@
         "type": "Point",
         "coordinates": [
           -76.88156,
-          0.08638
+          -0.08638
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672621007286099,
+        "_id": 7672620992713899,
         "lon": -76.72621,
-        "lat": 0.72861,
+        "lat": -0.72861,
         "community": "Miwaguno and Tobeta",
         "name": "Salvador Nihua",
         "users": 4,
@@ -6819,16 +6819,16 @@
         "type": "Point",
         "coordinates": [
           -76.72621,
-          0.72861
+          -0.72861
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672603007295899,
+        "_id": 7672602992704099,
         "lon": -76.72603,
-        "lat": 0.72959,
+        "lat": -0.72959,
         "community": "Miwaguno and Tobeta",
         "name": "Jacobo Nenquimo",
         "users": 7,
@@ -6842,16 +6842,16 @@
         "type": "Point",
         "coordinates": [
           -76.72603,
-          0.72959
+          -0.72959
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672707007289600,
+        "_id": 7672706992710400,
         "lon": -76.72707,
-        "lat": 0.72896,
+        "lat": -0.72896,
         "community": "Miwaguno and Tobeta",
         "name": "Menkai Enomenga",
         "users": 6,
@@ -6865,16 +6865,16 @@
         "type": "Point",
         "coordinates": [
           -76.72707,
-          0.72896
+          -0.72896
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672737007289699,
+        "_id": 7672736992710299,
         "lon": -76.72737,
-        "lat": 0.72897,
+        "lat": -0.72897,
         "community": "Miwaguno and Tobeta",
         "name": "Alex Nonge",
         "users": 5,
@@ -6888,16 +6888,16 @@
         "type": "Point",
         "coordinates": [
           -76.72737,
-          0.72897
+          -0.72897
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672739007285700,
+        "_id": 7672738992714300,
         "lon": -76.72739,
-        "lat": 0.72857,
+        "lat": -0.72857,
         "community": "Miwaguno and Tobeta",
         "name": "Salamon Nihua and Gloria Nenquimo",
         "users": 5,
@@ -6911,16 +6911,16 @@
         "type": "Point",
         "coordinates": [
           -76.72739,
-          0.72857
+          -0.72857
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672896007307400,
+        "_id": 7672895992692600,
         "lon": -76.72896,
-        "lat": 0.73074,
+        "lat": -0.73074,
         "community": "Miwaguno and Tobeta",
         "name": "Samuel Ima",
         "users": 6,
@@ -6934,16 +6934,16 @@
         "type": "Point",
         "coordinates": [
           -76.72896,
-          0.73074
+          -0.73074
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672901007277600,
+        "_id": 7672900992722400,
         "lon": -76.72901,
-        "lat": 0.72776,
+        "lat": -0.72776,
         "community": "Miwaguno and Tobeta",
         "name": "Yato Enomenga",
         "users": 10,
@@ -6957,16 +6957,16 @@
         "type": "Point",
         "coordinates": [
           -76.72901,
-          0.72776
+          -0.72776
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672877007280000,
+        "_id": 7672876992720000,
         "lon": -76.72877,
-        "lat": 0.728,
+        "lat": -0.728,
         "community": "Miwaguno and Tobeta",
         "name": "Roque Ima",
         "users": 5,
@@ -6980,16 +6980,16 @@
         "type": "Point",
         "coordinates": [
           -76.72877,
-          0.728
+          -0.728
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672823007280400,
+        "_id": 7672822992719600,
         "lon": -76.72823,
-        "lat": 0.72804,
+        "lat": -0.72804,
         "community": "Miwaguno and Tobeta",
         "name": "Angel Omaka",
         "users": 6,
@@ -7003,16 +7003,16 @@
         "type": "Point",
         "coordinates": [
           -76.72823,
-          0.72804
+          -0.72804
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672909007287200,
+        "_id": 7672908992712800,
         "lon": -76.72909,
-        "lat": 0.72872,
+        "lat": -0.72872,
         "community": "Miwaguno and Tobeta",
         "name": "Namo Enomenga",
         "users": 11,
@@ -7026,16 +7026,16 @@
         "type": "Point",
         "coordinates": [
           -76.72909,
-          0.72872
+          -0.72872
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672947007292701,
+        "_id": 7672946992707301,
         "lon": -76.72947,
-        "lat": 0.72927,
+        "lat": -0.72927,
         "community": "Miwaguno and Tobeta",
         "name": "Marcelo Nihua",
         "users": 10,
@@ -7049,16 +7049,16 @@
         "type": "Point",
         "coordinates": [
           -76.72947,
-          0.72927
+          -0.72927
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672948007293800,
+        "_id": 7672947992706200,
         "lon": -76.72948,
-        "lat": 0.72938,
+        "lat": -0.72938,
         "community": "Miwaguno and Tobeta",
         "name": "Juan Pablo Enomenga",
         "users": 6,
@@ -7072,16 +7072,16 @@
         "type": "Point",
         "coordinates": [
           -76.72948,
-          0.72938
+          -0.72938
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7673064007299499,
+        "_id": 7673063992700499,
         "lon": -76.73064,
-        "lat": 0.72995,
+        "lat": -0.72995,
         "community": "Miwaguno and Tobeta",
         "name": "Camilo Shiwango",
         "users": 14,
@@ -7095,16 +7095,16 @@
         "type": "Point",
         "coordinates": [
           -76.73064,
-          0.72995
+          -0.72995
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7673193007305001,
+        "_id": 7673192992695001,
         "lon": -76.73193,
-        "lat": 0.7305,
+        "lat": -0.7305,
         "community": "Miwaguno and Tobeta",
         "name": "Wini Ima",
         "users": 7,
@@ -7118,16 +7118,16 @@
         "type": "Point",
         "coordinates": [
           -76.73193,
-          0.7305
+          -0.7305
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672987007309901,
+        "_id": 7672986992690101,
         "lon": -76.72987,
-        "lat": 0.73099,
+        "lat": -0.73099,
         "community": "Miwaguno and Tobeta",
         "name": "Alfonso Irumenga",
         "users": 5,
@@ -7141,16 +7141,16 @@
         "type": "Point",
         "coordinates": [
           -76.72987,
-          0.73099
+          -0.73099
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672952007312699,
+        "_id": 7672951992687299,
         "lon": -76.72952,
-        "lat": 0.73127,
+        "lat": -0.73127,
         "community": "Miwaguno and Tobeta",
         "name": "Pablo Ima",
         "users": 5,
@@ -7164,16 +7164,16 @@
         "type": "Point",
         "coordinates": [
           -76.72952,
-          0.73127
+          -0.73127
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672958007313400,
+        "_id": 7672957992686600,
         "lon": -76.72958,
-        "lat": 0.73134,
+        "lat": -0.73134,
         "community": "Miwaguno and Tobeta",
         "name": "Marcelo Caiga",
         "users": 5,
@@ -7187,16 +7187,16 @@
         "type": "Point",
         "coordinates": [
           -76.72958,
-          0.73134
+          -0.73134
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672982007313100,
+        "_id": 7672981992686900,
         "lon": -76.72982,
-        "lat": 0.73131,
+        "lat": -0.73131,
         "community": "Miwaguno and Tobeta",
         "name": "Juane Ima",
         "users": 8,
@@ -7210,16 +7210,16 @@
         "type": "Point",
         "coordinates": [
           -76.72982,
-          0.73131
+          -0.73131
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672964007315000,
+        "_id": 7672963992685000,
         "lon": -76.72964,
-        "lat": 0.7315,
+        "lat": -0.7315,
         "community": "Miwaguno and Tobeta",
         "name": "Carlos Caiga",
         "users": 5,
@@ -7233,16 +7233,16 @@
         "type": "Point",
         "coordinates": [
           -76.72964,
-          0.7315
+          -0.7315
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672990007318100,
+        "_id": 7672989992681900,
         "lon": -76.7299,
-        "lat": 0.73181,
+        "lat": -0.73181,
         "community": "Miwaguno and Tobeta",
         "name": "Fidel Alvarado",
         "users": 7,
@@ -7256,16 +7256,16 @@
         "type": "Point",
         "coordinates": [
           -76.7299,
-          0.73181
+          -0.73181
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7672926007292300,
+        "_id": 7672925992707700,
         "lon": -76.72926,
-        "lat": 0.72923,
+        "lat": -0.72923,
         "community": "Miwaguno and Tobeta",
         "name": "Vicente Boya",
         "users": 5,
@@ -7281,16 +7281,16 @@
         "type": "Point",
         "coordinates": [
           -76.72926,
-          0.72923
+          -0.72923
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7673061007299800,
+        "_id": 7673060992700200,
         "lon": -76.73061,
-        "lat": 0.72998,
+        "lat": -0.72998,
         "community": "Miwaguno and Tobeta",
         "name": "Fausto Ima",
         "users": 7,
@@ -7304,16 +7304,16 @@
         "type": "Point",
         "coordinates": [
           -76.73061,
-          0.72998
+          -0.72998
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669038007051900,
+        "_id": 7669037992948100,
         "lon": -76.69038,
-        "lat": 0.70519,
+        "lat": -0.70519,
         "community": "Miwaguno and Tobeta",
         "name": "Dabo Enomenga",
         "users": 6,
@@ -7327,16 +7327,16 @@
         "type": "Point",
         "coordinates": [
           -76.69038,
-          0.70519
+          -0.70519
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669057007057999,
+        "_id": 7669056992941999,
         "lon": -76.69057,
-        "lat": 0.7058,
+        "lat": -0.7058,
         "community": "Miwaguno and Tobeta",
         "name": "Angel Aguinda",
         "users": 6,
@@ -7350,16 +7350,16 @@
         "type": "Point",
         "coordinates": [
           -76.69057,
-          0.7058
+          -0.7058
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669133007061999,
+        "_id": 7669132992937999,
         "lon": -76.69133,
-        "lat": 0.7062,
+        "lat": -0.7062,
         "community": "Miwaguno and Tobeta",
         "name": "Miriam Enomenga",
         "users": 8,
@@ -7373,16 +7373,16 @@
         "type": "Point",
         "coordinates": [
           -76.69133,
-          0.7062
+          -0.7062
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669170007062400,
+        "_id": 7669169992937600,
         "lon": -76.6917,
-        "lat": 0.70624,
+        "lat": -0.70624,
         "community": "Miwaguno and Tobeta",
         "name": "Telmo Enomenga",
         "users": 3,
@@ -7396,16 +7396,16 @@
         "type": "Point",
         "coordinates": [
           -76.6917,
-          0.70624
+          -0.70624
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669134007062900,
+        "_id": 7669133992937100,
         "lon": -76.69134,
-        "lat": 0.70629,
+        "lat": -0.70629,
         "community": "Miwaguno and Tobeta",
         "name": "Margarita Enomenga",
         "users": 9,
@@ -7419,16 +7419,16 @@
         "type": "Point",
         "coordinates": [
           -76.69134,
-          0.70629
+          -0.70629
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669003007054599,
+        "_id": 7669002992945399,
         "lon": -76.69003,
-        "lat": 0.70546,
+        "lat": -0.70546,
         "community": "Miwaguno and Tobeta",
         "name": "Gladys Enomenga",
         "users": 5,
@@ -7442,16 +7442,16 @@
         "type": "Point",
         "coordinates": [
           -76.69003,
-          0.70546
+          -0.70546
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669030007053399,
+        "_id": 7669029992946599,
         "lon": -76.6903,
-        "lat": 0.70534,
+        "lat": -0.70534,
         "community": "Miwaguno and Tobeta",
         "name": "Larry Bacuy",
         "users": 3,
@@ -7465,16 +7465,16 @@
         "type": "Point",
         "coordinates": [
           -76.6903,
-          0.70534
+          -0.70534
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "_id": 7669084007047499,
+        "_id": 7669083992952499,
         "lon": -76.69084,
-        "lat": 0.70475,
+        "lat": -0.70475,
         "community": "Miwaguno and Tobeta",
         "name": "Carlos Alvarado",
         "users": 8,
@@ -7488,7 +7488,7 @@
         "type": "Point",
         "coordinates": [
           -76.69084,
-          0.70475
+          -0.70475
         ]
       }
     },
