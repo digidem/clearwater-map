@@ -3180,7 +3180,8 @@
             "story_url": "http://www.giveclearwater.org/2013/10/salome-chuquitarco-30-years-rumipamba/",
             "story_title": "30 Years in Rumipamba",
             "story_excerpt": "Unlike the majority of Rumipamba’s founding community members, Salome did not move to the area from one of the Kichwa communities near Tena. She and her husband José and their children moved from the highland city of Latacunga over 30 years ago.",
-            "settlement": "Rumipamba"
+            "settlement": "Rumipamba",
+            "project": "Kichwa"
           },
           "id": "Rumipamba",
           "coordinates": [
@@ -3200,7 +3201,8 @@
             "date": "Thu Aug 15 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/2eb797d2eec6c9be6460e3d7cb8fb7c8c1657acb.jpg",
             "settlement": "Rumipamba",
-            "families": 1
+            "families": 1,
+            "project": "Kichwa"
           },
           "id": "Rumipamba",
           "coordinates": [
@@ -3240,7 +3242,8 @@
             "users": 10,
             "date": "Wed Aug 14 2013",
             "photo": "http://s3.amazonaws.com/clearwater-photos/81db947ee870118e6cf5790228153275ca6c858a.jpg",
-            "settlement": "Rumipamba"
+            "settlement": "Rumipamba",
+            "project": "Kichwa"
           },
           "id": "Rumipamba",
           "coordinates": [
