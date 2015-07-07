@@ -8275,6 +8275,25 @@
           0.02451
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_id": 7709856000237901,
+        "lon": -77.09856,
+        "lat": 0.02379,
+        "community": "Dovuno",
+        "name": "Linda Lucitante",
+        "users": 4,
+        "date": "Thu Mar 12 2015"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.09856,
+          0.02379
+        ]
+      }
     }
   ]
 }
