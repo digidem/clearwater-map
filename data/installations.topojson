@@ -7531,14 +7531,21 @@
           ]
         },
         {
-          "type": null,
+          "type": "Point",
           "properties": {
+            "_id": 7686322000850400,
+            "lon": -76.86322,
+            "lat": 0.08504,
             "community": "Dovuno",
             "name": "Miguel Queta and Ines Aguinda",
             "users": 7,
             "date": "Wed Mar 11 2015"
           },
-          "id": "Dovuno"
+          "id": "Dovuno",
+          "coordinates": [
+            3352,
+            9142
+          ]
         }
       ]
     }
