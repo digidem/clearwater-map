@@ -8232,6 +8232,16 @@
           -0.7718
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "community": "Dovuno",
+        "name": "Miguel Queta and Ines Aguinda",
+        "users": 7,
+        "date": "Wed Mar 11 2015"
+      },
+      "geometry": null
     }
   ]
 }
