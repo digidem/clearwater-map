@@ -6306,6 +6306,16 @@
           ]
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "community": "Dovuno",
+        "nationality": "Cofan",
+        "technicians": 1,
+        "story": "Between February and March ClearWater technicians installed 30 rainwater catchment systems in the community of Dovuno, benefitting over 200 people."
+      },
+      "geometry": null
     }
   ]
 }
