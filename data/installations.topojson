@@ -7529,6 +7529,16 @@
             3888,
             662
           ]
+        },
+        {
+          "type": null,
+          "properties": {
+            "community": "Dovuno",
+            "name": "Miguel Queta and Ines Aguinda",
+            "users": 7,
+            "date": "Wed Mar 11 2015"
+          },
+          "id": "Dovuno"
         }
       ]
     }
