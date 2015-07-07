@@ -7539,12 +7539,34 @@
             "community": "Dovuno",
             "name": "Miguel Queta and Ines Aguinda",
             "users": 7,
-            "date": "Wed Mar 11 2015"
+            "date": "Wed Mar 11 2015",
+            "photo": "https://drive.google.com/file/d/0B6JayPsgbXS1TGd0N1FYaC1NWnc/view?usp=sharing",
+            "settlement": "Dovuno",
+            "families": 1,
+            "project": "Dovuno Installation"
           },
           "id": "Dovuno",
           "coordinates": [
             3352,
             9142
+          ]
+        },
+        {
+          "type": "Point",
+          "properties": {
+            "_id": 7709618000245100,
+            "lon": -77.09618,
+            "lat": 0.02451,
+            "community": "Dovuno",
+            "name": "Emiliano Queta and Ema Quenama",
+            "users": 5,
+            "date": "Wed Mar 11 2015",
+            "photo": "https://drive.google.com/file/d/0B6JayPsgbXS1TTNEYWxYTGNRR3c/view?usp=sharing"
+          },
+          "id": "Dovuno",
+          "coordinates": [
+            2070,
+            8543
           ]
         }
       ]
