@@ -7568,6 +7568,23 @@
             2070,
             8543
           ]
+        },
+        {
+          "type": "Point",
+          "properties": {
+            "_id": 7709856000237901,
+            "lon": -77.09856,
+            "lat": 0.02379,
+            "community": "Dovuno",
+            "name": "Linda Lucitante",
+            "users": 4,
+            "date": "Thu Mar 12 2015"
+          },
+          "id": "Dovuno",
+          "coordinates": [
+            2057,
+            8536
+          ]
         }
       ]
     }
